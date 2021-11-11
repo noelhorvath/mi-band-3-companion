@@ -1,0 +1,27 @@
+<ion-header>
+  <app-toolbar></app-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="!isAuthenticated">
+    <ion-button expand="block" [disabled]="isScanningDisabled" (click)="startScanningForDevices()">Scan for
+      devices
+    </ion-button>
+    <ng-container *ngIf="counter != null">
+      <ion-label class="ion-text-center">You can scan again after {{counter}} second(s)!</ion-label>
+    </ng-container>
+    <ng-container *ngIf="deviceList">
+      <ng-container *ngFor="let device of deviceList">
+        <ion-card class="ion-text-center" (click)="connectToSelectedDevice(device.address)">
+          <ion-label>{{device.rssi}}</ion-label>
+          <br/>
+          <ion-label>{{device.address}}</ion-label>
+          <br/>
+          <ion-label>{{device?.name}}</ion-label>
+        </ion-card>
+      </ng-container>
+      <ng-container *ngIf="deviceList.length === 0">
+        <ion-card class="ion-text-center">No devices were found!</ion-card>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ion-content>

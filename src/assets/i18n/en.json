@@ -1,0 +1,17 @@
+{
+  "ENGLISH": "English",
+  "HUNGARIAN": "Hungarian",
+  "PASSWORD": "Password",
+  "PASSWORD_AGAIN": "Password again",
+  "EMAIL": "Email",
+  "FIRST_NAME": "First name",
+  "LAST_NAME": "First name",
+  "LOGIN": "Login",
+  "REGISTER": "Register",
+  "REGISTRATION": "Registration",
+  "SIGN_IN_WITH_GOOGLE": "Sign-in with Google account",
+  "RESET_PASSWORD": "Reset password",
+  "CANCEL": "Cancel",
+  "REQUEST_PASSWORD_RESET_LINK": "Request password reset link",
+  "BACK": "Back"
+}

@@ -1,0 +1,194 @@
+<!-- ############################################################################
+
+</info description="Exported and edited data from nRF Connect containing
+             information about all services of Mi Band 3"
+editor="Noel Horváth"
+creator="nRF Connect"
+credits="Thanks Freeyourgadget for missing service names,
+         nRF Connect for exported data"/>
+
+############################################################################# -->
+
+<device name="Mi Band 3">
+  <service name="Generic Access Service" uuid="00001800-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Device Name" uuid="00002A00-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Appearance" uuid="00002A01-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Peripheral Preferred Connection Parameters" uuid="00002A04-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+  </service>
+  <service name="Generic Attribute Service" uuid="00001801-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Service Changed" uuid="00002A05-0000-1000-8000-00805f9b34fb">
+      <property name="INDICATE"/>
+      <property name="READ"/>
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+    </characteristic>
+  </service>
+  <service name="Device Information Service" uuid="0000180a-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Serial Number String" uuid="00002a25-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Hardware Revision String" uuid="00002a27-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Software Revision String" uuid="00002a28-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="System ID" uuid="00002a23-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="PnP ID" uuid="00002a50-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+  </service>
+  <service name="Firmware Service" uuid="00001530-0000-3512-2118-0009af100700">
+    <characteristic name="Firmware" uuid="00001531-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Firmware Data" uuid="00001532-0000-3512-2118-0009af100700">
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+    </characteristic>
+  </service>
+  <service name="Alert Notification Service" uuid="00001811-0000-1000-8000-00805f9b34fb">
+    <characteristic name="New Alert" uuid="00002a46-0000-1000-8000-00805f9b34fb">
+      <descriptor uuid="00002901-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE"/>
+    </characteristic>
+    <characteristic name="Alert Notification Control Point" uuid="00002a44-0000-1000-8000-00805f9b34fb">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="WRITE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+  </service>
+  <service name="Immediate Alert Service" uuid="00001802-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Alert Level" uuid="00002a06-0000-1000-8000-00805f9b34fb">
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+    </characteristic>
+  </service>
+  <service name="Heart Rate Service" uuid="0000180d-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Heart Rate Measurement" uuid="00002a37-0000-1000-8000-00805f9b34fb">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Heart Rate Control Point" uuid="00002a39-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+      <property name="WRITE"/>
+    </characteristic>
+  </service>
+  <service name="Mi Band Service" uuid="0000fee0-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Current Time" uuid="00002a2b-0000-1000-8000-00805f9b34fb">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="WRITE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Sensor Control" uuid="00000001-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Sensor Data" uuid="00000002-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Configuration" uuid="00000003-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Peripheral Preferred Connection Parameters" uuid="00002a04-0000-1000-8000-00805f9b34fb">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Fetch" uuid="00000004-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Activity Data" uuid="00000005-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Battery Info" uuid="00000006-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Realtime Steps" uuid="00000007-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="User settings" uuid="00000008-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Device Event" uuid="00000010-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Chunked Transfer" uuid="00000020-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Weather" uuid="0000000e-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002901-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE"/>
+    </characteristic>
+    <characteristic name="Unknown F" uuid="0000000f-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+  </service>
+  <service name="Authentication Service" uuid="0000fee1-0000-1000-8000-00805f9b34fb">
+    <characteristic name="Authentication" uuid="00000009-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="WRITE_WITHOUT_RESPONSE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+    <characteristic name="Unknown_FEDD" uuid="0000fedd-0000-1000-8000-00805f9b34fb">
+      <property name="WRITE"/>
+    </characteristic>
+    <characteristic name="Unknown_FEDE" uuid="0000fede-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Unknown_FEDF" uuid="0000fedf-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Unknown_FED0" uuid="0000fed0-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+      <property name="WRITE"/>
+    </characteristic>
+    <characteristic name="Unknown_FED1" uuid="0000fed1-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+      <property name="WRITE"/>
+    </characteristic>
+    <characteristic name="Unknown_FED2" uuid="0000fed2-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+    </characteristic>
+    <characteristic name="Unknown_FED3" uuid="0000fed3-0000-1000-8000-00805f9b34fb">
+      <property name="READ"/>
+      <property name="WRITE"/>
+    </characteristic>
+    <characteristic name="Unknown_FEC1" uuid="0000fec1-0000-3512-2118-0009af100700">
+      <descriptor uuid="00002902-0000-1000-8000-00805f9b34fb"/>
+      <property name="READ"/>
+      <property name="WRITE"/>
+      <property name="NOTIFY"/>
+    </characteristic>
+  </service>
+</device>

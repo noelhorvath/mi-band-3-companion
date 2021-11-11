@@ -1,0 +1,54 @@
+<ion-header>
+  <app-toolbar type="login" [showBackButton]="isResettingPassword" (switchTemplate)="setIsResettingPassword($event)"></app-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid *ngIf="!isResettingPassword else passwordResetForm" [formGroup]="loginFormGroup">
+    <ion-row class="ion-text-center">
+      <ion-col size="12">
+        <ion-text color="primary">{{ title | translate }}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">{{ 'EMAIL' | translate }}</ion-label>
+          <ion-input type="email" autocomplete="email" formControlName="email"
+                     clearInput="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">{{ 'PASSWORD' | translate }}</ion-label>
+          <ion-input type="password" autocomplete="password" formControlName="password"
+                     clearInput="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" (click)="login()">{{ 'LOGIN' | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" (click)="resetPassword()">{{'RESET_PASSWORD' | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary"
+                    (click)="loginWithGoogle()">{{ 'SIGN_IN_WITH_GOOGLE' | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" (click)="goToRegister()">{{ 'REGISTER' | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ng-template #passwordResetForm>
+    <app-reset-password [email]="email"></app-reset-password>
+  </ng-template>
+</ion-content>

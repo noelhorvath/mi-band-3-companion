@@ -1,0 +1,8 @@
+{
+    "name": "Mi Band 3 Companion",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular",
+    "id": "cfa17792"
+}

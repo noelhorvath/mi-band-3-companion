@@ -1,0 +1,17 @@
+{
+  "ENGLISH": "Angol",
+  "HUNGARIAN": "Magyar",
+  "PASSWORD": "Jelszó",
+  "PASSWORD_AGAIN": "Jelszó újra",
+  "EMAIL": "Email",
+  "FIRST_NAME": "Keresztnév",
+  "LAST_NAME": "Vezetéknév",
+  "LOGIN": "Bejelentkezés",
+  "REGISTER": "Regisztrálás",
+  "REGISTRATION": "Regisztráció",
+  "SIGN_IN_WITH_GOOGLE": "Bejelentkezés Google fiókkal",
+  "RESET_PASSWORD": "Jelszó visszaállítás",
+  "CANCEL": "Mégse",
+  "SEND_PASSWORD_RESET_LINK": "Jelszóvisszaállító link kérése",
+  "BACK": "Vissza"
+}

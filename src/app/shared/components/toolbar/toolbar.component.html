@@ -1,0 +1,26 @@
+<ion-toolbar>
+  <ng-container *ngIf="this.type === 'login' else defaultToolbar">
+    <ion-button [hidden]="!showBackButton" slot="start" (click)="goBack()">
+      <ion-icon name="arrow-back-sharp"></ion-icon>
+      <ion-text>{{ 'BACK' | translate }}</ion-text>
+    </ion-button>
+    <ion-button slot="end" (click)="openLanguageSelect($event)">
+      <ion-icon name="language-sharp" ></ion-icon>
+    </ion-button>
+    <ion-select [hidden]="true" interface="popover" #languageSelect>
+      <ion-select-option value="en">{{ 'ENGLISH' | translate }}</ion-select-option>
+      <ion-select-option value="hu">{{ 'HUNGARIAN' | translate }}</ion-select-option>
+    </ion-select>
+  </ng-container>
+
+  <ng-template #defaultToolbar>
+    <ion-back-button [hidden]="!showBackButton" slot="start" text="{{ 'BACK' | translate }}"></ion-back-button>
+    <ion-button slot="end" (click)="openLanguageSelect($event)">
+      <ion-icon name="language-sharp" ></ion-icon>
+    </ion-button>
+    <ion-select [hidden]="true" interface="popover" #languageSelect>
+      <ion-select-option value="en">{{ 'ENGLISH' | translate }}</ion-select-option>
+      <ion-select-option value="hu">{{ 'HUNGARIAN' | translate }}</ion-select-option>
+    </ion-select>
+  </ng-template>
+</ion-toolbar>
