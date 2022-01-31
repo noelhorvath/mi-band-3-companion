@@ -7,7 +7,7 @@ android {
         applicationId "hu.noelhorvath.miband3companion"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 0.3.0
+        versionCode 1
         versionName "0.3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
