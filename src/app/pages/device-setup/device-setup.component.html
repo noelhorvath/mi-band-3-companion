@@ -1,27 +1,24 @@
 <ion-header>
-  <app-toolbar></app-toolbar>
+    <app-toolbar [connectionStatus]="connectionStatus" [showBackButton]="false"></app-toolbar>
 </ion-header>
 <ion-content>
-  <ng-container *ngIf="!isAuthenticated">
-    <ion-button expand="block" [disabled]="isScanningDisabled" (click)="startScanningForDevices()">Scan for
-      devices
-    </ion-button>
-    <ng-container *ngIf="counter != null">
-      <ion-label class="ion-text-center">You can scan again after {{counter}} second(s)!</ion-label>
+    <ng-container *ngIf="connectionStatus !== 'authenticated'">
+        <ion-button expand="block" color="primary" [disabled]="isScanningDisabled" (click)="startScanningForDevices()">
+            <ng-container *ngIf="counter != null else enabledScan">{{ ('SCAN_FOR_DEVICES' | translate) + " " + counter }}</ng-container>
+            <ng-template #enabledScan>{{ 'SCAN_FOR_DEVICES' | translate }}</ng-template>
+        </ion-button>
+        <ng-container *ngIf="deviceList">
+            <ng-container *ngIf="deviceList.length > 0 else noDevices">
+                <ng-container *ngFor="let device of deviceList">
+                    <app-scanned-device-card
+                        [deviceInfo]="device"
+                        (connectToDevice)="connectToSelectedDevice($event)">
+                    </app-scanned-device-card>
+                </ng-container>
+            </ng-container>
+            <ng-template #noDevices>
+                <ion-card>{{ 'NO_DEVICES_FOUND' | translate }}</ion-card>
+            </ng-template>
+        </ng-container>
     </ng-container>
-    <ng-container *ngIf="deviceList">
-      <ng-container *ngFor="let device of deviceList">
-        <ion-card class="ion-text-center" (click)="connectToSelectedDevice(device.address)">
-          <ion-label>{{device.rssi}}</ion-label>
-          <br/>
-          <ion-label>{{device.address}}</ion-label>
-          <br/>
-          <ion-label>{{device?.name}}</ion-label>
-        </ion-card>
-      </ng-container>
-      <ng-container *ngIf="deviceList.length === 0">
-        <ion-card class="ion-text-center">No devices were found!</ion-card>
-      </ng-container>
-    </ng-container>
-  </ng-container>
 </ion-content>

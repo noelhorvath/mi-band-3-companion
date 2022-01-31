@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -6,8 +7,8 @@ android {
         applicationId "hu.noelhorvath.miband3companion"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "0.1"
+        versionCode 0.3.0
+        versionName "0.3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -37,6 +38,8 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 apply from: 'capacitor.build.gradle'

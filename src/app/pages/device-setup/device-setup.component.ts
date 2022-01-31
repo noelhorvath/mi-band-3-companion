@@ -1,131 +1,158 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {BleConnectionService} from "../../services/ble/connection/ble-connection.service";
 import {PermissionService} from "../../services/permission/permission.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../../services/firebase/auth/auth.service";
+import {MessageService} from "../../services/message/message.service";
+import {IScannedDevice} from "./models/IScannedDevice";
+import {UserService} from "../../services/firebase/firestore/user/user.service";
+import {Device} from "../../shared/models/classes/Device";
 
 @Component({
-  selector: 'app-setup',
-  templateUrl: './device-setup.component.html',
-  styleUrls: ['./device-setup.component.scss'],
+    selector: 'app-setup',
+    templateUrl: './device-setup.component.html',
+    styleUrls: ['./device-setup.component.scss'],
 })
 export class DeviceSetupComponent implements OnInit {
-  public deviceList: any[];
-  public deviceListSubscription: Subscription;
-  public isAuthenticated: boolean;
-  public isAuthenticatedSubscription: Subscription;
-  public isScanningDisabled: boolean;
-  public isScanningDisabledSubscription: Subscription;
-  public isScanning: boolean;
-  public isScanningSubscription: Subscription;
-  public counter: number;
-  public connectionStatusSubscription: Subscription;
-  public connectionStatus: string;
-  public connectedDevice: string;
-  public connectedDeviceSubscription: Subscription;
+    public deviceList: IScannedDevice[];
+    public deviceListSubscription: Subscription;
+    public isScanningDisabled: boolean;
+    public isScanningDisabledSubscription: Subscription;
+    public isScanning: boolean;
+    public isScanningSubscription: Subscription;
+    public counter: number;
+    public connectedDevice: Device;
+    public connectedDeviceSubscription: Subscription;
+    public connectionStatus: string;
+    public connectionStatusSubscription: Subscription;
 
-  constructor(
-    private bleConnectionService: BleConnectionService,
-    private permissionService: PermissionService
-  ) {
-    this.deviceListSubscription = this.bleConnectionService.deviceListSubject.subscribe(list => {
-      this.deviceList = list;
-      // 10s timeout before next scan
-      this.runScanCountDown(list);
-    });
-    this.isScanningSubscription = this.bleConnectionService.isScanningSubject.subscribe(value => {
-      this.isScanning = value;
-    });
-    this.isScanningDisabledSubscription = this.bleConnectionService.isScanningDisabledSubject.subscribe(value => {
-      this.isScanningDisabled = value;
-    });
-    this.isAuthenticatedSubscription = this.bleConnectionService.isAuthenticatedSubject.subscribe(value => {
-      this.isAuthenticated = value;
-    });
+    constructor(
+        private bleConnectionService: BleConnectionService,
+        private permissionService: PermissionService,
+        private userService: UserService,
+        private router: Router,
+        private authService: AuthService,
+        private messageService: MessageService,
+        private zone: NgZone
+    ) {
+        this.deviceListSubscription = this.bleConnectionService.deviceListSubject.subscribe(async list => {
+            if (list) {
+                this.deviceList = list.map( scanResult => {
+                    return {name: scanResult.name, address: scanResult.address, rssi: scanResult.rssi} as IScannedDevice;
+                });
+                await this.messageService.dismissLoading();
+            }
+        });
 
-    // for testing
-    this.connectionStatusSubscription = this.bleConnectionService.connectionStatusSubject.subscribe((status: string) => {
-      this.connectionStatus = status;
-    });
-    this.connectedDeviceSubscription = this.bleConnectionService.connectedDeviceSubject.subscribe((address: string) => {
-      this.connectedDevice = address;
-    });
-  }
+        this.isScanningSubscription = this.bleConnectionService.isScanningSubject.subscribe(async value => {
+            this.isScanning = value;
+        }, async error => {
+            await this.displayErrorToast(error);
+        });
 
-  async startScanningForDevices() {
-    try {
-      const hasFLPerm = await this.permissionService.checkFineLocation(true);
-      const hasCLPerm = await this.permissionService.checkCoarseLocation(true);
-      const hasBLSPerm = await this.permissionService.checkBluetoothScan(true);
-      const hasBLCPerm = await this.permissionService.checkBluetoothConnect(true);
-      console.log(DeviceSetupComponent.name + " -> " + JSON.stringify(hasFLPerm) + " " + JSON.stringify(hasCLPerm) + " " + JSON.stringify(hasBLSPerm) + " " + JSON.stringify(hasBLCPerm));
+        this.isScanningDisabledSubscription = this.bleConnectionService.isScanningDisabledSubject.subscribe(value => {
+            this.isScanningDisabled = value;
+            if (value.valueOf()) {
+                // 10s timeout before next scan
+                this.runScanCountDown();
+            }
+        }, async error => {
+            await this.displayErrorToast(error);
+        });
 
-      if (hasBLSPerm != null && hasBLCPerm != null && !hasBLSPerm.hasPermission && !hasBLCPerm.hasPermission) {
-        console.error("Missing BLUETOOTH_SCAN and BLUETOOTH_CONNECT permissions!");
-        return;
-      } else if (hasBLSPerm != null && !hasBLSPerm.hasPermission) {
-        console.error("Missing BLUETOOTH_SCAN permission!");
-        return;
-      } else if (hasBLCPerm != null && !hasBLCPerm.hasPermission) {
-        console.error("Missing BLUETOOTH_SCAN permission!");
-        return;
-      } else {
-        if (hasFLPerm != null && hasCLPerm != null && !hasFLPerm.hasPermission && !hasCLPerm.hasPermission) {
-          console.error("Missing ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION permissions!");
-          return;
-        } else if (hasFLPerm != null && !hasFLPerm.hasPermission) {
-          console.error("Missing ACCESS_FINE_LOCATION permission!");
-          return;
-        } else if (hasCLPerm != null && !hasCLPerm.hasPermission) {
-          console.error("Missing ACCESS_COARSE_LOCATION permission!");
-          return;
+        this.connectionStatusSubscription = this.bleConnectionService.connectionStatusSubject.subscribe( async status => {
+            this.connectionStatus = status;
+            console.log("status: " + status);
+            if (status === 'connecting') {
+                await this.messageService.createLoading('CONNECTING_WITH_DOTS');
+            } else if (status === 'connected') {
+                try {
+                    if (this.connectedDevice) {
+                        //TODO: some message here
+                        const user = await this.authService.authUser;
+                        if (user) {
+                            await this.userService.updateField(user.uid, 'devices', this.connectedDevice, false, true);
+                            await this.router.navigateByUrl('/home', { replaceUrl: true });
+                            console.log('device connected');
+                        } else {
+                            console.error(DeviceSetupComponent.name + ' device setup error -> User is not logged in!');
+                            await this.router.navigateByUrl('/login', { replaceUrl: true });
+                        }
+                        await this.messageService.dismissLoading();
+                    } else {
+                        console.error(DeviceSetupComponent.name + ' -> missing device address after connecting');
+                    }
+                } catch (error) {
+                    await this.messageService.errorHandler(DeviceSetupComponent.name, "Device setup error", error, 'toast', true, 5000);
+                }
+            } else if ('disconnected') {
+                await this.messageService.dismissLoading();
+            }
+        }, async error => {
+            this.connectionStatus = 'disconnected';
+            await this.displayErrorToast(error);
+        });
+
+        this.connectedDeviceSubscription = this.bleConnectionService.connectedDeviceSubject.subscribe(async (device: Device) => {
+            this.connectedDevice = device;
+        }, async error => {
+            await this.displayErrorToast(error);
+        });
+    }
+
+    public async startScanningForDevices() {
+        try {
+            await this.messageService.createLoading("PREPARING_SCANNING");
+            this.messageService.changeLoadingMessage("CHECKING_PERMISSIONS");
+            await this.permissionService.checkForBluetoothScanPermissions();
+            this.messageService.changeLoadingMessage("ENABLING_BL");
+            const isEnabled = await this.bleConnectionService.enableBL();
+            if (!isEnabled) { return await this.messageService.errorHandler(DeviceSetupComponent.name, 'BL is not enabled', 'BL_NOT_ENABLED', 'alert', true); }
+            this.messageService.changeLoadingMessage("SCANNING_FOR_DEVICES");
+            return this.bleConnectionService.scanForDevices(3000);
+        } catch (e) {
+            console.error(DeviceSetupComponent.name + " -> startScanningForDevices error: " + e.message);
+            return await this.messageService.errorHandler(DeviceSetupComponent.name, e, e, 'alert', true);
         }
-      }
-      this.bleConnectionService.scanForDevices(1500); // TODO: test with more time and shit
-    } catch (e) {
-      console.error(DeviceSetupComponent.name + " -> startScanningForDevices error: " + e.message);
     }
-  }
 
-  async connectToSelectedDevice(address: string) {
-    await this.bleConnectionService.connect(address, true);
-  }
+    private runScanCountDown() {
+        let intervalId = setInterval(() => {
+            if (this.counter == null) {
+                // start countdown
+                this.counter = 10;
+            } else {
+                if (this.counter !== 0) {
+                    this.counter -= 1;
+                } else {
+                    // end countdown
+                    this.counter = undefined;
+                    this.zone.run( () => {
+                        this.bleConnectionService.isScanningDisabledSubject.next(false);
+                    });
+                    clearInterval(intervalId);
+                }
+            }
+        }, 1000);
+    }
 
-  runScanCountDown(data: any) {
-    if (data) {
-      let intervalId = setInterval(() => {
-        if (this.counter == null) {
-          // start countdown
-          this.counter = 10;
-        } else {
-          if (this.counter !== 0) {
-            this.counter -= 1;
-          } else {
-            // end countdown
-            this.counter = undefined;
-            this.bleConnectionService.isScanningDisabledSubject.next(false);
-            clearInterval(intervalId);
-          }
+    public connectToSelectedDevice(address: string): Promise<void> {
+        return this.bleConnectionService.connect(address, false, true);
+    }
+
+    private async displayErrorToast(error: any) {
+        if ((this.messageService.toast && this.messageService.toast.header !== "ERROR") || !this.messageService.toast) {
+            await this.messageService.errorHandler(DeviceSetupComponent.name, "ERROR", error, 'toast', true, 5000, 'bottom');
         }
-      }, 1000);
     }
-  }
 
-  disconnectDevice() {
-    if (this.connectedDevice != null) {
-      this.bleConnectionService.disconnectAndClose(this.connectedDevice);
-    } else {
-      // TODO: display error if no connected device
-      console.error(DeviceSetupComponent.name + ' -> Disconnect error: ' + ' No connected device!');
+    ngOnInit() {}
+
+    ngOnDestroy() {
+        if (this.isScanningDisabledSubscription) { this.isScanningDisabledSubscription.unsubscribe() }
+        if (this.isScanningSubscription) { this.isScanningSubscription.unsubscribe() }
+        if (this.deviceListSubscription) { this.deviceListSubscription.unsubscribe() }
+        if (this.connectionStatusSubscription) { this.connectionStatusSubscription.unsubscribe() }
     }
-  }
-
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    this.isScanningDisabledSubscription.unsubscribe();
-    this.isScanningSubscription.unsubscribe();
-    this.deviceListSubscription.unsubscribe();
-    this.isAuthenticatedSubscription.unsubscribe();
-  }
 }

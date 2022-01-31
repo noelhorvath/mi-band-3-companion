@@ -2,5 +2,7 @@
 	"appId": "hu.noelhorvath.miband3companion",
 	"appName": "Mi Band 3 Companion",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"loggingBehavior": "debug",
+	"plugins": {}
 }

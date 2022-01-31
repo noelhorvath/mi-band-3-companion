@@ -9,15 +9,15 @@ import {ToolbarModule} from "../../shared/components/toolbar/toolbar.module";
 
 
 @NgModule({
-  declarations: [RegisterComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ReactiveFormsModule,
-    RegisterRoutingModule,
-    TranslateModule,
-    ToolbarModule
-  ]
+    declarations: [RegisterComponent],
+    imports: [
+        CommonModule,
+        IonicModule,
+        ReactiveFormsModule,
+        RegisterRoutingModule,
+        TranslateModule,
+        ToolbarModule
+    ]
 })
 export class RegisterModule {
 }

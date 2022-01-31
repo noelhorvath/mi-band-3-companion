@@ -2,73 +2,60 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/firebase/auth/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MessageService} from "../../services/message/message.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public loginFormGroup: FormGroup;
-  public isResettingPassword: boolean;
-  public email: string;
-  public title: string;
+    public loginFormGroup: FormGroup;
+    public isResettingPassword: boolean;
+    public email: string;
+    public title: string;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-  ) {
-    this.loginFormGroup = new FormGroup({
-      email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
-      password: new FormControl('', Validators.required)
-    });
-    this.isResettingPassword = false;
-    this.email = "";
-    this.title = "LOGIN"
-  }
-
-  ngOnInit() {
-  }
-
-  public login() {
-    const email = this.loginFormGroup.value.email;
-    const password = this.loginFormGroup.value.password;
-    if (email && password) {
-      this.authService.login(email, password).then(() => {
-        // TODO: navigate to home
-        // TODO: check if user has a device
-        this.router.navigateByUrl('/device-setup').then(() => console.log('No saved devices detected, redirecting to device-setup'));
-      }).catch(error => {
-        console.error("Login error: " + error.message);
-        console.error("Login error code: " + error.code);
-      });
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+        private messageService: MessageService,
+    ) {
+        this.loginFormGroup = new FormGroup({
+            email: new FormControl('', Validators.compose([Validators.email, Validators.required])),
+            password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8)]))
+        });
+        this.isResettingPassword = false;
+        this.email = "";
+        this.title = "LOGIN"
     }
-  }
 
-  public goToRegister() {
-    this.router.navigateByUrl('/register').then(() => console.log('navigated to register')).catch(error => {
-      console.error('nav error: ' + error.message || error);
-    });
-  }
+    ngOnInit() { }
 
-  public resetPassword() {
-    this.isResettingPassword = true;
-    this.title = "PASSWORD_RESET";
-    this.email = this.loginFormGroup.value.email;
-    console.log("email: " + this.email);
-  }
+    public async login(): Promise<void> {
+        const email = this.loginFormGroup.value.email;
+        const password = this.loginFormGroup.value.password;
+        try {
+            const authUser = await this.authService.signIn(email, password);
+            if (authUser) { // only when email is verified (promise will be rejected otherwise)
+                await this.router.navigateByUrl('/home', { replaceUrl: true });
+            }
+        } catch (e) {
+            await this.messageService.errorHandler(LoginComponent.name, "Login failed", e, 'toast', false,5000,'top');
+        }
+    }
 
-  public loginWithGoogle() {
-    this.authService.loginWithGoogle().then(() => {
-      // TODO: navigate to home
-    }).catch(error => {
-      console.error("Google login error: " + error.message);
-      console.error("Google login error code: " + error.code);
-    });
-  }
+    public goToRegister(): void {
+        this.router.navigateByUrl('/register').catch( error => console.error('nav error: ' + error.message || error) );
+    }
 
-  setIsResettingPassword(event: any) {
-    this.isResettingPassword = event;
-    this.title = "LOGIN";
-  }
+    public resetPassword(): void {
+        this.isResettingPassword = true;
+        this.title = "PASSWORD_RESET";
+        this.email = this.loginFormGroup.value.email;
+    }
+
+    setIsResettingPassword(event: any): void {
+        this.isResettingPassword = event;
+        this.title = "LOGIN";
+    }
 }

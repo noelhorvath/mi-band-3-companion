@@ -1,16 +1,16 @@
 import {TestBed} from '@angular/core/testing';
 
-import {BleDataService} from './ble-data.service.ts';
+import {BleDataService} from './ble-data.service';
 
 describe('DataService', () => {
-  let service: BleDataService;
+    let service: BleDataService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(BleDataService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(BleDataService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

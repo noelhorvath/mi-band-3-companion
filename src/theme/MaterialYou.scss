@@ -1,0 +1,22 @@
+// Android 12 rounded style
+ion-card, ion-item {
+    border-radius: 32px;
+}
+
+
+ion-popover::part(content) {
+    border-radius: 32px;
+    margin: 1% 1%;
+    padding: 1% 1%;
+    background-color: #1f1f1f;
+}
+
+ion-popover::part(backdrop) {
+    --backdrop-opacity: 0.6;
+}
+
+
+ion-button, ion-back-button {
+    --border-radius: 32px;
+}
+

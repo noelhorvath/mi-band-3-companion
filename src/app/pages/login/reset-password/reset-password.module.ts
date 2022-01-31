@@ -7,17 +7,17 @@ import {TranslateModule} from "@ngx-translate/core";
 import {ToolbarModule} from "../../../shared/components/toolbar/toolbar.module";
 
 @NgModule({
-  declarations: [ResetPasswordComponent],
-  exports: [
-    ResetPasswordComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    IonicModule,
-    TranslateModule,
-    ToolbarModule,
-  ]
+    declarations: [ResetPasswordComponent],
+    exports: [
+        ResetPasswordComponent
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        IonicModule,
+        TranslateModule,
+        ToolbarModule,
+    ]
 })
 export class ResetPasswordModule {
 }

@@ -1,69 +1,71 @@
 <ion-header>
-  <app-toolbar showBackButton="true"></app-toolbar>
+    <app-toolbar type="register" showBackButton="true"></app-toolbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="registrationFormGroup">
-    <ion-grid>
-      <ion-row class="ion-text-center">
-        <ion-col size="12">
-          <ion-text color="primary">{{ 'REGISTRATION' | translate }}</ion-text>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">{{ 'FIRST_NAME' | translate }}</ion-label>
-            <ion-input type="text" autocomplete="given-name" formControlName="firstName"
-                       clearInput="true"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">{{ 'LAST_NAME' | translate }}</ion-label>
-            <ion-input type="text" autocomplete="family-name" formControlName="lastName"
-                       clearInput="true"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">{{ 'EMAIL' | translate }}</ion-label>
-            <ion-input type="email" autocomplete="email" formControlName="email"
-                       clearInput="true"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">{{ 'PASSWORD' | translate }}</ion-label>
-            <ion-input type="password" formControlName="password" clearInput="true"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">{{ 'PASSWORD_AGAIN' | translate }}</ion-label>
-            <ion-input type="password" formControlName="passwordAgain" clearInput="true"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="12">
-          <ion-button [disabled]="registrationFormGroup.invalid" color="primary" (click)="register()">
-            {{ 'REGISTER' | translate }}
-          </ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button color="primary" (click)="resetForm()">
-            {{ 'RESET' | translate }}
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+    <form [formGroup]="registrationFormGroup">
+        <ion-grid>
+            <ion-row class="ion-text-center">
+                <ion-col size="12">
+                    <ion-text color="primary">{{ 'REGISTRATION' | translate }}</ion-text>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">{{ 'FIRST_NAME' | translate }}</ion-label>
+                        <ion-input type="text" autocomplete="given-name" formControlName="firstName"
+                                   clearInput="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">{{ 'LAST_NAME' | translate }}</ion-label>
+                        <ion-input type="text" autocomplete="family-name" formControlName="lastName"
+                                   clearInput="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">{{ 'EMAIL' | translate }}</ion-label>
+                        <ion-input type="email" autocomplete="email" formControlName="email"
+                                   clearInput="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">{{ 'PASSWORD' | translate }}</ion-label>
+                        <ion-input autocomplete="password" type="password" formControlName="password"
+                                   clearInput="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">{{ 'PASSWORD_AGAIN' | translate }}</ion-label>
+                        <ion-input autocomplete="password" type="password" formControlName="passwordAgain"
+                                   clearInput="true"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button [disabled]="registrationFormGroup.invalid" color="primary" (click)="register()">
+                        {{ 'REGISTER' | translate }}
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button color="primary" (click)="resetForm()">
+                        {{ 'CLEAR_FORM_INPUTS' | translate }}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
 </ion-content>

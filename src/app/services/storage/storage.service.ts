@@ -1,31 +1,34 @@
 import {Injectable} from '@angular/core';
-import {Storage} from "@ionic/storage-angular";
+import {Storage} from '@ionic/storage-angular'
+import {BehaviorSubject} from 'rxjs'
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class StorageService {
 
-  constructor(
-    private storage: Storage
-  ) {
-    this.initStorage().then(() => {
-      console.log(StorageService.name + " -> Storage has been initialized!");
-    }).catch(error => {
-      console.error(StorageService.name + " -> Storage initialization failed: " + error.message || error);
-    });
-  }
+    public isStorageServiceInitializedSubject: BehaviorSubject<boolean>;
 
-  private async initStorage() {
-    await this.storage.create();
-  }
+    constructor(private storage: Storage) {
+        this.isStorageServiceInitializedSubject = new BehaviorSubject<boolean>(false);
+        this.initStorage().then(() => {
+            this.isStorageServiceInitializedSubject.next(true);
+            console.log(StorageService.name + ' -> Storage has been initialized!');
+        }).catch(error => {
+            console.error(StorageService.name + ' -> Storage initialization failed: ' + error.message || error);
+        });
+    }
 
-  public async setLanguage(lang: string) {
-    await this.storage.set("lang", lang);
-  }
+    private async initStorage() {
+        return await this.storage.create();
+    }
 
-  public async getLanguage() {
-    return await this.storage.get("lang");
-  }
+    public async setLanguage(lang: string) {
+        return await this.storage.set('lang', lang);
+    }
+
+    public async getLanguage() {
+        return await this.storage.get('lang');
+    }
 
 }

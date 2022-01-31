@@ -24,3 +24,11 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+// own style
+@import "/src/theme/MaterialYou.scss";
+
+.popover-content {
+    --border-radius: 32px;
+    border-radius: 32px;
+}

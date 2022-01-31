@@ -10,16 +10,16 @@ import {ResetPasswordModule} from "./reset-password/reset-password.module";
 
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ReactiveFormsModule,
-    LoginRoutingModule,
-    ToolbarModule,
-    TranslateModule,
-    ResetPasswordModule
-  ]
+    declarations: [LoginComponent],
+    imports: [
+        CommonModule,
+        IonicModule,
+        ReactiveFormsModule,
+        LoginRoutingModule,
+        ToolbarModule,
+        TranslateModule,
+        ResetPasswordModule
+    ]
 })
 export class LoginModule {
 }

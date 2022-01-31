@@ -7,16 +7,16 @@ import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [ToolbarComponent],
-  exports: [
-    ToolbarComponent
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-    FormsModule
-  ]
+    declarations: [ToolbarComponent],
+    exports: [
+        ToolbarComponent
+    ],
+    imports: [
+        CommonModule,
+        IonicModule,
+        TranslateModule,
+        FormsModule
+    ]
 })
 export class ToolbarModule {
 }
