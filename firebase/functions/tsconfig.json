@@ -1,14 +1,21 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
         "outDir": "lib",
         "sourceMap": true,
         "strict": true,
-        "target": "es2017"
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedParameters": true,
+        "exactOptionalPropertyTypes": true,
+        "target": "es2021"
     },
-    "compileOnSave": true,
+    "compileOnSave": false,
     "include": [
         "src"
     ]
