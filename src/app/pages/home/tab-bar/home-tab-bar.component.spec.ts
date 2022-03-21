@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {HomeTabBarComponent} from './home-tab-bar.component';
+import { HomeTabBarComponent } from './home-tab-bar.component';
 
 describe('HomeTabBarComponent', () => {
     let component: HomeTabBarComponent;

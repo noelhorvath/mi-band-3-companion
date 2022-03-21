@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonTabs} from "@ionic/angular";
+import { Component, ViewChild } from '@angular/core';
+import { IonTabs } from '@ionic/angular';
 
 @Component({
     selector: 'app-home-tab-bar',
     templateUrl: './home-tab-bar.component.html',
     styleUrls: ['./home-tab-bar.component.scss'],
 })
-export class HomeTabBarComponent implements OnInit {
+export class HomeTabBarComponent {
     private readonly deviceIconFilled = 'watch';
     private readonly deviceIconOutline = 'watch-outline';
     private readonly activityIconFilled = 'walk';
@@ -22,10 +22,9 @@ export class HomeTabBarComponent implements OnInit {
     public heartRateIcon: string;
     public trainingIcon: string;
     public statisticsIcon: string;
+    @ViewChild('tabBar', { static: false }) public tabs!: IonTabs;
 
-    @ViewChild('tabBar', { static: false }) tabs: IonTabs;
-
-    constructor() {
+    public constructor() {
         this.deviceIcon = this.deviceIconOutline;
         this.activityIcon = this.activityIconOutline;
         this.heartRateIcon = this.heartRateIconOutline;
@@ -33,9 +32,7 @@ export class HomeTabBarComponent implements OnInit {
         this.statisticsIcon = this.statisticsIconOutline;
     }
 
-    ngOnInit() { }
-
-    public setSelectedTab() {
+    public setSelectedTab(): void {
         const selectedTab = this.tabs.getSelected();
         if (selectedTab) {
             switch (selectedTab) {
