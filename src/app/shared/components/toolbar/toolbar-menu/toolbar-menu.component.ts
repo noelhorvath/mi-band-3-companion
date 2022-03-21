@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-toolbar-menu',
-  templateUrl: './toolbar-menu.component.html',
-  styleUrls: ['./toolbar-menu.component.scss'],
+    selector: 'app-toolbar-menu',
+    templateUrl: './toolbar-menu.component.html',
+    styleUrls: ['./toolbar-menu.component.scss'],
 })
-export class ToolbarMenuComponent implements OnInit {
+export class ToolbarMenuComponent {
 
-  constructor() { }
-
-  ngOnInit() {}
-
+    public constructor() {
+    }
 }

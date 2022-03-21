@@ -20,14 +20,16 @@
             <ion-back-button slot="start" [hidden]="!showBackButton" text="{{ 'BACK' | translate }}"></ion-back-button>
         </ion-buttons>
         <div class="ion-color-primary">
-            <ion-chip [color]="bleStatusColor">
-                <ion-icon name="bluetooth"></ion-icon>
-                <ion-label>{{ connectionStatus ? (connectionStatus.toUpperCase() | translate) : ('DISCONNECTED' | translate) }}</ion-label>
-                <ng-container *ngIf="connectionStatus === 'connecting'">
-                    <ion-spinner name="lines-sharp-small" [color]="bleStatusColor"></ion-spinner>
-                </ng-container>
-            </ion-chip>
-            <ng-container *ngIf="batteryInfo">
+            <ng-container *ngIf="connectionStatus !== undefined && connectionStatusColor !== undefined">
+                <ion-chip [color]="connectionStatusColor">
+                    <ion-icon name="bluetooth"></ion-icon>
+                    <ion-label>{{ connectionStatus | translate }}</ion-label>
+                    <ng-container *ngIf="connectionStatus === 'CONNECTING'">
+                        <ion-spinner name="lines-sharp-small" [color]="connectionStatusColor"></ion-spinner>
+                    </ng-container>
+                </ion-chip>
+            </ng-container>
+            <ng-container *ngIf="batteryInfo !== undefined && batteryChipIconName !== undefined && batteryChipColor !== undefined">
                 <ion-chip [color]="batteryChipColor">
                     <ion-icon [name]="batteryChipIconName"></ion-icon>
                     <ion-label>{{ batteryInfo.batteryLevel + '%'}}</ion-label>
@@ -39,7 +41,7 @@
                 <ion-icon name="language-sharp"></ion-icon>
                 <ion-text>{{ "LANG_ID" | translate }}</ion-text>
             </ion-button>
-            <ng-container *ngIf="currentUser">
+            <ng-container *ngIf="authUser !== undefined">
                 <ion-button slot="icon-only" (click)="signOut()">
                     <ion-icon name="log-out-outline"></ion-icon>
                 </ion-button>

@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {ToolbarComponent} from './toolbar.component';
+import { ToolbarComponent } from './toolbar.component';
 
 describe('ToolbarComponent', () => {
     let component: ToolbarComponent;
