@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DeviceRoutingModule} from "./device-routing.module";
-import {DeviceComponent} from "./device.component";
-import {IonicModule} from "@ionic/angular";
-import {TranslateModule} from "@ngx-translate/core";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DeviceRoutingModule } from './device-routing.module';
+import { DeviceComponent } from './device.component';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import {TranslateModule} from "@ngx-translate/core";
         CommonModule,
         DeviceRoutingModule,
         IonicModule,
-        TranslateModule
+        TranslateModule,
     ]
 })
 export class DeviceModule {

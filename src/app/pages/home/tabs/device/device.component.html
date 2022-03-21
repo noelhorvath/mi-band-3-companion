@@ -1,53 +1,110 @@
-<div>
-    <div>
-        <ng-container *ngIf="!connectedDevice && !activity">
-            <div class="ion-align-items-center">
-                <ion-spinner name="crescent" color="primary"></ion-spinner>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="connectedDevice">
+<div class="container">
+    <ng-container *ngIf="connectionInfo && connectionInfo.isReady() else loading">
+        <div class="title">
+            <ion-text color="primary">{{ 'DEVICE_INFORMATION' | translate }}</ion-text>
+        </div>
+        <div>
             <ion-card>
-                <ion-card-title class="ion-text-center">{{ 'DEVICE' | translate }}</ion-card-title>
                 <ion-card-content>
                     <ion-grid>
                         <ion-row>
-                            <ion-col>{{ 'NAME' | translate }}</ion-col>
-                            <ion-col>{{connectedDevice.name ?? ( 'UNKNOWN' | translate )}}</ion-col>
+                            <ion-col>{{ 'DEVICE' | translate }}</ion-col>
+                            <ion-col>{{ connectionInfo.device?.name ?? '-' }}</ion-col>
                         </ion-row>
                         <ion-row>
                             <ion-col>{{ 'MAC_ADDRESS' | translate }}</ion-col>
-                            <ion-col>{{ connectedDevice.macAddress ?? ( 'UNKNOWN' | translate ) }}</ion-col>
+                            <ion-col>{{ connectionInfo.device?.macAddress ?? '-' }}</ion-col>
                         </ion-row>
                         <ion-row>
-                            <ion-col>{{ 'LAST_CONNECTED_DATE' | translate }}</ion-col>
-                            <ion-col>{{ connectedDevice.lastUsedDate ?? ( 'UNKNOWN' | translate ) }}</ion-col>
+                            <ion-col>{{ 'LAST_CONNECTED' | translate }}</ion-col>
+                            <ion-col>
+                                {{ connectionInfo.device?.lastUsedDate | date:'YYYY-MM-dd HH:mm:ss' }}
+                            </ion-col>
                         </ion-row>
                     </ion-grid>
                 </ion-card-content>
             </ion-card>
-        </ng-container>
-    </div>
-    <div>
-        <ng-container *ngIf="activity">
-            <ion-card>
-                <ion-card-title class="ion-text-center">{{ 'ACTIVITY' | translate }}</ion-card-title>
-                <ion-card-content>
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col>{{ 'STEPS' | translate }}</ion-col>
-                            <ion-col>{{ activity.steps }}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col>{{ 'BURNED_CALORIES' | translate }}</ion-col>
-                            <ion-col>{{ activity.calories }}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col>{{ 'DISTANCE' | translate }}</ion-col>
-                            <ion-col>{{ activity.distance }}</ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
-        </ng-container>
-    </div>
+        </div>
+        <div class="title">
+            <ion-text color="primary">{{ 'LATEST_DEVICE_MEASUREMENTS' | translate }}</ion-text>
+        </div>
+        <ion-grid id="info-cards">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-card class="ion-text-center">
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="info-num">{{ activity?.distance ?? '-' }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text
+                                        class="info-text">{{ (activity?.distance ?? 0 > 1 ? 'METERS' : 'METER') | translate }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-card class="ion-text-center">
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="info-num">{{ activity?.calories ?? '-' }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text
+                                        class="info-text">{{ (activity?.calories ?? 0 > 1 ? 'CALORIES' : 'CALORIE') | translate }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="8">
+                    <ion-card class="ion-text-center">
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="info-num">{{ activity?.steps ?? '-' }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text
+                                        class="info-text">{{ (activity?.steps ?? 0 > 1 ? 'STEPS' : 'STEP') | translate }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-card class="ion-text-center">
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="info-num">{{ heartRate?.bpm ?? '-' }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-text class="info-text">{{ 'BPM' | translate }}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ng-container>
+    <ng-template #loading>
+        <div class="ion-align-items-center">
+            <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </div>
+    </ng-template>
 </div>

@@ -1,0 +1,20 @@
+<ion-segment [swipeGesture]="true" [(ngModel)]="chartDateType" (ionChange)="dateTypeSegmentHandler($event)"
+             [scrollable]="true">
+    <ng-container *ngFor="let type of CHART_TYPES">
+        <ion-segment-button [value]="type">{{ type.toUpperCase() | translate }}</ion-segment-button>
+    </ng-container>
+</ion-segment>
+<ng-container *ngIf="chartData !== undefined else loading">
+    <app-custom-chart
+        [chartType]="chartType"
+        [chartDataSets]="chartData"
+        [chartLabels]="chartLabels"
+        [chartOptions]="chartOptions"
+        [chartLegend]="chartLegend">
+    </app-custom-chart>
+</ng-container>
+<ng-template #loading>
+    <div class="ion-align-items-center">
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+</ng-template>
