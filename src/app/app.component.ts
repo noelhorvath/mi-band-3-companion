@@ -1,15 +1,16 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss'],
 })
-
 export class AppComponent {
+    public readonly title: string;
 
-    constructor() {
-        //TODO: splash screen
+    public constructor() {
+        this.title = 'Mi Band 3 Companion';
+        //TODO: add splash screen
     }
 }
 
