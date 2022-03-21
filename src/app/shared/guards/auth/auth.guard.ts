@@ -1,29 +1,37 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
-import {AuthService} from "../../../services/firebase/auth/auth.service";
-import {Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { FirebaseAuthService } from '../../../services/firebase/auth/firebase-auth.service';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { LogHelper } from '../../models/classes/LogHelper';
+import { User } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
+    private readonly logHelper: LogHelper;
 
-    constructor(
-        private authService: AuthService,
-        private router: Router
-    ) {
+    public constructor(
+        private authService: FirebaseAuthService,
+        private router: Router)
+    {
+        this.logHelper = new LogHelper(AuthGuard.name);
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.authService.getAuthUser().pipe(map(user => !!user), tap(isLoggedIn => {
+    public canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return this.authService.getAuthUserObservable().pipe(map((user: User | undefined): boolean => !!user && user.emailVerified), tap( async (isLoggedIn: boolean) => {
             if (!isLoggedIn) {
-                this.router.navigateByUrl('/login', { replaceUrl: true }).catch(error => console.error(AuthGuard.name + ' -> navigation failed: ' + error));
+                try {
+                    await this.router.navigateByUrl('/login', { replaceUrl: true });
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.canActivate.name, e);
+                }
             }
         }));
     }
 
-    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    public canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return this.canActivate(childRoute, state);
     }
 }

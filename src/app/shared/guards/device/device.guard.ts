@@ -1,35 +1,42 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import {AuthService} from "../../../services/firebase/auth/auth.service";
-import {StorageService} from "../../../services/storage/storage.service";
-import {UserService} from "../../../services/firebase/firestore/user/user.service";
-import {map, tap} from "rxjs/operators";
+import { FirebaseAuthService } from '../../../services/firebase/auth/firebase-auth.service';
+import { FirestoreUserService } from '../../../services/firestore/user/firestore-user.service';
+import { map, tap } from 'rxjs/operators';
+import { User } from '../../models/classes/User';
+import { LogHelper } from '../../models/classes/LogHelper';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-
 export class DeviceGuard implements CanActivate, CanActivateChild {
-    constructor(
-        private userService: UserService,
-        private authService: AuthService,
-        private storageService: StorageService,
-        private router: Router
-    ) { }
+    private readonly logHelper: LogHelper;
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.userService.get(this.authService.authUser ? this.authService.authUser.uid : null).pipe(
-            map(user => user ? (user.devices ? user.devices.length > 0 : false) : false),
-            tap( hasDevice => {
-            if (!hasDevice) {
-                this.router.navigateByUrl('/device-setup', { replaceUrl: true }).catch(e => console.error(DeviceGuard.name + ' -> nav error: ' + e));
-            }
-            return hasDevice;
-        }))
+    public constructor(
+        private userService: FirestoreUserService,
+        private authService: FirebaseAuthService,
+        private router: Router)
+    {
+        this.logHelper = new LogHelper(DeviceGuard.name);
     }
 
-    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    public canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return this.userService.get(this.authService.getAuthUser()?.uid ?? 'undefined').pipe(
+            map((user: User | undefined) => user !== undefined ? (user.devices ? user.devices.length > 0 : false) : false),
+            tap( async (hasDevice: boolean) => {
+                if (!hasDevice) {
+                    try {
+                        await this.router.navigateByUrl('/device-setup', { replaceUrl: true });
+                    } catch (e: unknown) {
+                        this.logHelper.logError('canActivate', e);
+                    }
+                }
+                return hasDevice;
+            }));
+    }
+
+    public canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return this.canActivate(childRoute, state);
     }
 
