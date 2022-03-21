@@ -54,7 +54,7 @@ export class Device implements IDevice {
     {
         this.name = name;
         this.macAddress = macAddress;
-        this.lastUsedDate = lastUsedDate.toString();
+        this.lastUsedDate = typeof lastUsedDate === 'string' ? lastUsedDate : lastUsedDate.toISOString();
         this.services = services?.map((s: IService) => objectToClass<Service>(s as Service, Service));
     }
 

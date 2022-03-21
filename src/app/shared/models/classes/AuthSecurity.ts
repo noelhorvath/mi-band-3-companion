@@ -16,9 +16,12 @@ export class AuthSecurity implements IAuthSecurity {
     {
         this.id = id;
         this.uuid = uuid;
-        this.lastAccountCreationDate = lastAccountCreationDate?.toString();
-        this.lastEmailVerificationRequestDate = lastEmailVerificationRequestDate?.toString();
-        this.lastPasswordChangeRequestDate = lastPasswordChangeRequestDate?.toString();
+        this.lastAccountCreationDate = typeof lastAccountCreationDate === 'string' ? lastAccountCreationDate
+            : lastAccountCreationDate?.toISOString();
+        this.lastEmailVerificationRequestDate = typeof lastEmailVerificationRequestDate === 'string' ? lastEmailVerificationRequestDate
+            : lastEmailVerificationRequestDate?.toISOString();
+        this.lastPasswordChangeRequestDate = typeof lastPasswordChangeRequestDate === 'string' ? lastPasswordChangeRequestDate
+            : lastPasswordChangeRequestDate?.toISOString();
     }
 
     public copy(other: IAuthSecurity): void {

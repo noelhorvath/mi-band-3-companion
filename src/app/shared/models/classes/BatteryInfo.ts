@@ -32,9 +32,9 @@ export class BatteryInfo implements IBatteryInfo {
         this.isCharging = isCharging;
         this.device = device !== undefined ? objectToClass<Device>(device as Device, Device) : device;
         this.lastChargeLevel = lastChargeLevel;
-        this.lastChargeDate = lastChargeDate?.toString();
+        this.lastChargeDate = typeof lastChargeDate === 'string' ? lastChargeDate : lastChargeDate?.toISOString();
         this.lastNumOfCharges = lastNumOfCharges;
-        this.prevChargeDate = prevChargeDate?.toString();
+        this.prevChargeDate = typeof prevChargeDate === 'string' ? prevChargeDate : prevChargeDate?.toISOString();
         this.prevNumOfCharges = prevNumOfCharges;
     }
 

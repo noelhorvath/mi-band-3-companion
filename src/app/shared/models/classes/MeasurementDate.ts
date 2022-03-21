@@ -11,7 +11,7 @@ export class MeasurementDate implements IMeasurementDate {
         uploadDate: string | Date = new Date())
     {
         this.dateType = dateType;
-        this.uploadDate = uploadDate.toString();
+        this.uploadDate = typeof uploadDate === 'string' ? uploadDate : uploadDate.toISOString();
     }
 
     public copy(other: IMeasurementDate): void {
