@@ -1,0 +1,16 @@
+export type LogOptions = { value: unknown };
+export type ScanStatus = 'scanning' | 'finished' | 'not scanning';
+export type ConnectionStatus = 'connected' | 'connecting' | 'disconnected' | 'connection error';
+export type BLEStatus = 'enabled' | 'enabling' | 'disabled';
+export type BLEError = { error: string; message: string };
+export type PropertyName = 'READ' | 'WRITE' | 'WRITE_WITHOUT_RESPONSE' | 'INDICATE';
+export type DateType = 'per second' | 'per minute' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly';
+export type ActivityDataType = 'step' | 'calorie' | 'distance';
+//export type HeartRateDataType = 'avg' | 'max' | 'min';
+//export type TrainingDataType = 'treadmill' | 'exercise';
+export type DevicePlatform = 'ios' | 'android' | 'web' | 'unknown';
+export type EmailRequestType = 'password' | 'verification';
+export type LogType = 'log' | 'error';
+export type MessageType = 'toast' | 'alert' | 'loading';
+export type ToastPosition = 'top' | 'middle' | 'bottom';
+export type LoadingSpinner = 'bubbles' | 'circles' | 'circular' | 'crescent' | 'dots' | 'lines' | 'lines-sharp' | 'lines-sharp-small' | 'lines-small';
