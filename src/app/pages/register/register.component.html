@@ -38,31 +38,25 @@
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <ion-item>
-                        <ion-label position="floating">{{ 'PASSWORD' | translate }}</ion-label>
-                        <ion-input autocomplete="password" type="password" formControlName="password"
-                                   clearInput="true"></ion-input>
-                    </ion-item>
+                    <app-password-input [inputFormControl]="getRegistrationFormControl('password')" inputLabel="PASSWORD"
+                                        labelPosition="floating" clearInput="true"></app-password-input>
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <ion-item>
-                        <ion-label position="floating">{{ 'PASSWORD_AGAIN' | translate }}</ion-label>
-                        <ion-input autocomplete="password" type="password" formControlName="passwordAgain"
-                                   clearInput="true"></ion-input>
-                    </ion-item>
+                    <app-password-input [inputFormControl]="getRegistrationFormControl('passwordAgain')" inputLabel="PASSWORD_AGAIN"
+                                        labelPosition="floating" clearInput="true"></app-password-input>
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col size="6">
-                    <ion-button [disabled]="registrationFormGroup.invalid" color="primary" (click)="register()">
+                <ion-col class="ion-align-items-center" size="6">
+                    <ion-button class="ion-text-wrap" [disabled]="registrationFormGroup.invalid" color="primary" (click)="register()">
                         {{ 'REGISTER' | translate }}
                     </ion-button>
                 </ion-col>
-                <ion-col size="6">
+                <ion-col class="ion-align-items-center" size="6">
                     <ion-button color="primary" (click)="resetForm()">
-                        {{ 'CLEAR_FORM_INPUTS' | translate }}
+                        {{ 'CLEAR' | translate }}
                     </ion-button>
                 </ion-col>
             </ion-row>

@@ -1,59 +1,82 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {AuthService} from "../../services/firebase/auth/auth.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MessageService} from "../../services/message/message.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FirebaseAuthService } from '../../services/firebase/auth/firebase-auth.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from '../../services/message/message.service';
+import { LogInfo } from '../../shared/models/classes/LogInfo';
+import { Subscription } from 'rxjs';
+import { getFormControlFromFormGroup } from '../../shared/functions/form.functions';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
-    public registrationFormGroup: FormGroup;
+export class RegisterComponent implements OnInit, OnDestroy {
+    private routeParamsSubscription: Subscription | undefined;
+    public readonly registrationFormGroup: FormGroup;
 
-    constructor(
+    public constructor(
         private router: Router,
-        private authService: AuthService,
-        private messageService: MessageService
+        private authService: FirebaseAuthService,
+        private messageService: MessageService,
+        private route: ActivatedRoute,
+        private formBuilder: FormBuilder
     ) {
-        this.registrationFormGroup = new FormGroup({
-            firstName: new FormControl('', [Validators.required]),
-            lastName: new FormControl('', [Validators.required]),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-            passwordAgain: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        this.registrationFormGroup = this.formBuilder.group({
+            firstName: ['', [Validators.required]],
+            lastName: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
+            passwordAgain: ['', [Validators.required, Validators.minLength(8)]],
         });
-        // TODO: reg info like min pass length
+        // TODO: maybe password infos like: min pass length, password strength, ...
+        // TODO: add pattern check for password
     }
 
-    ngOnInit() {}
+    public getRegistrationFormControl(formControlName: string): FormControl | null {
+        return getFormControlFromFormGroup(this.registrationFormGroup, formControlName);
+    }
 
-    public async register() {
-        const pass = this.registrationFormGroup.value.password;
-        const passAgain = this.registrationFormGroup.value.passwordAgain;
-        const email = this.registrationFormGroup.value.email;
-        const firstName = this.registrationFormGroup.value.lastName;
-        const lastName = this.registrationFormGroup.value.firstName;
-        try {
-            if (pass && passAgain && email) {
-                if (pass === passAgain) {
-                    await this.messageService.createLoading('CREATING_ACCOUNT_WITH_DOTS', "circular", false, 0, true, true);
-                    await this.authService.register(email, pass, firstName, lastName);
-                    await this.messageService.dismissLoading();
-                    await this.messageService.createAlert('REGISTRATION', 'SUCCESSFUL_REGISTRATION', true);
-                    return await this.router.navigateByUrl("/login");
-                } else {
-                    return this.messageService.errorHandler(RegisterComponent.name, 'Registration failed', 'PASSWORDS_NOT_MATCHING', 'toast', false, 5000, 'top');
+    public ngOnInit(): void {
+        this.routeParamsSubscription = this.route.params.subscribe( (params: Params) => {
+            this.registrationFormGroup.patchValue(
+                {
+                    email: params.email ?? '',
+                    password: params.password ?? '',
+                    passwordAgain: params.password ?? ''
                 }
+            );
+        });
+    }
+
+    public ngOnDestroy(): void {
+        this.routeParamsSubscription?.unsubscribe();
+    }
+
+    public async register(): Promise<void> {
+        try {
+            if (this.registrationFormGroup.value.password === this.registrationFormGroup.value.passwordAgain) {
+                await this.messageService.createLoading('CREATING_ACCOUNT_WITH_DOTS', 'circular', false, 0, true, true);
+                await this.authService.register(
+                    this.registrationFormGroup.value.email,
+                    this.registrationFormGroup.value.password,
+                    this.registrationFormGroup.value.firstName,
+                    this.registrationFormGroup.value.lastName
+                );
+                await this.messageService.dismissLoading();
+                await this.messageService.createAlert('REGISTRATION', 'SUCCESSFUL_REGISTRATION', true);
+                await this.router.navigate(['/login', { email: this.registrationFormGroup.value.email, password: this.registrationFormGroup.value.password }]);
+            } else {
+                return this.messageService.displayErrorMessage(new LogInfo(RegisterComponent.name, this.register.name, 'PASSWORDS_NOT_MATCHING'), 'toast', false, 5000, 'top');
             }
-        } catch (e) {
+        } catch (e: unknown) {
             await this.messageService.dismissLoading();
-            await this.messageService.errorHandler(RegisterComponent.name, 'Registration error', e, 'toast', false, 5000, 'top');
+            await this.messageService.displayErrorMessage(new LogInfo(RegisterComponent.name, this.register.name, e), 'toast', false, 5000, 'top');
         }
     }
 
-    public resetForm() {
+    public resetForm(): void {
         this.registrationFormGroup.reset();
     }
 }

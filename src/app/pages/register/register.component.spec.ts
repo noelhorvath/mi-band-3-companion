@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {RegisterComponent} from './register.component';
+import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
     let component: RegisterComponent;

@@ -19,35 +19,31 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-item>
-                                <ion-label position="floating">{{ 'PASSWORD' | translate }}</ion-label>
-                                <ion-input type="password" autocomplete="password" formControlName="password"
-                                           clearInput="true"></ion-input>
-                            </ion-item>
+                            <app-password-input [inputFormControl]="getLoginFormControl('password')"
+                                                inputLabel="PASSWORD"
+                                                labelPosition="floating" clearInput="true"></app-password-input>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
                             <ion-button color="primary" (click)="login()">{{ 'SIGN_IN' | translate }}</ion-button>
                         </ion-col>
-                    </ion-row>
-                    <ion-row>
                         <ion-col>
                             <ion-button color="primary"
-                                        (click)="resetPassword()">{{'RESET_PASSWORD' | translate}}</ion-button>
+                                        (click)="goToRegister()">{{ 'REGISTER' | translate }}</ion-button>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
                             <ion-button color="primary"
-                                        (click)="goToRegister()">{{ 'REGISTER' | translate }}</ion-button>
+                                        (click)="resetPassword()">{{ 'RESET_PASSWORD' | translate}}</ion-button>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </ion-card-content>
         </ng-container>
         <ng-template #passwordResetForm>
-            <app-reset-password [email]="email"></app-reset-password>
+            <app-login-reset-password [email]="loginFormGroup.get('email').value"></app-login-reset-password>
         </ng-template>
     </ion-card>
 </ion-content>

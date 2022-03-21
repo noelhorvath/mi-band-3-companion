@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./login.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login.component';
 
 const routes: Routes = [
     {
@@ -9,7 +9,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'reset-password',
-                loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule)
+                loadChildren: () => import('./reset-password/login-reset-password.module').then(m => m.LoginResetPasswordModule)
             }
         ]
     },
