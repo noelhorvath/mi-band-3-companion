@@ -4,4 +4,5 @@ export const AppSettings = {
     codeName: 'MiBand3Companion',
     version: '0.5.0',
     enableFirebaseDataCollection: false,
+    //appDynamicLinksUrl: 'https://www.mibandcompanion.page.link'
 };
