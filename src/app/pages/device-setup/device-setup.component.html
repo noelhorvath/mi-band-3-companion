@@ -1,24 +1,35 @@
 <ion-header>
-    <app-toolbar [connectionStatus]="connectionStatus" [showBackButton]="false"></app-toolbar>
+    <app-toolbar [connectionInfo]="connectionInfo" [showBackButton]="false"></app-toolbar>
 </ion-header>
 <ion-content>
-    <ng-container *ngIf="connectionStatus !== 'authenticated'">
-        <ion-button expand="block" color="primary" [disabled]="isScanningDisabled" (click)="startScanningForDevices()">
-            <ng-container *ngIf="counter != null else enabledScan">{{ ('SCAN_FOR_DEVICES' | translate) + " " + counter }}</ng-container>
+    <ng-container *ngIf="!connectionInfo.isConnected()">
+        <ion-button expand="block" color="primary" [disabled]="scanInfo.isDisabled" (click)="startScanningForDevices()">
+            <ng-container *ngIf="counter !== undefined else enabledScan">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="11">{{ ('SCAN_FOR_DEVICES' | translate) }}</ion-col>
+                        <ion-col size="1">{{ counter }}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ng-container>
             <ng-template #enabledScan>{{ 'SCAN_FOR_DEVICES' | translate }}</ng-template>
         </ion-button>
-        <ng-container *ngIf="deviceList">
-            <ng-container *ngIf="deviceList.length > 0 else noDevices">
-                <ng-container *ngFor="let device of deviceList">
-                    <app-scanned-device-card
-                        [deviceInfo]="device"
-                        (connectToDevice)="connectToSelectedDevice($event)">
-                    </app-scanned-device-card>
-                </ng-container>
+        <ng-container *ngIf="scanResults !== undefined && scanResults.length > 0 else noDevices">
+            <ng-container *ngFor="let scanResult of scanResults">
+                <app-scanned-device-card
+                    [scanResult]="scanResult"
+                    (connectToDevice)="connectToSelectedDevice($event)">
+                </app-scanned-device-card>
             </ng-container>
-            <ng-template #noDevices>
-                <ion-card>{{ 'NO_DEVICES_FOUND' | translate }}</ion-card>
-            </ng-template>
         </ng-container>
+        <ng-template #noDevices>
+            <ng-container *ngIf="scanResults !== undefined">
+                <ion-card>
+                    <ion-card-content>
+                        {{ 'NO_DEVICES_FOUND' | translate }}
+                    </ion-card-content>
+                </ion-card>
+            </ng-container>
+        </ng-template>
     </ng-container>
 </ion-content>

@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {DeviceSetupComponent} from './device-setup.component';
+import { DeviceSetupComponent } from './device-setup.component';
 
 describe('SetupComponent', () => {
     let component: DeviceSetupComponent;
