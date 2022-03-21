@@ -1,5 +1,5 @@
 {
-    "service": [
+    "services": [
         {
             "name": "Generic Access Service",
             "uuid": "00001800-0000-1000-8000-00805f9b34fb",
@@ -7,44 +7,52 @@
                 {
                     "name": "Device Name",
                     "uuid": "00002A00-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "Appearance",
                     "uuid": "00002A01-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "Peripheral Preferred Connection Parameters",
                     "uuid": "00002A04-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 }
             ]
         },
         {
             "name": "Generic Attribute Service",
             "uuid": "00001801-0000-1000-8000-00805f9b34fb",
-            "characteristics": {
-                "name": "Service Changed",
-                "uuid": "00002A05-0000-1000-8000-00805f9b34fb",
-                "properties": [
-                    {
-                        "name": "INDICATE"
-                    },
-                    {
-                        "name": "READ"
+            "characteristics": [
+                {
+                    "name": "Service Changed",
+                    "uuid": "00002A05-0000-1000-8000-00805f9b34fb",
+                    "properties": [
+                        {
+                            "name": "INDICATE"
+                        },
+                        {
+                            "name": "READ"
+                        }
+                    ],
+                    "descriptor": {
+                        "uuid": "00002902-0000-1000-8000-00805f9b34fb"
                     }
-                ],
-                "descriptor": {
-                    "uuid": "00002902-0000-1000-8000-00805f9b34fb"
                 }
-            }
+            ]
         },
         {
             "name": "Device Information Service",
@@ -53,37 +61,47 @@
                 {
                     "name": "Serial Number String",
                     "uuid": "00002a25-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "Hardware Revision String",
                     "uuid": "00002a27-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "Software Revision String",
                     "uuid": "00002a28-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "System ID",
                     "uuid": "00002a23-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "PnP ID",
                     "uuid": "00002a50-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 }
             ]
         },
@@ -109,9 +127,11 @@
                 {
                     "name": "Firmware Data",
                     "uuid": "00001532-0000-3512-2118-0009af100700",
-                    "properties": {
-                        "name": "WRITE_WITHOUT_RESPONSE"
-                    }
+                    "properties": [
+                        {
+                            "name": "WRITE_WITHOUT_RESPONSE"
+                        }
+                    ]
                 }
             ]
         },
@@ -125,9 +145,11 @@
                     "descriptor": {
                         "uuid": "00002901-0000-1000-8000-00805f9b34fb"
                     },
-                    "properties": {
-                        "name": "WRITE"
-                    }
+                    "properties": [
+                        {
+                            "name": "WRITE"
+                        }
+                    ]
                 },
                 {
                     "name": "Alert Notification Control Point",
@@ -152,13 +174,17 @@
         {
             "name": "Immediate Alert Service",
             "uuid": "00001802-0000-1000-8000-00805f9b34fb",
-            "characteristics": {
-                "name": "Alert Level",
-                "uuid": "00002a06-0000-1000-8000-00805f9b34fb",
-                "properties": {
-                    "name": "WRITE_WITHOUT_RESPONSE"
+            "characteristics": [
+                {
+                    "name": "Alert Level",
+                    "uuid": "00002a06-0000-1000-8000-00805f9b34fb",
+                    "properties": [
+                        {
+                            "name": "WRITE_WITHOUT_RESPONSE"
+                        }
+                    ]
                 }
-            }
+            ]
         },
         {
             "name": "Heart Rate Service",
@@ -170,9 +196,11 @@
                     "descriptor": {
                         "uuid": "00002902-0000-1000-8000-00805f9b34fb"
                     },
-                    "properties": {
-                        "name": "NOTIFY"
-                    }
+                    "properties": [
+                        {
+                            "name": "NOTIFY"
+                        }
+                    ]
                 },
                 {
                     "name": "Heart Rate Control Point",
@@ -231,9 +259,11 @@
                     "descriptor": {
                         "uuid": "00002902-0000-1000-8000-00805f9b34fb"
                     },
-                    "properties": {
-                        "name": "NOTIFY"
-                    }
+                    "properties": [
+                        {
+                            "name": "NOTIFY"
+                        }
+                    ]
                 },
                 {
                     "name": "Configuration",
@@ -289,9 +319,11 @@
                     "descriptor": {
                         "uuid": "00002902-0000-1000-8000-00805f9b34fb"
                     },
-                    "properties": {
-                        "name": "NOTIFY"
-                    }
+                    "properties": [
+                        {
+                            "name": "NOTIFY"
+                        }
+                    ]
                 },
                 {
                     "name": "Battery Info",
@@ -309,7 +341,7 @@
                     ]
                 },
                 {
-                    "name": "Realtime Steps",
+                    "name": "Realtime Activity",
                     "uuid": "00000007-0000-3512-2118-0009af100700",
                     "descriptor": {
                         "uuid": "00002902-0000-1000-8000-00805f9b34fb"
@@ -324,7 +356,7 @@
                     ]
                 },
                 {
-                    "name": "User settings",
+                    "name": "User Settings",
                     "uuid": "00000008-0000-3512-2118-0009af100700",
                     "descriptor": {
                         "uuid": "00002902-0000-1000-8000-00805f9b34fb"
@@ -344,9 +376,11 @@
                     "descriptor": {
                         "uuid": "00002902-0000-1000-8000-00805f9b34fb"
                     },
-                    "properties": {
-                        "name": "NOTIFY"
-                    }
+                    "properties": [
+                        {
+                            "name": "NOTIFY"
+                        }
+                    ]
                 },
                 {
                     "name": "Chunked Transfer",
@@ -372,9 +406,11 @@
                     "descriptor": {
                         "uuid": "00002901-0000-1000-8000-00805f9b34fb"
                     },
-                    "properties": {
-                        "name": "WRITE"
-                    }
+                    "properties": [
+                        {
+                            "name": "WRITE"
+                        }
+                    ]
                 },
                 {
                     "name": "Unknown F",
@@ -416,25 +452,31 @@
                     ]
                 },
                 {
-                    "name": "UNKNOWN FEDD",
+                    "name": "Unknown_FEDD",
                     "uuid": "0000fedd-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "WRITE"
-                    }
+                    "properties": [
+                        {
+                            "name": "WRITE"
+                        }
+                    ]
                 },
                 {
-                    "name": "Unknown FEDE",
+                    "name": "Unknown_FEDE",
                     "uuid": "0000fede-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
-                    "name": "Unknown FEDF",
+                    "name": "Unknown_FEDF",
                     "uuid": "0000fedf-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "Unknown_FED0",
@@ -463,9 +505,11 @@
                 {
                     "name": "Unknown_FED2",
                     "uuid": "0000fed2-0000-1000-8000-00805f9b34fb",
-                    "properties": {
-                        "name": "READ"
-                    }
+                    "properties": [
+                        {
+                            "name": "READ"
+                        }
+                    ]
                 },
                 {
                     "name": "Unknown_FED3",
