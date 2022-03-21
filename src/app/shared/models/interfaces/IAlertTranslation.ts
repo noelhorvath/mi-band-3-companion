@@ -1,6 +1,6 @@
 export interface IAlertTranslation {
-    headerKey: string,
-    messageKey: string,
-    buttonsKeys: string[]
+    headerKey: string;
+    messageKey: string;
+    buttonKeys: string[];
 }
 

@@ -1,8 +1,9 @@
-import {IService} from "./IService";
+import { IService } from './IService';
+import { IEntityModel } from './IEntityModel';
 
-export interface IDevice {
+export interface IDevice extends IEntityModel<IDevice> {
     name: string;
     macAddress: string;
-    lastUsedDate?: string;
-    services?: IService[];
+    lastUsedDate: string;
+    services?: IService[] | undefined;
 }

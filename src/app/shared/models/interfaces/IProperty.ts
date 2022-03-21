@@ -1,4 +1,6 @@
-export interface IProperty {
-    name: string
-    copy?(property: IProperty): void;
+import { IEntityModel } from './IEntityModel';
+import { PropertyName } from '../../types/custom.types';
+
+export interface IProperty extends IEntityModel<IProperty> {
+    name: PropertyName;
 }

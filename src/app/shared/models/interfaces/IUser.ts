@@ -1,11 +1,15 @@
-import {IDevice} from "./IDevice";
-import {IEntityModel} from "./IEntityModel";
+import { IDevice } from './IDevice';
+import { IEntityModel } from './IEntityModel';
 
 export interface IUser extends IEntityModel<IUser> {
-    id: string;
     email: string;
     firstName: string;
     lastName: string;
-    devices?: IDevice[];
+    id?: string;
+    devices?: IDevice[] | undefined;
+
+    getFullName?(): string;
+
+    getCurrentlyUsedDevice?(): IDevice | undefined;
 }
 

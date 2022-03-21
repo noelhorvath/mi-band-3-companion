@@ -1,37 +1,28 @@
-import {Service} from './Service';
-import {Device} from "./Device";
-import {IService} from "../interfaces/IService";
-import {miBand3BLEData} from "../constants/MiBand3BLEData";
+//@ts-ignore
+import miBand3Data from 'resources/MiBand3BLEServices.json';
+import { Service } from './Service';
+import { Device } from './Device';
+import { parseJSON } from '../../functions/parser.functions';
 
 export class MiBand3 extends Device {
-    public readonly name: string;
-    public readonly services: Service[];
+    public override readonly name: string;
+    public override readonly services: Service[];
     private static instance: MiBand3;
 
     private constructor() {
-        super('Mi Band 3');
-        this.services = this.jsonArrayToClasses<IService, Service>(miBand3BLEData(), Service);
+        super();
+        this.name = 'Mi Band 3';
+        this.services = parseJSON<Service>(miBand3Data.services, Service) as Array<Service> ?? [];
     }
 
-    public static getInstance() {
-        if (!MiBand3.instance) { this.instance = new MiBand3() }
+    public static getInstance(): MiBand3 {
+        if (!MiBand3.instance) {
+            this.instance = new MiBand3();
+        }
         return this.instance;
     }
 
-    private jsonArrayToClasses<K, T extends K & { copy(k: K): void }>(text: string, type: { new(): T }): T[] {
-        const obj = JSON.parse(text);
-        console.log(JSON.stringify(obj));
-        console.log(JSON.stringify(obj[0]));
-        return obj.map( s => {
-            console.log(JSON.stringify(s))
-            const temp: T = new type();
-            temp.copy(s);
-            return temp;
-        });
-    }
-
-    public getService(name: string): Service | null {
-        if (!name) { return null; }
-        return this.services.find( s => s && s.name && s.name.toLowerCase().includes(name.toLowerCase()))
+    public getService(name: string): Service | undefined {
+        return this.services.find((s: Service) => s.name !== undefined && s.name.toLowerCase().includes(name.toLowerCase()));
     }
 }
