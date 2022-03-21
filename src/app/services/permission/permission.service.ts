@@ -1,147 +1,114 @@
-import {Injectable} from '@angular/core';
-import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
-import {Device} from '@capacitor/device';
+import { Injectable } from '@angular/core';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LogHelper } from '../../shared/models/classes/LogHelper';
+import { PermissionNames, Permissions } from '../../shared/enums/permissions.enum';
+import { DeviceService } from '../device/device.service';
 
 @Injectable({
     providedIn: 'root'
 })
-
 export class PermissionService {
-    private osVersion: number;
-    private platform: string;
+    private readonly logHelper: LogHelper;
 
-    constructor(
+    public constructor(
         private androidPermissions: AndroidPermissions,
+        private deviceService: DeviceService
     ) {
-        Device.getInfo().then(deviceInfo => {
-            this.platform = deviceInfo.platform;
-            if (deviceInfo.osVersion) {
-                this.osVersion = PermissionService.convertAndroidOSVersionToNumber(deviceInfo.osVersion);
-            } else {
-                this.osVersion = -1;
-            }
-            console.log(PermissionService.name + " -> OS version: " + this.osVersion);
-        }).catch(error => console.error(AndroidPermissions.name + " -> getInfo error: " + error.message || error));
+        this.logHelper = new LogHelper(PermissionService.name);
     }
 
-    private static convertAndroidOSVersionToNumber(version: string): number {
-        if (version != null) {
-            if (!isNaN(Number(version))) {
-                return Number(version);
-            } else {
-                if (version.includes(".")) {
-                    let versionSplit = version.split(".");
-                    let result = "";
-                    for (let i = 0; i < versionSplit.length; i++) {
-                        if (!isNaN(Number(version[i]))) {
-                            result += version[i] + ".";
-                        } else {
-                            if (result.endsWith(".")) {
-                                result.substring(0, result.length - 2);
-                            }
-                            return result.length === 0 ? -1 : Number(result);
-                        }
-                    }
+    private async hasPermissionAccess(permission: string): Promise<boolean> {
+        try {
+            const platform = await this.deviceService.getPlatform();
+            if (platform === 'android') {
+                const checkResult = await this.androidPermissions.checkPermission(permission);
+                if (!checkResult.hasPermission) {
+                    const response = await this.androidPermissions.requestPermission(permission);
+                    return Promise.resolve(response.hasPermission);
                 } else {
-                    let result = "";
-                    for (let i = 0; i < version.length; i++) {
-                        if (!isNaN(Number(version[i]))) {
-                            result += version[i];
-                        } else {
-                            return result.length === 0 ? -1 : Number(result);
-                        }
-                    }
+                    return Promise.resolve(checkResult.hasPermission);
                 }
+            } else {
+                return Promise.reject('Unsupported platform');
             }
-        } else {
-            return -1;
+        } catch (e: unknown) {
+            return Promise.reject(this.logHelper.getUnknownMsg(e));
         }
     }
 
-    private async checkSpecificPermission(permission: string): Promise<{ hasPermission: boolean }> {
-        if (this.platform === "android") {
-            try {
-                let hasPermission = await this.androidPermissions.checkPermission(permission);
-                if (!hasPermission.hasPermission) {
-                    let response = await this.androidPermissions.requestPermission(permission);
-                    return Promise.resolve(response);
-                } else {
-                    return Promise.resolve(hasPermission);
-                }
-            } catch (e) {
-                return Promise.reject(e);
-            }
-        } else {
-            return Promise.reject("Unsupported platform");
-        }
-    }
-
-    public checkCoarseLocation(versionCheck = true) {
+    public async checkCoarseLocation(versionCheck = true): Promise<boolean | undefined> {
+        const osVersion = await this.deviceService.getOSMainVersion();
         if (versionCheck) {
-            if (11 <= this.osVersion) {
-                console.log(PermissionService.name + " -> Version check failed!");
-                return;
+            if (11 <= osVersion) {
+                this.logHelper.logDefault(this.checkCoarseLocation.name, 'Version check failed!');
+                return Promise.resolve(undefined);
             }
         }
-        return this.checkSpecificPermission("android.permission.ACCESS_FINE_LOCATION");
+        return this.hasPermissionAccess(Permissions.ACCESS_COARSE_LOCATION);
     }
 
-    public checkFineLocation(versionCheck = true) {
+    public async checkFineLocation(versionCheck = true): Promise<boolean | undefined> {
+        const osVersion = await this.deviceService.getOSMainVersion();
         if (versionCheck) {
-            if (12 <= this.osVersion) {
-                console.log(PermissionService.name + " -> Version check failed!");
-                return;
+            if (12 <= osVersion) {
+                this.logHelper.logDefault(this.checkFineLocation.name, 'Version check failed!');
+                return Promise.resolve(undefined);
             }
         }
-        return this.checkSpecificPermission("android.permission.ACCESS_FINE_LOCATION");
+        return this.hasPermissionAccess(Permissions.ACCESS_FINE_LOCATION);
     }
 
-    public async checkBluetoothScan(versionCheck = true) {
+    public async checkBluetoothScan(versionCheck = true): Promise<boolean | undefined> {
+        const osVersion = await this.deviceService.getOSMainVersion();
         if (versionCheck) {
-            if (this.osVersion < 12) {
-                return;
+            if (osVersion < 12) {
+                this.logHelper.logDefault(this.checkBluetoothScan.name, 'Version check failed!');
+                return Promise.resolve(undefined);
             }
         }
-        return this.checkSpecificPermission("android.permission.BLUETOOTH_SCAN");
+        return this.hasPermissionAccess(Permissions.BLUETOOTH_SCAN);
     }
 
-    public checkBluetoothConnect(versionCheck = true) {
+    public async checkBluetoothConnect(versionCheck = true): Promise<boolean | undefined> {
+        const osVersion = await this.deviceService.getOSMainVersion();
         if (versionCheck) {
-            if (this.osVersion < 12) {
-                return;
+            if (osVersion < 12) {
+                this.logHelper.logDefault(this.checkBluetoothConnect.name, 'Version check failed!');
+                return Promise.resolve(undefined);
             }
         }
-        return this.checkSpecificPermission("android.permission.BLUETOOTH_CONNECT");
+        return this.hasPermissionAccess(Permissions.BLUETOOTH_CONNECT);
     }
 
-    public async checkForBluetoothScanPermissions() {
-        let errorText = null;
+    public async checkForBluetoothScanPermissions(): Promise<void> {
+        let errorText = '';
         try {
             const hasFLPerm = await this.checkFineLocation(true);
             const hasCLPerm = await this.checkCoarseLocation(true);
             const hasBLSPerm = await this.checkBluetoothScan(true);
             const hasBLCPerm = await this.checkBluetoothConnect(true);
-            console.log(PermissionService.name + " -> " + JSON.stringify(hasFLPerm) + " " + JSON.stringify(hasCLPerm) + " " + JSON.stringify(hasBLSPerm) + " " + JSON.stringify(hasBLCPerm));
-            if (hasBLSPerm != null && hasBLCPerm != null && !hasBLSPerm.hasPermission && !hasBLCPerm.hasPermission) {
-                errorText = 'Missing BLUETOOTH_SCAN and BLUETOOTH_CONNECT permissions!';
-            } else if (hasBLSPerm != null && !hasBLSPerm.hasPermission) {
-                errorText = 'Missing BLUETOOTH_SCAN permission!';
-            } else if (hasBLCPerm != null && !hasBLCPerm.hasPermission) {
-                errorText = 'Missing BLUETOOTH_CONNECT permission!';
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.ACCESS_FINE_LOCATION } permission`, { value: hasFLPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.ACCESS_COARSE_LOCATION } permission`, { value: hasCLPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.BLUETOOTH_SCAN } permission`, { value: hasBLSPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.BLUETOOTH_CONNECT } permission`, { value: hasBLCPerm });
+            if (hasBLSPerm !== undefined && hasBLCPerm !== undefined && !hasBLSPerm && !hasBLCPerm) {
+                errorText = `Missing ${ PermissionNames.BLUETOOTH_SCAN } and ${ PermissionNames.BLUETOOTH_CONNECT } permissions!`;
+            } else if (hasBLSPerm !== undefined && !hasBLSPerm) {
+                errorText = `Missing ${ PermissionNames.BLUETOOTH_SCAN } permission!`;
+            } else if (hasBLCPerm !== undefined && !hasBLCPerm) {
+                errorText = `Missing ${ PermissionNames.BLUETOOTH_CONNECT } permission!`;
             } else {
-                if (hasFLPerm != null && hasCLPerm != null && !hasFLPerm.hasPermission && !hasCLPerm.hasPermission) {
-                    errorText = 'Missing ACCESS_FINE_LOCATION and ACCESS_COARSE_LOCATION permissions!';
-                } else if (hasFLPerm != null && !hasFLPerm.hasPermission) {
-                    errorText = 'Missing ACCESS_FINE_LOCATION permission!';
-                } else if (hasCLPerm != null && !hasCLPerm.hasPermission) {
-                    errorText = 'Missing ACCESS_COARSE_LOCATION permission!';
+                if (hasFLPerm !== undefined && hasCLPerm !== undefined && !hasFLPerm && !hasCLPerm) {
+                    errorText = `Missing ${ PermissionNames.ACCESS_FINE_LOCATION } and ${ PermissionNames.ACCESS_COARSE_LOCATION } permissions!`;
+                } else if (hasFLPerm !== undefined && !hasFLPerm) {
+                    errorText = `Missing ${ PermissionNames.ACCESS_FINE_LOCATION } permission!`;
+                } else if (hasCLPerm !== undefined && !hasCLPerm) {
+                    errorText = `Missing ${ PermissionNames.ACCESS_COARSE_LOCATION } permission!`;
                 }
             }
-        } catch (e) {
-            console.error(PermissionService.name + "checkForBluetoothScanPermissions error: " +  e.message || e);
-            return Promise.reject(e);
+        } catch (e: unknown) {
+            return Promise.reject(this.logHelper.getUnknownMsg(e));
         }
         return errorText ? Promise.reject(errorText) : Promise.resolve();
     }
-
 }

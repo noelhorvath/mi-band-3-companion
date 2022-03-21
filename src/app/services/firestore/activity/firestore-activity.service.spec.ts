@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PermissionService } from './permission.service';
+import { FirestoreActivityService } from './firestore-activity.service';
 
-describe('PermissionService', () => {
-    let service: PermissionService;
+describe('ActivityService', () => {
+    let service: FirestoreActivityService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(PermissionService);
+        service = TestBed.inject(FirestoreActivityService);
     });
 
     it('should be created', () => {

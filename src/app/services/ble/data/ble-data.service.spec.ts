@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {BleDataService} from './ble-data.service';
+import { BleDataService } from './ble-data.service';
 
 describe('DataService', () => {
     let service: BleDataService;

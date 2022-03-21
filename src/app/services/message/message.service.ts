@@ -1,209 +1,265 @@
-import {Injectable} from '@angular/core';
-import {AlertButton, AlertController, LoadingController, ToastController} from '@ionic/angular';
-import {Color} from "@ionic/core";
-import {TranslateService} from "../translate/translate.service";
-import {TranslatePipe} from "@ngx-translate/core";
-import {IAlertTranslation} from "../../shared/models/interfaces/IAlertTranslation";
-import {IToastTranslation} from "../../shared/models/interfaces/IToastTranslation";
-import {ILoadingTranslation} from "../../shared/models/interfaces/ILoadingTranslation";
+import { Injectable } from '@angular/core';
+import { AlertButton, AlertController, LoadingController, ToastButton, ToastController } from '@ionic/angular';
+import { Color } from '@ionic/core';
+import { LanguageService } from '../language/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { IAlertTranslation } from '../../shared/models/interfaces/IAlertTranslation';
+import { IToastTranslation } from '../../shared/models/interfaces/IToastTranslation';
+import { ILoadingTranslation } from '../../shared/models/interfaces/ILoadingTranslation';
+import { LogInfo } from '../../shared/models/classes/LogInfo';
+import { LogHelper } from '../../shared/models/classes/LogHelper';
+import { LoadingSpinner, MessageType, ToastPosition } from '../../shared/types/custom.types';
+import { ILogInfo } from '../../shared/models/interfaces/ILogInfo';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MessageService {
-    public alert: HTMLIonAlertElement;
-    public toast: HTMLIonToastElement;
-    public loading: HTMLIonLoadingElement;
-    private alertText: IAlertTranslation;
-    private toastText: IToastTranslation;
-    private loadingText: ILoadingTranslation;
+    private readonly logHelper: LogHelper;
+    public alertText: IAlertTranslation | undefined;
+    public toastText: IToastTranslation | undefined;
+    public loadingText: ILoadingTranslation | undefined;
+    public alert: HTMLIonAlertElement | undefined;
+    public toast: HTMLIonToastElement | undefined;
+    public loading: HTMLIonLoadingElement | undefined;
 
-    constructor(
+    public constructor(
         private alertController: AlertController,
         private toastController: ToastController,
         private loadingController: LoadingController,
         private translatePipe: TranslatePipe,
-        private translateService: TranslateService,
+        private languageService: LanguageService,
     ) {
-        this.translateService.isServiceInitializedSubject.subscribe( ready => {
-            if (ready) {
-                this.translateService.currentLanguageSubject.subscribe( lang => {
-                    if (lang) {
-                        // might not work
-                        // TODO: refresh html content?
-                        this.updateCurrentAlertText();
-                        this.updateCurrentToastText();
-                        this.updateCurrentLoadingText();
-                    }
-                })
+        this.logHelper = new LogHelper(MessageService.name);
+        this.languageService.isServiceInitializedSubject.subscribe((ready: boolean) => {
+            if (ready.valueOf()) {
+                this.languageService.currentLanguageSubject.subscribe(() => {
+                    // might not work
+                    // TODO: refresh html content?
+                    this.updateCurrentAlertText();
+                    this.updateCurrentToastText();
+                    this.updateCurrentLoadingText();
+                });
             }
-        })
+        });
     }
 
     //TODO: fix toast blocking UI interaction
 
-    public async errorHandler(logTitle: string, logMsg: string, error: any, messageType: string, closeAll: boolean, duration?: number, position?: string) {
-        let errorMsg = error.message || error.status || error.data || error;
+    public async displayErrorMessage(
+        logInfo: ILogInfo,
+        messageType: MessageType,
+        closeAll: boolean,
+        duration?: number,
+        position?: ToastPosition
+    ): Promise<void> {
         if (closeAll) {
             await this.dismissAlert();
             await this.dismissToast();
             await this.dismissLoading();
         }
         if (messageType === 'toast') {
-            await this.createToast("ERROR", errorMsg, position, "danger", duration);
+            await this.createToast(
+                'ERROR',
+                logInfo instanceof LogInfo ? logInfo.message : LogHelper.getUnknownMsg(logInfo.message),
+                position ?? 'bottom', 'danger', duration
+            );
         } else if (messageType === 'alert') {
-            await this.createAlert("ERROR", errorMsg);
+            await this.createAlert('ERROR', logInfo instanceof LogInfo ? logInfo.message : LogHelper.getUnknownMsg(logInfo.message));
         }
-        console.error(logTitle + " -> " + logMsg + ": " + errorMsg);
+        LogHelper.log(logInfo, 'error');
     }
 
-    public async createAlert(header: string, message: string, backdropDismiss = false, buttons: (string | AlertButton)[] = ['X']) {
+    public async createAlert(
+        header: string,
+        message: string,
+        backdropDismiss: boolean = false,
+        buttons: (string | AlertButton)[] = ['CLOSE']
+    ): Promise<void> {
         try {
             const element = await this.alertController.create({
                 header: this.translatePipe.transform(header),
                 message: this.translatePipe.transform(message),
                 backdropDismiss,
-                buttons: buttons.map((button) => {
-                    if ((button as AlertButton).text !== undefined) { // type check
-                        (button as AlertButton).text = this.translatePipe.transform((button as AlertButton).text);
-                        return button;
+                buttons: buttons.map( (button: string | AlertButton) => {
+                    if (typeof button === 'string') {
+                        return this.translatePipe.transform(button);
+                    } else {
+                        button.text = this.translatePipe.transform(button.text);
                     }
-                    return this.translatePipe.transform(button as string);
+                    return button;
                 })
             });
-            if (this.alert) { await this.dismissAlert(); }
+            if (this.alert) {
+                await this.dismissAlert();
+            }
             this.alert = element;
             await this.alert.present();
-            const buttonsKeys = buttons.map((button) => {
-                if ((button as AlertButton).text !== undefined) { // type check
-                    return (button as AlertButton).text;
-                }
-                return this.translatePipe.transform(button as string);
-            });
-            this.alertText = {headerKey: header, messageKey: message, buttonsKeys};
-        } catch (e) {
-            return console.error("createAlert error: " + e);
+            const buttonKeys = buttons.map( (button: string | AlertButton) => typeof button === 'string' ? button : button.text );
+            this.alertText = { headerKey: header, messageKey: message, buttonKeys };
+        } catch (e: unknown) {
+            this.logHelper.logError(this.createAlert.name, e);
         }
     }
 
-    public async createToast(header: string, message: string, position: string = "top",
-                             color: Color = "primary", duration: number = 3000, animated = false): Promise<void> {
+    public async createToast(
+        header: string,
+        message: string,
+        position: ToastPosition = 'top',
+        color: Color = 'primary',
+        duration: number = 3000,
+        buttons: (string | ToastButton)[] = ['x'],
+        animated: boolean = true,
+    ): Promise<void> {
         try {
             const element = await this.toastController.create({
                 header: this.translatePipe.transform(header),
                 message: this.translatePipe.transform(message),
                 duration,
-                position: position as "top" | "bottom" | "middle",
+                position,
                 animated,
-                color
+                color,
+                buttons: buttons.map( (button: string | ToastButton) => {
+                    if (typeof button === 'string') {
+                        return this.translatePipe.transform(button);
+                    } else {
+                        button.text = this.translatePipe.transform(button.text ?? 'x');
+                    }
+                    return button;
+                })
                 //translucent,
                 //keyboardClose,
                 //icon,
                 //id
             });
-            if (this.toast) { await this.dismissToast(); }
+            if (this.toast) {
+                await this.dismissToast();
+            }
             this.toast = element;
             await this.toast.present();
-            this.toastText = { headerKey: header, messageKey: message };
-        } catch (e) {
-            return console.error("createToast error: " + e);
+            const buttonKeys = buttons.map( (button: string | ToastButton) => typeof button === 'string' ? button : button.text ?? 'x' );
+            this.toastText = { headerKey: header, messageKey: message, buttonKeys };
+        } catch (e: unknown) {
+            this.logHelper.logError(this.createToast.name, e);
         }
     }
 
-    public async createLoading(message: string, spinner: string = "circular", backdropDismiss: boolean = false, duration: number = 0, keyboardClose: boolean = true, translucent: boolean = false) {
+    public async createLoading(
+        message: string,
+        spinner: LoadingSpinner = 'circular',
+        backdropDismiss: boolean = false,
+        duration: number = 0,
+        keyboardClose: boolean = true,
+        translucent: boolean = false
+    ): Promise<void> {
         try {
             const element = await this.loadingController.create({
                 message: this.translatePipe.transform(message),
-                spinner: spinner as "bubbles" | "circles" | "circular" | "crescent" | "dots" | "lines" | "lines-sharp" | "lines-sharp-small" | "lines-small",
+                spinner,
                 duration,
                 backdropDismiss,
                 keyboardClose,
                 translucent
             });
-            if (this.loading) { await this.dismissLoading(); }
+            if (this.loading) {
+                await this.dismissLoading();
+            }
             this.loading = element;
             await this.loading.present();
             this.loadingText = { messageKey: message };
-        } catch (e) {
-            return console.error("createLoading error: " + e);
+        } catch (e: unknown) {
+            this.logHelper.logError(this.createLoading.name, e);
         }
     }
 
     private updateCurrentLoadingText(): void {
-        if (this.loading) {
+        if (this.loading && this.loadingText) {
             this.loading.message = this.translatePipe.transform(this.loadingText.messageKey);
         }
     }
 
     public changeLoadingMessage(msgKey: string): void {
-        if (!this.loading) { return }
-        this.loadingText.messageKey = msgKey;
+        if (!this.loading) {
+            return;
+        }
+        this.loadingText = { messageKey: msgKey };
         this.updateCurrentLoadingText();
     }
 
     private updateCurrentAlertText(): void {
-        if (this.alert) {
+        if (this.alert !== undefined && this.alertText !== undefined) {
             this.alert.header = this.translatePipe.transform(this.alertText.headerKey);
             this.alert.message = this.translatePipe.transform(this.alertText.messageKey);
-            if (this.alert.buttons) {
-                if (this.alert.buttons.length > 0) {
-                    for (let i = 0; i < this.alert.buttons.length; i++) {
-                        if ((this.alert.buttons[i] as AlertButton).text !== undefined) { // type check
-                            (this.alert.buttons[i] as AlertButton).text = this.translatePipe.transform(this.alertText.buttonsKeys[i]);
-                        } else {
-                            this.alert.buttons[i] = this.translatePipe.transform(this.alertText.buttonsKeys[i]);
-                        }
+            this.alert.buttons = this.alert.buttons.map( (button: string | AlertButton, index: number) => {
+                if (this.alertText !== undefined) {
+                    if (typeof button === 'string') {
+                        button = this.translatePipe.transform(this.alertText.buttonKeys[index]);
+                    } else {
+                        button.text = this.translatePipe.transform(this.alertText.buttonKeys[index]);
                     }
                 }
-            }
+                return button;
+            });
         }
     }
 
     private updateCurrentToastText(): void {
-        if (this.toast) {
-            //this.toast.buttons TODO: translate toast buttons
+        if (this.toast !== undefined && this.toastText !== undefined) {
             this.toast.header = this.translatePipe.transform(this.toastText.headerKey);
             this.toast.message = this.translatePipe.transform(this.toastText.messageKey);
+            this.toast.buttons = this.toast.buttons?.map( (button: string | ToastButton, index: number) => {
+                if (this.alertText !== undefined) {
+                    if (typeof button === 'string') {
+                        button = this.translatePipe.transform(this.alertText.buttonKeys[index]);
+                    } else {
+                        button.text = this.translatePipe.transform(this.alertText.buttonKeys[index]);
+                    }
+                }
+                return button;
+            }) ?? [];
         }
     }
 
-    public async dismissAlert(): Promise<boolean | void> {
-        if (this.alert) {
+    public async dismissAlert(): Promise<boolean> {
+        if (this.alert !== undefined) {
             try {
                 const res = await this.alert.dismiss();
-                this.alert = null;
-                this.alertText = null;
-                return res;
-            } catch (e) {
-                return console.error(MessageService.name + ' -> loading dismiss error: ' + e);
+                this.alert = undefined;
+                this.alertText = undefined;
+                return Promise.resolve(res);
+            } catch (e: unknown) {
+                this.logHelper.logError(this.dismissAlert.name, e);
             }
         }
+        return Promise.resolve(false);
     }
 
-    public async dismissToast(): Promise<boolean | void> {
-        if (this.toast) {
+    public async dismissToast(): Promise<boolean> {
+        if (this.toast !== undefined) {
             try {
                 const res = await this.toast.dismiss();
-                this.toast = null;
-                this.toastText = null;
-                return res;
-            } catch (e) {
-                return console.error(MessageService.name + ' -> loading dismiss error: ' + e);
+                this.toast = undefined;
+                this.toastText = undefined;
+                return Promise.resolve(res);
+            } catch (e: unknown) {
+                this.logHelper.logError(this.dismissToast.name, e);
             }
         }
+        return Promise.resolve(false);
     }
 
-    public async dismissLoading(): Promise<boolean | void> {
-        if (this.loading) {
+    public async dismissLoading(): Promise<boolean> {
+        if (this.loading !== undefined) {
             try {
                 const res = await this.loading.dismiss();
-                this.loading = null;
-                this.loadingText = null;
-                return res;
-            } catch (e) {
-                return console.error(MessageService.name + ' -> loading dismiss error: ' + e);
+                this.loading = undefined;
+                this.loadingText = undefined;
+                return Promise.resolve(res);
+            } catch (e: unknown) {
+                this.logHelper.logError(this.dismissLoading.name, e);
             }
         }
+        return Promise.resolve(false);
     }
 
 }

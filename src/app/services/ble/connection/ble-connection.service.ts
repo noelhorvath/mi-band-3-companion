@@ -1,67 +1,60 @@
-import {Injectable, NgZone} from '@angular/core';
-import {AndroidGattTransportMode, BluetoothLE, DeviceInfo, OperationResult, ScanStatus} from '@ionic-native/bluetooth-le/ngx';
-import {Platform} from '@ionic/angular';
-import {BehaviorSubject, Subject} from 'rxjs';
+// @ts-ignore
 import * as crypto from 'crypto-browserify';
-import {Buffer} from 'buffer';
-import {AuthService} from "../../firebase/auth/auth.service";
-import {filter, take, timeout} from "rxjs/operators";
-import {PermissionService} from "../../permission/permission.service";
-import {MiBand3} from "../../../shared/models/classes/MiBand3";
-import {Device} from "../../../shared/models/classes/Device";
+import { Injectable } from '@angular/core';
+import { AndroidGattTransportMode, BluetoothLE, DeviceInfo, OperationResult, ScanStatus } from '@ionic-native/bluetooth-le/ngx';
+import { Platform } from '@ionic/angular';
+import { BehaviorSubject, first, Observer, Subject } from 'rxjs';
+import { Buffer } from 'buffer';
+import { FirebaseAuthService } from '../../firebase/auth/firebase-auth.service';
+import { filter, timeout } from 'rxjs/operators';
+import { PermissionService } from '../../permission/permission.service';
+import { MiBand3 } from '../../../shared/models/classes/MiBand3';
+import { Device } from '../../../shared/models/classes/Device';
+import { ConnectionInfo } from '../../../shared/models/classes/ConnectionInfo';
+import { ScanInfo } from '../../../shared/models/classes/ScanInfo';
+import { ScanResult } from '../../../shared/models/classes/ScanResult';
+import { LogHelper } from '../../../shared/models/classes/LogHelper';
+import { IDevice } from '../../../shared/models/interfaces/IDevice';
+import { BLEConnectionStatus, BLEScanStatus, BLEStatus, BLESubscriptionStatus } from '../../../shared/enums/ble.enum';
+import { User } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BleConnectionService {
+    private readonly logHelper: LogHelper;
+    private readonly miBand3: MiBand3;
+    private connectionInfo: ConnectionInfo;
+    private sentEncryptionKeyAgain: boolean;
     public blStatusSubject: Subject<string>;
-    public connectionStatusSubject: Subject<string>;
-    private firstTimeConnecting: boolean;
-    private connectedDevice: Device;
-    public deviceListSubject: BehaviorSubject<ScanStatus[]>
-    public isScanningSubject: BehaviorSubject<boolean>
-    public isScanningDisabledSubject: BehaviorSubject<boolean>;
-    public connectedDeviceSubject: BehaviorSubject<Device>;
-    private connectingDevice: Device;
-    private miBand3: MiBand3;
+    public connectionInfoSubject: Subject<ConnectionInfo>;
+    public scanInfoSubject: BehaviorSubject<ScanInfo>;
 
-    constructor(
+    public constructor(
         private ble: BluetoothLE,
         private platform: Platform,
-        private zone: NgZone,
-        private authService: AuthService,
+        private authService: FirebaseAuthService,
         private permissionService: PermissionService
     ) {
+        this.platform.ready().then(() => this.initializeBL());
+        this.logHelper = new LogHelper(BleConnectionService.name);
         this.miBand3 = MiBand3.getInstance();
-        this.platform.ready().then( () => this.initializeBL() );
+        this.sentEncryptionKeyAgain = false;
         this.blStatusSubject = new Subject<string>();
-        this.connectionStatusSubject = new BehaviorSubject<string>('disconnected');
-        this.deviceListSubject = new BehaviorSubject<ScanStatus[]>(undefined);
-        this.isScanningSubject = new BehaviorSubject<boolean>(false);
-        this.isScanningDisabledSubject = new BehaviorSubject<boolean>(false);
-        this.connectedDeviceSubject = new BehaviorSubject<Device>(null);
-
-        this.connectedDeviceSubject.subscribe( device => this.connectedDevice = device);
-        this.authService.isServiceInitializedSubject.subscribe((value: boolean) => {
-            if (value) {
-                this.authService.authUserSubject.subscribe(async user => {
-                    // reset stats after logout
-                    if (!user) {
-                        // disconnect device when user logs out
-                        if (this.connectedDevice && this.connectedDevice.macAddress) {
-                            console.log(BleConnectionService.name + ' -> Disconnecting device after logout');
-                            await this.disconnectAndClose(this.connectedDevice.macAddress);
-                        }
-                        console.log('Resetting data after logout')
-                        this.zone.run( () => {
-                            this.isScanningDisabledSubject.next(false);
-                            this.isScanningSubject.next(false);
-                            this.deviceListSubject.next(null);
-                            this.connectionStatusSubject.next('disconnected');
-                            this.connectedDeviceSubject.next(null);
-                        });
-                    }
-                });
+        this.connectionInfo = new ConnectionInfo();
+        this.connectionInfoSubject = new BehaviorSubject<ConnectionInfo>(this.connectionInfo);
+        this.scanInfoSubject = new BehaviorSubject<ScanInfo>(new ScanInfo());
+        this.connectionInfoSubject.subscribe(connectionInfo => this.connectionInfo = connectionInfo);
+        this.authService.authUserSubject.subscribe(async (user: User | undefined) => {
+            // reset stats after user logout
+            if (user === undefined) {
+                this.logHelper.logDefault('authUserSubject', 'Resetting data after logout');
+                // disconnect device when user logs out
+                if (this.connectionInfo.isConnected() && this.connectionInfo.device) {
+                    this.logHelper.logDefault('authUserSubject', 'Disconnecting device after logout');
+                    await this.disconnectAndClose(this.connectionInfo.device);
+                }
+                this.scanInfoSubject.next(new ScanInfo());
             }
         });
     }
@@ -72,79 +65,93 @@ export class BleConnectionService {
     //
     // restoreKey = A unique string to identify your app. Bluetooth Central background mode is required to use this,
     //              but background mode doesn't seem to require specifying the restoreKey.
-    private initializeBL(request = false, statusReceiver = true, restoreKey = 'MBCompanion') {
+    private initializeBL(request = false, statusReceiver = true, restoreKey = 'miband3companion'): void {
         // init bluetooth and subscribe to bluetooth status changes
-        this.ble.initialize({request, statusReceiver, restoreKey}).subscribe(status => {
-            console.log(BleConnectionService.name + ' -> BL status: ' + status.status);
-            this.zone.run( () => this.blStatusSubject.next(status.status) );
-            // reset stats when bl get disabled
-            if (status.status === 'disabled') {
-                this.zone.run( () => {
-                    console.log(BleConnectionService.name + ' -> Resetting service data after disabling BL');
-                    //this.isScanningDisabledSubject.next(false);
-                    this.isScanningSubject.next(false);
-                    this.deviceListSubject.next(null);
-                    this.connectionStatusSubject.next('disconnected');
-                    this.connectedDeviceSubject.next(null);
-                });
-            }
-        }, error => {
-            this.zone.run( () => this.blStatusSubject.error(error) );
+        this.ble.initialize({ request, statusReceiver, restoreKey }).subscribe({
+            next: (data: { status: 'enabled' | 'disabled' }) => {
+                this.logHelper.logDefault('initializeBL', 'Bluetooth status', { value: data.status });
+                this.blStatusSubject.next(data.status);
+                // reset stats when bl get disabled
+                if (data.status === BLEStatus.DISABLED) {
+                    this.logHelper.logDefault('initializeBL', 'Resetting service data after disabling BL');
+                    this.scanInfoSubject.next(new ScanInfo());
+                    this.connectionInfoSubject.next(new ConnectionInfo());
+                }
+            },
+            error: (e: unknown) => Promise.reject(this.logHelper.getUnknownMsg(e))
+            // TODO: localize error messages
+            /*{
+                if (typeof e === 'string' || e instanceof Error) {
+                    return Promise.reject(this.logHelper.getUnknownMsg(e));
+                } else {
+                    return Promise.reject(this.logHelper.getUnknownMsg((e as BLEError).message));
+                }
+                return Promise.reject(this.logHelper.getUnknownMsg(e));
+            }*/
         });
-        console.log('Bluetooth has been initialized!');
+        this.logHelper.logDefault('initializeBL', ' Bluetooth has been initialized!');
     }
 
-    public async isConnected(address: string): Promise<boolean> {
+    public async isConnected(deviceData: string | IDevice): Promise<boolean> {
         try {
             await this.blAndPermissionChecks();
-            return (await this.ble.isConnected({address})).isConnected;
-        } catch (e) {
-            return Promise.reject(e);
+            const wasConnected = await this.wasConnected(deviceData);
+            return wasConnected ? Promise.resolve(
+                (await this.ble.isConnected({
+                    address: typeof deviceData === 'string' ? deviceData : deviceData.macAddress
+                })).isConnected
+            ) : Promise.resolve(false);
+        } catch (e: unknown) {
+            return Promise.reject(this.logHelper.getUnknownMsg(e));
         }
     }
 
-    public async wasConnected(address: string): Promise<boolean> {
+    public async wasConnected(deviceData: string | IDevice): Promise<boolean> {
         try {
             await this.blAndPermissionChecks();
-            return (await this.ble.wasConnected({address})).wasConnected;
-        } catch (e) {
-            return Promise.reject(e);
+            return (await this.ble.wasConnected({ address: typeof deviceData === 'string' ? deviceData : deviceData.macAddress })).wasConnected;
+        } catch (e: unknown) {
+            return Promise.reject(this.logHelper.getUnknownMsg(e));
         }
     }
 
     public async enableBL(maxWaitTime: number = 5000): Promise<boolean> {
         try {
-            console.log(BleConnectionService.name + ' -> startTime: ' + new Date().toISOString());
+            this.logHelper.logDefault(this.enableBL.name, 'startTime', { value: new Date().toISOString() });
             let isBLEnabled = await this.isBLEnabled();
-            console.log(BleConnectionService.name + ' -> isEnabled: ' + isBLEnabled);
-            if (isBLEnabled) { return true; }
-            this.zone.run( () => this.blStatusSubject.next('enabling') );
+            this.logHelper.logDefault(this.enableBL.name, 'isEnabled', { value: isBLEnabled });
+            if (isBLEnabled) {
+                return true;
+            }
+            this.blStatusSubject.next(BLEStatus.ENABLING);
             this.ble.enable();
             await this.createTimeoutForEnableBL(maxWaitTime); // wait for BL to initialize and/or for user interacting with BL dialog
-            console.log(BleConnectionService.name + ' -> waitTime end: ' + new Date().toISOString());
+            this.logHelper.logDefault(this.enableBL.name, 'waitTime end', { value: new Date().toISOString() });
             isBLEnabled = await this.isBLEnabled();
-            console.log(BleConnectionService.name + ' -> isEnabled after enable: ' + new Date().toISOString());
-            if (!isBLEnabled) { this.zone.run( () => this.blStatusSubject.next('disabled') ) }
-            return isBLEnabled
-        } catch (e) {
-            console.error(BleConnectionService.name + ' -> enableBL error: ' + e);
-            return Promise.reject(e);
+            this.logHelper.logDefault(this.enableBL.name, 'Is BL enabled after enabling', { value: isBLEnabled });
+            if (!isBLEnabled) {
+                this.blStatusSubject.next(BLEStatus.DISABLED);
+            }
+            return Promise.resolve(isBLEnabled);
+        } catch (e: unknown) {
+            return Promise.reject(this.logHelper.getUnknownMsg(e));
         }
     }
 
-    public createTimeoutForEnableBL(ms: number) {
-        console.log(BleConnectionService.name + ' -> timeout start: ' + new Date().toISOString());
-        return new Promise<void>( res => setTimeout( () => {
-            console.log(BleConnectionService.name + ' -> timeout end: ' + new Date().toISOString());
+    public createTimeoutForEnableBL(ms: number): Promise<void> {
+        this.logHelper.logDefault(this.createTimeoutForEnableBL.name, 'timeout start', { value: new Date().toISOString() });
+        return new Promise<void>(res => setTimeout(() => {
+            this.logHelper.logDefault(this.createTimeoutForEnableBL.name, 'timeout end', { value: new Date().toISOString() });
             res();
         }, ms));
     }
 
-    public async isBLEnabled(): Promise<boolean>{
+    public async isBLEnabled(): Promise<boolean> {
         try {
-            return (await this.ble.isEnabled()).isEnabled;
-        } catch (e) {
-            console.log(BleConnectionService.name + ' -> BL error: ' + e);
+            return Promise.resolve((await this.ble.isEnabled()).isEnabled);
+        } catch (e: unknown) {
+            this.logHelper.logError(this.isBLEnabled.name, e);
+            return Promise.resolve(false);
         }
     }
 
@@ -153,81 +160,70 @@ export class BleConnectionService {
     public async blAndPermissionChecks(): Promise<void> {
         try {
             await this.permissionService.checkForBluetoothScanPermissions();
-            console.log('checking bl status');
+            this.logHelper.logDefault(this.blAndPermissionChecks.name, 'Checking Bluetooth status');
             const isEnabled = await this.enableBL();
-            return isEnabled ? Promise.resolve() : Promise.reject('BL is not enabled');
-        } catch (e) {
-            console.error(BleConnectionService.name + ' -> bl and permission check error: ' + e);
-            return Promise.reject(e);
+            return isEnabled ? Promise.resolve() : Promise.reject('BLUETOOTH_IS_DISABLED');
+        } catch (e: unknown) {
+            return Promise.reject(this.logHelper.getUnknownMsg(e));
         }
     }
 
-
     // Android prevents applications from starting and stopping scans more than 5 times in 30 seconds
-    // if it happens then 30s timeout
-    // so wait at least 7 seconds after each scan if user could "abuse" scanning
-    public async scanForDevices(ms: number = 1000) {
+    // if it happens then BL scanning will be disabled for 30s
+    // to prevent the abuse of scanning wait at least 7 seconds after each scan
+    public async scanForDevices(scanTime: number = 1000): Promise<void> {
         try {
             await this.blAndPermissionChecks();
-        } catch (e) {
-            this.zone.run( () => {
-                this.isScanningSubject.error(e);
-                this.isScanningDisabledSubject.next(false);
-                this.isScanningSubject.next(false);
-            });
+        } catch (e: unknown) {
+            this.scanInfoSubject.error(this.logHelper.getUnknownMsg(e));
+            this.scanInfoSubject.next(new ScanInfo());
         }
-        let deviceList: ScanStatus[] = [];
-        this.zone.run( () => {
-            this.isScanningSubject.next(true);
-            this.isScanningDisabledSubject.next(true);
-        });
+        const scanResults: ScanResult[] = [];
+        this.scanInfoSubject.next(new ScanInfo(BLEScanStatus.SCANNING, true));
         this.ble.startScan({
             services: [],
-            allowDuplicates: false,
+            // allowDuplicates: false, // iOS only
             scanMode: this.ble.SCAN_MODE_LOW_LATENCY,
             matchMode: this.ble.MATCH_MODE_AGGRESSIVE,
             matchNum: this.ble.MATCH_NUM_MAX_ADVERTISEMENT,
             callbackType: this.ble.CALLBACK_TYPE_ALL_MATCHES,
-        }).subscribe(scanData => {
-            if (scanData.address && scanData.name && scanData.name.toLowerCase().includes('mi band 3')) {
-                if (deviceList.findIndex(d => d.address === scanData.address) === -1) { // ignore duplicates
-                    deviceList.push(scanData);
+        }).subscribe({
+            next: (scanData: ScanStatus) => {
+                if (scanData.name?.toLowerCase().includes(this.miBand3.name.toLowerCase())) {
+                    const res: ScanResult = new ScanResult(scanData.address, scanData.name, scanData.rssi);
+                    const resIndex = scanResults.findIndex((s: ScanResult) => s.address === res.address);
+                    if (resIndex === -1) { // ignore duplicates
+                        scanResults.push(res);
+                    } else { // update rssi if device is already added
+                        scanResults[resIndex].rssi = res.rssi;
+                    }
                 }
+            },
+            error: (e: unknown) => {
+                this.scanInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                this.scanInfoSubject.next(new ScanInfo());
             }
-        }, error => {
-            this.zone.run( () => {
-                this.isScanningSubject.error(error);
-                this.isScanningDisabledSubject.next(false);
-                this.isScanningSubject.next(false);
-            });
         });
 
         // stop scanning
-        this.ble.isScanning().then(value => {
-            if (value.isScanning) {
+        try {
+            const isScanning = (await this.ble.isScanning()).isScanning;
+            if (isScanning) {
                 setTimeout(async () => {
                     try {
                         await this.ble.stopScan();
-                        deviceList.sort((a, b) => { return b.rssi - a.rssi; });
-                        this.zone.run( () => this.deviceListSubject.next(deviceList));
-                    } catch (e) {
-                        this.zone.run( () => {
-                            this.isScanningSubject.error(e);
-                            this.isScanningSubject.next(false);
-                            this.isScanningDisabledSubject.next(false);
-                        });
-                    } finally {
-                        this.zone.run( () => this.isScanningSubject.next(false));
+                        scanResults.sort(ScanResult.getCompareFunction('rssi', 'desc'));
+                        this.scanInfoSubject.next(new ScanInfo(BLEScanStatus.FINISHED, true, scanResults));
+                    } catch (e: unknown) {
+                        this.scanInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                        this.scanInfoSubject.next(new ScanInfo());
                     }
-                }, ms)
+                }, scanTime);
             }
-        }).catch(error => {
-            this.zone.run( () => {
-                this.isScanningSubject.error(error)
-                this.isScanningSubject.next(false);
-                this.isScanningDisabledSubject.next(false);
-            });
-        });
+        } catch (error: unknown) {
+            this.scanInfoSubject.error(this.logHelper.getUnknownMsg(error));
+            this.scanInfoSubject.next(new ScanInfo());
+        }
     }
 
     // address = The address/identifier provided by the scan's return object
@@ -238,22 +234,20 @@ export class BleConnectionService {
     //
     // firstTime = if true skip (2. auth step) sending encryption key during auth process
     // TODO: fix autoConnect handling => fix reconnect
-    public async connect(address: string, autoConnect: boolean = false, firstTime: boolean = false) {
+    public async connect(device: IDevice, autoConnect: boolean = false): Promise<void> {
         try {
             await this.blAndPermissionChecks();
-            this.firstTimeConnecting = firstTime;
-            const wasConnected = (await this.ble.wasConnected({ address })).wasConnected;
-            console.log("wasConnected: " + wasConnected.valueOf());
-            if (wasConnected) {
-                this.zone.run( () => this.connectionStatusSubject.next('connecting') );
-                await this.ble.close({ address });
-                this.ble.connect({ address, autoConnect, transport: AndroidGattTransportMode.TRANSPORT_LE }).subscribe(async a => await this.setupConnection(a)
-                    ,e => this.zone.run( () => {
-                            this.connectionStatusSubject.error(e);
-                            this.connectionStatusSubject.next('disconnected');
-                    }));
+            const wasConnected: boolean = await this.wasConnected(device);
+            this.logHelper.logDefault(this.connect.name, 'wasConnected', { value: wasConnected.valueOf() });
+            this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTING, false, device));
+            if (wasConnected.valueOf()) {
+                await this.ble.close({ address: device.macAddress });
+                this.ble.connect({
+                    address: device.macAddress,
+                    autoConnect,
+                    transport: AndroidGattTransportMode.TRANSPORT_LE
+                }).subscribe(this.getConnectObserver());
             } else {
-                this.zone.run( () => this.connectionStatusSubject.next('connecting') );
                 // scan is needed before connecting
                 this.ble.startScan({
                     services: [],
@@ -262,191 +256,189 @@ export class BleConnectionService {
                     matchMode: this.ble.MATCH_MODE_AGGRESSIVE,
                     matchNum: this.ble.MATCH_NUM_MAX_ADVERTISEMENT,
                     callbackType: this.ble.CALLBACK_TYPE_ALL_MATCHES,
-                }).pipe(timeout(5000), filter(s => s.address === address), take(1)).subscribe( async() => {
-                    await this.ble.stopScan();
-                    this.ble.connect({ address, autoConnect, transport: AndroidGattTransportMode.TRANSPORT_LE }).subscribe(async a => await this.setupConnection(a),e => this.zone.run( () => {
-                        this.connectionStatusSubject.error(e);
-                        this.connectionStatusSubject.next('disconnected');
-                    }));
-                },e => {
-                    this.zone.run( () => {
-                        this.connectionStatusSubject.error(e);
-                        this.connectionStatusSubject.next('disconnected');
-                    });
+                }).pipe(timeout(5000), filter(s => s.address === device.macAddress), first()).subscribe({
+                    next: async () => {
+                        await this.ble.stopScan();
+                        this.ble.connect({
+                            address: device.macAddress,
+                            autoConnect,
+                            transport: AndroidGattTransportMode.TRANSPORT_LE
+                        }).subscribe(this.getConnectObserver());
+                    },
+                    error: (e: unknown) => {
+                        this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                        this.connectionInfoSubject.next(new ConnectionInfo());
+                    }
                 });
             }
-        } catch (e) {
-            console.log();
-            this.zone.run( () => {
-                this.connectionStatusSubject.error(e);
-                this.connectionStatusSubject.next('disconnected');
-            });
+        } catch (e: unknown) {
+            this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
+            this.connectionInfoSubject.next(new ConnectionInfo());
         }
     }
 
-    private async setupConnection(connectionData: DeviceInfo): Promise<void> {
-        try {
-            console.log(BleConnectionService.name + ' -> connection info: ' + JSON.stringify(connectionData));
-            if (connectionData.status !== 'connected') { this.zone.run( () => this.connectionStatusSubject.next(connectionData.status)) }
-            if (connectionData.status === 'connected') {
-                console.log(BleConnectionService.name + ' -> Connected to device');
-                this.connectingDevice = new Device(connectionData.name, connectionData.address);
-                await this.ble.discover({ address: connectionData.address, clearCache: false }); // discover services
-                this.authenticateMiBand(connectionData.address, this.firstTimeConnecting); // start auth process
-            } else if (connectionData.status === 'disconnected') {
-                this.connectingDevice = null;
-                console.log(BleConnectionService.name + ' -> Unexpectedly disconnected');
-                // free BL resource if auth failed and gets disconnected
-                //await this.ble.close({address: connectionData.address});
-                this.zone.run( () => {
-                    this.connectionStatusSubject.next(connectionData.status);
-                    this.connectingDevice = null;
-                    this.connectedDeviceSubject.next(null);
-                });
+    private getConnectObserver(): Partial<Observer<DeviceInfo>> {
+        return {
+            next: async (connectionData: DeviceInfo): Promise<void> => {
+                try {
+                    this.logHelper.logDefault(this.getConnectObserver.name, 'connection info', { value: connectionData });
+                    const conInfo = new ConnectionInfo(connectionData.status as BLEConnectionStatus);
+                    if (connectionData.status === BLEConnectionStatus.CONNECTED) {
+                        this.logHelper.logDefault(this.getConnectObserver.name + 'connection status', 'Connected to device!');
+                        await this.ble.discover({ address: connectionData.address, clearCache: false }); // discover services
+                        conInfo.device = new Device(this.miBand3.name, connectionData.address);
+                        this.connectionInfoSubject.next(conInfo);
+                        this.authenticateMiBand(conInfo.device); // start auth process
+                    } else if (connectionData.status === BLEConnectionStatus.DISCONNECTED) {
+                        this.logHelper.logDefault(this.getConnectObserver.name + 'connection status', 'Unexpectedly disconnected!');
+                        // free BL resource if auth failed and gets disconnected
+                        try {
+                            await this.ble.close({ address: connectionData.address });
+                        } catch (e: unknown) {
+                            this.logHelper.logError(this.getConnectObserver.name, e);
+                        }
+                        this.connectionInfoSubject.next(conInfo);
+                    }
+                } catch (e: unknown) {
+                    this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                    this.connectionInfoSubject.next(new ConnectionInfo());
+                }
+            },
+            error: (e: unknown): void => {
+                this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                this.connectionInfoSubject.next(new ConnectionInfo());
             }
-        } catch (e) {
-            this.zone.run( () => {
-                this.connectionStatusSubject.error(e);
-                this.connectionStatusSubject.next('disconnected');
-                this.connectedDeviceSubject.next(null);
-            });
-        }
+        };
     }
 
-    public async disconnectAndClose(address: string) {
+    public async disconnectAndClose(deviceData: string | IDevice): Promise<void> {
         try {
-            await this.ble.disconnect({address});
-            await this.ble.close({address});
-            console.log(BleConnectionService.name + ' -> Disconnected successfully!');
-        } catch (e) {
-            console.error(BleConnectionService.name + ' -> disconnectAndClose error: ' + e.message);
-            this.zone.run( () => {
-                this.connectionStatusSubject.error(e);
-                this.connectionStatusSubject.next('disconnected');
-            });
+            const address = typeof deviceData === 'string' ? deviceData : deviceData.macAddress;
+            await this.ble.disconnect({ address });
+            await this.ble.close({ address });
+            this.logHelper.logDefault(this.disconnectAndClose.name, 'Disconnected successfully!');
+        } catch (e: unknown) {
+            this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
         } finally {
-            this.zone.run( () => {
-                this.connectedDeviceSubject.next(null);
-                this.deviceListSubject.next(undefined);
-                this.connectionStatusSubject.next(undefined);
-            });
+            this.connectionInfoSubject.next(new ConnectionInfo());
         }
     }
 
-    // Authentication with steps
-    private authenticateMiBand(address: string, sendEncryptionKey: boolean) {
-        const serviceUUID = this.miBand3.getService('authentication').uuid;
-        const characteristicUUID = this.miBand3.getService('authentication').getCharacteristic('auth').uuid;
+    private authenticateMiBand(device: IDevice): void {
+        const serviceUUID: string = this.miBand3.getService('authentication')?.uuid ?? 'unknown';
+        const characteristicUUID: string = this.miBand3.getService('authentication')?.getCharacteristic('auth')?.uuid ?? 'unknown';
+        // Authentication steps
         this.ble.subscribe({ // 1. set notify on (by sending 2 bytes request (0x01, 0x00) to the Descriptor === subscribe)
-            address,
+            address: device.macAddress,
             service: serviceUUID,
             characteristic: characteristicUUID
-        }).subscribe(async data => {
-            try {
-                if (data) {
-                    if (data.status === 'subscribed') {
-                        console.log(BleConnectionService.name + ' => Subscribed to auth');
-                        if (sendEncryptionKey) { // need to send encryption key when connecting for the first time
-                            await this.sendEncryptionKey(address, serviceUUID, characteristicUUID); // 2. by writing 2 bytes (0x01 + 0x00)  + encryption key (16 bytes)
-                        }  else { // skip 2. (no press button verification) => 3.
-                            const writeData = Buffer.from([2, 0]); // 3. Request random key by sending 2 bytes: 0x02 + 0x00
-                            await this.write(address, serviceUUID, characteristicUUID, writeData, 'noResponse');
-                        }
+        }).subscribe({
+            next: async (data: OperationResult) => {
+                try {
+                    if (data.status === BLESubscriptionStatus.SUBSCRIBED) {
+                        this.logHelper.logDefault(this.authenticateMiBand.name, 'Subscribed to auth');
+                        // authentication sub will fail immediately if the encryption key is same as on the Mi Band 3
+                        // it is better to start with requesting a random key first
+                        // if the device has different encryption/secret key => 100304 => send encryption key => back to 100101
+                        const writeData = Buffer.from([2, 0]); // 2. Request random key by sending 2 bytes: 0x02 + 0x00
+                        await this.write(device, serviceUUID, characteristicUUID, writeData, 'noResponse');
                     } else {
-                        if (data.value) {
-                            // TODO: display auth failed msg if fails
+                        if (data.value !== undefined) {
                             const response = Buffer.from(this.ble.encodedStringToBytes(data.value)).slice(0, 3).toString('hex'); // get the first 3 bytes to know what to do
-                            console.log(BleConnectionService.name + " -> auth response: " + response);
+                            this.logHelper.logDefault(this.authenticateMiBand.name, 'auth response', { value: response });
                             if (response === '100101') { // if user did press the button on the Mi Band
                                 // authentication level 1
-                                console.log(BleConnectionService.name + ' -> Sent key ok');
-                                console.log(BleConnectionService.name + ' -> Paired successfully');
+                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Sent key ok');
+                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Paired successfully');
                                 const writeData = Buffer.from([2, 0]); // 3. Request random key by sending 2 bytes: 0x02 + 0x00
-                                await this.write(address, serviceUUID, characteristicUUID, writeData, 'noResponse');
-                            } else if (response === '100102') { // if user did not press button on the Mi Band while pairing
-                                console.log(BleConnectionService.name + ' -> Pairing failed');
-                                // TODO: press the button pls msg or cancel
-                                await this.sendEncryptionKey(address, serviceUUID, characteristicUUID); // try again -> send encryption key again
+                                await this.write(device, serviceUUID, characteristicUUID, writeData, 'noResponse');
+                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Request sent for a random key');
+                            } else if (response === '100102') { // if user did not press button on the Mi Band after sending the encryption key
+                                this.connectionInfoSubject.error('Pairing failed!\nPlease press the button on Mi Band to confirm pairing!');
+                                this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, false, device));
+                                await this.sendEncryptionKey(device, serviceUUID, characteristicUUID); // send encryption key again
                             } else if (response === '100104') {
-                                this.zone.run( () => {
-                                    this.connectionStatusSubject.error('Encryption key sending failed!');
-                                    this.connectionStatusSubject.next('disconnected');
-                                });
-                                await this.disconnectAndClose(address);
+                                this.connectionInfoSubject.error('Encryption key sending failed!');
+                                // re-send encryption key once if sending failed
+                                if (!this.sentEncryptionKeyAgain) {
+                                    this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, false, device));
+                                    await this.sendEncryptionKey(device, serviceUUID, characteristicUUID); // send encryption key again
+                                    this.sentEncryptionKeyAgain = true;
+                                } else {
+                                    await this.disconnectAndClose(device);
+                                }
                             } else if (response === '100201') { // 4. Encrypt the random 16 bytes number with AES/ECB/NoPadding with the encryption key that was sent at 2. step
                                 // authentication level 2
-                                console.log(BleConnectionService.name + ' -> Requested random key received');
+                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Requested random key received');
                                 const randomData = Buffer.from(this.ble.encodedStringToBytes(data.value)).slice(3, 19); // remove the first 3 bytes
                                 const algorithm = 'aes-128-ecb';
                                 const cipher = crypto.createCipheriv(algorithm, this.getEncryptionKey(), '').setAutoPadding(false); // create encryptor + disable auto padding
                                 const encryptedData = cipher.update(randomData); // encrypt data
                                 cipher.final(); // stop cipher
                                 const writeData = Buffer.concat([Buffer.from([3, 0]), encryptedData]); // 5. Send 2 bytes 0x03 + 0x00 + encrypted data
-                                await this.write(address, serviceUUID, characteristicUUID, writeData, 'noResponse');
+                                await this.write(device, serviceUUID, characteristicUUID, writeData, 'noResponse');
                             } else if (response === '100204') { // data request failed
-                                this.zone.run(() => {
-                                    this.connectionStatusSubject.error('Requesting data failed!');
-                                    this.connectionStatusSubject.next('disconnected');
-                                });
-                                await this.disconnectAndClose(address);
+                                this.connectionInfoSubject.error('Requesting data failed!');
+                                await this.disconnectAndClose(device);
                             } else if (response === '100301') { // 6. Authentication done
-                                console.log(BleConnectionService.name + ' -> Authenticated successfully');
-                                // run inside Angular Zone to trigger change detection, because sometimes it doesn't trigger
-                                this.zone.run(() => {
-                                    this.connectingDevice.lastUsedDate = new Date().toISOString();
-                                    this.connectedDeviceSubject.next(this.connectingDevice);
-                                    this.connectionStatusSubject.next('connected');
-                                });
-                                await this.ble.unsubscribe({ address, service: serviceUUID, characteristic: characteristicUUID });
-                            } else if (response === '100304') { // encryption failed device probably has a different secret key
-                                this.zone.run(() => {
-                                    this.connectionStatusSubject.error('Encryption failed!');
-                                    this.connectionStatusSubject.next('disconnected');
-                                });
-                                await this.sendEncryptionKey(address, serviceUUID, characteristicUUID);
+                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Authenticated successfully');
+                                device.lastUsedDate = new Date().toISOString();
+                                this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, true, device));
+                                await this.ble.unsubscribe({ address: device.macAddress, service: serviceUUID, characteristic: characteristicUUID });
+                            } else if (response === '100304') { // encryption fails, because the device probably has a different secret key
+                                this.logHelper.logError(this.authenticateMiBand.name, 'Encryption failed, sending new encryption key!');
+                                await this.sendEncryptionKey(device, serviceUUID, characteristicUUID); // write 2 bytes (0x01 + 0x00)  + encryption key (16 bytes)
                             } else {
-                                console.error(BleConnectionService.name + ' -> Authentication failed, error code: ' + response);
-                                await this.disconnectAndClose(address);
+                                this.logHelper.logError(this.authenticateMiBand.name, 'Authentication code', { value: response });
+                                await this.disconnectAndClose(device);
                             }
                         }
                     }
+                } catch (error: unknown) {
+                    this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(error));
+                    const isConnected = await this.isConnected(device);
+                    if (isConnected) {
+                        await this.disconnectAndClose(device);
+                    }
                 }
-
-            } catch (error) {
-                console.error(BleConnectionService.name + " -> auth error: " + error);
-                this.zone.run( () => {
-                    this.connectionStatusSubject.error(error);
-                    this.connectionStatusSubject.next('disconnected');
-                });
+            },
+            error: (e: unknown) => {
+                this.logHelper.logError(this.authenticateMiBand.name, e);
             }
-        }, error => {
-            console.error(BleConnectionService.name + " -> auth sub error: " + error.message || error);
-            this.zone.run( () => {
-                this.connectionStatusSubject.error(error);
-                this.connectionStatusSubject.next('disconnected');
-            });
         });
     }
 
-    private async sendEncryptionKey(address: string, service: string, characteristic: string): Promise<OperationResult> {
+    private async sendEncryptionKey(
+        deviceData: string | IDevice,
+        service: string,
+        characteristic: string
+    ): Promise<OperationResult> {
         const writeData = Buffer.concat([Buffer.from([1, 0]), this.getEncryptionKey()], 18); // 0x01 + 0x00 + encryption key => 18 bytes
-        return this.write(address,
+        return this.write(
+            typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
             service,
             characteristic,
-            writeData, 'noResponse');
+            writeData,
+            'noResponse'
+        );
     }
 
-    getEncryptionKey() {
-        return Buffer.from([50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65]);
+    public getEncryptionKey(): Buffer {
+        return Buffer.from([30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]);
     }
 
-    private write(address: string, service: string, characteristic: string, value: Buffer, type?: string): Promise<OperationResult> {
+    private write(
+        deviceData: string | IDevice,
+        service: string, characteristic: string,
+        value: Buffer,
+        type?: string
+    ): Promise<OperationResult> {
         return this.ble.write({
-            address,
+            address: typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
             service,
             characteristic,
             value: this.ble.bytesToEncodedString(value),
-            type
+            type: type ?? ''
         });
     }
 }
