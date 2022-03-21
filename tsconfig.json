@@ -10,35 +10,51 @@
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "importHelpers": true,
-        "target": "es2015",
-        "module": "es2020",
+        "target": "es2021",
+        "module": "esnext",
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
         "lib": [
-            "es2018",
+            "es2021",
             "dom"
         ],
         "paths": {
-            "crypto": [
-                "./node_modules/crypto-browserify"
-            ],
-            "buffer": [
-                "./node_modules/buffer"
-            ],
-            "stream": [
-                "./node_modules/stream-browserify"
-            ]
+            "crypto": ["./node_modules/crypto-browserify"],
+            "buffer": ["./node_modules/buffer"],
+            "stream": ["./node_modules/stream-browserify"]
             //"assert": ["./node_modules/assert"],
             //"http": ["./node_modules/stream-http"],
             //"https": ["./node_modules/https-browserify"],
             //"os": ["./node_modules/os-browserify"],
             //"process": ["./node_modules/process/browser"]
-        }
+        },
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noImplicitOverride": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "exactOptionalPropertyTypes": true,
+        // enable importing JSON files
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
-        "strictTemplates": true
+        "strictInputTypes": true,
+        "strictTemplates": true,
+        "strictSafeNavigationTypes": true,
+        "strictAttributeTypes": true,
+        "strictDomLocalRefTypes": true,
+        "strictOutputEventTypes": true,
+        "strictDomEventTypes": true,
+        "strictContextGenerics": true,
+        "strictLiteralTypes": true
     }
 }
