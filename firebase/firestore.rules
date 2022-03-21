@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+    	allow create;
+      allow get: if isUser() && getUserId() == userId;
+      allow update: if isUser() && getUserId() == userId;
+      allow delete: if isUser() && getUserId() == userId;
+    }
+    match /userData/{userId} {
+      allow read: if isUser() && getUserId() == userId;
+      allow write: if isUser() && getUserId() == userId;
+      match /activityData/{id=**} {
+        allow read;
+        allow write;
+      }
+      match /trainingData/{id=**} {
+        allow read;
+        allow write;
+      }
+      match /heartRateData/{id=**} {
+        allow read;
+        allow write;
+      }
+      match /batteryData/{id=**} {
+        allow read;
+        allow write;
+      }
+      match /statistics/{id=**} {
+        allow read;
+        allow write;
+      }
+    }
+    match /security/{deviceId} {
+    	allow create: if deviceId != 'unknown';
+      allow update: if deviceId != 'unknown';
+      allow get: if deviceId != 'unknown';
+      allow list: if deviceId != 'unknown';
+      match /authentication/{id=**} {
+      	allow create;
+      	allow update;
+      	allow get;
+      	allow list;
+      }
+    }
+  }
+  
+  function isUser() {
+  	return request.auth.uid != null;
+  }
+  
+  function getUserId() {
+  	return request.auth.uid;
+  }
+}
