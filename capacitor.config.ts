@@ -8,7 +8,8 @@ const config: CapacitorConfig = {
     bundledWebRuntime: false,
     loggingBehavior: environment.production ? 'production' : 'debug',
     server: {
-        hostname: 'localhost'
+        hostname: 'miband3companion.web.app',
+        androidScheme: 'https'
     },
     plugins: {
         /*
