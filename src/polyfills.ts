@@ -64,8 +64,15 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
  * APPLICATION IMPORTS
  */
 
-// needed to use node modules (crypto, buffer, stream, ...)
-// import * as process from 'process';
-
-//window.process = process;
 (window as any).global = window;
+
+/*
+import { Buffer } from 'buffer';
+
+global.Buffer = Buffer;
+global.process = {
+    env: { DEBUG: undefined },
+    version: '',
+    nextTick: require('next-tick')
+} as any;
+*/
