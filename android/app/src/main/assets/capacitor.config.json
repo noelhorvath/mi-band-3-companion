@@ -4,5 +4,8 @@
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"loggingBehavior": "debug",
+	"server": {
+		"hostname": "localhost"
+	},
 	"plugins": {}
 }
