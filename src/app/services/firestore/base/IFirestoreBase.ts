@@ -4,9 +4,13 @@ import { QueryOption } from '../../../shared/types/firestore.types';
 export interface IFirestoreBase<T> {
     add(item: T, id?: string): Promise<void>;
 
-    get(id: string): Observable<T | undefined>;
+    get(id: string): Promise<T | undefined>;
 
-    list(queryOptions?: QueryOption | QueryOption[]): Observable<T[] | undefined>;
+    getWithValueChanges(id: string): Observable<T | undefined>;
+
+    list(queryOptions?: QueryOption | QueryOption[]): Promise<T[] | undefined>;
+
+    listWithValueChanges(queryOptions?: QueryOption | QueryOption[]): Observable<T[] | undefined>;
 
     update(item: T): Promise<void>;
 

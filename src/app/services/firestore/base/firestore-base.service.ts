@@ -3,29 +3,43 @@ import { Observable } from 'rxjs';
 import { IEntityModel } from '../../../shared/models/interfaces/IEntityModel';
 import { map } from 'rxjs/operators';
 import {
-    arrayUnion,
-    Firestore,
-    CollectionReference,
-    QueryConstraint,
-    collection,
-    setDoc,
-    doc,
     addDoc,
+    arrayUnion,
+    collection,
+    collectionData,
+    CollectionReference,
     deleteDoc,
-    query,
-    orderBy,
-    WhereFilterOp,
+    doc,
+    docData,
+    DocumentReference,
+    DocumentSnapshot,
+    endAt,
+    endBefore,
     FieldPath,
-    limit, where, startAt, endAt, startAfter, endBefore, getDocs,
-    QueryDocumentSnapshot, docData, collectionData, Query, updateDoc, DocumentReference
+    Firestore,
+    getDoc,
+    getDocs,
+    limit,
+    orderBy,
+    query,
+    Query,
+    QueryConstraint,
+    QueryDocumentSnapshot,
+    setDoc,
+    startAfter,
+    startAt,
+    updateDoc,
+    where,
+    WhereFilterOp
 } from '@angular/fire/firestore';
-import { genericFirebaseConverter, objectToClass } from '../../../shared/functions/parser.functions';
+import { genericFirebaseConverter, instantiate } from '../../../shared/functions/parser.functions';
 import { CursorQuery, LimitQuery, OrderByQuery, QueryOption, WhereQuery } from '../../../shared/types/firestore.types';
 import { QueryOperators } from '../../../shared/enums/firestore.enum';
 import { LogHelper } from '../../../shared/models/classes/LogHelper';
 import { LogInfo } from '../../../shared/models/classes/LogInfo';
+import { Copyable } from '../../../shared/types/custom.types';
 
-export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(entity: T): void }> implements IFirestoreBase<T> {
+export abstract class FirestoreBaseService<T extends IEntityModel<T> & Copyable<T>> implements IFirestoreBase<T> {
     public static readonly INVALID_ID_ERROR = 'ID is invalid';
     public static readonly INVALID_FIELD_NAME_ERROR = 'fieldName is invalid';
     private readonly factory: new (id?: string) => T;
@@ -33,9 +47,6 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
     private _collectionPath: string | undefined;
 
     public static isQueryValid(constraints: QueryOption[] | QueryOption): { isValid: boolean; errorMsg?: string } {
-        if (!(constraints instanceof Array)) {
-            return FirestoreBaseService.isQueryValid([constraints]);
-        }
         const whereOpStats: { [filterOperator in WhereFilterOp]: { count: number; field?: string | FieldPath | undefined } } = {
             '<': { count: 0 },
             '<=': { count: 0 },
@@ -49,7 +60,7 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
             'array-contains-any': { count: 0 },
         };
         const orderByFields: (string | FieldPath)[] = [];
-        for (const constraint of constraints) {
+        for (const constraint of constraints instanceof Array ? constraints : Array.of(constraints)) {
 
             // If you include a filter with a range comparison (<, <=, >, >=), your first ordering must be on the same field
             if ((whereOpStats[QueryOperators.LESS].field !== undefined && orderByFields.length > 0 && orderByFields[0] !== whereOpStats[QueryOperators.LESS].field)
@@ -57,14 +68,14 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                 || (whereOpStats[QueryOperators.GREATER].field !== undefined && orderByFields.length > 0 && orderByFields[0] !== whereOpStats[QueryOperators.GREATER].field)
                 || (whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && orderByFields.length > 0 && orderByFields[0] !== whereOpStats[QueryOperators.GREATER_OR_EQUAL].field)
             ) {
-                return { isValid: false, errorMsg: 'First ordering must be on the same field as the range comparison(s)'};
+                return { isValid: false, errorMsg: 'First ordering must be on the same field as the range comparison(s)' };
             }
 
             if ('limit' in constraint) {
                 if ((constraint as LimitQuery).limit <= 0) {
                     return { isValid: false, errorMsg: 'Limit must be higher than 0' };
                 }
-            } else if ('fieldPath' in constraint && 'value' in constraint && 'opStr' in constraint ) {
+            } else if ('fieldPath' in constraint && 'value' in constraint && 'opStr' in constraint) {
                 const field: string | FieldPath = (constraint as WhereQuery).fieldPath;
                 whereOpStats[(constraint as WhereQuery).opStr].count++;
 
@@ -76,8 +87,7 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                 // Range filter and orderBy cannot be on different fields
                 if (whereOpStats[QueryOperators.LESS].count > 1 && whereOpStats[QueryOperators.LESS_OR_EQUAL].count > 1
                     && whereOpStats[QueryOperators.GREATER].count > 1 && whereOpStats[QueryOperators.GREATER_OR_EQUAL].count > 1
-                    && whereOpStats[QueryOperators.NOT_EQUAL].count > 1 && whereOpStats[QueryOperators.NOT_IN].count > 1)
-                {
+                    && whereOpStats[QueryOperators.NOT_EQUAL].count > 1 && whereOpStats[QueryOperators.NOT_IN].count > 1) {
                     return { isValid: false, errorMsg: 'Only one of each range and not equals comparisons is allowed' };
                 }
 
@@ -86,9 +96,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                         || (whereOpStats[QueryOperators.GREATER].field !== undefined && whereOpStats[QueryOperators.LESS].field !== whereOpStats[QueryOperators.GREATER].field)
                         || (whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.LESS].field !== whereOpStats[QueryOperators.GREATER_OR_EQUAL].field)
                         || (whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && whereOpStats[QueryOperators.LESS].field !== whereOpStats[QueryOperators.NOT_EQUAL].field)
-                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.LESS].field !== whereOpStats[QueryOperators.NOT_IN].field))
-                    {
-                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field'};
+                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.LESS].field !== whereOpStats[QueryOperators.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field' };
                     }
                 }
 
@@ -97,9 +106,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                         || (whereOpStats[QueryOperators.GREATER].field !== undefined && whereOpStats[QueryOperators.LESS_OR_EQUAL].field !== whereOpStats[QueryOperators.GREATER].field)
                         || (whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.LESS_OR_EQUAL].field !== whereOpStats[QueryOperators.GREATER_OR_EQUAL].field)
                         || (whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && whereOpStats[QueryOperators.LESS_OR_EQUAL].field !== whereOpStats[QueryOperators.NOT_EQUAL].field)
-                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.LESS_OR_EQUAL].field !== whereOpStats[QueryOperators.NOT_IN].field))
-                    {
-                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field'};
+                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.LESS_OR_EQUAL].field !== whereOpStats[QueryOperators.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field' };
                     }
                 }
 
@@ -108,9 +116,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                         || (whereOpStats[QueryOperators.LESS].field !== undefined && whereOpStats[QueryOperators.GREATER].field !== whereOpStats[QueryOperators.LESS].field)
                         || (whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.GREATER].field !== whereOpStats[QueryOperators.GREATER_OR_EQUAL].field)
                         || (whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && whereOpStats[QueryOperators.GREATER].field !== whereOpStats[QueryOperators.NOT_EQUAL].field)
-                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.GREATER].field !== whereOpStats[QueryOperators.NOT_IN].field))
-                    {
-                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field'};
+                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.GREATER].field !== whereOpStats[QueryOperators.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field' };
                     }
                 }
 
@@ -119,9 +126,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                         || (whereOpStats[QueryOperators.GREATER].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== whereOpStats[QueryOperators.GREATER].field)
                         || (whereOpStats[QueryOperators.LESS].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== whereOpStats[QueryOperators.LESS].field)
                         || (whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== whereOpStats[QueryOperators.NOT_EQUAL].field)
-                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== whereOpStats[QueryOperators.NOT_IN].field))
-                    {
-                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field'};
+                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== whereOpStats[QueryOperators.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field' };
                     }
                 }
 
@@ -130,9 +136,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                         || (whereOpStats[QueryOperators.GREATER].field !== undefined && whereOpStats[QueryOperators.NOT_EQUAL].field !== whereOpStats[QueryOperators.GREATER].field)
                         || (whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.NOT_EQUAL].field !== whereOpStats[QueryOperators.GREATER_OR_EQUAL].field)
                         || (whereOpStats[QueryOperators.LESS].field !== undefined && whereOpStats[QueryOperators.NOT_EQUAL].field !== whereOpStats[QueryOperators.LESS].field)
-                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.NOT_EQUAL].field !== whereOpStats[QueryOperators.NOT_IN].field))
-                    {
-                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field'};
+                        || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.NOT_EQUAL].field !== whereOpStats[QueryOperators.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field' };
                     }
                 }
 
@@ -141,9 +146,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                         || (whereOpStats[QueryOperators.GREATER].field !== undefined && whereOpStats[QueryOperators.NOT_IN].field !== whereOpStats[QueryOperators.GREATER].field)
                         || (whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.NOT_IN].field !== whereOpStats[QueryOperators.GREATER_OR_EQUAL].field)
                         || (whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && whereOpStats[QueryOperators.NOT_IN].field !== whereOpStats[QueryOperators.NOT_EQUAL].field)
-                        || (whereOpStats[QueryOperators.LESS].field !== undefined && whereOpStats[QueryOperators.NOT_IN].field !== whereOpStats[QueryOperators.LESS].field))
-                    {
-                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field'};
+                        || (whereOpStats[QueryOperators.LESS].field !== undefined && whereOpStats[QueryOperators.NOT_IN].field !== whereOpStats[QueryOperators.LESS].field)) {
+                        return { isValid: false, errorMsg: 'Range (<, <=, >, >=) and not equals (!=, not-in) comparisons must all filter on the same field' };
                     }
                 }
 
@@ -151,9 +155,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                 if ((whereOpStats[QueryOperators.EQUAL].field !== undefined && orderByFields.includes(whereOpStats[QueryOperators.EQUAL].field as string | FieldPath))
                     || (whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && orderByFields.includes(whereOpStats[QueryOperators.NOT_EQUAL].field as string | FieldPath))
                     || (whereOpStats[QueryOperators.NOT_IN].field !== undefined && orderByFields.includes(whereOpStats[QueryOperators.NOT_IN].field as string | FieldPath))
-                    || (whereOpStats[QueryOperators.IN].field !== undefined && orderByFields.includes(whereOpStats[QueryOperators.IN].field as string | FieldPath)))
-                {
-                    return { isValid: false, errorMsg: 'Query cannot be ordered by any field included in an equality or in clause'};
+                    || (whereOpStats[QueryOperators.IN].field !== undefined && orderByFields.includes(whereOpStats[QueryOperators.IN].field as string | FieldPath))) {
+                    return { isValid: false, errorMsg: 'Query cannot be ordered by any field included in an equality or in clause' };
                 }
 
                 // in, not-in, and array-contains-any support up to 10 comparison values
@@ -186,9 +189,8 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
                     || whereOpStats[QueryOperators.NOT_IN].field !== undefined && whereOpStats[QueryOperators.NOT_IN].field === field
                     || whereOpStats[QueryOperators.EQUAL].field !== undefined && whereOpStats[QueryOperators.EQUAL].field === field
                     || whereOpStats[QueryOperators.NOT_EQUAL].field !== undefined && whereOpStats[QueryOperators.NOT_EQUAL].field === field
-                    || whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field === field)
-                {
-                    return { isValid: false, errorMsg: 'Query cannot be ordered by any field included in an equality or in clause'};
+                    || whereOpStats[QueryOperators.GREATER_OR_EQUAL].field !== undefined && whereOpStats[QueryOperators.GREATER_OR_EQUAL].field === field) {
+                    return { isValid: false, errorMsg: 'Query cannot be ordered by any field included in an equality or in clause' };
                 }
             }
         }
@@ -211,18 +213,20 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
 
     protected set collectionPath(path: string | undefined) {
         this._collectionPath = path;
-        this.collectionReference = path !== undefined ? collection(this.firestore, path).withConverter<T>(genericFirebaseConverter<T>(this.factory)) : path;
+        this.collectionReference = path !== undefined ? collection(this.firestore, path).withConverter(genericFirebaseConverter(this.factory)) : path;
     }
 
     public get collectionPath(): string | undefined {
         return this._collectionPath;
     }
 
-    private getDocRef(id: string): DocumentReference<T> {
+    private getDocRef(id?: string): DocumentReference<T> {
         if (this.collectionPath === undefined) {
             throw new Error('Collection path is undefined');
         }
-        return doc(this.firestore, this.collectionPath, id).withConverter<T>(genericFirebaseConverter<T>(this.factory));
+        return id !== undefined
+            ? doc(this.firestore, this.collectionPath, id).withConverter(genericFirebaseConverter(this.factory))
+            : doc(this.firestore, this.collectionPath).withConverter(genericFirebaseConverter(this.factory));
     }
 
     private createQuery(queryOptions: QueryOption | QueryOption[] | undefined): Query<T> {
@@ -232,15 +236,13 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
 
         if (queryOptions === undefined) {
             return query<T>(this.collectionReference, ...[]);
-        } else if (!(queryOptions instanceof Array)) {
-            return this.createQuery([queryOptions]);
         } else {
             const queryCheckResult = FirestoreBaseService.isQueryValid(queryOptions);
             if (!queryCheckResult.isValid) {
                 throw new Error(queryCheckResult.errorMsg);
             } else {
                 const queryResult: QueryConstraint[] = [];
-                for (const queryOption of queryOptions) {
+                for (const queryOption of queryOptions instanceof Array ? queryOptions : Array.of(queryOptions)) {
                     if ('limit' in queryOption) {
                         queryResult.push(limit((queryOption as LimitQuery).limit));
                     } else if ('fieldPath' in queryOption && 'value' in queryOption && 'opStr' in queryOption) {
@@ -304,17 +306,38 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
         }
     }
 
-    public get(id: string): Observable<T | undefined> {
+    public async get(id: string): Promise<T | undefined> {
         try {
-            return docData<T>(this.getDocRef(id)).pipe(map( (item: T | undefined) => item !== undefined ? objectToClass<T>(item as T, this.factory) : item ));
+            const docSnap = await getDoc<T>(this.getDocRef(id));
+            return docSnap.exists() ? Promise.resolve(instantiate(docSnap.data(), this.factory)) : Promise.resolve(docSnap.data());
         } catch (e: unknown) {
             throw e;
         }
     }
 
-    public list(queryOptions?: QueryOption | QueryOption[]): Observable<T[] | undefined> {
+    public getWithValueChanges(id: string): Observable<T | undefined> {
         try {
-            return collectionData(this.createQuery(queryOptions)).pipe(map((items: T[] | undefined) => items?.map( (item: T) => objectToClass<T>(item, this.factory) )));
+            return docData<T>(this.getDocRef(id)).pipe(map((item: T | undefined) => item !== undefined ? instantiate(item, this.factory) : item));
+        } catch (e: unknown) {
+            throw e;
+        }
+    }
+
+    public async list(queryOptions?: QueryOption | QueryOption[]): Promise<T[] | undefined> {
+        try {
+            const docSnaps = await getDocs<T>(this.createQuery(queryOptions));
+            if (docSnaps.empty) {
+                return Promise.resolve(undefined);
+            }
+            return Promise.resolve(docSnaps.docs.map((docSnap: DocumentSnapshot<T>) => instantiate(docSnap.data() as T, this.factory)));
+        } catch (e: unknown) {
+            throw e;
+        }
+    }
+
+    public listWithValueChanges(queryOptions?: QueryOption | QueryOption[]): Observable<T[] | undefined> {
+        try {
+            return collectionData(this.createQuery(queryOptions)).pipe(map((items: T[] | undefined) => items?.map((item: T) => instantiate(item, this.factory))));
         } catch (e: unknown) {
             throw e;
         }
@@ -333,20 +356,23 @@ export abstract class FirestoreBaseService<T extends IEntityModel<T> & { copy(en
         data: unknown,
         addToArray: boolean = false
     ): Promise<void> {
-        if (fieldName === 'undefined') {
-            return Promise.reject(FirestoreBaseService.INVALID_FIELD_NAME_ERROR);
-        } else if ('id' in queryOptions && queryOptions.id === 'undefined') {
-            return Promise.reject(FirestoreBaseService.INVALID_ID_ERROR);
-        }
-        const updateData: Record<string, unknown> = {};
-        updateData[`${ fieldName }`] = addToArray ? arrayUnion(JSON.parse(JSON.stringify(data))) : data;
-        if ('id' in queryOptions) {
-            return updateDoc<T>(this.getDocRef(queryOptions.id), (data instanceof Array ? JSON.parse(JSON.stringify(updateData)) : updateData));
-        } else {
-            this.list(queryOptions).pipe(map( (items: T[] | undefined) => {
-                items?.map( (item: T) =>
-                    item.id === undefined ? Promise.resolve() : updateDoc<T>(this.getDocRef(item.id), (data instanceof Array ? JSON.parse(JSON.stringify(updateData)) : updateData)) );
-            }));
+        try {
+            if (fieldName === 'undefined') {
+                return Promise.reject(FirestoreBaseService.INVALID_FIELD_NAME_ERROR);
+            } else if ('id' in queryOptions && queryOptions.id === 'undefined') {
+                return Promise.reject(FirestoreBaseService.INVALID_ID_ERROR);
+            }
+            const updateData: Record<string, unknown> = {};
+            updateData[`${ fieldName }`] = addToArray ? arrayUnion(JSON.parse(JSON.stringify(data))) : data;
+            if ('id' in queryOptions) {
+                return updateDoc<T>(this.getDocRef(queryOptions.id), (data instanceof Array ? JSON.parse(JSON.stringify(updateData)) : updateData));
+            } else {
+                const itemList = await this.list(queryOptions);
+                itemList?.map((item: T) => item.id === undefined ? Promise.resolve()
+                    : updateDoc<T>(this.getDocRef(item.id), (data instanceof Array ? JSON.parse(JSON.stringify(updateData)) : updateData)));
+            }
+        } catch (e: unknown) {
+            throw e;
         }
     }
 
