@@ -1,15 +1,15 @@
 import { IHeartRate } from '../interfaces/IHeartRate';
 import { Device } from './Device';
-import { objectToClass } from '../../functions/parser.functions';
 import { IDevice } from '../interfaces/IDevice';
 import { MeasurementDate } from './MeasurementDate';
 import { IMeasurementDate } from '../interfaces/IMeasurementDate';
+import { copyProperty } from '../../functions/parser.functions';
 
 export class HeartRate implements IHeartRate {
     public id: string;
     public bpm: number;
-    public device?: Device | undefined;
-    public measurementDate?: MeasurementDate | undefined;
+    public device: Device | undefined;
+    public measurementDate: MeasurementDate | undefined;
 
     public constructor(
         id: string = 'undefined',
@@ -19,26 +19,16 @@ export class HeartRate implements IHeartRate {
     {
         this.id = id;
         this.bpm = bpm;
-        this.device = device !== undefined ? objectToClass<Device>(device as Device, Device) : device;
-        this.measurementDate = measurementDate !== undefined ? objectToClass<MeasurementDate>(measurementDate as MeasurementDate, MeasurementDate) : measurementDate;
+        copyProperty(this, { device } as Partial<IHeartRate>, 'device', Device);
+        copyProperty(this, { measurementDate } as Partial<IHeartRate>, 'measurementDate', MeasurementDate);
     }
 
     public copy(other: IHeartRate): void {
         if (!this.isEqual(other)) {
             this.id = other.id ?? 'undefined';
             this.bpm = other.bpm;
-
-            if (this.device !== undefined && other.device !== undefined) {
-                this.device.copy(other.device);
-            } else {
-                this.device = other.device !== undefined ? objectToClass<Device>(other.device as Device, Device) : other.device;
-            }
-
-            if (this.measurementDate !== undefined && other.measurementDate !== undefined) {
-                this.measurementDate.copy(other.measurementDate);
-            } else {
-                this.measurementDate = other.measurementDate !== undefined ? objectToClass<MeasurementDate>(other.measurementDate as MeasurementDate, MeasurementDate) : other.measurementDate;
-            }
+            copyProperty(this, other, 'device', Device);
+            copyProperty(this, other, 'measurementDate', MeasurementDate);
         }
     }
 

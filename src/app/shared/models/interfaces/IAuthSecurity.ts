@@ -1,9 +1,10 @@
 import { IEntityModel } from './IEntityModel';
+import { IFireTimestamp } from './IFireTimestamp';
 
 export interface IAuthSecurity extends IEntityModel<IAuthSecurity> {
-    id?: string;
     uuid: string;
-    lastAccountCreationDate?: string | undefined;
-    lastPasswordChangeRequestDate?: string | undefined;
-    lastEmailVerificationRequestDate?: string | undefined;
+    id?: string;
+    lastAccountCreationDate?: IFireTimestamp | undefined;
+    lastPasswordChangeRequestDate?: IFireTimestamp | undefined;
+    lastEmailVerificationRequestDate?: IFireTimestamp | undefined;
 }

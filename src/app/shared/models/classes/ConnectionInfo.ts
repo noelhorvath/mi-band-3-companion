@@ -3,12 +3,12 @@ import { Device } from './Device';
 import { ConnectionStatus } from '../../types/custom.types';
 import { BLEConnectionStatus } from '../../enums/ble.enum';
 import { IDevice } from '../interfaces/IDevice';
-import { objectToClass } from '../../functions/parser.functions';
+import { copyProperty } from '../../functions/parser.functions';
 
 export class ConnectionInfo implements IConnectionInfo {
     private _status!: ConnectionStatus;
     public isAuthenticated: boolean;
-    public device?: Device | undefined;
+    public device: Device | undefined;
 
     public constructor(
         status: ConnectionStatus = BLEConnectionStatus.DISCONNECTED,
@@ -17,7 +17,7 @@ export class ConnectionInfo implements IConnectionInfo {
     {
         this.status = status;
         this.isAuthenticated = isAuthenticated;
-        this.device = device !== undefined ? objectToClass<Device>(device as Device, Device) : device;
+        copyProperty(this, { device } as Partial<IConnectionInfo>, 'device', Device);
     }
 
     public set status(status: ConnectionStatus) {
@@ -64,12 +64,7 @@ export class ConnectionInfo implements IConnectionInfo {
         if (!this.isEqual(other)) {
             this.status = other.status;
             this.isAuthenticated = other.isAuthenticated;
-
-            if (this.device !== undefined && other.device !== undefined) {
-                this.device.copy(other.device);
-            } else {
-                this.device = other.device !== undefined ? objectToClass<Device>(other.device as Device, Device) : other.device;
-            }
+            copyProperty(this, other, 'device', Device);
         }
     }
 

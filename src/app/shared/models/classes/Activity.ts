@@ -1,32 +1,32 @@
 import { IActivity } from '../interfaces/IActivity';
 import { Device } from './Device';
-import { objectToClass } from '../../functions/parser.functions';
 import { IDevice } from '../interfaces/IDevice';
 import { MeasurementDate } from './MeasurementDate';
 import { IMeasurementDate } from '../interfaces/IMeasurementDate';
+import { copyProperty } from '../../functions/parser.functions';
 
 export class Activity implements IActivity {
     public id: string;
     public steps: number;
     public distance: number;
     public calories: number;
-    public device?: Device | undefined;
-    public measurementDate?: MeasurementDate | undefined;
+    public device: Device | undefined;
+    public measurementDate: MeasurementDate | undefined;
 
     public constructor(
         id: string = 'undefined',
         calories: number = 0,
         distance: number = 0,
         steps: number = 0,
-        device?: IDevice,
+        device?: IDevice | undefined,
         measurementDate?: IMeasurementDate)
     {
         this.id = id;
         this.steps = steps;
         this.distance = distance;
         this.calories = calories;
-        this.device = device !== undefined ? objectToClass<Device>(device as Device, Device) : device;
-        this.measurementDate = measurementDate !== undefined ? objectToClass<MeasurementDate>(measurementDate as MeasurementDate, MeasurementDate) : measurementDate;
+        copyProperty(this, { device } as Partial<IActivity>, 'device', Device);
+        copyProperty(this, { measurementDate } as Partial<IActivity>, 'measurementDate', MeasurementDate);
     }
 
     public copy(other: IActivity): void {
@@ -35,18 +35,8 @@ export class Activity implements IActivity {
             this.steps = other.steps;
             this.distance = other.distance;
             this.calories = other.calories;
-
-            if (this.measurementDate !== undefined && other.measurementDate !== undefined) {
-                this.measurementDate.copy(other.measurementDate);
-            } else {
-                this.measurementDate = other.measurementDate !== undefined ? objectToClass<MeasurementDate>(other.measurementDate as MeasurementDate, MeasurementDate) : other.measurementDate;
-            }
-
-            if (this.device !== undefined && other.device !== undefined) {
-                this.device.copy(other.device);
-            } else {
-                this.device = other.device !== undefined ? objectToClass<Device>(other.device as Device, Device) : other.device;
-            }
+            copyProperty(this, other, 'device', Device);
+            copyProperty(this, other, 'measurementDate', MeasurementDate);
         }
     }
 
@@ -57,8 +47,8 @@ export class Activity implements IActivity {
     }
 
     public isEqual(other: IActivity | undefined): boolean {
-        return this !== other ? this.id === other?.id && this.calories === other.calories && this.distance === other.distance && this.steps === other.steps
-            && (this.device !== other.device ? this.device?.isEqual(other.device) ?? false : true)
+        return this !== other ? this.id === other?.id && this.calories === other.calories && this.distance === other.distance
+            && this.steps === other.steps && (this.device !== other.device ? this.device?.isEqual(other.device) ?? false : true)
             && (this.measurementDate !== other?.measurementDate ? this.measurementDate?.isEqual(other.measurementDate) ?? false : true) : true;
     }
 }

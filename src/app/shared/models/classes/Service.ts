@@ -2,12 +2,12 @@ import { IService } from '../interfaces/IService';
 import { Characteristic } from './Characteristic';
 import { UUIDExtension } from './UUIDExtension';
 import { ICharacteristic } from '../interfaces/ICharacteristic';
-import { objectToClass } from '../../functions/parser.functions';
+import { copyProperty, isArrayPropertyEqual } from '../../functions/parser.functions';
 import { compareNumericStrings, compareStrings } from '../../functions/comparison.functions';
 import { OrderByDirection } from '@angular/fire/firestore';
 
 export class Service extends UUIDExtension implements IService {
-    public characteristics: Characteristic[];
+    public characteristics!: Characteristic[];
     public name?: string;
 
     private static sortByUUIDAsc(a: IService, b: IService): number {
@@ -39,11 +39,11 @@ export class Service extends UUIDExtension implements IService {
 
     public constructor(
         uuid: string = 'undefined',
-        characteristic: ICharacteristic[] = [],
+        characteristics: ICharacteristic[] = [],
         name?: string)
     {
         super(uuid);
-        this.characteristics = characteristic.map((c: ICharacteristic) => objectToClass<Characteristic>(c as Characteristic, Characteristic));
+        copyProperty(this, { characteristics } as Partial<IService>, 'characteristics', Characteristic);
         this.name = name ?? 'undefined';
     }
 
@@ -53,8 +53,8 @@ export class Service extends UUIDExtension implements IService {
 
     public copy(other: IService): void {
         if (!this.isEqual(other)) {
-            this.characteristics = other.characteristics.map((c: ICharacteristic) => objectToClass<Characteristic>(c as Characteristic, Characteristic));
             this.uuid = other.uuid;
+            copyProperty(this, other, 'characteristics', Characteristic);
             this.name = other.name ?? 'undefined';
         }
     }
@@ -70,28 +70,7 @@ export class Service extends UUIDExtension implements IService {
             return false;
         } else {
             const res = this.name === other.name && this.uuid === (other instanceof Service ? other.uuid : other.uuid.toLowerCase());
-            if (!res) {
-                return res;
-            }
-            let areCharacteristicsEqual = false;
-            if (this.characteristics === other.characteristics) {
-                areCharacteristicsEqual = true;
-            } else if (this.characteristics.length !== other.characteristics.length) {
-                areCharacteristicsEqual = false;
-            } else {
-                const charsThis = objectToClass<Service>(this, Service).characteristics.sort(Characteristic.getCompareFunction('uuid', 'asc'));
-                const charsOther = objectToClass<Service>(other as Service, Service).characteristics.sort(Characteristic.getCompareFunction('uuid', 'asc'));
-                for (let i = 0; i < charsThis.length; i++) {
-                    if (!charsThis[i].isEqual(charsOther[i])) {
-                        break;
-                    }
-
-                    if (i === charsThis.length - 1) {
-                        areCharacteristicsEqual = true;
-                    }
-                }
-            }
-            return areCharacteristicsEqual;
+            return !res ? res : isArrayPropertyEqual(this, other, Service, 'characteristics', Characteristic.getCompareFunction, 'uuid', 'asc');
         }
     }
 }

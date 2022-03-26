@@ -1,8 +1,8 @@
-//@ts-ignore
 import miBand3Data from 'resources/MiBand3BLEServices.json';
 import { Service } from './Service';
 import { Device } from './Device';
 import { parseJSON } from '../../functions/parser.functions';
+import { IService } from '../interfaces/IService';
 
 export class MiBand3 extends Device {
     public override readonly name: string;
@@ -12,7 +12,7 @@ export class MiBand3 extends Device {
     private constructor() {
         super();
         this.name = 'Mi Band 3';
-        this.services = parseJSON<Service>(miBand3Data.services, Service) as Array<Service> ?? [];
+        this.services = parseJSON(miBand3Data.services as unknown as IService, Service) as Array<Service> ?? [];
     }
 
     public static getInstance(): MiBand3 {

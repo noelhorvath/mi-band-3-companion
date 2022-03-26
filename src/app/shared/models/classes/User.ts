@@ -1,7 +1,7 @@
 import { IUser } from '../interfaces/IUser';
 import { Device } from './Device';
 import { IDevice } from '../interfaces/IDevice';
-import { objectToClass } from '../../functions/parser.functions';
+import { copyProperty, isArrayPropertyEqual } from '../../functions/parser.functions';
 
 export class User implements IUser {
     public id: string;
@@ -21,7 +21,7 @@ export class User implements IUser {
         this.email = email;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.devices = devices?.map((d: IDevice) => objectToClass<Device>(d as Device, Device));
+        copyProperty(this, { devices } as Partial<User>, 'devices', Device);
     }
 
     public getCurrentlyUsedDevice(): Device | undefined {
@@ -54,7 +54,7 @@ export class User implements IUser {
             this.email = other.email;
             this.lastName = other.lastName;
             this.firstName = other.firstName;
-            this.devices = other.devices?.map((d: IDevice) => objectToClass<Device>(d as Device, Device));
+            copyProperty(this, other, 'devices', Device);
         }
     }
 
@@ -65,30 +65,7 @@ export class User implements IUser {
             return false;
         } else {
             const res = this.id === other.id && this.email === other.email && this.firstName === other.firstName && this.lastName === other.lastName;
-            if (!res) {
-                return res;
-            }
-            let areDevicesEqual = false;
-            if (this.devices === other.devices) {
-                areDevicesEqual = true;
-            } else if (this.devices === undefined || other.devices === undefined || this.devices.length !== other.devices.length) {
-                areDevicesEqual = false;
-            } else {
-                const devicesThis = objectToClass<User>(this, User).devices?.sort(Device.getCompareFunction('macAddress', 'asc'));
-                const devicesOther = objectToClass<User>(other as User, User).devices?.sort(Device.getCompareFunction('macAddress', 'asc'));
-                if (devicesThis !== undefined && devicesOther !== undefined) {
-                    for (let i = 0; i < devicesThis.length; i++) {
-                        if (!devicesThis[i].isEqual(devicesOther[i])) {
-                            break;
-                        }
-
-                        if (i === devicesThis.length - 1) {
-                            areDevicesEqual = true;
-                        }
-                    }
-                }
-            }
-            return areDevicesEqual;
+            return !res ? res : isArrayPropertyEqual(this, other, User, 'devices', Device.getCompareFunction, 'macAddress', 'asc');
         }
     }
 }

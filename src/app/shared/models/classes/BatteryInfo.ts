@@ -1,19 +1,21 @@
 import { IBatteryInfo } from '../interfaces/IBatteryInfo';
 import { Device } from './Device';
 import { IDevice } from '../interfaces/IDevice';
-import { objectToClass } from '../../functions/parser.functions';
+import { copyProperty } from '../../functions/parser.functions';
+import { FireTimestamp } from './FireTimestamp';
+import { IFireTimestamp } from '../interfaces/IFireTimestamp';
+import { equals } from '../../functions/comparison.functions';
 
 export class BatteryInfo implements IBatteryInfo {
     public id: string;
     public batteryLevel: number;
     public isCharging: boolean;
-    public device?: Device | undefined;
-    public lastChargeDate?: string | undefined;
-    public lastNumOfCharges?: number | undefined;
-    public lastChargeLevel?: number | undefined;
-    public prevChargeDate?: string | undefined;
-    public prevNumOfCharges?: number | undefined;
-
+    public device: Device | undefined;
+    public lastChargeDate: FireTimestamp | undefined;
+    public lastNumOfCharges: number | undefined;
+    public lastChargeLevel: number | undefined;
+    public prevChargeDate: FireTimestamp | undefined;
+    public prevNumOfCharges: number | undefined;
     // public unknown_value?: number | undefined;
 
     public constructor(
@@ -21,21 +23,23 @@ export class BatteryInfo implements IBatteryInfo {
         batteryLevel: number = 0,
         isCharging: boolean = false,
         device?: IDevice,
-        lastChargeDate?: string | Date,
+        lastChargeDate?: IFireTimestamp,
         lastChargeLevel?: number,
         lastNumOfCharges?: number,
-        prevChargeDate?: string | Date,
+        prevChargeDate?: IFireTimestamp,
         prevNumOfCharges?: number)
     {
         this.id = id;
         this.batteryLevel = batteryLevel;
         this.isCharging = isCharging;
-        this.device = device !== undefined ? objectToClass<Device>(device as Device, Device) : device;
+        copyProperty(this, { device } as Partial<IBatteryInfo>, 'device', Device);
+        copyProperty<IBatteryInfo, BatteryInfo, 'lastChargeDate', IFireTimestamp, FireTimestamp>
+            (this, { lastChargeDate } as Partial<IBatteryInfo>, 'lastChargeDate', FireTimestamp);
         this.lastChargeLevel = lastChargeLevel;
-        this.lastChargeDate = typeof lastChargeDate === 'string' ? lastChargeDate : lastChargeDate?.toISOString();
-        this.lastNumOfCharges = lastNumOfCharges;
-        this.prevChargeDate = typeof prevChargeDate === 'string' ? prevChargeDate : prevChargeDate?.toISOString();
         this.prevNumOfCharges = prevNumOfCharges;
+        copyProperty<IBatteryInfo, BatteryInfo, 'prevChargeDate', IFireTimestamp, FireTimestamp>
+            (this, { prevChargeDate } as Partial<IBatteryInfo>, 'prevChargeDate', FireTimestamp);
+        this.lastNumOfCharges = lastNumOfCharges;
     }
 
 
@@ -44,32 +48,30 @@ export class BatteryInfo implements IBatteryInfo {
             this.id = other.id ?? 'undefined';
             this.batteryLevel = other.batteryLevel;
             this.isCharging = other.isCharging;
-
-            if (this.device !== undefined && other.device !== undefined) {
-                this.device.copy(other.device);
-            } else {
-                this.device = other.device !== undefined ? objectToClass<Device>(other.device as Device, Device) : other.device;
-            }
-
-            this.lastChargeDate = other.lastChargeDate;
+            copyProperty(this, other, 'device', Device);
+            copyProperty<IBatteryInfo, BatteryInfo, 'lastChargeDate', IFireTimestamp, FireTimestamp>(this, other, 'lastChargeDate', FireTimestamp);
             this.lastNumOfCharges = other.lastNumOfCharges;
             this.lastChargeLevel = other.lastChargeLevel;
+            copyProperty<IBatteryInfo, BatteryInfo, 'prevChargeDate', IFireTimestamp, FireTimestamp>(this, other, 'prevChargeDate', FireTimestamp);
             this.prevNumOfCharges = other.prevNumOfCharges;
-            this.prevChargeDate = other.prevChargeDate;
         }
     }
 
     public toString(): string {
-        return 'id: ' + this.id + ', device: ' + (this.device ? '{' + this.device.toString() + '}' : this.device) + ', batteryLevel: ' + this.batteryLevel
-            + ', isCharging: ' + this.isCharging + ', prevChargeDate: ' + this.prevChargeDate + ', prevNumOfCharges: ' + this.prevNumOfCharges
-            + ', lastChargeDate: ' + this.lastChargeDate + ', lastNumOfCharges: ' + this.lastNumOfCharges + ', lastChargeLevel: ' + this.lastChargeLevel;
+        return 'id: ' + this.id + ', device: ' + (this.device ? '{' + this.device.toString() + '}' : this.device)
+            + ', batteryLevel: ' + this.batteryLevel + ', isCharging: ' + this.isCharging
+            + ', prevChargeDate: ' + this.prevChargeDate?.toString()
+            + ', prevNumOfCharges: ' + this.prevNumOfCharges
+            + ', lastChargeDate: ' + this.lastChargeDate?.toString()
+            + ', lastNumOfCharges: ' + this.lastNumOfCharges + ', lastChargeLevel: ' + this.lastChargeLevel;
     }
 
     public isEqualTo(other: IBatteryInfo | undefined): boolean {
         return this !== other ? this.id === other?.id && this.batteryLevel === other.batteryLevel && this.isCharging === other.isCharging
-            && (this.device !== other.device ? this.device?.isEqual(other.device) ?? false : true) && this.lastChargeDate === other.lastChargeDate
+            && (this.device !== other.device ? this.device?.isEqual(other.device) ?? false : true)
+            && equals<IFireTimestamp | undefined>(this.lastChargeDate, other.lastChargeDate)
             && this.lastNumOfCharges === other.lastNumOfCharges && this.lastChargeLevel === other.lastChargeLevel
-            && this.prevNumOfCharges === other.prevNumOfCharges && this.prevChargeDate === other.prevChargeDate : true;
+            && this.prevNumOfCharges === other.prevNumOfCharges && equals<IFireTimestamp | undefined>(this.prevChargeDate, other.prevChargeDate) : true;
     }
 }
 

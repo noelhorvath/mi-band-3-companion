@@ -1,7 +1,7 @@
 import { LogInfo } from './LogInfo';
 import { LogOptions, LogType } from '../../types/custom.types';
 import { ILogInfo } from '../interfaces/ILogInfo';
-import { objectToClass } from '../../functions/parser.functions';
+import { instantiate } from '../../functions/parser.functions';
 
 export class LogHelper {
     private _logInfo: LogInfo;
@@ -19,7 +19,7 @@ export class LogHelper {
     }
 
     private set logInfo(logInfo: ILogInfo) {
-        this._logInfo = logInfo instanceof LogInfo ? logInfo : objectToClass<LogInfo>(logInfo as LogInfo, LogInfo);
+        this._logInfo = logInfo instanceof LogInfo ? logInfo : instantiate(logInfo, LogInfo);
     }
 
     private setOptions(options: LogOptions | undefined): void {
@@ -55,7 +55,7 @@ export class LogHelper {
     }
 
     public static log(logInfo: ILogInfo, type: LogType = 'log'): void {
-        const logMsg = logInfo instanceof LogInfo ? logInfo.toString() : objectToClass<LogInfo>(logInfo as LogInfo, LogInfo).toString();
+        const logMsg = logInfo instanceof LogInfo ? logInfo.toString() : instantiate(logInfo, LogInfo).toString();
         return type === 'log' ? console.log(logMsg) : console.error(logMsg);
     }
 
@@ -73,11 +73,7 @@ export class LogHelper {
         } else if (message === null) {
             return 'null';
         } else if (typeof message === 'object') {
-            if (typeof message?.toString === 'function') {
-                return message.toString() === '[object Object]' ? JSON.stringify(message) : message.toString();
-            } else {
-                return JSON.stringify(message);
-            }
+            return typeof message.toString === 'function' && message.toString() !== '[object Object]' ? message.toString() : JSON.stringify(message);
         } else {
             return JSON.stringify(message);
         }

@@ -4,7 +4,7 @@ import { LogOptions } from '../../types/custom.types';
 
 export class LogInfo implements ILogInfo {
     private _message: unknown | string;
-    private _options?: LogOptions | undefined;
+    private _options: LogOptions | undefined;
     public mainId: string;
     public secondaryId: string;
 
