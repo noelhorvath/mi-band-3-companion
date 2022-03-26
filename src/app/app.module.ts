@@ -25,7 +25,9 @@ import { createTranslateLoader } from './shared/functions/translate.function';
 import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { enableIndexedDbPersistence, initializeFirestore, provideFirestore, CACHE_SIZE_UNLIMITED } from '@angular/fire/firestore';
 import { indexedDBLocalPersistence, initializeAuth, provideAuth, prodErrorMap, debugErrorMap } from '@angular/fire/auth';
-import { AppSettings } from './app.settings';
+import { AppSettings } from '../settings/app.settings';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { FirebaseServerInfoService } from './services/firebase/server-info/firebase-server-info.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -35,7 +37,7 @@ import { AppSettings } from './app.settings';
             const app = initializeApp(environment.firebaseConfig, AppSettings.codeName);
             app.automaticDataCollectionEnabled = AppSettings.enableFirebaseDataCollection;
             return app;
-        }),
+        }, ),
         provideFirestore( () => {
             const firestore = initializeFirestore(getApp(AppSettings.codeName),
                 {
@@ -43,7 +45,7 @@ import { AppSettings } from './app.settings';
                     cacheSizeBytes: CACHE_SIZE_UNLIMITED,
                     ignoreUndefinedProperties: true,
                 });
-            enableIndexedDbPersistence(firestore, { }).catch((e: unknown) =>
+            enableIndexedDbPersistence(firestore).catch((e: unknown) =>
                 LogHelper.log(
                     {
                         mainId: AppModule.name,
@@ -64,6 +66,7 @@ import { AppSettings } from './app.settings';
             auth.useDeviceLanguage();
             return auth;
         }),
+        provideDatabase( () => getDatabase(getApp(AppSettings.codeName), environment.firebaseConfig.databaseURL) ),
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
@@ -89,6 +92,7 @@ import { AppSettings } from './app.settings';
         LanguageService,
         StorageService,
         FirebaseAuthService,
+        FirebaseServerInfoService,
         FirestoreUserService,
         FirestoreActivityService,
         TranslatePipe,
