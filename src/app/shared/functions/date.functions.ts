@@ -1,6 +1,25 @@
-export const getDaysInCurrentMonth = (date: Date): number => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-export const getNumOfWeeksInCurrentMonth = (date: Date): number => {
-    const monthStartDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay() === 0 ? 7 : new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+import { IFireTimestamp } from '../models/interfaces/IFireTimestamp';
+import { FireTimestamp } from '../models/classes/FireTimestamp';
+import { instantiate } from './parser.functions';
+
+export const getDaysInCurrentMonth = (date: Date | IFireTimestamp): number => {
+    let dateObj: Date;
+    if (date instanceof Date) {
+        dateObj = date;
+    } else {
+        dateObj = date instanceof FireTimestamp ? date.toDate() : instantiate(date, FireTimestamp).toDate();
+    }
+    return new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0).getDate();
+};
+
+export const getNumOfWeeksInCurrentMonth = (date: Date | IFireTimestamp): number => {
+    let dateObj: Date;
+    if (date instanceof Date) {
+        dateObj = date;
+    } else {
+        dateObj = date instanceof FireTimestamp ? date.toDate() : instantiate(date, FireTimestamp).toDate();
+    }
+    const monthStartDay = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1).getDay() === 0 ? 7 : new Date(dateObj.getFullYear(), dateObj.getMonth(), 1).getDay();
     return Math.ceil((getDaysInCurrentMonth(date) - 7 + monthStartDay) / 7) + 1;
 };
 export const generateArrayOfNumbers = (start: number, end: number): number[] => {
@@ -18,5 +37,6 @@ export const generateStringArrayOfNumbers = (start: number, end: number): string
     return array;
 };
 
-export const timePassedSinceDate = (date: Date | string | number): number =>
-    typeof date === 'object' ? new Date().getTime() - date.getTime() : new Date().getTime() - new Date(date).getTime();
+export const timeDifferenceInSeconds = (a: IFireTimestamp, b: IFireTimestamp): number =>
+    (a instanceof FireTimestamp ? a : instantiate(a, FireTimestamp)).seconds
+    - (b instanceof FireTimestamp ? b : instantiate(b, FireTimestamp)).seconds;
