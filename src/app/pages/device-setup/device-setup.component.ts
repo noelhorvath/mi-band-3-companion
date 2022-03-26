@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { first, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { BleConnectionService } from '../../services/ble/connection/ble-connection.service';
 import { PermissionService } from '../../services/permission/permission.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,6 @@ import { ConnectionInfo } from '../../shared/models/classes/ConnectionInfo';
 import { ScanResult } from '../../shared/models/classes/ScanResult';
 import { LogInfo } from '../../shared/models/classes/LogInfo';
 import { LogHelper } from '../../shared/models/classes/LogHelper';
-import { User } from '../../shared/models/classes/User';
 import { BLEConnectionStatus } from '../../shared/enums/ble.enum';
 
 @Component({
@@ -74,21 +73,22 @@ export class DeviceSetupComponent implements OnDestroy, OnInit {
                         this.messageService.changeLoadingMessage('SAVING_NEW_DEVICE_WITH_DOTS');
                         const authUser = this.authService.getAuthUser();
                         if (authUser !== undefined) {
-                            this.userService.get(authUser.uid).pipe(first()).subscribe(async (user: User | undefined) => {
-                                if (user !== undefined && connectionInfo.device !== undefined) {
-                                    if (user.devices === undefined) {
-                                        user.devices = [];
-                                    }
-                                    user.devices.push(connectionInfo.device);
-                                    await this.userService.updateField({ id: user.id }, 'devices', user.devices);
-                                    await this.messageService.dismissLoading();
-                                    this.logHelper.logDefault('connectionInfoSubject', 'Adding new device', { value: connectionInfo.device });
-                                    await this.router.navigateByUrl('/home', { replaceUrl: true });
-                                } else {
-                                    await this.messageService.dismissLoading();
-                                    await this.router.navigateByUrl('/login', { replaceUrl: true });
+                            const user = await this.userService.get(authUser.uid);
+                            if (user !== undefined && connectionInfo.device !== undefined) {
+                                if (user.devices === undefined) {
+                                    user.devices = [];
                                 }
-                            });
+                                user.devices.push(connectionInfo.device);
+                                this.userService.updateField({ id: user.id }, 'devices', user.devices)
+                                    .then(() => this.logHelper.logDefault('update User', 'devices field has been updated'))
+                                    .catch( (e: unknown) => this.logHelper.logError('update User error', e));
+                                await this.messageService.dismissLoading();
+                                this.logHelper.logDefault('connectionInfoSubject', 'Adding new device', { value: connectionInfo.device });
+                                await this.router.navigateByUrl('/home', { replaceUrl: true });
+                            } else {
+                                await this.messageService.dismissLoading();
+                                await this.router.navigateByUrl('/login', { replaceUrl: true });
+                            }
                         } else {
                             this.logHelper.logError('connectionInfoSubject', 'User is not logged in!');
                             await this.messageService.dismissLoading();
