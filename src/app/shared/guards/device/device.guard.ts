@@ -22,8 +22,8 @@ export class DeviceGuard implements CanActivate, CanActivateChild {
     }
 
     public canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.userService.get(this.authService.getAuthUser()?.uid ?? 'undefined').pipe(
-            map((user: User | undefined) => user !== undefined ? (user.devices ? user.devices.length > 0 : false) : false),
+        return this.userService.getWithValueChanges(this.authService.getAuthUser()?.uid ?? 'undefined').pipe(
+            map( (user: User | undefined) => user !== undefined ? (user.devices ? user.devices.length > 0 : false) : false),
             tap( async (hasDevice: boolean) => {
                 if (!hasDevice) {
                     try {
