@@ -11,10 +11,9 @@ import { User } from '@angular/fire/auth';
 export class FirestoreActivityService extends FirestoreBaseService<Activity> {
     public constructor(
         firestore: Firestore,
-        private authService: FirebaseAuthService)
-    {
+        private authService: FirebaseAuthService) {
         super(firestore, Activity);
-        this.authService.authUserSubject.subscribe( (user: User | undefined) => {
+        this.authService.authUserSubject.subscribe((user: User | undefined) => {
             if (user !== undefined) {
                 this.collectionPath = `userData/${ user.uid }/activityData`;
             }

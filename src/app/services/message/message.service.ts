@@ -81,7 +81,7 @@ export class MessageService {
                 header: this.translatePipe.transform(header),
                 message: this.translatePipe.transform(message),
                 backdropDismiss,
-                buttons: buttons.map( (button: string | AlertButton) => {
+                buttons: buttons.map((button: string | AlertButton) => {
                     if (typeof button === 'string') {
                         return this.translatePipe.transform(button);
                     } else {
@@ -95,7 +95,7 @@ export class MessageService {
             }
             this.alert = element;
             await this.alert.present();
-            const buttonKeys = buttons.map( (button: string | AlertButton) => typeof button === 'string' ? button : button.text );
+            const buttonKeys = buttons.map((button: string | AlertButton) => typeof button === 'string' ? button : button.text);
             this.alertText = { headerKey: header, messageKey: message, buttonKeys };
         } catch (e: unknown) {
             this.logHelper.logError(this.createAlert.name, e);
@@ -119,7 +119,7 @@ export class MessageService {
                 position,
                 animated,
                 color,
-                buttons: buttons.map( (button: string | ToastButton) => {
+                buttons: buttons.map((button: string | ToastButton) => {
                     if (typeof button === 'string') {
                         return this.translatePipe.transform(button);
                     } else {
@@ -137,7 +137,7 @@ export class MessageService {
             }
             this.toast = element;
             await this.toast.present();
-            const buttonKeys = buttons.map( (button: string | ToastButton) => typeof button === 'string' ? button : button.text ?? 'x' );
+            const buttonKeys = buttons.map((button: string | ToastButton) => typeof button === 'string' ? button : button.text ?? 'x');
             this.toastText = { headerKey: header, messageKey: message, buttonKeys };
         } catch (e: unknown) {
             this.logHelper.logError(this.createToast.name, e);
@@ -190,7 +190,7 @@ export class MessageService {
         if (this.alert !== undefined && this.alertText !== undefined) {
             this.alert.header = this.translatePipe.transform(this.alertText.headerKey);
             this.alert.message = this.translatePipe.transform(this.alertText.messageKey);
-            this.alert.buttons = this.alert.buttons.map( (button: string | AlertButton, index: number) => {
+            this.alert.buttons = this.alert.buttons.map((button: string | AlertButton, index: number) => {
                 if (this.alertText !== undefined) {
                     if (typeof button === 'string') {
                         button = this.translatePipe.transform(this.alertText.buttonKeys[index]);
@@ -207,7 +207,7 @@ export class MessageService {
         if (this.toast !== undefined && this.toastText !== undefined) {
             this.toast.header = this.translatePipe.transform(this.toastText.headerKey);
             this.toast.message = this.translatePipe.transform(this.toastText.messageKey);
-            this.toast.buttons = this.toast.buttons?.map( (button: string | ToastButton, index: number) => {
+            this.toast.buttons = this.toast.buttons?.map((button: string | ToastButton, index: number) => {
                 if (this.alertText !== undefined) {
                     if (typeof button === 'string') {
                         button = this.translatePipe.transform(this.alertText.buttonKeys[index]);

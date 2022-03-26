@@ -6,24 +6,21 @@ import { DeviceService } from '../../device/device.service';
 import { LogHelper } from '../../../shared/models/classes/LogHelper';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class FirestoreAuthSecurityService extends FirestoreBaseService<AuthSecurity>{
-  public constructor(
-      firestore: Firestore,
-      private deviceService: DeviceService)
-  {
-      super(firestore, AuthSecurity);
-      this.deviceService.getUUID()
-          .then( (uuid: string) => {
-              this.collectionPath = `security/${uuid}/authentication`;
-              console.log(this.collectionPath);
-          }).catch( (e: unknown) => LogHelper.log(
-              {
-                  mainId: FirestoreAuthSecurityService.name,
-                  secondaryId: this.deviceService.getUUID.name,
-                  message: e,
-              })
-          );
-  }
+export class FirestoreAuthSecurityService extends FirestoreBaseService<AuthSecurity> {
+    public constructor(
+        firestore: Firestore,
+        private deviceService: DeviceService) {
+        super(firestore, AuthSecurity);
+        this.deviceService.getUUID()
+            .then((uuid: string) => this.collectionPath = `security/${ uuid }/authentication`)
+            .catch((e: unknown) => LogHelper.log(
+                {
+                    mainId: FirestoreAuthSecurityService.name,
+                    secondaryId: this.deviceService.getUUID.name,
+                    message: e,
+                })
+            );
+    }
 }
