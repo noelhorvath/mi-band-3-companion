@@ -29,19 +29,23 @@
             //"process": ["./node_modules/process/browser"]
         },
         "strict": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "alwaysStrict": true,
+        "exactOptionalPropertyTypes": true,
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
-        "noImplicitReturns": true,
+        "noImplicitAny": false,
         "noImplicitOverride": true,
+        "noImplicitReturns": true,
         "noImplicitThis": true,
-        "alwaysStrict": true,
-        "noUnusedParameters": true,
         "noUnusedLocals": true,
-        "exactOptionalPropertyTypes": true,
+        "noUnusedParameters": true,
+        "noPropertyAccessFromIndexSignature": true,
         // enable importing JSON files
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
+        "allowSyntheticDefaultImports": true
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
