@@ -59,11 +59,11 @@ export class ToolbarComponent implements OnDestroy, OnChanges, OnInit {
     public ngOnChanges(changes: SimpleChanges): void {
         this.logHelper.logDefault(this.ngOnChanges.name, 'changed property', { value: changes });
 
-        if (changes.connectionInfo) {
+        if (changes['connectionInfo'] !== undefined) {
             this.setConnectionStatusColorChip();
         }
 
-        if (changes.batteryInfo) {
+        if (changes['batteryInfo'] !== undefined) {
             this.setBatteryChip();
         }
     }

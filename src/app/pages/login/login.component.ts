@@ -4,7 +4,7 @@ import { FirebaseAuthService } from '../../services/firebase/auth/firebase-auth.
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from '../../services/message/message.service';
 import { LogInfo } from '../../shared/models/classes/LogInfo';
-import { AuthErrorMessages } from '../../shared/enums/auth-error-messages.enum';
+import { FirebaseErrorMessages } from '../../shared/enums/firebase.enum';
 import { LogHelper } from '../../shared/models/classes/LogHelper';
 import { getFormControlFromFormGroup } from '../../shared/functions/form.functions';
 import { Subscription } from 'rxjs';
@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.routeParamsSubscription = this.route.params.subscribe( (params: Params) => {
             this.loginFormGroup.patchValue(
                 {
-                    email: params.email ?? '',
-                    password: params.password ?? '',
+                    email: params['email'] ?? '',
+                    password: params['password'] ?? '',
                 }
             );
         });
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 await this.router.navigateByUrl('/home', { replaceUrl: true });
             }
         } catch (e: unknown) {
-            if (e === AuthErrorMessages.UNVERIFIED_EMAIL) {
+            if (e === FirebaseErrorMessages.UNVERIFIED_EMAIL) {
                 this.logHelper.logDefault(this.login.name, 'Login failed, because account is unverified');
                 await this.messageService.createAlert('UNVERIFIED_REGISTRATION', 'VERIFY_ACCOUNT', false,
                     [
@@ -83,8 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                                         {
                                             mainId: LoginComponent.name,
                                             secondaryId: 'unverified alert handler',
-                                            message: 'sendEmailVerification error',
-                                            options: { value: error }
+                                            message: error,
                                         },
                                         'toast',
                                         true,

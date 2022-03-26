@@ -42,9 +42,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.routeParamsSubscription = this.route.params.subscribe( (params: Params) => {
             this.registrationFormGroup.patchValue(
                 {
-                    email: params.email ?? '',
-                    password: params.password ?? '',
-                    passwordAgain: params.password ?? ''
+                    email: params['email'] ?? '',
+                    password: params['password'] ?? '',
+                    passwordAgain: params['password'] ?? ''
                 }
             );
         });

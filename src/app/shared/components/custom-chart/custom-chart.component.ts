@@ -38,7 +38,7 @@ export class CustomChartComponent implements OnInit, OnDestroy, OnChanges {
 
     public ngOnChanges(changes: SimpleChanges): void {
         this.logHelper.logDefault(this.ngOnChanges.name, 'changes', { value: changes });
-        if (changes.chartLabels) {
+        if (changes['chartLabels'] !== undefined) {
             this.tmpChartLabels = this.chartLabels?.map((l: string) => this.translatePipe.transform(l.toUpperCase()));
         }
     }

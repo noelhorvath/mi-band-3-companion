@@ -26,7 +26,9 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-button color="primary" (click)="login()">{{ 'SIGN_IN' | translate }}</ion-button>
+                            <ion-button color="primary" (click)="login()" [disabled]="loginFormGroup.invalid">
+                                {{ 'SIGN_IN' | translate }}
+                            </ion-button>
                         </ion-col>
                         <ion-col>
                             <ion-button color="primary"
