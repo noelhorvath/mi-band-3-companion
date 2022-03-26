@@ -43,6 +43,11 @@ service cloud.firestore {
                 allow list;
             }
         }
+        match /info/serverTimestamp {
+            allow get;
+            allow create;
+            allow update;
+        }
     }
 
     function isUser() {
