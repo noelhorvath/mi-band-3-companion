@@ -14,6 +14,7 @@ import { Property } from '../../../shared/models/classes/Property';
 import { LogHelper } from '../../../shared/models/classes/LogHelper';
 import { IDevice } from '../../../shared/models/interfaces/IDevice';
 import { User } from '@angular/fire/auth';
+import { FireTimestamp } from '../../../shared/models/classes/FireTimestamp';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,7 @@ export class BleDataService {
     private readonly logHelper: LogHelper;
     private readonly miBand3: MiBand3;
     // TODO: check BL status
-    //private blStatus: string;
+    // private blStatus: string;
     private connectionInfo: ConnectionInfo;
     public activitySubject: BehaviorSubject<Activity | undefined>;
     public batteryInfoSubject: BehaviorSubject<BatteryInfo | undefined>;
@@ -55,7 +56,7 @@ export class BleDataService {
                 this.logHelper.logError('connectionInfoSubject', e);
             }
         });
-        this.authService.authUserSubject.subscribe( (user: User | undefined) => {
+        this.authService.authUserSubject.subscribe((user: User | undefined) => {
             // reset data
             if (user === undefined) {
                 this.isSubscribedSubject.next(false);
@@ -95,9 +96,9 @@ export class BleDataService {
                     batteryInfo.batteryLevel = bytes.at(1) as number;
                     batteryInfo.isCharging = bytes.at(2) === 1;
                     if (3 < bytes.length) {
-                        batteryInfo.prevChargeDate = this.dateFromBytes(bytes, 3)?.toISOString(); // 7 bytes
+                        batteryInfo.prevChargeDate = this.dateFromBytes(bytes, 3); // 7 bytes
                         batteryInfo.prevNumOfCharges = bytes.at(10);
-                        batteryInfo.lastChargeDate = this.dateFromBytes(bytes, 11)?.toISOString(); // 7 bytes
+                        batteryInfo.lastChargeDate = this.dateFromBytes(bytes, 11); // 7 bytes
                         batteryInfo.lastNumOfCharges = bytes.at(18);
                         batteryInfo.lastChargeLevel = bytes.at(19);
                     }
@@ -243,7 +244,7 @@ export class BleDataService {
         });
     }
 
-    private dateFromBytes(bytes: Uint8Array, startIndex: number = 0): Date | undefined {
+    private dateFromBytes(bytes: Uint8Array, startIndex: number = 0): FireTimestamp | undefined {
         const date = new Date();
         if (bytes.length < 7) {
             return undefined;
@@ -259,6 +260,6 @@ export class BleDataService {
             bytes.at(startIndex + 6),
             0
         );
-        return date;
+        return FireTimestamp.fromDate(date);
     }
 }

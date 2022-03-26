@@ -17,6 +17,7 @@ import { LogHelper } from '../../../shared/models/classes/LogHelper';
 import { IDevice } from '../../../shared/models/interfaces/IDevice';
 import { BLEConnectionStatus, BLEScanStatus, BLEStatus, BLESubscriptionStatus } from '../../../shared/enums/ble.enum';
 import { User } from '@angular/fire/auth';
+import { FireTimestamp } from '../../../shared/models/classes/FireTimestamp';
 
 @Injectable({
     providedIn: 'root'
@@ -190,7 +191,7 @@ export class BleConnectionService {
         }).subscribe({
             next: (scanData: ScanStatus) => {
                 if (scanData.name?.toLowerCase().includes(this.miBand3.name.toLowerCase())) {
-                    const res: ScanResult = new ScanResult(scanData.address, scanData.name, scanData.rssi);
+                    const res = new ScanResult(scanData.address, scanData.name, scanData.rssi);
                     const resIndex = scanResults.findIndex((s: ScanResult) => s.address === res.address);
                     if (resIndex === -1) { // ignore duplicates
                         scanResults.push(res);
@@ -237,7 +238,7 @@ export class BleConnectionService {
     public async connect(device: IDevice, autoConnect: boolean = false): Promise<void> {
         try {
             await this.blAndPermissionChecks();
-            const wasConnected: boolean = await this.wasConnected(device);
+            const wasConnected = await this.wasConnected(device);
             this.logHelper.logDefault(this.connect.name, 'wasConnected', { value: wasConnected.valueOf() });
             this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTING, false, device));
             if (wasConnected.valueOf()) {
@@ -325,8 +326,8 @@ export class BleConnectionService {
     }
 
     private authenticateMiBand(device: IDevice): void {
-        const serviceUUID: string = this.miBand3.getService('authentication')?.uuid ?? 'unknown';
-        const characteristicUUID: string = this.miBand3.getService('authentication')?.getCharacteristic('auth')?.uuid ?? 'unknown';
+        const serviceUUID = this.miBand3.getService('authentication')?.uuid ?? 'unknown';
+        const characteristicUUID = this.miBand3.getService('authentication')?.getCharacteristic('auth')?.uuid ?? 'unknown';
         // Authentication steps
         this.ble.subscribe({ // 1. set notify on (by sending 2 bytes request (0x01, 0x00) to the Descriptor === subscribe)
             address: device.macAddress,
@@ -382,7 +383,7 @@ export class BleConnectionService {
                                 await this.disconnectAndClose(device);
                             } else if (response === '100301') { // 6. Authentication done
                                 this.logHelper.logDefault(this.authenticateMiBand.name, 'Authenticated successfully');
-                                device.lastUsedDate = new Date().toISOString();
+                                device.lastUsedDate = FireTimestamp.now();
                                 this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, true, device));
                                 await this.ble.unsubscribe({ address: device.macAddress, service: serviceUUID, characteristic: characteristicUUID });
                             } else if (response === '100304') { // encryption fails, because the device probably has a different secret key
