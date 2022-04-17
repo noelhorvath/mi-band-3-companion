@@ -1,0 +1,79 @@
+<ion-list class="ion-margin-bottom ion-margin-top">
+    <ion-accordion-group [formGroup]="filterFormGroup">
+        <ion-accordion value="measurement-values">
+            <ion-item slot="header">
+                <ion-label>{{ 'FILTER_OPTIONS' | translate }}</ion-label>
+            </ion-item>
+            <ion-list slot="content">
+                <ng-container *ngIf="fields !== undefined">
+                    <ion-item>
+                        <ion-label>{{ 'MEASUREMENT_TYPE' | translate }}</ion-label>
+                        <ion-select formControlName="measurementType" okText="{{ 'OK' | translate }}"
+                                    cancelText="{{ 'CANCEL' | translate }}" (ionChange)="measurementTypeChanged()">
+                            <ion-select-option *ngFor="let type of measurementTypes" [value]="type">{{ type.toUpperCase() | translate }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ng-container>
+                <ng-container *ngIf="filterFormGroup.value['fieldName'] === dateFieldName">
+                    <app-date-picker [control]="$any(filterFormGroup.controls['startDate'])"
+                                              placeholderText="START_DATE" [pickerId]="startDatePickerId"
+                                              [presentationMode]="datePickerMode" [dateDisplayFormat]="datePickerFormat">
+                    </app-date-picker>
+                    <app-date-picker [control]="$any(filterFormGroup.controls['endDate'])"
+                                              placeholderText="END_DATE" [pickerId]="endDatePickerId"
+                                              [presentationMode]="datePickerMode" [dateDisplayFormat]="datePickerFormat">
+                    </app-date-picker>
+                </ng-container>
+                <ion-item>
+                    <ion-label>{{ 'MEASUREMENT_FIELD' | translate }}</ion-label>
+                    <ion-select formControlName="fieldName" okText="{{ 'OK' | translate }}" cancelText="{{ 'CANCEL' | translate }}">
+                        <ion-select-option *ngFor="let field of fields" [value]="field.fieldName">
+                            {{ field.text.toUpperCase() | translate }}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ng-container *ngIf="filterFormGroup.value['fieldName'] !== dateFieldName">
+                    <ion-item>
+                        <ion-label class="input-label" position="floating">{{ 'MEASUREMENT_FIELD_VALUE' | translate }}</ion-label>
+                        <ion-input formControlName="fieldValue" placeholder="{{ 'VALUE_FOR_SELECTED_FIELD' | translate }}"
+                                   type="number" inputmode="numeric"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{ 'VALUE_MATCH' | translate }}</ion-label>
+                        <ion-select formControlName="matchOperator" okText="{{ 'OK' | translate }}" cancelText="{{ 'CANCEL' | translate }}">
+                            <ion-select-option value="<">{{ 'LESS' | translate }}</ion-select-option>
+                            <ion-select-option value="<=">{{ 'LESS_OR_EQUAL' | translate }}</ion-select-option>
+                            <ion-select-option value=">">{{ 'GREATER' | translate }}</ion-select-option>
+                            <ion-select-option value=">=">{{ 'GREATER_OR_EQUAL' | translate }}</ion-select-option>
+                            <ion-select-option value="==">{{ 'EQUAL' | translate }}</ion-select-option>
+                            <ion-select-option value="!=">{{ 'NOT_EQUAL' | translate }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ng-container>
+                <ng-container *ngIf="(filterFormGroup.value['matchOperator'] !== '=='
+                                        && filterFormGroup.value['matchOperator'] !== '!=')
+                                        || filterFormGroup.value['fieldName'] === dateFieldName">
+                    <ion-item>
+                        <ion-label>{{ 'ORDER' | translate }}</ion-label>
+                        <ion-select formControlName="orderDirection" okText="{{ 'OK' | translate }}" cancelText="{{ 'CANCEL' | translate }}">
+                            <ion-select-option value="asc">{{ 'ASC' | translate }}</ion-select-option>
+                            <ion-select-option value="desc">{{ 'DESC' | translate }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ng-container>
+                <ion-row>
+                    <ion-col>
+                        <ion-button expand="block" (click)="resetForm()">
+                            {{ 'RESET' | translate }}
+                        </ion-button>
+                    </ion-col>
+                    <ion-col>
+                        <ion-button expand="block" (click)="filter()">
+                            {{ 'FILTER' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+        </ion-accordion>
+    </ion-accordion-group>
+</ion-list>
