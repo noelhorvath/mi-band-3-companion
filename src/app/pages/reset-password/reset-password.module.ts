@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginResetPasswordComponent } from './login-reset-password.component';
+import { ResetPasswordComponent } from './reset-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ToolbarModule } from '../../../shared/components/toolbar/toolbar.module';
+import { ToolbarModule } from '../../shared/components/toolbar/toolbar.module';
+import { ResetPasswordRoutingModule } from './reset-password-routing.module';
 
 @NgModule({
-    declarations: [LoginResetPasswordComponent],
+    declarations: [ResetPasswordComponent],
     exports: [
-        LoginResetPasswordComponent
+        ResetPasswordComponent
     ],
     imports: [
         CommonModule,
@@ -17,7 +18,8 @@ import { ToolbarModule } from '../../../shared/components/toolbar/toolbar.module
         IonicModule,
         TranslateModule,
         ToolbarModule,
+        ResetPasswordRoutingModule
     ]
 })
-export class LoginResetPasswordModule {
+export class ResetPasswordModule {
 }
