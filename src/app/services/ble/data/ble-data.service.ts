@@ -1,170 +1,634 @@
 import { Injectable } from '@angular/core';
 import { BluetoothLE, OperationResult } from '@ionic-native/bluetooth-le/ngx';
 import { BleConnectionService } from '../connection/ble-connection.service';
-import { MiBand3 } from '../../../shared/models/classes/MiBand3';
-import { BehaviorSubject, Observer } from 'rxjs';
+import { BehaviorSubject, Observer, Subscription } from 'rxjs';
 import { BatteryInfo } from '../../../shared/models/classes/BatteryInfo';
 import { FirebaseAuthService } from '../../firebase/auth/firebase-auth.service';
 import { Activity } from '../../../shared/models/classes/Activity';
 import { HeartRate } from '../../../shared/models/classes/HeartRate';
-import { Service } from '../../../shared/models/classes/Service';
 import { ConnectionInfo } from '../../../shared/models/classes/ConnectionInfo';
-import { Characteristic } from '../../../shared/models/classes/Characteristic';
-import { Property } from '../../../shared/models/classes/Property';
 import { LogHelper } from '../../../shared/models/classes/LogHelper';
-import { IDevice } from '../../../shared/models/interfaces/IDevice';
-import { User } from '@angular/fire/auth';
+import { MeasurementInfo } from '../../../shared/models/classes/MeasurementInfo';
+import { BleBaseService } from '../base/ble-base.service';
 import { FireTimestamp } from '../../../shared/models/classes/FireTimestamp';
+import { ActivityInfo } from '../../../shared/models/classes/ActivityInfo';
+import { Buffer } from 'buffer';
+import { DateTypeEnum } from '../../../shared/enums/date.enum';
+import { FirestoreHeartRateService } from '../../firestore/heart-rate/firestore-heart-rate.service';
+import { ProgressStatusEnum } from '../../../shared/enums/progress-status.enum';
+import { TaskProgressInfo } from '../../../shared/models/classes/TaskProgressInfo';
+import { FirestoreBatteryInfoService } from '../../firestore/battery-info/firestore-battery-info.service';
+import { FirestoreActivityService } from '../../firestore/activity/firestore-activity.service';
+import { MeasurementValue } from '../../../shared/models/classes/MeasurementValue';
+import { FirestoreActivityInfoService } from '../../firestore/activity/info/activity-info.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BleDataService {
+export class BleDataService extends BleBaseService {
     private readonly logHelper: LogHelper;
-    private readonly miBand3: MiBand3;
-    // TODO: check BL status
-    // private blStatus: string;
+    private activityInfo: ActivityInfo | undefined;
     private connectionInfo: ConnectionInfo;
+    private activitySyncedDate: Date | undefined;
+    private totalPackageCount: number;
+    private processedPackageCount: number;
+    private pastActivityBuffer: Activity[];
+    private pastHeartRateBuffer: HeartRate[];
+    private processingPastActivityHour: number;
+    private processingPastActivityDay: number;
+    private processingIndex: { hourly: number; daily: number; total: number };
+    private processingCount: { hourlyActivity: number; hourlyHeartRate: number; dailyActivity: number; dailyHeartRate: number };
+    private activitySyncInterval: NodeJS.Timer | undefined;
+    private activityInfoSubscription: Subscription | undefined;
+    private isSyncInitialized: boolean;
+    public activitySyncStatusSubject: BehaviorSubject<TaskProgressInfo>;
     public activitySubject: BehaviorSubject<Activity | undefined>;
     public batteryInfoSubject: BehaviorSubject<BatteryInfo | undefined>;
-    public heartRateSubject: BehaviorSubject<HeartRate | undefined>;
+    public heartRateSubject: BehaviorSubject<number | undefined>;
     public isSubscribedSubject: BehaviorSubject<boolean>;
 
     public constructor(
-        private ble: BluetoothLE,
+        ble: BluetoothLE,
         private bleConnectionService: BleConnectionService,
-        private authService: FirebaseAuthService
+        private authService: FirebaseAuthService,
+        private activityInfoService: FirestoreActivityInfoService,
+        private activityService: FirestoreActivityService,
+        private heartRateService: FirestoreHeartRateService,
+        private batteryInfoService: FirestoreBatteryInfoService
     ) {
+        super(ble);
         this.logHelper = new LogHelper(BleDataService.name);
         this.connectionInfo = new ConnectionInfo();
-        this.miBand3 = MiBand3.getInstance();
+        this.totalPackageCount = 0;
+        this.processedPackageCount = 0;
+        this.processingPastActivityHour = 0;
+        this.processingPastActivityDay = 0;
+        this.processingIndex = { daily: 0, hourly: 0, total: 0 };
+        this.processingCount = { hourlyActivity: 0, hourlyHeartRate: 0, dailyActivity: 0, dailyHeartRate: 0 };
+        this.pastActivityBuffer = [];
+        this.pastHeartRateBuffer = [];
+        this.isSyncInitialized = false;
+        this.activitySyncStatusSubject = new BehaviorSubject<TaskProgressInfo>(new TaskProgressInfo());
         this.batteryInfoSubject = new BehaviorSubject<BatteryInfo | undefined>(undefined);
         this.activitySubject = new BehaviorSubject<Activity | undefined>(undefined);
-        this.heartRateSubject = new BehaviorSubject<HeartRate | undefined>(undefined);
+        this.heartRateSubject = new BehaviorSubject<number | undefined>(undefined);
         this.isSubscribedSubject = new BehaviorSubject<boolean>(false);
         this.bleConnectionService.connectionInfoSubject.subscribe({
-            next: (info: ConnectionInfo) => {
+            next: async (info: ConnectionInfo) => {
                 this.connectionInfo = info;
                 if (info.isDisconnected()) {
-                    this.isSubscribedSubject.next(false);
-                    this.batteryInfoSubject.next(undefined);
-                    this.activitySubject.next(undefined);
-                    this.heartRateSubject.next(undefined);
+                    this.resetService();
+                } else if (info.isReady()) {
+                    this.activityInfoSubscription = this.activityInfoService.getWithValueChanges(info.device?.macAddress ?? 'undefined')
+                        .subscribe(async (activityInfo: ActivityInfo | undefined) => {
+                            this.activityInfo = activityInfo;
+                            if (activityInfo === undefined) {
+                                const initialSyncDate = new Date(new Date().setUTCDate(new Date().getUTCDate() - 31));
+                                initialSyncDate.setUTCDate(initialSyncDate.getUTCDate() - 31);
+                                const initialActivityInfo = new ActivityInfo(
+                                    info.device?.macAddress ?? 'undefined',
+                                    FireTimestamp.fromDate(new Date(new Date().setUTCDate(new Date().getUTCDate() - 31)))
+                                );
+                                try {
+                                    await this.activityInfoService.add(initialActivityInfo);
+                                } catch (e: unknown) {
+                                    this.logHelper.logError('activityInfo sub error', e);
+                                }
+                            } else {
+                                if (!this.isSyncInitialized) {
+                                    this.isSyncInitialized = !this.isSyncInitialized;
+                                    try {
+                                        await this.fetchActivityData();
+                                        this.logHelper.logDefault('Started initial sync', { value: FireTimestamp.now() });
+                                    } catch (e: unknown) {
+                                        this.logHelper.logError(this.fetchActivityData.name, e);
+                                    }
+
+                                    // set 30 min interval for activity sync
+                                    this.activitySyncInterval = setInterval(async () => {
+                                        try {
+                                            await this.fetchActivityData();
+                                        } catch (e: unknown) {
+                                            this.logHelper.logError(this.fetchActivityData.name, e);
+                                        }
+                                        this.logHelper.logDefault('Syncing past activity data', { value: FireTimestamp.now() });
+                                    }, 1800000); // === 1000 (to ms) * 60 (to sec) * 30 (to min)
+                                    // set 5 min interval for battery info updating
+                                    this.activitySyncInterval = setInterval(async () => {
+                                        try {
+                                            if (this.connectionInfo.isReady()) {
+                                                await this.readBatteryInfo();
+                                            }
+                                        } catch (e: unknown) {
+                                            this.logHelper.logError(this.readBatteryInfo.name, e);
+                                        }
+                                        this.logHelper.logDefault('Updating battery info', { value: FireTimestamp.now() });
+                                    }, 300000); // === 1000 (to ms) * 60 (to sec) * 5 (to min)
+                                }
+                            }
+                        });
                 }
             },
             error: (e: unknown) => {
                 this.logHelper.logError('connectionInfoSubject', e);
             }
         });
-        this.authService.authUserSubject.subscribe((user: User | undefined) => {
+        this.authService.authUserSubject.subscribe( () => {
             // reset data
-            if (user === undefined) {
-                this.isSubscribedSubject.next(false);
-                this.batteryInfoSubject.next(undefined);
-                this.activitySubject.next(undefined);
-                this.heartRateSubject.next(undefined);
-            }
+            this.resetService();
         });
     }
 
-    public subscribe(deviceData: string | IDevice, service: string, characteristic: string, observer: Partial<Observer<OperationResult>>): void {
-        this.ble.subscribe({
-            address: typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
-            service,
-            characteristic
-        }).subscribe(observer);
+    private resetService(): void {
+        this.isSubscribedSubject.next(false);
+        this.batteryInfoSubject.next(undefined);
+        this.activitySubject.next(undefined);
+        this.heartRateSubject.next(undefined);
+        if (this.activitySyncInterval !== undefined) {
+            clearInterval(this.activitySyncInterval);
+            this.activitySyncInterval = undefined;
+        }
+        this.activityInfoSubscription?.unsubscribe();
+        this.pastActivityBuffer = [];
+        this.pastHeartRateBuffer = [];
+        this.isSyncInitialized = false;
     }
 
-    // TODO: check if data.value is not undefined
+    private processPastActivityData(data: OperationResult): void {
+        if (data.value) {
+            /* Fetched past activity data max 13 bytes
+               fetch batch contains 4 (at max) activity data/package  per minute
 
-    private processData(data: OperationResult): void {
-        if (data.value !== undefined) {
-            const char = data.characteristic.toLowerCase();
-            const service = data.service.toLowerCase();
+                    0. queue number
+                    1-4 activity data
+                    5-8. next activity data
+                    9-12. next activity data
+
+                    Activity data:
+
+                        0. raw category
+                        1. intensity
+                        2. steps
+                        3. heart rate
+            */
             const bytes = this.ble.encodedStringToBytes(data.value);
-            this.logHelper.logDefault(this.processData.name, 'data', { value: bytes });
-            this.logHelper.logDefault(this.processData.name, 'service', { value: service });
-            this.logHelper.logDefault(this.processData.name, 'char', { value: char });
-            if (service === this.miBand3.getService('mi band')?.getShortenedUUID()) {
-                if (char === (this.miBand3.getService('mi band')?.getCharacteristic('activity'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'activity', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'activity length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('battery'))?.getShortenedUUID()) {
-                    const batteryInfo = new BatteryInfo();
-                    const unknown_value = bytes.at(0); // first byte ???
-                    batteryInfo.device = this.connectionInfo.device;
-                    batteryInfo.batteryLevel = bytes.at(1) as number;
-                    batteryInfo.isCharging = bytes.at(2) === 1;
-                    if (3 < bytes.length) {
-                        batteryInfo.prevChargeDate = this.dateFromBytes(bytes, 3); // 7 bytes
-                        batteryInfo.prevNumOfCharges = bytes.at(10);
-                        batteryInfo.lastChargeDate = this.dateFromBytes(bytes, 11); // 7 bytes
-                        batteryInfo.lastNumOfCharges = bytes.at(18);
-                        batteryInfo.lastChargeLevel = bytes.at(19);
+            if (this.activitySyncedDate !== undefined) {
+                for (let i = 0; i < (bytes.length - 1) / 4; i++) {
+                    if (this.processedPackageCount > 0) {
+                        this.activitySyncedDate.setMinutes(this.activitySyncedDate.getMinutes() + 1);
                     }
-                    this.logHelper.logDefault(this.processData.name, 'batteryInfo', { value: batteryInfo });
-                    this.logHelper.logDefault(this.processData.name, 'batteryInfo unknown value', { value: unknown_value });
-                    this.batteryInfoSubject.next(batteryInfo);
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('realtime activity'))?.getShortenedUUID()) {
-                    // 3 bytes steps count, 4 distance in meters, 5. calorie
-                    const activity = new Activity();
-                    activity.device = this.connectionInfo.device;
-                    activity.steps = this.bytesToInt(bytes.subarray(1, 5));
-                    if (5 < bytes.length) {
-                        activity.distance = this.bytesToInt(bytes.subarray(5, 9));
-                        if (9 < bytes.length) {
-                            activity.calories = this.bytesToInt(bytes.subarray(9, 13));
+
+                    if (this.processedPackageCount === 0) {
+                        this.processingIndex.total = 0;
+                        this.processingCount.hourlyActivity = 0;
+                        this.processingCount.hourlyHeartRate = 0;
+                        this.processingCount.dailyActivity = 0;
+                        this.processingCount.dailyHeartRate = 0;
+                    }
+
+                    // for every average +1 is needed because avg starts at -1
+                    if (this.processingPastActivityDay !== this.activitySyncedDate.getDate()) {
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.dailyHeartRate !== 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg =
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg
+                                    / this.processingCount.dailyHeartRate);
+                        }
+
+                        if (this.processingCount.dailyActivity !== 0) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.avg =
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.daily].intensity.avg
+                                    / this.processingCount.dailyActivity);
+                        }
+
+                        this.processingCount.dailyHeartRate = 0;
+                        this.processingCount.dailyActivity = 0;
+                        this.processingIndex.total++;
+                    }
+
+                    if (this.processingPastActivityDay !== this.activitySyncedDate.getDate() || this.processedPackageCount === 0) {
+                        this.processingPastActivityDay = this.activitySyncedDate.getDate();
+                        const date = new Date(Date.UTC(this.activitySyncedDate.getFullYear(),
+                            this.activitySyncedDate.getMonth(), this.activitySyncedDate.getDate(), 0, 0, 0, 0));
+                        this.pastActivityBuffer.push(
+                            new Activity(
+                                'undefined',
+                                0, // steps,
+                                -1,
+                                -1,
+                                new MeasurementValue(-1), // intensity
+                                new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.DAILY),
+                            )
+                        );
+                        this.pastHeartRateBuffer.push(new HeartRate(
+                            'undefined',
+                            new MeasurementValue(-1), // bpm
+                            new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.DAILY),
+                        ));
+                        this.processingIndex.daily = this.processingIndex.total === 0 ? this.processingIndex.total++ : this.processingIndex.total;
+                    }
+
+                    if (this.processingPastActivityHour !== this.activitySyncedDate.getHours()) {
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.hourlyHeartRate !== 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg =
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg
+                                    / this.processingCount.hourlyHeartRate);
+                        }
+
+                        if (this.processingCount.hourlyActivity !== 0) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg =
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg
+                                    / this.processingCount.hourlyActivity);
+                        }
+
+                        this.processingCount.hourlyHeartRate = 0;
+                        this.processingCount.hourlyActivity = 0;
+                        this.processingIndex.total++;
+                    }
+
+                    if (this.processingPastActivityHour !== this.activitySyncedDate.getHours() || this.processedPackageCount === 0) {
+                        this.processingPastActivityHour = this.activitySyncedDate.getHours();
+                        const date = new Date(this.activitySyncedDate); // clone date
+                        date.setMinutes(0, 0, 0);
+                        this.pastActivityBuffer.push(
+                            new Activity(
+                                'undefined',
+                                0, // steps,
+                                -1,
+                                -1,
+                                new MeasurementValue(-1), // intensity
+                                new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.HOURLY),
+                            )
+                        );
+                        this.pastHeartRateBuffer.push(new HeartRate(
+                            'undefined',
+                            new MeasurementValue(-1), // bpm
+                            new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.HOURLY),
+                        ));
+                        this.processingIndex.hourly = this.processingIndex.total;
+                    }
+
+
+                    // bytes[i * 4 + 1] == category ?
+                    const intensity = bytes[i * 4 + 2];
+                    this.pastActivityBuffer[this.processingIndex.daily].steps += bytes[i * 4 + 3];
+                    this.pastActivityBuffer[this.processingIndex.hourly].steps += bytes[i * 4 + 3];
+                    const bpm = bytes[i * 4 + 4];
+                    // 255 bpm === not measured
+                    if (bpm !== 255) {
+                        if (this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.min > bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.min = bpm;
+                        }
+
+                        if (this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.max < bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.max = bpm;
+                        }
+
+                        this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg += bpm;
+                        this.processingCount.hourlyHeartRate++;
+
+                        if (this.pastHeartRateBuffer[this.processingIndex.daily].bpm.min > bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.min = bpm;
+                        }
+
+                        if (this.pastHeartRateBuffer[this.processingIndex.daily].bpm.max < bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.max = bpm;
+                        }
+
+                        this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg += bpm;
+                        this.processingCount.dailyHeartRate++;
+                    }
+
+                    if (intensity !== 0) {
+                        if (this.pastActivityBuffer[this.processingIndex.hourly].intensity.min > intensity) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.min = intensity;
+                        }
+
+                        if (this.pastActivityBuffer[this.processingIndex.hourly].intensity.max < intensity) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.max = intensity;
+                        }
+
+                        this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg += intensity;
+                        this.processingCount.hourlyActivity++;
+
+                        if (this.pastActivityBuffer[this.processingIndex.daily].intensity.min > intensity) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.min = intensity;
+                        }
+
+                        if (this.pastActivityBuffer[this.processingIndex.daily].intensity.max < intensity) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.max = intensity;
+                        }
+
+                        this.pastActivityBuffer[this.processingIndex.daily].intensity.avg += intensity;
+                        this.processingCount.dailyActivity++;
+                    }
+
+                    if (this.totalPackageCount === ++this.processedPackageCount) {
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.hourlyHeartRate !== 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg =
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg / this.processingCount.hourlyHeartRate);
+                        }
+
+                        if (this.processingCount.hourlyActivity !== 0) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg =
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg / this.processingCount.hourlyActivity);
+                        }
+
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.dailyHeartRate !== 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg =
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg / this.processingCount.dailyHeartRate);
+                        }
+
+                        if (this.processingCount.dailyActivity !== 0) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.avg =
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.daily].intensity.avg / this.processingCount.dailyActivity);
                         }
                     }
-                    this.logHelper.logDefault(this.processData.name, 'realtime activity' + JSON.stringify(activity));
-                    this.activitySubject.next(activity);
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('time'))?.getShortenedUUID()) {
-                    // {"7":3,"8":0,"9":0,"10":4} last 4 bytes ??
-                    const date = this.dateFromBytes(bytes);
-                    this.logHelper.logDefault(this.processData.name, 'currentTime', { value: date });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('sensor control'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'sensorControl', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'sensorControl length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('sensor data'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'sensorData', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'sensorData length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('config'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'config', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'config length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('connection parameters'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'conParams', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'conParams length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('fetch'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'fetch', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'fetch length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('user settings'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'userSettings', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'userSettings length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('event'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'event', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'event length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('transfer'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'transfer', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'transfer length', { value: bytes.length });
-                } else if (char === (this.miBand3.getService('mi band')?.getCharacteristic('unknown f'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'unknown_f', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'unknown_f length', { value: bytes.length });
                 }
-            } else if (service === this.miBand3.getService('heart rate')?.getShortenedUUID()) {
-                // 2 bytes == bpm value
-                const heartRate = new HeartRate();
-                heartRate.device = this.connectionInfo.device;
-                heartRate.bpm = this.bytesToInt(bytes);
-                this.logHelper.logDefault(this.processData.name, 'heartRateMeasurement', { value: heartRate });
-                this.heartRateSubject.next(heartRate);
-            } else if (service === this.miBand3.getService('alert notification')?.getShortenedUUID()) {
-                if (char === (this.miBand3.getService('alert notification')?.getCharacteristic('notification control'))?.getShortenedUUID()) {
-                    this.logHelper.logDefault(this.processData.name, 'notification', { value: bytes });
-                    this.logHelper.logDefault(this.processData.name, 'notification length', { value: bytes.length });
+            } else {
+                this.logHelper.logDefault(this.processPastActivityData.name, 'sync error', { value: 'activitySyncStartDateTime is undefined' });
+            }
+        }
+    }
+
+    private async processFetchData(data: OperationResult): Promise<void> {
+        if (data.value) {
+            /* Fetch data 15 bytes or 3 bytes
+                0-2. response
+                3-6. number of packages
+                7.-14 datetime (that was sent initially)
+            */
+            const bytes = this.ble.encodedStringToBytes(data.value);
+            this.logHelper.logDefault(this.processFetchData.name, 'fetch', { value: Buffer.from(bytes).toString('hex') });
+            this.logHelper.logDefault(this.processFetchData.name, 'fetch', { value: bytes });
+            if (3 <= bytes.length) {
+                const response = Buffer.from(bytes).subarray(0, 3).toString('hex');
+                switch (response) {
+                    case '100101':
+                        this.totalPackageCount = bytes.length === 15 ? this.bytesToInt(bytes.subarray(3, 7)) : 0;
+                        const tmpStartDate = bytes.length === 15 ? this.dateTimeFromBytes(bytes, 7)?.toDate() : undefined;
+                        if (tmpStartDate !== undefined) {
+                            this.activitySyncedDate = new Date(tmpStartDate);
+                            this.activitySyncedDate.setSeconds(0, 0);
+                            this.processingPastActivityHour = this.activitySyncedDate.getHours();
+                            this.processingPastActivityDay = this.activitySyncedDate.getDate();
+                            this.logHelper.logDefault(this.processFetchData.name, 'fetch package count', { value: this.totalPackageCount });
+                            this.logHelper.logDefault(this.processFetchData.name, 'fetch start datetime', { value: this.activitySyncedDate });
+                            if (0 < this.totalPackageCount) {
+                                this.processedPackageCount = 0;
+                                try {
+                                    await this.write(data.address, data.service, data.characteristic, Uint8Array.of(0x02));
+                                    this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.STARTED, Math.ceil(this.totalPackageCount / 60) * 2));
+                                    this.logHelper.logDefault(this.processFetchData.name, 'Activity fetching start code sent');
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, 'write fetch start error', { value: e });
+                                }
+                            } else {
+                                try {
+                                    await this.write(data.address, data.service, data.characteristic, Uint8Array.of(0x03));
+                                    this.logHelper.logDefault(this.processFetchData.name, 'Activity fetching end code sent, because there is no past activity data');
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, 'write fetch end error', { value: e });
+                                }
+                            }
+                        } else {
+                            this.logHelper.logError(this.processFetchData.name, 'fetch start error', { value: 'missing start date' });
+                        }
+                        break;
+                    case '100102':
+                        this.logHelper.logDefault(this.processFetchData.name, 'Activity fetching started');
+                        break;
+                    case '100201':
+                        if (this.pastActivityBuffer !== []) {
+                            let processedCount = 0;
+                            let isFirstHourlyProcessed = false;
+                            await Promise.all(this.pastHeartRateBuffer.map( async (heartRate: HeartRate) => {
+                                try {
+                                    if (!isFirstHourlyProcessed || heartRate.measurementInfo.type === DateTypeEnum.DAILY) {
+                                        if (heartRate.measurementInfo.type === DateTypeEnum.HOURLY) {
+                                            isFirstHourlyProcessed = !isFirstHourlyProcessed;
+                                        }
+                                        const sameHeartRate = await this.heartRateService.list([
+                                            { fieldPath: 'measurementInfo.date', opStr: '==', value: heartRate.measurementInfo.date },
+                                            { fieldPath: 'measurementInfo.type', opStr: '==', value: heartRate.measurementInfo.type },
+                                            { limit: 1 }
+                                        ]);
+                                        if (sameHeartRate !== undefined) {
+                                            heartRate.bpm.max = heartRate.bpm.max < sameHeartRate[0].bpm.max ? sameHeartRate[0].bpm.max : heartRate.bpm.max;
+                                            heartRate.bpm.min = heartRate.bpm.min > sameHeartRate[0].bpm.min ? sameHeartRate[0].bpm.min : heartRate.bpm.min;
+
+                                            if (heartRate.bpm.avg === -1) {
+                                                heartRate.bpm.avg = sameHeartRate[0].bpm.avg;
+                                            }
+
+                                            if (heartRate.bpm.avg !== -1 && sameHeartRate[0].bpm.avg !== -1) {
+                                                if ((heartRate.bpm.avg === 0 && sameHeartRate[0].bpm.avg === 0)
+                                                    || (heartRate.bpm.avg === 0 || sameHeartRate[0].bpm.avg === 0)
+                                                ) {
+                                                    heartRate.bpm.avg += sameHeartRate[0].bpm.avg;
+                                                } else {
+                                                    heartRate.bpm.avg = Math.floor((heartRate.bpm.avg + sameHeartRate[0].bpm.avg) / 2);
+                                                }
+                                            }
+
+                                            await this.heartRateService.update({ id: sameHeartRate[0].id }, { bpm: heartRate.bpm });
+                                        } else {
+                                            await this.heartRateService.add(heartRate);
+                                        }
+                                    } else {
+                                        await this.heartRateService.add(heartRate);
+                                    }
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, 'add past HeartRate error', { value: e });
+                                }
+                                this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.PROCESSING, this.pastActivityBuffer.length * 2, ++processedCount));
+                            }));
+                            this.pastHeartRateBuffer = [];
+                            isFirstHourlyProcessed = false;
+                            await Promise.all(this.pastActivityBuffer.map( async (activity: Activity) => {
+                                try {
+                                    if (!isFirstHourlyProcessed || activity.measurementInfo.type === DateTypeEnum.DAILY) {
+                                        if (activity.measurementInfo.type === DateTypeEnum.HOURLY) {
+                                            isFirstHourlyProcessed = !isFirstHourlyProcessed;
+                                        }
+                                        const sameActivity = await this.activityService.list([
+                                            { fieldPath: 'measurementInfo.date', opStr: '==', value: activity.measurementInfo.date },
+                                            { fieldPath: 'measurementInfo.type', opStr: '==', value: activity.measurementInfo.type },
+                                            { limit: 1 }
+                                        ]);
+                                        if (sameActivity !== undefined) {
+                                            if (activity.measurementInfo.type === DateTypeEnum.HOURLY) {
+                                                activity.steps += sameActivity[0].steps;
+                                            } else {
+                                                activity.steps = activity.steps > sameActivity[0].steps ? activity.steps : sameActivity[0].steps;
+                                            }
+
+                                            activity.intensity.max = activity.intensity.max < sameActivity[0].intensity.max
+                                                ? sameActivity[0].intensity.max : activity.intensity.max;
+                                            activity.intensity.min = activity.intensity.min > sameActivity[0].intensity.min
+                                                ? sameActivity[0].intensity.min : activity.intensity.min;
+
+                                            if (activity.intensity.avg === -1) {
+                                                activity.intensity.avg = sameActivity[0].intensity.avg;
+                                            }
+
+                                            if (activity.intensity.avg !== -1 && sameActivity[0].intensity.avg !== -1) {
+                                                if ((activity.intensity.avg === 0 && sameActivity[0].intensity.avg === 0)
+                                                    || (activity.intensity.avg === 0 || sameActivity[0].intensity.avg === 0)
+                                                ) {
+                                                    activity.intensity.avg += sameActivity[0].intensity.avg;
+                                                } else {
+                                                    activity.intensity.avg = Math.floor((activity.intensity.avg + sameActivity[0].intensity.avg) / 2);
+                                                }
+                                            }
+
+                                            await this.activityService.update(
+                                                { id: sameActivity[0].id },
+                                                {
+                                                    steps: activity.steps,
+                                                    intensity: activity.intensity
+                                                }
+                                            );
+                                        } else {
+                                            await this.activityService.add(activity);
+                                        }
+                                    } else {
+                                        await this.activityService.add(activity);
+                                    }
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, 'add past Activity error', { value: e });
+                                }
+                                this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.PROCESSING, this.pastActivityBuffer.length * 2, ++processedCount));
+                            }));
+
+                            this.pastActivityBuffer = [];
+                            try {
+                                if (this.activitySyncedDate !== undefined && this.activityInfo !== undefined) {
+                                    this.activitySyncedDate.setMinutes(this.activitySyncedDate.getMinutes() + 1);
+                                    await this.activityInfoService.update({ id: this.activityInfo.id }, { lastSynced: FireTimestamp.fromDate(this.activitySyncedDate) });
+                                }
+                            } catch (e: unknown) {
+                                this.logHelper.logError(this.processPastActivityData.name, 'update last sync date error');
+                            }
+                        }
+
+                        if (this.activitySyncedDate !== undefined && new Date().getTime() - this.activitySyncedDate.getTime() <= 60 * 1000) {
+                            try {
+                                await this.write(data.address, data.service, data.characteristic, Uint8Array.of(0x03));
+                                this.logHelper.logDefault(this.processFetchData.name, 'Activity fetching end code sent');
+                            } catch (e: unknown) {
+                                this.logHelper.logError(this.processFetchData.name, 'write fetch end error', { value: e });
+                            }
+                        } else {
+                            try {
+                                await this.fetchActivityData();
+                            } catch (e: unknown) {
+                                this.logHelper.logError(this.fetchActivityData.name, e);
+                            }
+                        }
+                        break;
+                    case '100301':
+                        this.logHelper.logDefault(this.processFetchData.name, 'Fetching successfully finished');
+                        this.unsubscribe(data.address, data.service, data.characteristic).catch((e: unknown) => {
+                            this.logHelper.logError(this.processFetchData.name, e);
+                        });
+                        this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.FINISHED));
+                        break;
+                    default:
+                        this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.FAILED));
+                        this.unsubscribe(data.address, data.service, data.characteristic).catch((e: unknown) => {
+                            this.logHelper.logError(this.processFetchData.name, e);
+                        });
+                        this.logHelper.logError(this.processFetchData.name, 'unexpected fetch response code', { value: response });
                 }
             }
-        } else {
-            this.logHelper.logDefault(this.processData.name, 'data value is undefined', { value: data });
+        }
+    }
+
+    private async processRealTimeActivity(data: OperationResult): Promise<void> {
+        if (data.value) {
+            const bytes = this.ble.encodedStringToBytes(data.value);
+            /* Realtime steps 5 bytes or 13 bytes if not used with Mi Fit it only shows steps count => 5 bytes
+                0. header?
+                1-4. steps
+                5-8. calories (kcal)
+                9-12. distance (meters)
+            */
+            const activity = new Activity();
+            const current = new Date();
+            const date = new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate(), 0, 0, 0, 0));
+            activity.measurementInfo = new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.DAILY);
+            activity.steps = this.bytesToInt(bytes.subarray(1, 5));
+            activity.distance = this.bytesToInt(bytes.subarray(5, 9));
+            activity.calories = this.bytesToInt(bytes.subarray(9));
+            const sameActivity = await this.activityService.list([
+                { fieldPath: 'measurementInfo.date', opStr: '==', value: activity.measurementInfo.date },
+                { fieldPath: 'measurementInfo.type', opStr: '==', value: activity.measurementInfo.type },
+                { limit: 1 }
+            ]);
+            if (sameActivity !== undefined) {
+                await this.activityService.update(
+                    { id: sameActivity[0].id },
+                    {
+                        steps: activity.steps,
+                        distance: activity.distance,
+                        calories: activity.calories
+                    }
+                );
+            } else {
+                await this.activityService.add(activity);
+            }
+            this.activitySubject.next(activity);
+            this.logHelper.logDefault(this.processRealTimeActivity.name, 'realtime activity', { value: activity });
+        }
+    }
+
+    public async processBatteryInfo(data: OperationResult): Promise<void> {
+        if (data.value) {
+            const bytes = this.ble.encodedStringToBytes(data.value);
+            if (bytes.length < 3) {
+                // get full battery info
+                try {
+                    await this.readBatteryInfo();
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.processBatteryInfo.name, this.readBatteryInfo.name, { value: e });
+                }
+            } else {
+                // process full info after reading from device
+                const batteryInfo = new BatteryInfo();
+                const unknown_value = bytes.at(0); // first byte ???
+                batteryInfo.id = data.address;
+                batteryInfo.deviceRef = this.connectionInfo.device?.macAddress ?? 'unknown';
+                batteryInfo.batteryLevel = bytes.at(1) as number;
+                batteryInfo.isCharging = bytes.at(2) === 1; // status => 1 === charging
+                batteryInfo.prevChargeDate = this.dateTimeFromBytes(bytes, 3); // 7 bytes
+                batteryInfo.prevNumOfCharges = bytes.at(10);
+                batteryInfo.lastChargeDate = this.dateTimeFromBytes(bytes, 11); // 7 bytes
+                batteryInfo.lastNumOfCharges = bytes.at(18);
+                batteryInfo.lastChargeLevel = bytes.at(19);
+                this.logHelper.logDefault(this.processBatteryInfo.name, 'batteryInfo', { value: batteryInfo });
+                this.logHelper.logDefault(this.processBatteryInfo.name, 'batteryInfo unknown value', { value: unknown_value });
+                this.batteryInfoSubject.next(batteryInfo);
+                try {
+                    await this.batteryInfoService.update({ id: batteryInfo.id }, batteryInfo);
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.processBatteryInfo.name, 'update BatteryInfo error', { value: e });
+                }
+            }
+        }
+    }
+
+    private async processHeartRate(data: OperationResult): Promise<void> {
+        if (data.value !== undefined) {
+            // pushes data per second 1 heart rate measurement === 5 bpm data
+            // 0. header?
+            // 1. bpm
+            const bpm = this.ble.encodedStringToBytes(data.value)[1];
+            this.logHelper.logDefault(this.processHeartRate.name, 'bpm', { value: bpm });
+            this.heartRateSubject.next(bpm);
         }
     }
 
@@ -179,87 +643,194 @@ export class BleDataService {
         };
     }
 
-    public bytesToInt(bytes: Uint8Array): number {
-        if (!bytes) {
-            return 0;
+    private subscribeToRealTimeActivity(): void {
+        const service = this.miBand3.getServiceByName('mi band');
+        const characteristic = service?.getCharacteristicByName('realtime activity');
+        if (service === undefined) {
+            throw new Error('Failed to get Mi Band service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Realtime Activity characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
         }
-        let res = 0;
-        for (let i = bytes.length - 1; 0 <= i; i--) {
-            res = bytes[i] !== 0 ? res * 256 + bytes[i] : res + bytes[i];
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) => this.processRealTimeActivity(value)));
+    }
+
+    private subscribeToActivityData(): void {
+        const service = this.miBand3.getServiceByName('mi band');
+        const characteristic = service?.getCharacteristicByName('activity data');
+        if (service === undefined) {
+            throw new Error('Failed to get Mi Band service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Activity Data characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
         }
-        return res;
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) => this.processPastActivityData(value)));
     }
 
-    private read(deviceData: string | IDevice, service: string, characteristic: string): Promise<OperationResult> {
-        return this.ble.read({
-            address: typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
-            service,
-            characteristic
-        });
+    private subscribeToBatteryInfo(): void {
+        const service = this.miBand3.getServiceByName('mi band');
+        const characteristic = service?.getCharacteristicByName('battery info');
+        if (service === undefined) {
+            throw new Error('Failed to get Mi Band service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Battery Info characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) => this.processBatteryInfo(value)));
     }
 
-    /*
-    private write(address: string, service: string, characteristic: string, value: Uint8Array, type?: string): Promise<OperationResult> {
-        return this.ble.write({
-            address,
-            service,
-            characteristic,
-            value: this.ble.bytesToEncodedString(value),
-            type
-        });
+    private subscribeToHeartRate(): void {
+        const service = this.miBand3.getServiceByName('heart rate');
+        const characteristic = service?.getCharacteristicByName('heart rate measurement');
+        if (service === undefined) {
+            throw new Error('Failed to get Heart Rate service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Heart Rate Measurement characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) => this.processHeartRate(value)));
     }
-     */
 
-    public async initBLESubscriptions(deviceData: string | IDevice): Promise<void> {
-        this.miBand3.services.map((s: Service) => {
-            if (!s.name?.toLowerCase().includes('authentication') && !s.name?.toLowerCase().includes('heart')) {
-                s.characteristics.map((c: Characteristic) => {
-                    if (c.properties.find((p: Property) => p && p.name && p.name.toLowerCase() === 'notify')) {
-                        this.subscribe(
-                            typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
-                            s.uuid,
-                            c.uuid,
-                            this.processDataObserver((value: OperationResult) => this.processData(value))
-                        );
-                    }
-                });
+    private async readRealTimeActivity(): Promise<void> {
+        const service = this.miBand3.getServiceByName('mi band');
+        const characteristic = service?.getCharacteristicByName('realtime activity');
+        if (service === undefined) {
+            throw new Error('Failed to get Mi Band service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Realtime Activity characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        try {
+            await this.processRealTimeActivity(await this.read(this.connectionInfo.device, service, characteristic));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.readRealTimeActivity.name, 'read real time activity error', { value: e });
+        }
+    }
+
+    private async readBatteryInfo(): Promise<void> {
+        const service = this.miBand3.getServiceByName('mi band');
+        const characteristic = service?.getCharacteristicByName('battery info');
+        if (service === undefined) {
+            throw new Error('Failed to get Mi Band service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Battery Info characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        try {
+            await this.processBatteryInfo(await this.read(this.connectionInfo.device, service, characteristic));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.readRealTimeActivity.name, 'read real time activity error', { value: e });
+        }
+    }
+
+    public async initDeviceData(): Promise<void> {
+        try {
+            this.subscribeToRealTimeActivity();
+            this.subscribeToBatteryInfo();
+            this.subscribeToHeartRate();
+            await this.readRealTimeActivity();
+            await this.readBatteryInfo();
+            this.isSubscribedSubject.next(true);
+        } catch (e: unknown) {
+            throw e;
+        }
+    }
+
+    public async getSoftwareVersion(): Promise<string> {
+        const service = this.miBand3.getServiceByName('device information');
+        const characteristic = service?.getCharacteristicByName('software');
+        if (service === undefined) {
+            throw new Error('Failed to get Device Information service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Software Revision characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        let version = 'unknown';
+        try {
+            const data = await this.read(this.connectionInfo.device, service, characteristic);
+            version = String.fromCharCode(...this.ble.encodedStringToBytes(data.value));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.getSoftwareVersion.name, e);
+        }
+        return version;
+    }
+
+    public async getSerialNumber(): Promise<string> {
+        const service = this.miBand3.getServiceByName('device information');
+        const characteristic = service?.getCharacteristicByName('serial number');
+        if (service === undefined) {
+            throw new Error('Failed to get Device Information service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Serial Number characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        let version = 'unknown';
+        try {
+            const data = await this.read(this.connectionInfo.device, service, characteristic);
+            version = String.fromCharCode(...this.ble.encodedStringToBytes(data.value));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.getSerialNumber.name, e);
+        }
+        return version;
+    }
+
+    public async getHardwareVersion(): Promise<string> {
+        const service = this.miBand3.getServiceByName('device information');
+        const characteristic = service?.getCharacteristicByName('hardware revision');
+        if (service === undefined) {
+            throw new Error('Failed to get Device Information service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Hardware Revision characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        let version = 'unknown';
+        try {
+            const data = await this.read(this.connectionInfo.device, service, characteristic);
+            version = String.fromCharCode(...this.ble.encodedStringToBytes(data.value));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.getSerialNumber.name, e);
+        }
+        return version;
+    }
+
+    public async fetchActivityData(): Promise<void> {
+        const service = this.miBand3.getServiceByName('mi band');
+        const characteristic = service?.getCharacteristicByName('fetch');
+        if (service === undefined) {
+            throw new Error('Failed to get Mi Band service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get Fetch characteristic');
+        } else if (this.connectionInfo.device === undefined) {
+            throw new Error('No connected device');
+        }
+        this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) => this.processFetchData(value)));
+        this.subscribeToActivityData();
+        try {
+            if (this.activityInfo !== undefined) {
+                this.logHelper.logDefault(this.fetchActivityData.name, 'Fetching activity date from device...');
+                if (this.activityInfo.lastSynced === undefined) {
+                }
+                const timeBytes = this.dateTimeToBytes(this.activityInfo.lastSynced, { timezone: true });
+                const initBytes = Uint8Array.of(0x01, 0x01);
+                const writeData = new Uint8Array(timeBytes.length + initBytes.length);
+                writeData.set(initBytes);
+                writeData.set(timeBytes, initBytes.length);
+                this.logHelper.logDefault(this.fetchActivityData.name, 'activity fetch write data', { value: writeData });
+                await this.write(this.connectionInfo.device, service, characteristic, writeData);
+                this.logHelper.logDefault(this.fetchActivityData.name, 'Past activity fetching start data sent');
             }
-        });
-        this.isSubscribedSubject.next(true);
-    }
-
-    public readAllData(deviceData: string | IDevice): void {
-        this.miBand3.services.map((s: Service) => {
-            if (!s.name?.toLowerCase().includes('authentication')) {
-                s.characteristics.map(async (c: Characteristic) => {
-                    if (c.properties.find((p: Property) => p && p.name && p.name.toLowerCase() === 'read')) {
-                        try {
-                            this.processData(await this.read(typeof deviceData === 'string' ? deviceData : deviceData.macAddress, s.uuid, c.uuid));
-                        } catch (e: unknown) {
-                            this.logHelper.logError(this.readAllData.name, e);
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    private dateFromBytes(bytes: Uint8Array, startIndex: number = 0): FireTimestamp | undefined {
-        const date = new Date();
-        if (bytes.length < 7) {
-            return undefined;
+        } catch (e: unknown) {
+            this.logHelper.logError(this.fetchActivityData.name, e);
         }
-        date.setFullYear(
-            this.bytesToInt(bytes.subarray(startIndex, startIndex + 2)),
-            bytes.at(startIndex + 2) as number,
-            bytes.at(startIndex + 3)
-        );
-        date.setHours(
-            bytes.at(startIndex + 4) as number,
-            bytes.at(startIndex + 5),
-            bytes.at(startIndex + 6),
-            0
-        );
-        return FireTimestamp.fromDate(date);
     }
+
 }
