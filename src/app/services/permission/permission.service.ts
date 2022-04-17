@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LogHelper } from '../../shared/models/classes/LogHelper';
-import { PermissionNames, Permissions } from '../../shared/enums/permissions.enum';
+import { PermissionName, Permission } from '../../shared/enums/permissions.enum';
 import { DeviceService } from '../device/device.service';
 
 @Injectable({
@@ -44,7 +44,7 @@ export class PermissionService {
                 return Promise.resolve(undefined);
             }
         }
-        return this.hasPermissionAccess(Permissions.ACCESS_COARSE_LOCATION);
+        return this.hasPermissionAccess(Permission.ACCESS_COARSE_LOCATION);
     }
 
     public async checkFineLocation(versionCheck = true): Promise<boolean | undefined> {
@@ -55,7 +55,7 @@ export class PermissionService {
                 return Promise.resolve(undefined);
             }
         }
-        return this.hasPermissionAccess(Permissions.ACCESS_FINE_LOCATION);
+        return this.hasPermissionAccess(Permission.ACCESS_FINE_LOCATION);
     }
 
     public async checkBluetoothScan(versionCheck = true): Promise<boolean | undefined> {
@@ -66,7 +66,7 @@ export class PermissionService {
                 return Promise.resolve(undefined);
             }
         }
-        return this.hasPermissionAccess(Permissions.BLUETOOTH_SCAN);
+        return this.hasPermissionAccess(Permission.BLUETOOTH_SCAN);
     }
 
     public async checkBluetoothConnect(versionCheck = true): Promise<boolean | undefined> {
@@ -77,7 +77,7 @@ export class PermissionService {
                 return Promise.resolve(undefined);
             }
         }
-        return this.hasPermissionAccess(Permissions.BLUETOOTH_CONNECT);
+        return this.hasPermissionAccess(Permission.BLUETOOTH_CONNECT);
     }
 
     public async checkForBluetoothScanPermissions(): Promise<void> {
@@ -87,23 +87,23 @@ export class PermissionService {
             const hasCLPerm = await this.checkCoarseLocation(true);
             const hasBLSPerm = await this.checkBluetoothScan(true);
             const hasBLCPerm = await this.checkBluetoothConnect(true);
-            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.ACCESS_FINE_LOCATION } permission`, { value: hasFLPerm });
-            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.ACCESS_COARSE_LOCATION } permission`, { value: hasCLPerm });
-            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.BLUETOOTH_SCAN } permission`, { value: hasBLSPerm });
-            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionNames.BLUETOOTH_CONNECT } permission`, { value: hasBLCPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionName.ACCESS_FINE_LOCATION } permission`, { value: hasFLPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionName.ACCESS_COARSE_LOCATION } permission`, { value: hasCLPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionName.BLUETOOTH_SCAN } permission`, { value: hasBLSPerm });
+            this.logHelper.logDefault(this.checkForBluetoothScanPermissions.name, `has ${ PermissionName.BLUETOOTH_CONNECT } permission`, { value: hasBLCPerm });
             if (hasBLSPerm !== undefined && hasBLCPerm !== undefined && !hasBLSPerm && !hasBLCPerm) {
-                errorText = `Missing ${ PermissionNames.BLUETOOTH_SCAN } and ${ PermissionNames.BLUETOOTH_CONNECT } permissions!`;
+                errorText = `Missing ${ PermissionName.BLUETOOTH_SCAN } and ${ PermissionName.BLUETOOTH_CONNECT } permissions!`;
             } else if (hasBLSPerm !== undefined && !hasBLSPerm) {
-                errorText = `Missing ${ PermissionNames.BLUETOOTH_SCAN } permission!`;
+                errorText = `Missing ${ PermissionName.BLUETOOTH_SCAN } permission!`;
             } else if (hasBLCPerm !== undefined && !hasBLCPerm) {
-                errorText = `Missing ${ PermissionNames.BLUETOOTH_CONNECT } permission!`;
+                errorText = `Missing ${ PermissionName.BLUETOOTH_CONNECT } permission!`;
             } else {
                 if (hasFLPerm !== undefined && hasCLPerm !== undefined && !hasFLPerm && !hasCLPerm) {
-                    errorText = `Missing ${ PermissionNames.ACCESS_FINE_LOCATION } and ${ PermissionNames.ACCESS_COARSE_LOCATION } permissions!`;
+                    errorText = `Missing ${ PermissionName.ACCESS_FINE_LOCATION } and ${ PermissionName.ACCESS_COARSE_LOCATION } permissions!`;
                 } else if (hasFLPerm !== undefined && !hasFLPerm) {
-                    errorText = `Missing ${ PermissionNames.ACCESS_FINE_LOCATION } permission!`;
+                    errorText = `Missing ${ PermissionName.ACCESS_FINE_LOCATION } permission!`;
                 } else if (hasCLPerm !== undefined && !hasCLPerm) {
-                    errorText = `Missing ${ PermissionNames.ACCESS_COARSE_LOCATION } permission!`;
+                    errorText = `Missing ${ PermissionName.ACCESS_COARSE_LOCATION } permission!`;
                 }
             }
         } catch (e: unknown) {
