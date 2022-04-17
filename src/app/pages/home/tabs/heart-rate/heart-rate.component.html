@@ -1,1 +1,47 @@
-<p>WIP</p>
+<ion-content>
+    <app-data-chart [chartDateType]="heartRateChartDateType" [chartData]="heartRateChartData"
+                    (chartDateTypeChanged)="onChartTypeChanged($event)">
+        <ion-segment swipeGesture="true" [(ngModel)]="heartRateDataType" (ionChange)="onChartTypeChanged()"
+                     scrollable="true">
+            <ion-segment-button *ngFor="let type of HEART_RATE_DATA_TYPES" [value]="type">
+                {{ type.toUpperCase() | translate }}
+            </ion-segment-button>
+        </ion-segment>
+    </app-data-chart>
+    <div class="title ion-margin-top ion-margin-bottom">
+        <ion-label color="primary">
+            {{ 'STORED_PULSE_DATA' | translate }}
+        </ion-label>
+    </div>
+    <app-items-filter [fields]="FILTER_FIELDS" [startDatePickerId]="'heart-rate-start-date-picker'"
+                      [endDatePickerId]="'heart-rate-end-date-picker'" [dateFieldName]="FILTER_FIELDS[0].fieldName"
+                      [measurementTypes]="MEASUREMENT_TYPES" (filterOptions)="this.loadHeartRates(infiniteScroll, $event)">
+    </app-items-filter>
+    <ng-container *ngIf="heartRateItems && heartRateItems.length > 0">
+        <app-heart-rate-item *ngFor="let heartRate of heartRateItems" [heartRate]="heartRate"></app-heart-rate-item>
+    </ng-container>
+    <ng-container *ngIf="isLoadingHeartRates else noItemsOrInitial">
+        <div class="ion-text-center ion-margin-top ion-margin-bottom">
+            <ion-spinner color="primary" name="crescent"></ion-spinner>
+        </div>
+    </ng-container>
+    <ng-template #noItemsOrInitial>
+        <ng-container *ngIf="heartRateItems === undefined else noItems">
+            <ion-item class="ion-text-center">
+                <ion-label>{{ 'USE_HEART_RATE_FILTER' | translate }}</ion-label>
+            </ion-item>
+        </ng-container>
+        <ng-template #noItems>
+            <ng-container *ngIf="heartRateItems?.length === 0">
+                <ion-item class="ion-text-center">
+                    <ion-label>{{ 'NO_PULSE_DATA_FOUND' | translate }}</ion-label>
+                </ion-item>
+            </ng-container>
+        </ng-template>
+    </ng-template>
+    <ion-infinite-scroll #infiniteScroll threshold="100px" (ionInfinite)="loadHeartRates($event)">
+        <ion-infinite-scroll-content loadingSpinner="dots"
+                                     loadingText="{{ 'LOADING_MORE_DATA' | translate }}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

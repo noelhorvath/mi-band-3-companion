@@ -1,0 +1,47 @@
+<ng-container *ngIf="activity !== undefined">
+    <ion-list class="ion-margin-bottom ion-margin-top ion-margin-start ion-margin-end">
+        <ng-container *ngIf="activity.measurementInfo.type === 'daily' else hourly">
+            <ion-list-header>
+                <ion-label class="header" color="primary">{{ activity.measurementInfo.date.toDate() | date:'YYYY-MM-dd' }}</ion-label>
+            </ion-list-header>
+        </ng-container>
+        <ng-template #hourly>
+            <ion-list-header>
+                <ion-label class="header" color="primary">{{ activity.measurementInfo.date.toDate() | date:'YYYY-MM-dd HH:mm' }}</ion-label>
+            </ion-list-header>
+        </ng-template>
+        <ion-accordion-group>
+            <ion-accordion value="measurement-values">
+                <ion-item slot="header">
+                    <ion-label>{{ 'MEASUREMENT_VALUES' | translate }}</ion-label>
+                </ion-item>
+                <ion-list slot="content">
+                    <ion-item>
+                        <ion-label>{{ 'STEPS' | translate }}</ion-label>
+                        <ion-label>{{ activity.steps }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{ 'DISTANCE' | translate }}</ion-label>
+                        <ion-label>{{ (activity.distance === -1 ? 0 : activity.distance) + ' ' + 'm' }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{ 'BURNED_CALORIES' | translate }}</ion-label>
+                        <ion-label>{{ (activity.calories === -1 ? 0 : activity.calories) + ' ' + 'Cal' }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{ 'AVG_INTENSITY' | translate }}</ion-label>
+                        <ion-label>{{ activity.intensity.avg === -1 ? 0 : activity.intensity.avg }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{ 'MAX_INTENSITY' | translate }}</ion-label>
+                        <ion-label>{{ activity.intensity.max === MIN_INT ? 0 : activity.intensity.max }}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>{{ 'MIN_INTENSITY' | translate }}</ion-label>
+                        <ion-label>{{ activity.intensity.min === MAX_INT ? 0 : activity.intensity.min }}</ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-accordion>
+        </ion-accordion-group>
+    </ion-list>
+</ng-container>

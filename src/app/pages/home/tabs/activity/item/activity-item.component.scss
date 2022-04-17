@@ -1,0 +1,18 @@
+:host {
+    ion-item {
+        border-radius: 0 !important;
+    }
+    ion-accordion {
+        ion-list {
+            border-radius: 0 !important;
+        }
+    }
+    ion-label {
+        text-align: center;
+    }
+    .header {
+        font-size: large;
+        font-weight: bold;
+        text-align: start !important;
+    }
+}

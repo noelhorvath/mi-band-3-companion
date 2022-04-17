@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HeartRateComponent} from "./heart-rate.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HeartRateComponent } from './heart-rate.component';
 
 const routes: Routes = [
     {

@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {HeartRateComponent} from './heart-rate.component';
+import { HeartRateComponent } from './heart-rate.component';
 
 describe('HeartRateComponent', () => {
     let component: HeartRateComponent;
