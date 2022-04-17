@@ -11,9 +11,8 @@ const config: CapacitorConfig = {
         hostname: 'miband3companion.web.app',
         androidScheme: 'https'
     },
+    /*
     plugins: {
-        /*
-        // TODO: configure splash screen
         SplashScreen: {
             launchShowDuration: 3000,
             launchAutoHide: true,
@@ -29,8 +28,8 @@ const config: CapacitorConfig = {
             layoutName: 'launch_screen',
             useDialog: false,
         },
-        */
     },
+     */
 };
 
 export default config;
