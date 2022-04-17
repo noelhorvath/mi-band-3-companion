@@ -1,7 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IonicModule} from '@ionic/angular';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import {StatisticsComponent} from './statistics.component';
+import { StatisticsComponent } from './statistics.component';
 
 describe('StatisticsComponent', () => {
     let component: StatisticsComponent;
