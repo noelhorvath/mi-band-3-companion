@@ -8,7 +8,7 @@ export enum DateTypeEnum {
     YEARLY = 'yearly'
 }
 
-export enum Months {
+export enum Month {
     JANUARY = 'January',
     FEBRUARY = 'February',
     MARCH = 'March',
@@ -23,7 +23,7 @@ export enum Months {
     DECEMBER = 'December',
 }
 
-export enum Days {
+export enum Day {
     MONDAY = 'Monday',
     TUESDAY = 'Tuesday',
     WEDNESDAY = 'Wednesday',
@@ -31,4 +31,11 @@ export enum Days {
     FRIDAY = 'Friday',
     SATURDAY = 'Saturday',
     SUNDAY = 'Sunday',
+}
+
+export enum IntervalTypeEnum {
+    TODAY = 'today',
+    THIS_WEEK = 'this_week',
+    THIS_MONTH = 'this_month',
+    THIS_YEAR = 'this_year',
 }

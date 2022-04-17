@@ -3,7 +3,7 @@ export enum FirebaseConnectionStatus {
     OFFLINE = 'offline'
 }
 
-export enum FirebaseErrorMessages {
+export enum FirebaseErrorMessage {
     // firebase errors
     USER_NOT_FOUND = 'USER_NOT_FOUND',
     USER_IS_NOT_SIGNED_IN = 'USER_IS_NOT_SIGNED_IN',

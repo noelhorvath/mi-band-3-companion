@@ -1,11 +1,11 @@
-export enum PermissionNames {
+export enum PermissionName {
     ACCESS_COARSE_LOCATION = 'ACCESS_COARSE_LOCATION',
     ACCESS_FINE_LOCATION = 'ACCESS_FINE_LOCATION',
     BLUETOOTH_SCAN = 'BLUETOOTH_SCAN',
     BLUETOOTH_CONNECT = 'BLUETOOTH_CONNECT'
 }
 
-export enum Permissions {
+export enum Permission {
     ACCESS_COARSE_LOCATION = 'android.permission.ACCESS_COARSE_LOCATION',
     ACCESS_FINE_LOCATION = 'android.permission.ACCESS_FINE_LOCATION',
     BLUETOOTH_SCAN = 'android.permission.BLUETOOTH_SCAN',

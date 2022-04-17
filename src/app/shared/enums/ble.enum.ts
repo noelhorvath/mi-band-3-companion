@@ -28,3 +28,9 @@ export enum BLEProperty {
     WRITE_WITHOUT_RESPONSE = 'WRITE_WITHOUT_RESPONSE',
     INDICATE = 'INDICATE'
 }
+
+export enum BLEGender {
+    MALE = 0x00,
+    FEMALE = 0x01,
+    OTHER =  0x02
+}

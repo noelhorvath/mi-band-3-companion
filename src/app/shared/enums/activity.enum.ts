@@ -1,5 +1,6 @@
 export enum ActivityDataTypeEnum {
-    STEP = 'step',
-    CALORIE = 'calorie',
-    DISTANCE = 'distance'
+    STEPS = 'steps',
+    CALORIES = 'calories',
+    DISTANCE = 'distance',
+    INTENSITY = 'intensity'
 }

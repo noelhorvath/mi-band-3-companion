@@ -1,4 +1,4 @@
-export enum QueryOperators {
+export enum QueryOperator {
     LESS = '<',
     LESS_OR_EQUAL = '<=',
     EQUAL = '==',
