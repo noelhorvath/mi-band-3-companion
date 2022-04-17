@@ -1,0 +1,124 @@
+<ion-modal [trigger]="triggerId" [breakpoints]="[0.1, 1]" [initialBreakpoint]="1">
+    <ng-template>
+        <ion-content>
+            <div class="page-title ion-margin-bottom ion-margin-top">
+                <ion-label color="primary">{{ 'ACCOUNT_SETTINGS' | translate }}</ion-label>
+            </div>
+            <ion-grid class="ion-margin-bottom">
+                <ion-row class="title ion-margin-top ion-margin-bottom">
+                    <ion-col size="12">
+                        <ion-label color="primary">{{ 'PASSWORD' | translate }}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12">
+                        <ion-button expand="block" color="primary" (click)="sendPasswordChangeLink()">
+                            {{ 'REQUEST_PASSWORD_CHANGE_LINK' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid [formGroup]="emailUpdateFormGroup">
+                <ion-row class="title ion-margin-top ion-margin-bottom">
+                    <ion-col size="12">
+                        <ion-label color="primary">{{ 'EMAIL' | translate }}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">{{ 'EMAIL' | translate }}</ion-label>
+                            <ion-input type="email" autocomplete="email" formControlName="email"
+                                       clearInput="true"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6">
+                        <ion-button expand="block" color="primary" (click)="resetEmailUpdateForm()">
+                            {{ 'CLEAR' | translate }}
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button expand="block" [disabled]="!isEmailUpdateValid()" color="primary"
+                                    (click)="updateEmail()">
+                            {{ 'CHANGE' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid class="ion-margin-bottom" [formGroup]="profileUpdateForm">
+                <ion-row class="title ion-margin-top ion-margin-bottom">
+                    <ion-col size="12">
+                        <ion-label color="primary">{{ 'PROFILE' | translate }}</ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">{{ 'FIRST_NAME' | translate }}</ion-label>
+                            <ion-input type="text" autocomplete="given-name" formControlName="firstName"
+                                       clearInput="true"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">{{ 'LAST_NAME' | translate }}</ion-label>
+                            <ion-input type="text" autocomplete="family-name" formControlName="lastName"
+                                       clearInput="true"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item (click)="showPicker('gender')">
+                            <ng-container *ngIf="profileUpdateForm.get('gender')?.value else genderPlaceholder">
+                                <ion-label class="ion-text-center">{{ genderText ?? 'UNKNOWN' | translate }}</ion-label>
+                            </ng-container>
+                            <ng-template #genderPlaceholder>
+                                <ion-label class="ion-text-center placeholder">{{ 'GENDER' | translate }}</ion-label>
+                            </ng-template>
+                            <ion-icon color="primary" name="chevron-forward-outline"></ion-icon>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <app-date-picker [control]="$any(profileUpdateForm.controls['birthDate'])"
+                                         placeholderText="BIRTH_DATE" [min]="this.datePickerMinValue"
+                                         [max]="this.datePickerMaxValue"></app-date-picker>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <app-range-item [control]="$any(profileUpdateForm.controls['height'])"
+                                                 labelText="HEIGHT" unit="cm" [minRangeValue]="20" [maxRangeValue]="300">
+                        </app-range-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <app-range-item [control]="$any(profileUpdateForm.controls['weight'])"
+                                                 labelText="WEIGHT" unit="kg" [minRangeValue]="3" [maxRangeValue]="650">
+                        </app-range-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6">
+                        <ion-button expand="block" color="primary" (click)="resetProfileUpdateForm()">
+                            {{ 'CLEAR' | translate }}
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button expand="block" [disabled]="!isProfileUpdateValid()" color="primary"
+                                    (click)="updateProfile()">
+                            {{ 'UPDATE' | translate }}
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-content>
+    </ng-template>
+</ion-modal>

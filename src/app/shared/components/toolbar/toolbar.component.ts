@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { LanguageService } from '../../../services/language/language.service';
-import { IonSelect } from '@ionic/angular';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FirebaseAuthService } from '../../../services/firebase/auth/firebase-auth.service';
-import { Router } from '@angular/router';
 import { BatteryInfo } from '../../models/classes/BatteryInfo';
 import { LogHelper } from '../../models/classes/LogHelper';
 import { ConnectionInfo } from '../../models/classes/ConnectionInfo';
-import { User as AuthUser } from '@angular/fire/auth';
+import { TaskProgressInfo } from '../../models/classes/TaskProgressInfo';
+import { BleDataService } from '../../../services/ble/data/ble-data.service';
+import { ProgressStatusEnum } from '../../enums/progress-status.enum';
+import { BleConnectionService } from '../../../services/ble/connection/ble-connection.service';
+import { Device } from '../../models/classes/Device';
 
 @Component({
     selector: 'app-toolbar',
@@ -16,43 +16,104 @@ import { User as AuthUser } from '@angular/fire/auth';
 })
 export class ToolbarComponent implements OnDestroy, OnChanges, OnInit {
     private readonly logHelper: LogHelper;
-    private isLanguageServiceInitializedSubscription: Subscription | undefined;
-    private isAuthServiceInitializedSubscription: Subscription | undefined;
-    private currentLanguageSubscription: Subscription | undefined;
-    private authUserSubscription: Subscription | undefined;
-    public currentLanguage: string | undefined;
-    public authUser: AuthUser | undefined;
-    public languages: string[] | undefined;
+    private syncStatusSubscription: Subscription | undefined;
     public connectionStatusColor: string | undefined;
     public batteryChipColor: string | undefined;
     public batteryChipIconName: string | undefined;
     public connectionStatus: string | undefined;
-
-    @ViewChild('languageSelect') public languageSelect!: IonSelect;
+    public syncStatus: string | undefined;
+    public syncStatusColor: string;
+    public syncStatusIconName: string | undefined;
+    public device: Device | undefined;
     @Input() public type: string | undefined;
     @Input() public showBackButton: boolean | undefined;
     @Input() public connectionInfo: ConnectionInfo | undefined;
     @Input() public batteryInfo: BatteryInfo | undefined;
-    @Output() public switchTemplate: EventEmitter<boolean>;
-
-    // TODO: add reconnect/connect/disconnect option to status chip
+    @Input() public menuId: string | undefined;
+    @Input() public showSignOut: boolean;
+    @Input() public isConnectionManagementEnabled: boolean;
+    @Output() public logoutEvent: EventEmitter<void>;
 
     public constructor(
-        private languageService: LanguageService,
-        private authService: FirebaseAuthService,
-        private router: Router
+        private bleDataService: BleDataService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private bleConnectionService: BleConnectionService
     ) {
         this.logHelper = new LogHelper(ToolbarComponent.name);
-        this.switchTemplate = new EventEmitter<boolean>();
+        this.syncStatusIconName = undefined;
+        this.syncStatusColor = 'success';
+        this.logoutEvent = new EventEmitter<void>();
+        this.showSignOut = false;
+        this.isConnectionManagementEnabled = true;
+        this.bleConnectionService.deviceSettingsSubject.subscribe( (device: Device) => {
+           this.device = device;
+        });
+    }
+
+    private setConnectionStatusColorChip(): void {
+        if (this.connectionInfo !== undefined) {
+            this.connectionStatus = this.connectionInfo.status.toUpperCase();
+            if (this.connectionInfo.isReady()) {
+                this.connectionStatusColor = 'success';
+            } else if (this.connectionInfo.isConnectingOrAuthenticating()) {
+                this.connectionStatusColor = 'warning';
+            } else if (this.connectionInfo.isDisconnected()) {
+                this.connectionStatusColor = 'danger';
+            } else {
+                this.connectionStatusColor = 'warning';
+            }
+        }
+    }
+
+    private setSyncStatusChip(): void {
+        if (this.syncStatus !== undefined) {
+            switch (this.syncStatus) {
+                case 'finished':
+                    this.syncStatusColor = 'success';
+                    this.syncStatusIconName = 'checkmark-outline';
+                    break;
+                case 'started' || 'processing':
+                    this.syncStatusColor = 'warning';
+                    this.syncStatusIconName = undefined;
+                    break;
+                case 'failed':
+                    this.syncStatusColor = 'danger';
+                    this.syncStatusIconName = 'alert-outline';
+                    break;
+                default:
+                    this.syncStatusColor = 'warning';
+                    this.syncStatusIconName = undefined;
+            }
+        }
+    }
+
+    private setBatteryChip(): void {
+        if (this.batteryInfo !== undefined) {
+            if (this.batteryInfo.isCharging) {
+                this.batteryChipColor = 'warning';
+                this.batteryChipIconName = 'battery-charging';
+            } else {
+                if (this.batteryInfo.batteryLevel > 55) {
+                    this.batteryChipColor = 'success';
+                    this.batteryChipIconName = 'battery-full';
+                } else if (this.batteryInfo.batteryLevel <= 55 && this.batteryInfo.batteryLevel > 15) {
+                    this.batteryChipColor = 'success';
+                    this.batteryChipIconName = 'battery-half';
+                } else {
+                    this.batteryChipColor = 'danger';
+                    this.batteryChipIconName = 'battery-dead';
+                }
+            }
+        }
     }
 
     public ngOnInit(): void {
-        this.languages = this.languageService.getLanguages();
-        this.currentLanguageSubscription = this.languageService.currentLanguageSubject.subscribe((lang: string) => {
-            this.currentLanguage = lang;
-        });
-        this.authUserSubscription = this.authService.authUserSubject.subscribe( (user: AuthUser | undefined) => {
-            this.authUser = user;
+        this.syncStatusSubscription = this.bleDataService.activitySyncStatusSubject.subscribe( (progressInfo: TaskProgressInfo) => {
+            if (this.syncStatus !== progressInfo.status) {
+                this.syncStatus = progressInfo.status;
+                this.setSyncStatusChip();
+                this.changeDetectorRef.detectChanges();
+            }
         });
     }
 
@@ -68,84 +129,31 @@ export class ToolbarComponent implements OnDestroy, OnChanges, OnInit {
         }
     }
 
-    private setBatteryChip(): void {
-        if (this.batteryInfo) {
-            if (this.batteryInfo.isCharging) {
-                this.batteryChipColor = 'warning';
-                this.batteryChipIconName = 'battery-charging';
+    public async syncDeviceData(): Promise<void> {
+        try {
+            if (this.syncStatus !== ProgressStatusEnum.PROCESSING || ProgressStatusEnum.STARTED) {
+                return await this.bleDataService.fetchActivityData();
             } else {
-                if (this.batteryInfo.batteryLevel > 55) {
-                    this.batteryChipColor = 'success';
-                    this.batteryChipIconName = 'battery-full';
-                } else if (this.batteryInfo.batteryLevel <= 55 && this.batteryInfo.batteryLevel > 10) {
-                    this.batteryChipColor = 'success';
-                    this.batteryChipIconName = 'battery-half';
-                } else {
-                    this.batteryChipColor = 'danger';
-                    this.batteryChipIconName = 'battery-dead';
-                }
+                this.logHelper.logDefault(this.syncDeviceData.name, 'already syncing');
             }
+        } catch (e: unknown) {
+            this.logHelper.logError(this.syncDeviceData.name, this.bleDataService.fetchActivityData.name, { value: e });
         }
     }
 
     public ngOnDestroy(): void {
-        this.isAuthServiceInitializedSubscription?.unsubscribe();
-        this.isLanguageServiceInitializedSubscription?.unsubscribe();
-        this.currentLanguageSubscription?.unsubscribe();
-        this.authUserSubscription?.unsubscribe();
+        this.syncStatusSubscription?.unsubscribe();
     }
 
-    public async openLanguageSelect(event: UIEvent): Promise<void> {
+    public async manageConnection(): Promise<void> {
         try {
-            await this.languageSelect.open(event);
-            this.languageSelect.value = this.languageService.getCurrentLanguage();
-            const langSelectSubscription = this.languageSelect.ionChange.subscribe(async () => {
-                try {
-                    const lang = this.languageSelect.value as string;
-                    this.logHelper.logDefault(this.openLanguageSelect.name, 'Selected language', { value: lang });
-                    await this.languageService.changeLanguage(lang);
-                    langSelectSubscription?.unsubscribe();
-                } catch (e: unknown) {
-                    this.logHelper.logError('langSelectSubscription', 'languageSelect.ionChange error', { value: e });
-                }
-            });
-        } catch (e: unknown) {
-            this.logHelper.logError(this.openLanguageSelect.name, 'languageSelect error', { value: e });
-        }
-    }
-
-    private setConnectionStatusColorChip(): void {
-        if (this.connectionInfo) {
-            this.connectionStatus = this.connectionInfo.status.toUpperCase();
-            if (this.connectionInfo.isConnected()) {
-                this.connectionStatusColor = 'success';
-            } else if (this.connectionInfo.isConnecting()) {
-                this.connectionStatusColor = 'warning';
-            } else if (this.connectionInfo.isDisconnected()) {
-                this.connectionStatusColor = 'danger';
-            } else {
-                this.connectionStatusColor = 'warning';
+            if (this.connectionInfo?.isReady() && this.device !== undefined) {
+                await this.bleConnectionService.disconnectAndClose(this.device);
+            } else if (!this.connectionInfo?.isConnected() && this.device !== undefined) {
+                await this.bleConnectionService.connect(this.device);
             }
-        }
-    }
-
-    public goBack(): void {
-        this.switchTemplate.emit(false);
-    }
-
-    /*
-    public openSettings($event: MouseEvent) {
-        // TODO: device, account,... settings
-    }
-     */
-
-    public async signOut(): Promise<void> {
-        try {
-            await this.authService.signOut();
-            await this.router.navigateByUrl('/login', { replaceUrl: true });
-            this.logHelper.logDefault(this.signOut.name, 'User logged out');
         } catch (e: unknown) {
-            this.logHelper.logError(this.signOut.name, e);
+            this.logHelper.logError(this.manageConnection.name, e);
         }
     }
 }

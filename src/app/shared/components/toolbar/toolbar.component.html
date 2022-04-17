@@ -1,15 +1,9 @@
 <ion-toolbar>
-    <ng-container *ngIf="this.type === 'login' || this.type === 'register' else defaultToolbar">
-        <ng-container *ngIf="this.type === 'register' else otherBackButton">
-            <ion-back-button [hidden]="!showBackButton" slot="start" text="{{ 'BACK' | translate }}"></ion-back-button>
-        </ng-container>
-        <ng-template #otherBackButton>
-            <ion-button [hidden]="!showBackButton" slot="start" (click)="goBack()">
-                <ion-icon name="arrow-back-sharp"></ion-icon>
-                <ion-text>{{ 'BACK' | translate }}</ion-text>
-            </ion-button>
-        </ng-template>
-        <ion-button slot="end" (click)="openLanguageSelect($event)">
+    <ng-container *ngIf="this.type === 'login' || this.type === 'register'
+                   || this.type === 'reset-password' else defaultToolbar">
+        <ion-back-button [hidden]="!showBackButton" slot="start"
+                         text="{{ 'BACK_UPPERCASE' | translate }}"></ion-back-button>
+        <ion-button slot="end" (click)="languageSelect.openLanguageSelect($event)">
             <ion-icon name="language-sharp"></ion-icon>
             <ion-text>{{ "LANG_ID" | translate }}</ion-text>
         </ion-button>
@@ -20,8 +14,8 @@
             <ion-back-button slot="start" [hidden]="!showBackButton" text="{{ 'BACK' | translate }}"></ion-back-button>
         </ion-buttons>
         <div class="ion-color-primary">
-            <ng-container *ngIf="connectionStatus !== undefined && connectionStatusColor !== undefined">
-                <ion-chip [color]="connectionStatusColor">
+            <ng-container *ngIf="connectionStatus !== undefined && connectionStatusColor !== undefined && isConnectionManagementEnabled">
+                <ion-chip [color]="connectionStatusColor" (click)="manageConnection()">
                     <ion-icon name="bluetooth"></ion-icon>
                     <ion-label>{{ connectionStatus | translate }}</ion-label>
                     <ng-container *ngIf="connectionStatus === 'CONNECTING'">
@@ -29,30 +23,41 @@
                     </ng-container>
                 </ion-chip>
             </ng-container>
-            <ng-container *ngIf="batteryInfo !== undefined && batteryChipIconName !== undefined && batteryChipColor !== undefined">
+            <ng-container
+                *ngIf="batteryInfo !== undefined && batteryChipIconName !== undefined && batteryChipColor !== undefined">
                 <ion-chip [color]="batteryChipColor">
                     <ion-icon [name]="batteryChipIconName"></ion-icon>
                     <ion-label>{{ batteryInfo.batteryLevel + '%'}}</ion-label>
                 </ion-chip>
             </ng-container>
+            <ng-container *ngIf="connectionInfo?.isReady()">
+                <ion-chip [color]="syncStatusColor" (click)="syncDeviceData()">
+                    <ion-icon name="sync-circle-outline"></ion-icon>
+                    <ng-container *ngIf="syncStatus === 'processing' || syncStatus === 'started'">
+                        <ion-spinner name="lines-sharp-small" [color]="syncStatusColor"></ion-spinner>
+                    </ng-container>
+                    <ng-container *ngIf="syncStatusIconName !== undefined">
+                        <ion-icon [name]="syncStatusIconName"></ion-icon>
+                    </ng-container>
+                </ion-chip>
+            </ng-container>
         </div>
         <ion-buttons slot="end">
-            <ion-button (click)="openLanguageSelect($event)">
-                <ion-icon name="language-sharp"></ion-icon>
-                <ion-text>{{ "LANG_ID" | translate }}</ion-text>
-            </ion-button>
-            <ng-container *ngIf="authUser !== undefined">
-                <ion-button slot="icon-only" (click)="signOut()">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                </ion-button>
+            <ng-container *ngIf="menuId !== undefined else withoutMenu">
                 <ion-menu-button></ion-menu-button>
             </ng-container>
+            <ng-template #withoutMenu>
+                <ion-item button="true" (click)="languageSelect.openLanguageSelect($event)">
+                    <ion-icon name="language-sharp"></ion-icon>
+                    <ion-text>{{ "LANG_ID" | translate }}</ion-text>
+                </ion-item>
+                <ng-container *ngIf="showSignOut">
+                    <ion-item button="true" slot="icon-only" (click)="logoutEvent.emit()">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </ion-item>
+                </ng-container>
+            </ng-template>
         </ion-buttons>
     </ng-template>
-
-    <ion-select [(ngModel)]="currentLanguage" [hidden]="true" interface="popover" #languageSelect>
-        <ng-container *ngFor="let lang of languages">
-            <ion-select-option value="{{ lang }}">{{ lang.toUpperCase() | translate }}</ion-select-option>
-        </ng-container>
-    </ion-select>
+    <app-toolbar-language-select #languageSelect></app-toolbar-language-select>
 </ion-toolbar>

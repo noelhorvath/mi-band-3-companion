@@ -1,0 +1,3 @@
+<ion-select [(ngModel)]="currentLanguage" [hidden]="true" interface="popover" #languageSelect>
+    <ion-select-option *ngFor="let lang of languages" value="{{ lang }}">{{ lang.toUpperCase() | translate }}</ion-select-option>
+</ion-select>

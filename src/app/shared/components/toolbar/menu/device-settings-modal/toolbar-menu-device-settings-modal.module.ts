@@ -1,24 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToolbarComponent } from './toolbar.component';
+import { ToolbarMenuDeviceSettingsModalComponent } from './toolbar-menu-device-settings-modal.component';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import { ToolbarLanguageSelectModule } from './language-select/toolbar-language-select.module';
 
 
 @NgModule({
-    declarations: [ToolbarComponent],
-    exports: [
-        ToolbarComponent
-    ],
+    declarations: [ToolbarMenuDeviceSettingsModalComponent],
     imports: [
         CommonModule,
         IonicModule,
         TranslateModule,
-        FormsModule,
-        ToolbarLanguageSelectModule
-    ]
+        FormsModule
+    ],
+    exports: [ToolbarMenuDeviceSettingsModalComponent]
 })
-export class ToolbarModule {
+export class ToolbarMenuDeviceSettingsModalModule {
 }

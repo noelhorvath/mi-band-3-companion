@@ -1,0 +1,19 @@
+ion-modal {
+    .title {
+        font-size: large;
+
+    }
+    .page-title {
+        font-size: x-large;
+    }
+
+    .title, .page-title {
+        font-weight: bold;
+        text-align: center;
+    }
+    ion-select {
+        max-width: 100% !important;
+        width: 100% !important;
+        text-align: center;
+    }
+}

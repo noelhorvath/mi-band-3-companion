@@ -1,0 +1,36 @@
+<ion-menu side="start" [contentId]="contentId" [menuId]="menuId">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>{{ 'MENU' | translate }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ng-container *ngIf="user !== undefined">
+            <div class="user-text ion-margin-bottom ion-margin-top">
+                <ion-label>{{ ('WELCOME' | translate) + ' ' + user.getFullName(languageSelect.currentLanguage) }}</ion-label>
+            </div>
+        </ng-container>
+        <ion-item class="ion-margin-top ion-margin-bottom" button="true" id="user-settings-modal">
+            <ion-label>{{ 'ACCOUNT_SETTINGS' | translate }}</ion-label>
+            <app-toolbar-menu-user-settings-modal triggerId="user-settings-modal" [connectionInfo]="connectionInfo"
+                                                  [user]="user" ></app-toolbar-menu-user-settings-modal>
+        </ion-item>
+        <ion-item class="ion-margin-top ion-margin-bottom" button="true" id="device-settings-modal">
+            <ion-label>{{ 'DEVICE_SETTINGS' | translate }}</ion-label>
+            <app-toolbar-menu-device-settings-modal triggerId="device-settings-modal"
+                                                    [user]="user" [connectionInfo]="connectionInfo">
+            </app-toolbar-menu-device-settings-modal>
+        </ion-item>
+        <ion-item class="ion-margin-top ion-margin-bottom"  button="true" (click)="languageSelect.openLanguageSelect($event)">
+            <ion-label>{{ "LANG_ID" | translate }}</ion-label>
+            <ion-icon color="primary" name="language-sharp"></ion-icon>
+        </ion-item>
+        <ng-container *ngIf="authUser !== undefined">
+            <ion-item class="ion-margin-top ion-margin-bottom" button="true" (click)="logoutEvent.emit()">
+                <ion-label>{{ 'SIGN_OUT' | translate }}</ion-label>
+                <ion-icon color="primary" name="log-out-outline"></ion-icon>
+            </ion-item>
+        </ng-container>
+    </ion-content>
+    <app-toolbar-language-select #languageSelect></app-toolbar-language-select>
+</ion-menu>
