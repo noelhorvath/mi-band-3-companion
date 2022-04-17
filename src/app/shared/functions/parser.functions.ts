@@ -1,6 +1,5 @@
-import { QueryDocumentSnapshot, SnapshotOptions, WithFieldValue, DocumentData, OrderByDirection } from '@angular/fire/firestore';
-import { FirestoreConverter } from '../types/firestore.types';
 import { Constructor, Copyable, EqualityChecker, NamedProperty, SortFunction } from '../types/custom.types';
+import { OrderByDirection } from '@angular/fire/firestore';
 
 // class must have a default constructor and a copy method or a copy constructor
 export const instantiate = <T extends Copyable<T>, K extends T>(obj: T, factory: Constructor<K>): K => {
@@ -16,11 +15,6 @@ export const instantiate = <T extends Copyable<T>, K extends T>(obj: T, factory:
 export const parseJSON = <T extends Copyable<T>, K extends T>(data: Array<T> | T, factory: Constructor<K>): K[] | K =>
     data instanceof Array ? data.map((s: T) => instantiate(s, factory) ?? new factory()) : instantiate(data, factory) ?? new factory();
 
-export const genericFirebaseConverter = <T extends Copyable<T>>(factory: Constructor<T>): FirestoreConverter<T> => ({
-    toFirestore: (data: WithFieldValue<T>): DocumentData => JSON.parse(JSON.stringify(data)),
-    fromFirestore: (snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): T => instantiate(snapshot.data(options), factory)
-});
-
 export const copyProperty =
     <IMainType extends NamedProperty<PropertyName, (IPropertyType | Array<IPropertyType>)> & Copyable<IMainType>,
         MainType extends IMainType,
@@ -29,7 +23,7 @@ export const copyProperty =
         PropertyType extends IPropertyType>
     (_this: MainType, other: Partial<IMainType> | IMainType | MainType, propName: PropertyName, propFactory: Constructor<PropertyType>): void => {
         if (other[propName] instanceof Array) {
-            (_this[propName] as IPropertyType[] | undefined) = (other[propName] as Array<IPropertyType>)?.map( (item: IPropertyType) => instantiate<IPropertyType, PropertyType>(item, propFactory) );
+            (_this[propName] as IPropertyType[] | undefined) = (other[propName] as Array<IPropertyType>)?.map((item: IPropertyType) => instantiate<IPropertyType, PropertyType>(item, propFactory));
         } else if (_this[propName] && other[propName] && typeof _this.copy === 'function' && typeof (_this[propName] as IPropertyType).copy === 'function') {
             (_this[propName] as (IPropertyType & { copy: (other: IPropertyType) => void })).copy(other[propName] as IPropertyType);
         } else {
@@ -47,14 +41,13 @@ export const isArrayPropertyEqual =
         PropertyName extends string,
         IPropertyType,
         PropertyType extends IPropertyType & EqualityChecker<IPropertyType>>(
-            _this: MainType,
-            other: IMainType,
-            mainFactory: Constructor<MainType>,
-            propName: PropertyName,
-            sortFunction: (propName: string, order: OrderByDirection) => SortFunction<IPropertyType>,
-            sortByPropName: string,
-            sortByOrder: OrderByDirection): boolean =>
-    {
+        _this: MainType,
+        other: IMainType,
+        mainFactory: Constructor<MainType>,
+        propName: PropertyName,
+        sortFunction: (propName: string, order: OrderByDirection) => SortFunction<IPropertyType>,
+        sortByPropName: string,
+        sortByOrder: OrderByDirection): boolean => {
         let isEqual = false;
         if (_this[propName] === other[propName]) {
             isEqual = true;

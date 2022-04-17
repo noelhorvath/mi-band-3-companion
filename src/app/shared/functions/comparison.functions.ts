@@ -15,7 +15,9 @@ export const compareTimestamps = (a: IFireTimestamp, b: IFireTimestamp): number 
 };
 
 export const equals = <T>(a: T, b: T): boolean => {
-    if (a === b){
+    if (a === b) {
+        return a === b;
+    } else if (a === undefined || b === undefined) {
         return a === b;
     } else if (a instanceof Date && b instanceof Date) {
         return compareDates(a, b) === 0;
