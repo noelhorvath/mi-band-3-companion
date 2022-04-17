@@ -13,14 +13,12 @@ export class HomeTabBarComponent {
     private readonly activityIconOutline = 'walk-outline';
     private readonly heartRateIconFilled = 'fitness';
     private readonly heartRateIconOutline = 'fitness-outline';
-    private readonly trainingIconFilled = 'barbell';
-    private readonly trainingIconOutline = 'barbell-outline';
     private readonly statisticsIconFilled = 'bar-chart';
     private readonly statisticsIconOutline = 'bar-chart-outline';
+    private prevSelectedTab: string | undefined;
     public deviceIcon: string;
     public activityIcon: string;
     public heartRateIcon: string;
-    public trainingIcon: string;
     public statisticsIcon: string;
     @ViewChild('tabBar', { static: false }) public tabs!: IonTabs;
 
@@ -28,13 +26,30 @@ export class HomeTabBarComponent {
         this.deviceIcon = this.deviceIconOutline;
         this.activityIcon = this.activityIconOutline;
         this.heartRateIcon = this.heartRateIconOutline;
-        this.trainingIcon = this.trainingIconOutline;
         this.statisticsIcon = this.statisticsIconOutline;
     }
 
     public setSelectedTab(): void {
         const selectedTab = this.tabs.getSelected();
-        if (selectedTab) {
+        if (selectedTab !== undefined) {
+            if (this.prevSelectedTab !== undefined) {
+                switch (this.prevSelectedTab) {
+                    case 'device':
+                        this.deviceIcon = this.deviceIconOutline;
+                        break;
+                    case 'activity':
+                        this.activityIcon = this.activityIconOutline;
+                        break;
+                    case 'heart-rate':
+                        this.heartRateIcon = this.heartRateIconOutline;
+                        break;
+                    case 'statistics':
+                        this.statisticsIcon = this.statisticsIconOutline;
+                        break;
+                    default:
+                        break;
+                }
+            }
             switch (selectedTab) {
                 case 'device':
                     this.deviceIcon = this.deviceIconFilled;
@@ -45,9 +60,6 @@ export class HomeTabBarComponent {
                 case 'heart-rate':
                     this.heartRateIcon = this.heartRateIconFilled;
                     break;
-                case 'training':
-                    this.trainingIcon = this.trainingIconFilled;
-                    break;
                 case 'statistics':
                     this.statisticsIcon = this.statisticsIconFilled;
                     break;
@@ -55,5 +67,6 @@ export class HomeTabBarComponent {
                     break;
             }
         }
+        this.prevSelectedTab = selectedTab;
     }
 }
