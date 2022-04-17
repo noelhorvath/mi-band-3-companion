@@ -4,8 +4,8 @@ import { DeviceSetupComponent } from './device-setup.component';
 import { IonicModule } from '@ionic/angular';
 import { DeviceSetupRoutingModule } from './device-setup-routing.module';
 import { ToolbarModule } from '../../shared/components/toolbar/toolbar.module';
-import { ScannedDeviceCardModule } from './scanned-device-card/scanned-device-card.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ScannedDeviceItemModule } from './scanned-device-item/scanned-device-item.module';
 
 @NgModule({
     declarations: [DeviceSetupComponent],
@@ -14,8 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
         IonicModule,
         DeviceSetupRoutingModule,
         ToolbarModule,
-        ScannedDeviceCardModule,
-        TranslateModule
+        TranslateModule,
+        ScannedDeviceItemModule
     ]
 })
 export class DeviceSetupModule {

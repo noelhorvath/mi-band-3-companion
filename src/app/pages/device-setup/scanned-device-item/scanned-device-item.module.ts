@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScannedDeviceCardComponent } from './scanned-device-card.component';
+import { ScannedDeviceItemComponent } from './scanned-device-item.component';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-    declarations: [ScannedDeviceCardComponent],
+    declarations: [ScannedDeviceItemComponent],
     exports: [
-        ScannedDeviceCardComponent
+        ScannedDeviceItemComponent
     ],
     imports: [
         CommonModule,
@@ -15,5 +15,5 @@ import { TranslateModule } from '@ngx-translate/core';
         TranslateModule
     ]
 })
-export class ScannedDeviceCardModule {
+export class ScannedDeviceItemModule {
 }

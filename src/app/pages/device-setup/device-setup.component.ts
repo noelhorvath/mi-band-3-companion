@@ -36,7 +36,7 @@ export class DeviceSetupComponent implements OnDestroy, OnInit {
         private userService: FirestoreUserService,
         private router: Router,
         private authService: FirebaseAuthService,
-        private messageService: MessageService,
+        private messageService: MessageService
     ) {
         this.logHelper = new LogHelper(DeviceSetupComponent.name);
         this.scanInfo = new ScanInfo();
@@ -49,61 +49,22 @@ export class DeviceSetupComponent implements OnDestroy, OnInit {
                 this.scanInfo = scanInfo;
                 this.logHelper.logDefault('ngOnInit', 'scan info', { value: scanInfo });
                 if (scanInfo.results !== undefined) {
-                    this.scanResults = scanInfo.results;
-                    await this.messageService.dismissLoading();
-                    if (scanInfo.isDisabled.valueOf() && this.scanIntervalId === undefined) {
-                        // 10s timeout before next scan
-                        this.runScanCountdown();
+                    const authUser = this.authService.getAuthUser();
+                    if (authUser !== undefined) {
+                        const user = await this.userService.get(authUser.uid);
+                        this.scanResults = scanInfo.results.filter( (scanResult: ScanResult) =>
+                            user?.devices !== undefined && user.devices.length > 0
+                                ? user.devices.findIndex( device => device.macAddress === scanResult.address) === -1 : true);
+                        await this.messageService.dismissLoading();
+                        if (scanInfo.isDisabled.valueOf() && this.scanIntervalId === undefined) {
+                            // 10s timeout before next scan
+                            this.runScanCountdown();
+                        }
                     }
                 }
             },
             error: async (e: unknown) => {
                 await this.displayErrorToast(e, 'scanInfoSubject');
-            }
-        });
-
-        this.connectionInfoSubscription = this.bleConnectionService.connectionInfoSubject.subscribe({
-            next: async (connectionInfo: ConnectionInfo) => {
-                this.connectionInfo = connectionInfo;
-                this.logHelper.logDefault('connectionInfoSubject', 'connectionInfo', { value: connectionInfo });
-                if (connectionInfo.isConnectingOrAuthenticating()) {
-                    await this.messageService.createLoading('CONNECTING_TO_DEVICE_WITH_DOTS');
-                } else if (connectionInfo.isReady()) {
-                    try {
-                        this.messageService.changeLoadingMessage('SAVING_NEW_DEVICE_WITH_DOTS');
-                        const authUser = this.authService.getAuthUser();
-                        if (authUser !== undefined) {
-                            const user = await this.userService.get(authUser.uid);
-                            if (user !== undefined && connectionInfo.device !== undefined) {
-                                if (user.devices === undefined) {
-                                    user.devices = [];
-                                }
-                                user.devices.push(connectionInfo.device);
-                                this.userService.updateField({ id: user.id }, 'devices', user.devices)
-                                    .then(() => this.logHelper.logDefault('update User', 'devices field has been updated'))
-                                    .catch( (e: unknown) => this.logHelper.logError('update User error', e));
-                                await this.messageService.dismissLoading();
-                                this.logHelper.logDefault('connectionInfoSubject', 'Adding new device', { value: connectionInfo.device });
-                                await this.router.navigateByUrl('/home', { replaceUrl: true });
-                            } else {
-                                await this.messageService.dismissLoading();
-                                await this.router.navigateByUrl('/login', { replaceUrl: true });
-                            }
-                        } else {
-                            this.logHelper.logError('connectionInfoSubject', 'User is not logged in!');
-                            await this.messageService.dismissLoading();
-                            await this.router.navigateByUrl('/login', { replaceUrl: true });
-                        }
-                    } catch (error: unknown) {
-                        await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, 'connectionInfoSubject', error), 'toast', true, 5000);
-                    }
-                } else if (connectionInfo.isDisconnected()) {
-                    await this.messageService.dismissLoading();
-                }
-            },
-            error: async (e: unknown) => {
-                this.connectionInfo.status = BLEConnectionStatus.CONNECTION_ERROR;
-                await this.displayErrorToast(e, 'connectionInfoSubject');
             }
         });
     }
@@ -119,7 +80,6 @@ export class DeviceSetupComponent implements OnDestroy, OnInit {
                 return await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, this.startScanningForDevices.name, 'BL_NOT_ENABLED'), 'alert', true);
             }
             this.messageService.changeLoadingMessage('SCANNING_FOR_DEVICES_WITH_DOTS');
-            // TODO: fine tune scanning time
             return this.bleConnectionService.scanForDevices(3000);
         } catch (e) {
             return await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, this.startScanningForDevices.name, e), 'alert', true);
@@ -149,6 +109,50 @@ export class DeviceSetupComponent implements OnDestroy, OnInit {
     }
 
     public connectToSelectedDevice(scannedDevice: ScanResult): Promise<void> {
+        this.connectionInfoSubscription = this.bleConnectionService.connectionInfoSubject.subscribe({
+            next: async (connectionInfo: ConnectionInfo) => {
+                this.connectionInfo = connectionInfo;
+                this.logHelper.logDefault('connectionInfoSubject', 'connectionInfo', { value: connectionInfo });
+                if (connectionInfo.isConnectingOrAuthenticating()) {
+                    await this.messageService.createLoading('CONNECTING_TO_DEVICE_WITH_DOTS');
+                } else if (connectionInfo.isReady()) {
+                    try {
+                        this.messageService.changeLoadingMessage('SAVING_NEW_DEVICE_WITH_DOTS');
+                        const authUser = this.authService.getAuthUser();
+                        if (authUser !== undefined) {
+                            const user = await this.userService.get(authUser.uid);
+                            if (user !== undefined && connectionInfo.device !== undefined) {
+                                if (user.devices === undefined) {
+                                    user.devices = [];
+                                }
+                                user.devices.push(connectionInfo.device);
+                                this.userService.update({ id: user.id }, { devices: user.devices })
+                                    .then(() => this.logHelper.logDefault('update User', 'devices field has been updated'))
+                                    .catch((e: unknown) => this.logHelper.logError('update User error', e));
+                                this.messageService.changeLoadingMessage('INITIALIZING_DEVICE_WITH_DOTS');
+                                this.logHelper.logDefault('connectionInfoSubject', 'Adding new device', { value: connectionInfo.device });
+                                await this.router.navigateByUrl('/home', { replaceUrl: true });
+                            } else {
+                                await this.messageService.dismissLoading();
+                                await this.router.navigateByUrl('/login', { replaceUrl: true });
+                            }
+                        } else {
+                            this.logHelper.logError('connectionInfoSubject', 'User is not logged in!');
+                            await this.messageService.dismissLoading();
+                            await this.router.navigateByUrl('/login', { replaceUrl: true });
+                        }
+                    } catch (error: unknown) {
+                        await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, 'connectionInfoSubject', error), 'toast', true, 5000);
+                    }
+                } else if (connectionInfo.isDisconnected()) {
+                    await this.messageService.dismissLoading();
+                }
+            },
+            error: async (e: unknown) => {
+                this.connectionInfo.status = BLEConnectionStatus.CONNECTION_ERROR;
+                await this.displayErrorToast(e, 'connectionInfoSubject');
+            }
+        });
         return this.bleConnectionService.connect(new Device(scannedDevice.name, scannedDevice.address), false);
     }
 
@@ -161,5 +165,14 @@ export class DeviceSetupComponent implements OnDestroy, OnInit {
     public ngOnDestroy(): void {
         this.scanInfoSubscription?.unsubscribe();
         this.connectionInfoSubscription?.unsubscribe();
+    }
+
+    public async signOutUser(): Promise<void> {
+        try {
+            await this.authService.signOut();
+            await this.router.navigateByUrl('/login', { replaceUrl: true });
+        } catch (e: unknown) {
+            this.logHelper.logError(this.signOutUser.name, e);
+        }
     }
 }

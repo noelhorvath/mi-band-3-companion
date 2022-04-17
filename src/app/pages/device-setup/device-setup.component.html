@@ -1,9 +1,11 @@
 <ion-header>
-    <app-toolbar [connectionInfo]="connectionInfo" [showBackButton]="false"></app-toolbar>
+    <app-toolbar [connectionInfo]="connectionInfo" [showBackButton]="false"
+                 [isConnectionManagementEnabled]="false" [showSignOut]="true"
+                 (logoutEvent)="signOutUser()"></app-toolbar>
 </ion-header>
 <ion-content>
     <ng-container *ngIf="!connectionInfo.isConnected()">
-        <ion-button expand="block" color="primary" [disabled]="scanInfo.isDisabled" (click)="startScanningForDevices()">
+        <ion-button class="ion-margin-top ion-margin-bottom" expand="block" color="primary" [disabled]="scanInfo.isDisabled" (click)="startScanningForDevices()">
             <ng-container *ngIf="counter !== undefined else enabledScan">
                 <ion-grid>
                     <ion-row>
@@ -15,18 +17,16 @@
             <ng-template #enabledScan>{{ 'SCAN_FOR_DEVICES' | translate }}</ng-template>
         </ion-button>
         <ng-container *ngIf="scanResults !== undefined && scanResults.length > 0 else noDevices">
-            <ng-container *ngFor="let scanResult of scanResults">
-                <app-scanned-device-card
-                    [scanResult]="scanResult"
-                    (connectToDevice)="connectToSelectedDevice($event)">
-                </app-scanned-device-card>
-            </ng-container>
+            <ion-item-group>
+                <app-scanned-device-item *ngFor="let scanResult of scanResults" [scanResult]="scanResult"
+                                         (connectToDevice)="connectToSelectedDevice($event)"></app-scanned-device-item>
+            </ion-item-group>
         </ng-container>
         <ng-template #noDevices>
             <ng-container *ngIf="scanResults !== undefined">
                 <ion-card>
-                    <ion-card-content>
-                        {{ 'NO_DEVICES_FOUND' | translate }}
+                    <ion-card-content class="ion-text-center">
+                        <ion-label>{{ 'NO_DEVICES_FOUND' | translate }}</ion-label>
                     </ion-card-content>
                 </ion-card>
             </ng-container>
