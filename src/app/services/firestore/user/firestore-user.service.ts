@@ -8,6 +8,6 @@ import { Firestore } from '@angular/fire/firestore';
 })
 export class FirestoreUserService extends FirestoreBaseService<User> {
     public constructor(firestore: Firestore) {
-        super(firestore, User, 'users');
+        super(firestore, User, User.getFirestoreConverter(), 'users');
     }
 }

@@ -11,8 +11,9 @@ import { LogHelper } from '../../../shared/models/classes/LogHelper';
 export class FirestoreAuthSecurityService extends FirestoreBaseService<AuthSecurity> {
     public constructor(
         firestore: Firestore,
-        private deviceService: DeviceService) {
-        super(firestore, AuthSecurity);
+        private deviceService: DeviceService
+    ) {
+        super(firestore, AuthSecurity, AuthSecurity.getFirestoreConverter());
         this.deviceService.getUUID()
             .then((uuid: string) => this.collectionPath = `security/${ uuid }/authentication`)
             .catch((e: unknown) => LogHelper.log(

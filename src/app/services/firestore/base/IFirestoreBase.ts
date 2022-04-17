@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { QueryOption } from '../../../shared/types/firestore.types';
+import { PaginateOptions, PaginateResult, QueryOption } from '../../../shared/types/firestore.types';
 
 export interface IFirestoreBase<T> {
     add(item: T, id?: string): Promise<void>;
@@ -8,13 +8,13 @@ export interface IFirestoreBase<T> {
 
     getWithValueChanges(id: string): Observable<T | undefined>;
 
-    list(queryOptions?: QueryOption | QueryOption[]): Promise<T[] | undefined>;
+    list(queryOptions?: QueryOption<T> | QueryOption<T>[]): Promise<T[] | undefined>;
 
-    listWithValueChanges(queryOptions?: QueryOption | QueryOption[]): Observable<T[] | undefined>;
+    listWithValueChanges(queryOptions?: QueryOption<T> | QueryOption<T>[]): Observable<T[] | undefined>;
 
-    update(item: T): Promise<void>;
+    delete(queryOptions: { id: string } | QueryOption<T> | QueryOption<T>[]): Promise<void>;
 
-    delete(queryOptions: { id: string } | QueryOption | QueryOption[]): Promise<void>;
+    update(queryOptions: { id: string } | QueryOption<T> | QueryOption<T>[], data: Partial<T>): Promise<void>;
 
-    updateField(queryOptions: { id: string }, fieldName: string, data: unknown, addToArray: boolean): Promise<void>;
+    paginate(options: PaginateOptions<T>): Promise<PaginateResult<T> | undefined>;
 }
