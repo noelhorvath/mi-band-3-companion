@@ -79,46 +79,8 @@ export class HomeComponent implements OnDestroy, OnInit {
             this.logHelper.logDefault('batteryInfoSubject', 'batteryInfo', { value: batteryInfo });
             this.changeDetectorRef.detectChanges();
         });
-        this.connectionInfoSubscription = this.bleConnectionService.connectionInfoSubject.subscribe({
-            next: async (connInfo: ConnectionInfo) => {
-                this.connectionInfo = connInfo;
-                if (connInfo.device !== undefined) {
-                    this.bleConnectionService.deviceSettingsSubject.next(connInfo.device);
-                }
-                this.logHelper.logDefault('connectionInfoSubject', 'connectionInfo', { value: connInfo });
-                if (connInfo.isReady()) {
-                    if (this.user !== undefined && connInfo.device !== undefined) {
-                        try {
-                            const devices = this.user?.devices?.map((dev: Device) =>
-                                connInfo.device !== undefined && dev.macAddress === connInfo.device.macAddress ? connInfo.device : dev);
-                            // update last connected date of device
-                            this.userService.update({ id: this.user.id }, { devices })
-                                .then(() => this.logHelper.logDefault('update User', 'devices field has been updated'))
-                                .catch((e: unknown) => this.logHelper.logError('update User error', e));
-                            this.messageService.changeLoadingMessage('INITIALIZING_DEVICE_WITH_DOTS');
-                            await this.bleDataService.initDeviceData();
-                            this.bleDeviceSettingsService.setCurrentTime(connInfo.device).catch( (e: unknown) => {
-                                this.logHelper.logError(this.bleDeviceSettingsService.setCurrentTime.name, e);
-                            });
-                            this.bleDeviceSettingsService.setUserInfo(connInfo.device, this.user).catch( (e: unknown) => {
-                                this.logHelper.logError(this.bleDeviceSettingsService.setCurrentTime.name, e);
-                            });
-                        } catch (e: unknown) {
-                            await this.messageService.displayErrorMessage(new LogInfo(HomeComponent.name, this.ngOnInit.name, e), 'toast', true);
-                        }
-                    }
-                }
-            },
-            error: async (e: unknown) => {
-                this.connectionInfo.status = BLEConnectionStatus.CONNECTION_ERROR;
-                await this.messageService.displayErrorMessage(new LogInfo(HomeComponent.name, 'connectionInfoSubject', e), 'toast', true);
-            }
-        });
         this.isSubscribedSubscription = this.bleDataService.isSubscribedSubject.subscribe(async (isSubscribed: boolean) => {
             this.logHelper.logDefault('isSubscribedSubject', 'Is app subscribed to device characteristics', { value: isSubscribed });
-            if (!this.isSubscribed.valueOf() && isSubscribed.valueOf() && this.connectionInfo.isReady() && this.connectionInfo.device !== undefined) {
-                this.logHelper.logDefault('isSubscribedSubject', 'Reading device\'s data...');
-            }
             this.isSubscribed = isSubscribed;
             if (this.isSubscribed.valueOf()) {
                 await this.messageService.dismissLoading();
@@ -131,7 +93,47 @@ export class HomeComponent implements OnDestroy, OnInit {
                     .subscribe( (user: User | undefined) => this.user = user);
             }
         });
-        this.initDevice().then( () => this.logHelper.logDefault(this.initDevice.name, 'Device has been initialized'));
+        this.initDevice().then( () => {
+            this.logHelper.logDefault(this.initDevice.name, 'Device has been initialized');
+            this.connectionInfoSubscription = this.bleConnectionService.connectionInfoSubject.subscribe({
+                next: async (connInfo: ConnectionInfo) => {
+                    this.connectionInfo = connInfo;
+                    console.log('connectionInfo: ' + connInfo.toString());
+                    if (connInfo.device !== undefined) {
+                        this.bleConnectionService.deviceSettingsSubject.next(connInfo.device);
+                    }
+                    this.logHelper.logDefault('connectionInfoSubject', 'connectionInfo', { value: connInfo });
+                    if (connInfo.isReady()) {
+                        if (this.user !== undefined && connInfo.device !== undefined) {
+                            try {
+                                const devices = this.user?.devices?.map((dev: Device) =>
+                                    connInfo.device !== undefined && dev.macAddress === connInfo.device.macAddress ? connInfo.device : dev);
+                                // update last connected date of device
+                                this.userService.update({ id: this.user.id }, { devices })
+                                    .then(() => this.logHelper.logDefault('update User', 'devices field has been updated'))
+                                    .catch((e: unknown) => this.logHelper.logError('update User error', e));
+                                this.messageService.changeLoadingMessage('INITIALIZING_DEVICE_WITH_DOTS');
+                                console.log('a');
+                                await this.bleDataService.initDeviceData();
+                                console.log('b');
+                                this.bleDeviceSettingsService.setCurrentTime(connInfo.device).catch( (e: unknown) => {
+                                    this.logHelper.logError(this.bleDeviceSettingsService.setCurrentTime.name, e);
+                                });
+                                this.bleDeviceSettingsService.setUserInfo(connInfo.device, this.user).catch( (e: unknown) => {
+                                    this.logHelper.logError(this.bleDeviceSettingsService.setCurrentTime.name, e);
+                                });
+                            } catch (e: unknown) {
+                                await this.messageService.displayErrorMessage(new LogInfo(HomeComponent.name, this.ngOnInit.name, e), 'toast', true);
+                            }
+                        }
+                    }
+                },
+                error: async (e: unknown) => {
+                    this.connectionInfo.status = BLEConnectionStatus.CONNECTION_ERROR;
+                    await this.messageService.displayErrorMessage(new LogInfo(HomeComponent.name, 'connectionInfoSubject', e), 'toast', true);
+                }
+            });
+        });
     }
 
     public ngOnDestroy(): void {
