@@ -1,9 +1,11 @@
-<div class="chart-wrapper">
-    <canvas baseChart
-            [type]="chartType"
-            [datasets]="chartDataSets"
-            [labels]="tmpChartLabels"
-            [options]="chartOptions"
-            [legend]="chartLegend">
-    </canvas>
-</div>
+<ng-container *ngIf="chartOptions && chartType && chartDataSets && tmpChartLabels && chartOptions">
+    <div class="chart-wrapper">
+        <canvas baseChart
+                [type]="chartType"
+                [datasets]="chartDataSets"
+                [labels]="tmpChartLabels"
+                [options]="chartOptions"
+                [legend]="chartLegend ?? false">
+        </canvas>
+    </div>
+</ng-container>

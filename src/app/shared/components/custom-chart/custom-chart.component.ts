@@ -2,8 +2,8 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '../../../services/language/language.service';
-import { TranslatePipe } from '@ngx-translate/core';
 import { LogHelper } from '../../models/classes/LogHelper';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-custom-chart',
@@ -24,7 +24,7 @@ export class CustomChartComponent implements OnInit, OnDestroy, OnChanges {
 
     public constructor(
         private languageService: LanguageService,
-        private translatePipe: TranslatePipe,
+        private translatePipe: TranslatePipe
     ) {
         this.logHelper = new LogHelper(CustomChartComponent.name);
     }
