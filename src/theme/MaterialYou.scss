@@ -1,30 +1,9 @@
 /* Android 12 Material You style */
 
-ion-card, ion-item {
+ion-card, ion-item, ion-popover::part(content), ion-list, ion-datetime {
     border-radius: 32px;
 }
 
-ion-popover::part(content) {
-    border-radius: 32px;
-    margin: 1% 1%;
-    padding: 1% 1%;
-    background-color: #1f1f1f;
-}
-
-ion-popover::part(backdrop) {
-    --backdrop-opacity: 0.6;
-}
-
-ion-button, ion-back-button {
+ion-button, ion-back-button, ion-modal {
     --border-radius: 32px;
-}
-
-.popover-content {
-    --border-radius: 32px;
-    border-radius: 32px;
-}
-
-.container {
-    overflow: scroll;
-    overflow-scrolling: touch;
 }
