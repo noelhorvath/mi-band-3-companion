@@ -1,6 +1,5 @@
-import { DocumentData, FieldPath, DocumentSnapshot, QueryDocumentSnapshot, SnapshotOptions, WhereFilterOp, WithFieldValue, OrderByDirection } from '@angular/fire/firestore';
+import { DocumentSnapshot, FieldPath, OrderByDirection, WhereFilterOp } from '@angular/fire/firestore';
 
-export type FirestoreConverter<T> = { toFirestore: (data: WithFieldValue<T>) => DocumentData; fromFirestore: (snapshot: QueryDocumentSnapshot, options?: SnapshotOptions) => T };
 export type WhereQuery = {
     fieldPath: string | FieldPath;
     opStr: WhereFilterOp;
@@ -13,6 +12,15 @@ export type OrderByQuery = {
     fieldPath: string | FieldPath;
     directionStr?: OrderByDirection;
 };
-export type QueryOption = WhereQuery | LimitQuery | OrderByQuery | CursorQuery;
+export type QueryOption<T> = WhereQuery | LimitQuery | OrderByQuery | CursorQuery<T>;
 export type CursorQueryType = 'startAt' | 'startAfter' | 'endAt' | 'endBefore';
-export type CursorQuery = { type: CursorQueryType; snapshot: DocumentSnapshot<unknown> };
+export type CursorQuery<T> = { type: CursorQueryType; snapshot: DocumentSnapshot<T> };
+export type PaginateOptions<T> = {
+    queryOptions: WhereQuery | OrderByQuery | (WhereQuery | OrderByQuery)[];
+    size: number;
+    lastDocSnap: DocumentSnapshot<T> | undefined;
+};
+export type PaginateResult<T> = {
+    items: T[];
+    lastDocSnap: DocumentSnapshot<T>;
+};
