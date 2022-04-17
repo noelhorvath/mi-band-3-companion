@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Database, onValue, ref, DataSnapshot } from '@angular/fire/database';
+import { Database, DataSnapshot, onValue, ref } from '@angular/fire/database';
 import { FireTimestamp } from '../../../shared/models/classes/FireTimestamp';
 import { LogHelper } from '../../../shared/models/classes/LogHelper';
 import { BehaviorSubject } from 'rxjs';
 import { NetworkStatus } from '../../../shared/types/custom.types';
-import { FirebaseConnectionStatus, FirebaseErrorMessages } from '../../../shared/enums/firebase.enum';
+import { FirebaseConnectionStatus, FirebaseErrorMessage } from '../../../shared/enums/firebase.enum';
 import { doc, DocumentReference, Firestore, getDocFromServer, serverTimestamp, setDoc, updateDoc } from '@angular/fire/firestore';
 import { IFireTimestamp } from '../../../shared/models/interfaces/IFireTimestamp';
 import { instantiate } from '../../../shared/functions/parser.functions';
@@ -21,8 +21,7 @@ export class FirebaseServerInfoService {
 
     public constructor(
         private firestore: Firestore,
-        private database: Database)
-    {
+        private database: Database) {
         this.logHelper = new LogHelper(FirebaseServerInfoService.name);
         this.isConnected = false;
         this.serverTimeDocRef = doc(this.firestore, 'info', 'serverTimestamp');
@@ -49,7 +48,7 @@ export class FirebaseServerInfoService {
                 }
                 return instantiate((docSnap.data() as { currentTime: IFireTimestamp }).currentTime, FireTimestamp);
             } else {
-                return Promise.reject(FirebaseErrorMessages.NETWORK_REQUEST_FAILED);
+                return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
             }
         } catch (e: unknown) {
             throw e;

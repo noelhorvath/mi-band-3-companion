@@ -20,7 +20,7 @@ import {
     User as AuthUser,
     UserCredential
 } from '@angular/fire/auth';
-import { FirebaseErrorMessages } from '../../../shared/enums/firebase.enum';
+import { FirebaseErrorMessage } from '../../../shared/enums/firebase.enum';
 import { LogInfo } from '../../../shared/models/classes/LogInfo';
 import { LanguageService } from '../../language/language.service';
 import { AuthSecurity } from '../../../shared/models/classes/AuthSecurity';
@@ -38,8 +38,6 @@ export class FirebaseAuthService {
     private firebaseConnection: NetworkStatus;
     public authUserSubject: BehaviorSubject<AuthUser | undefined>;
 
-    // TODO: delete unverified users after x days
-
     public constructor(
         private userService: FirestoreUserService,
         private languageService: LanguageService,
@@ -55,11 +53,21 @@ export class FirebaseAuthService {
             async (authUser: AuthUser | null) => {
                 this.authUserSubject.next(this.auth.currentUser !== null ? this.auth.currentUser : undefined);
                 this.logHelper.logDefault('onAuthStateChanged', 'User status', { value: !!authUser ? 'logged in' : 'not logged in' });
+                if (authUser !== null && authUser.email !== null) {
+                    try {
+                        const user = await this.userService.get(authUser.uid);
+                        if (user !== undefined && user.id !== authUser.email) {
+                            await this.userService.update({ id: authUser.uid }, { email: authUser.email });
+                        }
+                    } catch (e: unknown) {
+                        this.logHelper.logError('onAuthStateChanged', e);
+                    }
+                }
             },
             (error: unknown) => this.logHelper.logError('onAuthStateChanged', error)
         );
         this.languageService.isServiceInitializedSubject.subscribe((isReady: boolean) => {
-            if (isReady) {
+            if (isReady.valueOf()) {
                 this.languageService.currentLanguageSubject.subscribe((lang: string) => {
                     this.auth.languageCode = lang;
                 });
@@ -75,8 +83,8 @@ export class FirebaseAuthService {
                         if (authSecurity === undefined || authSecurity.length === 0) {
                             this.authSecurity.uuid = uuid;
                             this.authSecurityService.add(this.authSecurity)
-                                .then( () => this.logHelper.logDefault('add AuthSecurity', 'new AuthSecurity has been added'))
-                                .catch( (e: unknown) => this.logHelper.logError('add AuthSecurity error', e));
+                                .then(() => this.logHelper.logDefault('add AuthSecurity', 'new AuthSecurity has been added'))
+                                .catch((e: unknown) => this.logHelper.logError('add AuthSecurity error', e));
                         } else {
                             this.authSecurity = authSecurity[0];
                         }
@@ -87,28 +95,28 @@ export class FirebaseAuthService {
             this.logHelper.logError('AuthSecurity setup error', e);
         });
         this.firebaseConnection = 'offline';
-        this.serverInfo.connectionStatusSubject.subscribe( (status: NetworkStatus) => this.firebaseConnection = status );
+        this.serverInfo.connectionStatusSubject.subscribe((status: NetworkStatus) => this.firebaseConnection = status);
     }
 
     private static getAuthErrorMessage(error: AuthError): string | undefined {
         if ('code' in error) {
             switch (error.code) {
                 case 'auth/wrong-password':
-                    return FirebaseErrorMessages.WRONG_PASSWORD;
+                    return FirebaseErrorMessage.WRONG_PASSWORD;
                 case 'auth/user-disabled':
-                    return FirebaseErrorMessages.USER_IS_DISABLED;
+                    return FirebaseErrorMessage.USER_IS_DISABLED;
                 case 'auth/user-not-found':
-                    return FirebaseErrorMessages.USER_NOT_FOUND;
+                    return FirebaseErrorMessage.USER_NOT_FOUND;
                 case 'auth/email-already-in-use':
-                    return FirebaseErrorMessages.EMAIL_ALREADY_IN_USE;
+                    return FirebaseErrorMessage.EMAIL_ALREADY_IN_USE;
                 case 'auth/network-request-failed':
-                    return FirebaseErrorMessages.NETWORK_REQUEST_FAILED;
+                    return FirebaseErrorMessage.NETWORK_REQUEST_FAILED;
                 case 'auth/internal-error':
-                    return FirebaseErrorMessages.INTERNAL_ERROR;
+                    return FirebaseErrorMessage.INTERNAL_ERROR;
                 case 'auth/weak-password':
-                    return FirebaseErrorMessages.WEAK_PASSWORD;
+                    return FirebaseErrorMessage.WEAK_PASSWORD;
                 case 'auth/invalid-email':
-                    return FirebaseErrorMessages.INVALID_EMAIL;
+                    return FirebaseErrorMessage.INVALID_EMAIL;
                 default:
                     LogHelper.log(new LogInfo(FirebaseAuthService.name, error.code, error.message), 'error');
                     break;
@@ -125,20 +133,20 @@ export class FirebaseAuthService {
         try {
             if (this.auth.currentUser !== null) {
                 await updateEmail(this.auth.currentUser, email);
-                this.userService.updateField({ id: this.auth.currentUser.uid }, 'email', email, false)
-                    .then( () => this.logHelper.logDefault('update User', 'email has been updated'))
-                    .catch( (e: unknown) => this.logHelper.logError('update User error', e));
+                this.userService.update({ id: this.auth.currentUser.uid }, { email })
+                    .then(() => this.logHelper.logDefault('update User', 'email has been updated'))
+                    .catch((e: unknown) => this.logHelper.logError('update User error', e));
                 return Promise.resolve();
             }
-            return Promise.reject(FirebaseErrorMessages.USER_IS_NOT_SIGNED_IN);
+            return Promise.reject(FirebaseErrorMessage.USER_IS_NOT_SIGNED_IN);
         } catch (error: unknown) {
             this.logHelper.logError(this.updateUserEmail.name, 'updateUserEmail error', { value: error });
-            return Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessages.UPDATING_EMAIL_FAILED);
+            return Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.UPDATING_EMAIL_FAILED);
         }
     }
 
     public signOut(): Promise<void> {
-        return this.auth.currentUser !== null ? signOut(this.auth) : Promise.reject(FirebaseErrorMessages.USER_IS_NOT_SIGNED_IN);
+        return this.auth.currentUser !== null ? signOut(this.auth) : Promise.reject(FirebaseErrorMessage.USER_IS_NOT_SIGNED_IN);
     }
 
     public async signIn(email: string, password: string): Promise<AuthUser | undefined> {
@@ -146,14 +154,14 @@ export class FirebaseAuthService {
             const userCredentials = await signInWithEmailAndPassword(this.auth, email, password);
             // user must verify email before using the app
             if (!userCredentials.user.emailVerified) {
-                return Promise.reject(FirebaseErrorMessages.UNVERIFIED_EMAIL);
+                return Promise.reject(FirebaseErrorMessage.UNVERIFIED_EMAIL);
             } else {
                 return Promise.resolve(userCredentials.user);
             }
         } catch (error: unknown) {
             this.logHelper.logError(this.signIn.name, 'signIn error', { value: error });
             return error instanceof Error && 'code' in error
-                ? Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessages.SIGN_IN_FAILED)
+                ? Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.SIGN_IN_FAILED)
                 : Promise.reject(error);
         }
     }
@@ -161,7 +169,7 @@ export class FirebaseAuthService {
     public async sendEmailVerification(signOutUser?: boolean, actionCodeSettings?: ActionCodeSettings): Promise<void> {
         try {
             if (this.auth.currentUser === null) {
-                return Promise.reject(FirebaseErrorMessages.USER_IS_NOT_SIGNED_IN);
+                return Promise.reject(FirebaseErrorMessage.USER_IS_NOT_SIGNED_IN);
             } else {
                 if (this.firebaseConnection === 'online') {
                     if (this.authSecurity.lastEmailVerificationRequestDate !== undefined) {
@@ -169,17 +177,17 @@ export class FirebaseAuthService {
                         if (timeDifference >= 60 ** 2) {
                             await sendEmailVerification(this.auth.currentUser, actionCodeSettings);
                         } else {
-                            return Promise.reject(FirebaseErrorMessages.VERIFICATION_EMAIL_REQUESTING_IS_DISABLED);
+                            return Promise.reject(FirebaseErrorMessage.VERIFICATION_EMAIL_REQUESTING_IS_DISABLED);
                         }
                     } else {
                         await sendEmailVerification(this.auth.currentUser, actionCodeSettings);
                     }
-                    this.authSecurityService.updateField({ id: this.authSecurity.id }, 'lastEmailVerificationRequestDate', await this.serverInfo.getServerTime())
-                        .then( () => this.logHelper.logDefault('update AuthSecurity', 'lastEmailVerificationRequestDate has been updated'))
-                        .catch( (e: unknown) => this.logHelper.logError('update AuthSecurity error', e));
+                    this.authSecurityService.update({ id: this.authSecurity.id }, { lastEmailVerificationRequestDate: await this.serverInfo.getServerTime() })
+                        .then(() => this.logHelper.logDefault('update AuthSecurity', 'lastEmailVerificationRequestDate has been updated'))
+                        .catch((e: unknown) => this.logHelper.logError('update AuthSecurity error', e));
                     return signOutUser ? this.signOut() : Promise.resolve();
                 } else {
-                    return Promise.reject(FirebaseErrorMessages.NETWORK_REQUEST_FAILED);
+                    return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
                 }
             }
         } catch (e: unknown) {
@@ -189,36 +197,37 @@ export class FirebaseAuthService {
 
     // register user and create user doc
     // @ts-ignore
-    public async register(email: string, password: string, firstName: string, lastName: string): Promise<void> {
+    public async register(user: User, password: string): Promise<void> {
         try {
             if (this.firebaseConnection === 'online') {
                 let userCredential: UserCredential;
                 if (this.authSecurity.lastEmailVerificationRequestDate !== undefined) {
                     const timeDifference = await this.serverInfo.timePassedSinceServerTimeInSeconds(this.authSecurity.lastEmailVerificationRequestDate);
                     if (timeDifference >= 60 ** 2) {
-                        userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+                        userCredential = await createUserWithEmailAndPassword(this.auth, user.email, password);
                     } else {
-                        return Promise.reject(FirebaseErrorMessages.ACCOUNT_CREATION_IS_DISABLED);
+                        return Promise.reject(FirebaseErrorMessage.ACCOUNT_CREATION_IS_DISABLED);
                     }
                 } else {
-                    userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+                    userCredential = await createUserWithEmailAndPassword(this.auth, user.email, password);
                 }
-                this.authSecurityService.updateField({ id: this.authSecurity.id }, 'lastAccountCreationDate', await this.serverInfo.getServerTime())
-                    .then( () => this.logHelper.logDefault('update AuthSecurity', 'lastAccountCreationDate has been updated'))
-                    .catch( (e: unknown) => this.logHelper.logError('update AuthSecurity error', e));
+                this.authSecurityService.update({ id: this.authSecurity.id }, { lastAccountCreationDate: await this.serverInfo.getServerTime() })
+                    .then(() => this.logHelper.logDefault('update AuthSecurity', 'lastAccountCreationDate has been updated'))
+                    .catch((e: unknown) => this.logHelper.logError('update AuthSecurity error', e));
                 await this.sendEmailVerification();
-                await updateProfile(userCredential.user, { displayName: firstName + ' ' + lastName });
-                this.userService.add(new User(userCredential.user?.uid, email, firstName, lastName))
-                    .then( () => this.logHelper.logDefault('add User', 'new user has been added'))
-                    .catch( (e: unknown) => this.logHelper.logError('add User error', e));
+                await updateProfile(userCredential.user, { displayName: user.getFullName(this.languageService.getCurrentLanguage()) });
+                user.id = userCredential.user.uid;
+                this.userService.add(user)
+                    .then(() => this.logHelper.logDefault('add User', 'new user has been added'))
+                    .catch((e: unknown) => this.logHelper.logError('add User error', e));
                 return await this.auth.signOut();
             } else {
-                return Promise.reject(FirebaseErrorMessages.NETWORK_REQUEST_FAILED);
+                return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
             }
         } catch (error: unknown) {
             this.logHelper.logError(this.register.name, 'registration error', { value: error });
             return error instanceof Error && 'code' in error
-                ? Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessages.REGISTRATION_FAILED)
+                ? Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.REGISTRATION_FAILED)
                 : Promise.reject(error);
         }
     }
@@ -226,26 +235,26 @@ export class FirebaseAuthService {
     public async sendPasswordResetEmail(email: string, actionCodeSettings?: ActionCodeSettings): Promise<void> {
         try {
             if (this.firebaseConnection === 'online') {
-                if (this.authSecurity.lastEmailVerificationRequestDate !== undefined) {
-                    const timeDifference = await this.serverInfo.timePassedSinceServerTimeInSeconds(this.authSecurity.lastEmailVerificationRequestDate);
+                if (this.authSecurity.lastPasswordChangeRequestDate !== undefined) {
+                    const timeDifference = await this.serverInfo.timePassedSinceServerTimeInSeconds(this.authSecurity.lastPasswordChangeRequestDate);
                     if (timeDifference >= 60 ** 2) {
                         await sendPasswordResetEmail(this.auth, email, actionCodeSettings);
                     } else {
-                        return Promise.reject(FirebaseErrorMessages.PASSWORD_RESETTING_IS_DISABLED);
+                        return Promise.reject(FirebaseErrorMessage.PASSWORD_RESETTING_IS_DISABLED);
                     }
                 } else {
                     await sendPasswordResetEmail(this.auth, email, actionCodeSettings);
                 }
-                this.authSecurityService.updateField({ id: this.authSecurity.id }, 'lastPasswordChangeRequestDate', await this.serverInfo.getServerTime())
-                    .then( () => this.logHelper.logDefault('update AuthSecurity', 'lastPasswordChangeRequestDate has been updated'))
-                    .catch( (e: unknown) => this.logHelper.logError('update AuthSecurity error', e));
+                this.authSecurityService.update({ id: this.authSecurity.id }, { lastPasswordChangeRequestDate: await this.serverInfo.getServerTime() })
+                    .then(() => this.logHelper.logDefault('update AuthSecurity', 'lastPasswordChangeRequestDate has been updated'))
+                    .catch((e: unknown) => this.logHelper.logError('update AuthSecurity error', e));
                 return Promise.resolve();
             } else {
-                return Promise.reject(FirebaseErrorMessages.NETWORK_REQUEST_FAILED);
+                return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
             }
         } catch (error: unknown) {
             this.logHelper.logError(this.register.name, 'sendPasswordResetEmail error', { value: error });
-            return Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessages.SENDING_PASSWORD_RESET_EMAIL_FAILED);
+            return Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.SENDING_PASSWORD_RESET_EMAIL_FAILED);
         }
     }
 
