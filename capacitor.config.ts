@@ -7,11 +7,11 @@ const config: CapacitorConfig = {
     webDir: 'www',
     bundledWebRuntime: false,
     loggingBehavior: environment.production ? 'production' : 'debug',
+    /*
     server: {
         hostname: 'miband3companion.web.app',
         androidScheme: 'https'
     },
-    /*
     plugins: {
         SplashScreen: {
             launchShowDuration: 3000,

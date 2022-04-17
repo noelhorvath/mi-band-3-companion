@@ -3,9 +3,5 @@
 	"appName": "Mi Band 3 Companion",
 	"webDir": "www",
 	"bundledWebRuntime": false,
-	"loggingBehavior": "debug",
-	"server": {
-		"hostname": "miband3companion.web.app",
-		"androidScheme": "https"
-	}
+	"loggingBehavior": "debug"
 }
