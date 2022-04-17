@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject } from 'rxjs';
 import { LogHelper } from '../../shared/models/classes/LogHelper';
-import { ActivityDataType, DateType } from '../../shared/types/custom.types';
+import { ActivityDataType, DateType, MeasurementValueDataType } from '../../shared/types/custom.types';
 
 @Injectable({
     providedIn: 'root'
@@ -30,14 +30,17 @@ export class StorageService {
         return this.storage.set('lang', lang);
     }
 
-    public async getLanguage(): Promise<string | undefined> {
+    private async getData<T>(key: string): Promise<T | undefined> {
         try {
-            const data = await this.storage.get('lang');
+            const data = await this.storage.get(key);
             return data !== null ? data : undefined;
         } catch (e: unknown) {
             return Promise.reject(e);
         }
+    }
 
+    public async getLanguage(): Promise<string | undefined> {
+        return this.getData('lang');
     }
 
     public async setActivityChartDateType(dateType: DateType): Promise<void> {
@@ -45,12 +48,7 @@ export class StorageService {
     }
 
     public async getActivityChartDateType(): Promise<DateType | undefined> {
-        try {
-            const data = await this.storage.get('activityChartDateType');
-            return data !== null ? data : undefined;
-        } catch (e: unknown) {
-            return Promise.reject(e);
-        }
+        return this.getData('activityChartDateType');
     }
 
     public async setActivityDataType(dateType: ActivityDataType): Promise<void> {
@@ -58,12 +56,7 @@ export class StorageService {
     }
 
     public async getActivityDataType(): Promise<ActivityDataType | undefined> {
-        try {
-            const data = await this.storage.get('activityDataType');
-            return data !== null ? data : undefined;
-        } catch (e: unknown) {
-            return Promise.reject(e);
-        }
+        return this.getData('activityDataType');
     }
 
     public async setHeartRateChartDateType(dateType: DateType): Promise<void> {
@@ -71,25 +64,22 @@ export class StorageService {
     }
 
     public async getHeartRateChartDateType(): Promise<DateType | undefined> {
-        try {
-            const data = await this.storage.get('heartRateChartDateType');
-            return data !== null ? data : undefined;
-        } catch (e: unknown) {
-            return Promise.reject(e);
-        }
+        return this.getData('heartRateChartDateType');
     }
 
-    public async setTrainingChartDateType(dateType: DateType): Promise<void> {
-        return this.storage.set('trainingChartDateType', dateType);
+    public async setHeartRateDataType(dateType: MeasurementValueDataType): Promise<void> {
+        return this.storage.set('heartRateDataType', dateType);
     }
 
-    public async getTrainingChartDateType(): Promise<DateType | undefined> {
-        try {
-            const data = await this.storage.get('trainingChartDateType');
-            return data !== null ? data : undefined;
-        } catch (e: unknown) {
-            return Promise.reject(e);
-        }
+    public async getHeartRateDataType(): Promise<MeasurementValueDataType | undefined> {
+        return this.getData('heartRateDataType');
     }
 
+    public async setActivityMeasurementValueDataType(dateType: MeasurementValueDataType): Promise<void> {
+        return this.storage.set('activityMeasurementValueDataType', dateType);
+    }
+
+    public async getActivityMeasurementValueDataType(): Promise<MeasurementValueDataType | undefined> {
+        return this.getData('activityMeasurementValueDataType');
+    }
 }
