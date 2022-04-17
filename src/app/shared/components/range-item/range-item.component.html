@@ -1,0 +1,25 @@
+<ng-container *ngIf="control">
+    <ion-item>
+        <ion-grid>
+            <ion-row class="ion-text-center">
+                <ion-col>
+                    <ion-label>{{ labelText | translate }}</ion-label>
+                </ion-col>
+                <ion-col>
+                    <ng-container *ngIf="unit !== undefined else withOutUnit">
+                        <ion-label color="primary">{{ heightRange.value + ' ' + (unit | translate) }}</ion-label>
+                    </ng-container>
+                    <ng-template #withOutUnit>
+                        <ion-label color="primary">{{ heightRange.value }}</ion-label>
+                    </ng-template>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-range #heightRange color="primary" [pin]="showRangePin" [min]="minRangeValue" [max]="maxRangeValue"
+                               [formControl]="control"></ion-range>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+</ng-container>
