@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as crypto from 'crypto-browserify';
 import { Injectable } from '@angular/core';
 import { AndroidGattTransportMode, BluetoothLE, DeviceInfo, OperationResult, ScanStatus } from '@ionic-native/bluetooth-le/ngx';
@@ -8,7 +7,6 @@ import { Buffer } from 'buffer';
 import { FirebaseAuthService } from '../../firebase/auth/firebase-auth.service';
 import { filter, timeout } from 'rxjs/operators';
 import { PermissionService } from '../../permission/permission.service';
-import { MiBand3 } from '../../../shared/models/classes/MiBand3';
 import { Device } from '../../../shared/models/classes/Device';
 import { ConnectionInfo } from '../../../shared/models/classes/ConnectionInfo';
 import { ScanInfo } from '../../../shared/models/classes/ScanInfo';
@@ -18,30 +16,34 @@ import { IDevice } from '../../../shared/models/interfaces/IDevice';
 import { BLEConnectionStatus, BLEScanStatus, BLEStatus, BLESubscriptionStatus } from '../../../shared/enums/ble.enum';
 import { User } from '@angular/fire/auth';
 import { FireTimestamp } from '../../../shared/models/classes/FireTimestamp';
+import { Characteristic } from '../../../shared/models/classes/Characteristic';
+import { Service } from '../../../shared/models/classes/Service';
+import { BleBaseService } from '../base/ble-base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BleConnectionService {
+export class BleConnectionService extends BleBaseService {
     private readonly logHelper: LogHelper;
-    private readonly miBand3: MiBand3;
     private connectionInfo: ConnectionInfo;
     private sentEncryptionKeyAgain: boolean;
     public blStatusSubject: Subject<string>;
     public connectionInfoSubject: Subject<ConnectionInfo>;
     public scanInfoSubject: BehaviorSubject<ScanInfo>;
+    public deviceSettingsSubject: BehaviorSubject<Device>;
 
     public constructor(
-        private ble: BluetoothLE,
+        ble: BluetoothLE,
         private platform: Platform,
         private authService: FirebaseAuthService,
         private permissionService: PermissionService
     ) {
+        super(ble);
         this.platform.ready().then(() => this.initializeBL());
         this.logHelper = new LogHelper(BleConnectionService.name);
-        this.miBand3 = MiBand3.getInstance();
         this.sentEncryptionKeyAgain = false;
         this.blStatusSubject = new Subject<string>();
+        this.deviceSettingsSubject = new BehaviorSubject<Device>(new Device());
         this.connectionInfo = new ConnectionInfo();
         this.connectionInfoSubject = new BehaviorSubject<ConnectionInfo>(this.connectionInfo);
         this.scanInfoSubject = new BehaviorSubject<ScanInfo>(new ScanInfo());
@@ -56,6 +58,7 @@ export class BleConnectionService {
                     await this.disconnectAndClose(this.connectionInfo.device);
                 }
                 this.scanInfoSubject.next(new ScanInfo());
+                this.deviceSettingsSubject.next(new Device());
             }
         });
     }
@@ -80,7 +83,6 @@ export class BleConnectionService {
                 }
             },
             error: (e: unknown) => Promise.reject(this.logHelper.getUnknownMsg(e))
-            // TODO: localize error messages
             /*{
                 if (typeof e === 'string' || e instanceof Error) {
                     return Promise.reject(this.logHelper.getUnknownMsg(e));
@@ -156,8 +158,6 @@ export class BleConnectionService {
         }
     }
 
-    // TODO: fix no connecting after BL enable/check
-
     public async blAndPermissionChecks(): Promise<void> {
         try {
             await this.permissionService.checkForBluetoothScanPermissions();
@@ -183,7 +183,6 @@ export class BleConnectionService {
         this.scanInfoSubject.next(new ScanInfo(BLEScanStatus.SCANNING, true));
         this.ble.startScan({
             services: [],
-            // allowDuplicates: false, // iOS only
             scanMode: this.ble.SCAN_MODE_LOW_LATENCY,
             matchMode: this.ble.MATCH_MODE_AGGRESSIVE,
             matchNum: this.ble.MATCH_NUM_MAX_ADVERTISEMENT,
@@ -234,7 +233,6 @@ export class BleConnectionService {
     // transport set to TRANSPORT_LE is the safest for ble (auto can cause issues)
     //
     // firstTime = if true skip (2. auth step) sending encryption key during auth process
-    // TODO: fix autoConnect handling => fix reconnect
     public async connect(device: IDevice, autoConnect: boolean = false): Promise<void> {
         try {
             await this.blAndPermissionChecks();
@@ -252,12 +250,11 @@ export class BleConnectionService {
                 // scan is needed before connecting
                 this.ble.startScan({
                     services: [],
-                    allowDuplicates: false,
                     scanMode: this.ble.SCAN_MODE_LOW_LATENCY,
                     matchMode: this.ble.MATCH_MODE_AGGRESSIVE,
                     matchNum: this.ble.MATCH_NUM_MAX_ADVERTISEMENT,
                     callbackType: this.ble.CALLBACK_TYPE_ALL_MATCHES,
-                }).pipe(timeout(5000), filter(s => s.address === device.macAddress), first()).subscribe({
+                }).pipe(filter(s => s.address === device.macAddress), timeout(15000), first()).subscribe({
                     next: async () => {
                         await this.ble.stopScan();
                         this.ble.connect({
@@ -266,8 +263,14 @@ export class BleConnectionService {
                             transport: AndroidGattTransportMode.TRANSPORT_LE
                         }).subscribe(this.getConnectObserver());
                     },
-                    error: (e: unknown) => {
-                        this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                    error: async (e: unknown) => {
+                        if (e instanceof Error && e.message !== 'Timeout has occurred') {
+                            this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(e));
+                        }
+                        const res = await this.ble.isScanning();
+                        if (res.isScanning) {
+                           await this.ble.stopScan();
+                        }
                         this.connectionInfoSubject.next(new ConnectionInfo());
                     }
                 });
@@ -326,120 +329,128 @@ export class BleConnectionService {
     }
 
     private authenticateMiBand(device: IDevice): void {
-        const serviceUUID = this.miBand3.getService('authentication')?.uuid ?? 'unknown';
-        const characteristicUUID = this.miBand3.getService('authentication')?.getCharacteristic('auth')?.uuid ?? 'unknown';
+        const service = this.miBand3.getServiceByName('authentication');
+        const characteristic = service?.getCharacteristicByName('auth');
+        if (service === undefined) {
+            throw new Error('Failed to get authentication service');
+        } else if (characteristic === undefined) {
+            throw new Error('Failed to get authentication characteristic');
+        }
         // Authentication steps
-        this.ble.subscribe({ // 1. set notify on (by sending 2 bytes request (0x01, 0x00) to the Descriptor === subscribe)
-            address: device.macAddress,
-            service: serviceUUID,
-            characteristic: characteristicUUID
-        }).subscribe({
-            next: async (data: OperationResult) => {
-                try {
-                    if (data.status === BLESubscriptionStatus.SUBSCRIBED) {
-                        this.logHelper.logDefault(this.authenticateMiBand.name, 'Subscribed to auth');
-                        // authentication sub will fail immediately if the encryption key is same as on the Mi Band 3
-                        // it is better to start with requesting a random key first
-                        // if the device has different encryption/secret key => 100304 => send encryption key => back to 100101
-                        const writeData = Buffer.from([2, 0]); // 2. Request random key by sending 2 bytes: 0x02 + 0x00
-                        await this.write(device, serviceUUID, characteristicUUID, writeData, 'noResponse');
-                    } else {
-                        if (data.value !== undefined) {
-                            const response = Buffer.from(this.ble.encodedStringToBytes(data.value)).slice(0, 3).toString('hex'); // get the first 3 bytes to know what to do
-                            this.logHelper.logDefault(this.authenticateMiBand.name, 'auth response', { value: response });
-                            if (response === '100101') { // if user did press the button on the Mi Band
-                                // authentication level 1
-                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Sent key ok');
-                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Paired successfully');
-                                const writeData = Buffer.from([2, 0]); // 3. Request random key by sending 2 bytes: 0x02 + 0x00
-                                await this.write(device, serviceUUID, characteristicUUID, writeData, 'noResponse');
-                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Request sent for a random key');
-                            } else if (response === '100102') { // if user did not press button on the Mi Band after sending the encryption key
-                                this.connectionInfoSubject.error('Pairing failed!\nPlease press the button on Mi Band to confirm pairing!');
-                                this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, false, device));
-                                await this.sendEncryptionKey(device, serviceUUID, characteristicUUID); // send encryption key again
-                            } else if (response === '100104') {
-                                this.connectionInfoSubject.error('Encryption key sending failed!');
-                                // re-send encryption key once if sending failed
-                                if (!this.sentEncryptionKeyAgain) {
-                                    this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, false, device));
-                                    await this.sendEncryptionKey(device, serviceUUID, characteristicUUID); // send encryption key again
-                                    this.sentEncryptionKeyAgain = true;
-                                } else {
-                                    await this.disconnectAndClose(device);
-                                }
-                            } else if (response === '100201') { // 4. Encrypt the random 16 bytes number with AES/ECB/NoPadding with the encryption key that was sent at 2. step
-                                // authentication level 2
-                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Requested random key received');
-                                const randomData = Buffer.from(this.ble.encodedStringToBytes(data.value)).slice(3, 19); // remove the first 3 bytes
-                                const algorithm = 'aes-128-ecb';
-                                const cipher = crypto.createCipheriv(algorithm, this.getEncryptionKey(), '').setAutoPadding(false); // create encryptor + disable auto padding
-                                const encryptedData = cipher.update(randomData); // encrypt data
-                                cipher.final(); // stop cipher
-                                const writeData = Buffer.concat([Buffer.from([3, 0]), encryptedData]); // 5. Send 2 bytes 0x03 + 0x00 + encrypted data
-                                await this.write(device, serviceUUID, characteristicUUID, writeData, 'noResponse');
-                            } else if (response === '100204') { // data request failed
-                                this.connectionInfoSubject.error('Requesting data failed!');
-                                await this.disconnectAndClose(device);
-                            } else if (response === '100301') { // 6. Authentication done
-                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Authenticated successfully');
-                                device.lastUsedDate = FireTimestamp.now();
-                                this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, true, device));
-                                await this.ble.unsubscribe({ address: device.macAddress, service: serviceUUID, characteristic: characteristicUUID });
-                            } else if (response === '100304') { // encryption fails, because the device probably has a different secret key
-                                this.logHelper.logError(this.authenticateMiBand.name, 'Encryption failed, sending new encryption key!');
-                                await this.sendEncryptionKey(device, serviceUUID, characteristicUUID); // write 2 bytes (0x01 + 0x00)  + encryption key (16 bytes)
+        // 1. set notify on (by sending 2 bytes request (0x01, 0x00) to the Descriptor === subscribe)
+        this.subscribe(
+            device,
+            service,
+            characteristic,
+            {
+                next: async (data: OperationResult) => {
+                    try {
+                        if (this.connectionInfo.device !== undefined) {
+                            if (data.status === BLESubscriptionStatus.SUBSCRIBED) {
+                                this.logHelper.logDefault(this.authenticateMiBand.name, 'Subscribed to auth');
+                                // authentication sub will fail immediately if the encryption key is same as on the Mi Band 3
+                                // it is better to start with requesting a random key first
+                                // if the device has different encryption/secret key => 100304 => send encryption key => back to 100101
+                                // 2. Request random key by sending 2 bytes: 0x02 + 0x00
+                                await this.write(data.address, data.service, data.characteristic, Buffer.from([0x02, 0x00]));
                             } else {
-                                this.logHelper.logError(this.authenticateMiBand.name, 'Authentication code', { value: response });
-                                await this.disconnectAndClose(device);
+                                if (data.value !== undefined) {
+                                    const response = Buffer.from(this.ble.encodedStringToBytes(data.value)).subarray(0, 3).toString('hex'); // get the first 3 bytes to know what to do
+                                    this.logHelper.logDefault(this.authenticateMiBand.name, 'auth response', { value: response });
+                                    switch (response) {
+                                        case '100101':
+                                            // if user did press the button on the Mi Band
+                                            // authentication level 1
+                                            this.logHelper.logDefault(this.authenticateMiBand.name, 'Sent key ok');
+                                            this.logHelper.logDefault(this.authenticateMiBand.name, 'Paired successfully');
+                                            // 3. Request random key by sending 2 bytes: 0x02 + 0x00
+                                            await this.write(data.address, data.service, data.characteristic, Buffer.from([0x02, 0x00]));
+                                            this.logHelper.logDefault(this.authenticateMiBand.name, 'Request sent for a random key');
+                                            break;
+                                        case '100102':
+                                            this.connectionInfoSubject.error('Pairing failed!\nPlease press the button on Mi Band to confirm pairing!');
+                                            this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, false, device));
+                                            await this.sendEncryptionKey(data.address, data.service, data.characteristic); // send encryption key again
+                                            break;
+                                        case '100104':
+                                            this.connectionInfoSubject.error('Encryption key sending failed!');
+                                            // re-send encryption key once if sending failed
+                                            if (!this.sentEncryptionKeyAgain) {
+                                                this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, false, device));
+                                                await this.sendEncryptionKey(data.address, data.service, data.characteristic); // send encryption key again
+                                                this.sentEncryptionKeyAgain = true;
+                                            } else {
+                                                await this.disconnectAndClose(data.address);
+                                            }
+                                            break;
+                                        case '100201':
+                                            // 4. Encrypt the random 16 bytes number with AES/ECB/NoPadding with the encryption key that was sent at 2. step
+                                            // authentication level 2
+                                            this.logHelper.logDefault(this.authenticateMiBand.name, 'Requested random key received');
+                                            const randomData = Buffer.from(this.ble.encodedStringToBytes(data.value)).subarray(3, 19); // remove the first 3 bytes
+                                            const algorithm = 'aes-128-ecb';
+                                            const cipher = crypto.createCipheriv(algorithm, this.getEncryptionKey(), '').setAutoPadding(false); // create encryptor + disable auto padding
+                                            const encryptedData = cipher.update(randomData); // encrypt data
+                                            cipher.final(); // stop cipher
+                                            // 5. Send 2 bytes 0x03 + 0x00 + encrypted data
+                                            await this.write(data.address, data.service, data.characteristic, Buffer.concat([Buffer.from([0x03, 0x00]), encryptedData]));
+                                            break;
+                                        case '100204':
+                                            // data request failed
+                                            this.connectionInfoSubject.error('Requesting data failed!');
+                                            await this.disconnectAndClose(data.address);
+                                            break;
+                                        case '100301':
+                                            // 6. Authentication done
+                                            this.logHelper.logDefault(this.authenticateMiBand.name, 'Authenticated successfully');
+                                            device.lastUsedDate = FireTimestamp.now();
+                                            this.connectionInfoSubject.next(new ConnectionInfo(BLEConnectionStatus.CONNECTED, true, device));
+                                            await this.unsubscribe(data.address, data.service, data.characteristic);
+                                            break;
+                                        case '100304':
+                                            // encryption fails, because the device probably has a different secret key
+                                            this.logHelper.logError(this.authenticateMiBand.name, 'Encryption failed, sending new encryption key!');
+                                            await this.sendEncryptionKey(data.address, data.service, data.characteristic); // write 2 bytes (0x01 + 0x00)  + encryption key (16 bytes)
+                                            break;
+                                        default:
+                                            this.logHelper.logError(this.authenticateMiBand.name, 'Unexpected authentication response', { value: response });
+                                            await this.disconnectAndClose(data.address);
+                                    }
+                                }
                             }
+                        } else {
+                            this.logHelper.logError(this.authenticateMiBand.name, 'no connected device to continue authentication process');
+                        }
+                    } catch (error: unknown) {
+                        this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(error));
+                        const isConnected = await this.isConnected(data.address);
+                        if (isConnected) {
+                            await this.disconnectAndClose(data.address);
                         }
                     }
-                } catch (error: unknown) {
-                    this.connectionInfoSubject.error(this.logHelper.getUnknownMsg(error));
-                    const isConnected = await this.isConnected(device);
-                    if (isConnected) {
-                        await this.disconnectAndClose(device);
-                    }
+                },
+                error: (e: unknown) => {
+                    this.logHelper.logError(this.authenticateMiBand.name, e);
                 }
-            },
-            error: (e: unknown) => {
-                this.logHelper.logError(this.authenticateMiBand.name, e);
             }
-        });
+        );
     }
 
     private async sendEncryptionKey(
         deviceData: string | IDevice,
-        service: string,
-        characteristic: string
+        service: string | Service,
+        characteristic: string | Characteristic
     ): Promise<OperationResult> {
-        const writeData = Buffer.concat([Buffer.from([1, 0]), this.getEncryptionKey()], 18); // 0x01 + 0x00 + encryption key => 18 bytes
+        const writeData = Buffer.concat([Buffer.from([0x01, 0x00]), this.getEncryptionKey()], 18); // 0x01 + 0x00 + encryption key => 18 bytes
         return this.write(
-            typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
+            deviceData,
             service,
             characteristic,
-            writeData,
-            'noResponse'
+            writeData
         );
     }
 
     public getEncryptionKey(): Buffer {
-        return Buffer.from([30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]);
-    }
-
-    private write(
-        deviceData: string | IDevice,
-        service: string, characteristic: string,
-        value: Buffer,
-        type?: string
-    ): Promise<OperationResult> {
-        return this.ble.write({
-            address: typeof deviceData === 'string' ? deviceData : deviceData.macAddress,
-            service,
-            characteristic,
-            value: this.ble.bytesToEncodedString(value),
-            type: type ?? ''
-        });
+        return Buffer.from([0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45]);
     }
 }
