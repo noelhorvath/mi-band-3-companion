@@ -6,7 +6,7 @@
         <ng-template #datePlaceholderText>
             <ion-label class="ion-text-center placeholder">{{ placeholderText | translate }}</ion-label>
         </ng-template>
-            <ion-modal [trigger]="pickerId" [breakpoints]="[0.1, 0.25, 0.5, 0.75, 0.9]" [initialBreakpoint]="0.5">
+            <ion-modal [trigger]="pickerId" [breakpoints]="[0.1, 0.25, 0.5, 0.75, 1]" [initialBreakpoint]="0.5">
                 <ng-template>
                     <ion-datetime [formControl]="control" #popoverDatePicker [presentation]="presentationMode"
                                   [min]="min" [max]="max" first-day-of-week="1" [locale]="dateTimeLocale" size="cover">
