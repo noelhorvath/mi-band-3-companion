@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AlertButton, AlertController, LoadingController, ToastButton, ToastController } from '@ionic/angular';
 import { Color } from '@ionic/core';
 import { LanguageService } from '../language/language.service';
-import { TranslatePipe } from '@ngx-translate/core';
 import { IAlertTranslation } from '../../shared/models/interfaces/IAlertTranslation';
 import { IToastTranslation } from '../../shared/models/interfaces/IToastTranslation';
 import { ILoadingTranslation } from '../../shared/models/interfaces/ILoadingTranslation';
@@ -10,6 +9,7 @@ import { LogInfo } from '../../shared/models/classes/LogInfo';
 import { LogHelper } from '../../shared/models/classes/LogHelper';
 import { LoadingSpinner, MessageType, ToastPosition } from '../../shared/types/custom.types';
 import { ILogInfo } from '../../shared/models/interfaces/ILogInfo';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root'
@@ -27,15 +27,13 @@ export class MessageService {
         private alertController: AlertController,
         private toastController: ToastController,
         private loadingController: LoadingController,
-        private translatePipe: TranslatePipe,
         private languageService: LanguageService,
-    ) {
+        private translatePipe: TranslatePipe) {
         this.logHelper = new LogHelper(MessageService.name);
         this.languageService.isServiceInitializedSubject.subscribe((ready: boolean) => {
             if (ready.valueOf()) {
                 this.languageService.currentLanguageSubject.subscribe(() => {
                     // might not work
-                    // TODO: refresh html content?
                     this.updateCurrentAlertText();
                     this.updateCurrentToastText();
                     this.updateCurrentLoadingText();
@@ -43,8 +41,6 @@ export class MessageService {
             }
         });
     }
-
-    //TODO: fix toast blocking UI interaction
 
     public async displayErrorMessage(
         logInfo: ILogInfo,
@@ -90,7 +86,7 @@ export class MessageService {
                     return button;
                 })
             });
-            if (this.alert) {
+            if (this.alert !== undefined) {
                 await this.dismissAlert();
             }
             this.alert = element;
@@ -132,7 +128,7 @@ export class MessageService {
                 //icon,
                 //id
             });
-            if (this.toast) {
+            if (this.toast !== undefined) {
                 await this.dismissToast();
             }
             this.toast = element;
@@ -161,7 +157,7 @@ export class MessageService {
                 keyboardClose,
                 translucent
             });
-            if (this.loading) {
+            if (this.loading !== undefined) {
                 await this.dismissLoading();
             }
             this.loading = element;
@@ -173,13 +169,13 @@ export class MessageService {
     }
 
     private updateCurrentLoadingText(): void {
-        if (this.loading && this.loadingText) {
+        if (this.loading !== undefined && this.loadingText !== undefined) {
             this.loading.message = this.translatePipe.transform(this.loadingText.messageKey);
         }
     }
 
     public changeLoadingMessage(msgKey: string): void {
-        if (!this.loading) {
+        if (this.loading === undefined) {
             return;
         }
         this.loadingText = { messageKey: msgKey };
