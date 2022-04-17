@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { FirebaseAuthService } from '../../../services/firebase/auth/firebase-auth.service';
 import { FirestoreUserService } from '../../../services/firestore/user/firestore-user.service';
 import { map, tap } from 'rxjs/operators';
@@ -16,15 +16,15 @@ export class DeviceGuard implements CanActivate, CanActivateChild {
     public constructor(
         private userService: FirestoreUserService,
         private authService: FirebaseAuthService,
-        private router: Router)
-    {
+        private router: Router) {
         this.logHelper = new LogHelper(DeviceGuard.name);
     }
 
     public canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return this.userService.getWithValueChanges(this.authService.getAuthUser()?.uid ?? 'undefined').pipe(
-            map( (user: User | undefined) => user !== undefined ? (user.devices ? user.devices.length > 0 : false) : false),
-            tap( async (hasDevice: boolean) => {
+            take(1),
+            map((user: User | undefined) => user !== undefined ? (user.devices ? user.devices.length > 0 : false) : false),
+            tap(async (hasDevice: boolean) => {
                 if (!hasDevice) {
                     try {
                         await this.router.navigateByUrl('/device-setup', { replaceUrl: true });
