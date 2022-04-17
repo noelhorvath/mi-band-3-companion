@@ -20,10 +20,6 @@ const routes: Routes = [
                 loadChildren: () => import('../home/tabs/heart-rate/heart-rate.module').then(m => m.HeartRateModule),
             },
             {
-                path: 'training',
-                loadChildren: () => import('../home/tabs/training/training.module').then(m => m.TrainingModule),
-            },
-            {
                 path: 'statistics',
                 loadChildren: () => import('../home/tabs/statistics/statistics.module').then(m => m.StatisticsModule),
             },

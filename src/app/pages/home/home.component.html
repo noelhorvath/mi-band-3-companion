@@ -1,7 +1,11 @@
+<app-toolbar-menu #menu menuId="home-menu" contentId="home-content" [connectionInfo]="connectionInfo"
+                  [authUser]="authUser" [user]="user" (logoutEvent)="signOut()"></app-toolbar-menu>
 <ion-header>
-    <app-toolbar [connectionInfo]="connectionInfo" [batteryInfo]="batteryInfo" [showBackButton]=false></app-toolbar>
+    <app-toolbar [menuId]="menu.menuId" [connectionInfo]="connectionInfo"
+                 [batteryInfo]="batteryInfo" [showBackButton]=false
+                 (logoutEvent)="signOut()"></app-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [id]="menu.contentId">
     <ion-router-outlet [animated]=false></ion-router-outlet>
     <app-home-tab-bar></app-home-tab-bar>
 </ion-content>
