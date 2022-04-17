@@ -1,23 +1,14 @@
-.container {
-    overflow: scroll;
-    overflow-scrolling: touch;
-}
+:host {
+    .title {
+        font-size: large;
+        font-weight: bold;
+        text-align: center;
+    }
+    .header {
+        font-weight: bolder;
+    }
 
-.info-num {
-    font-size: 2em;
-    text-align: center;
+    .info-num{
+        font-size: larger;
+    }
 }
-
-.info-text {
-    font-size: 1.25em;
-    text-align: center;
-}
-
-.title {
-    font-size: 1.25em;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
-
