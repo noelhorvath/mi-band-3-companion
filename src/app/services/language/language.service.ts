@@ -18,6 +18,7 @@ export class LanguageService {
     ) {
         this.logHelper = new LogHelper(LanguageService.name);
         this.translateService.addLangs(['en', 'hu']);
+        this.translateService.setDefaultLang('en');
         this.currentLanguageSubject = new BehaviorSubject<string>(this.translateService.currentLang);
         this.isServiceInitializedSubject = new BehaviorSubject<boolean>(false);
         this.initLanguage().then(() => this.logHelper.logDefault(this.initLanguage.name, 'Translate service has been initialized!'));
