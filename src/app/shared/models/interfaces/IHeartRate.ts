@@ -1,10 +1,9 @@
 import { IEntityModel } from './IEntityModel';
-import { IDevice } from './IDevice';
-import { IMeasurementDate } from './IMeasurementDate';
+import { IMeasurementInfo } from './IMeasurementInfo';
+import { IMeasurementValue } from './IMeasurementValue';
 
 export interface IHeartRate extends IEntityModel<IHeartRate> {
-    bpm: number;
+    bpm: IMeasurementValue;
+    measurementInfo: IMeasurementInfo;
     id?: string;
-    device?: IDevice | undefined;
-    measurementDate?: IMeasurementDate | undefined;
 }

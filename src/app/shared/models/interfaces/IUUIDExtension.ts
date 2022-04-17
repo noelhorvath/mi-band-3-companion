@@ -1,5 +1,5 @@
 export interface IUUIDExtension {
-    uuid?: string;
+    uuid: string;
 
     getShortenedUUID?(): string;
 }
