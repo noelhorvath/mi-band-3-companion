@@ -7,6 +7,5 @@
 	"server": {
 		"hostname": "miband3companion.web.app",
 		"androidScheme": "https"
-	},
-	"plugins": {}
+	}
 }
