@@ -10,7 +10,6 @@ export class AppComponent {
 
     public constructor() {
         this.title = 'Mi Band 3 Companion';
-        //TODO: add splash screen
     }
 }
 

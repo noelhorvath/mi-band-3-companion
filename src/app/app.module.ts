@@ -23,29 +23,30 @@ import { FirestoreActivityService } from './services/firestore/activity/firestor
 import { LogHelper } from './shared/models/classes/LogHelper';
 import { createTranslateLoader } from './shared/functions/translate.function';
 import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { enableIndexedDbPersistence, initializeFirestore, provideFirestore, CACHE_SIZE_UNLIMITED } from '@angular/fire/firestore';
-import { indexedDBLocalPersistence, initializeAuth, provideAuth, prodErrorMap, debugErrorMap } from '@angular/fire/auth';
+import { CACHE_SIZE_UNLIMITED, enableIndexedDbPersistence, initializeFirestore, provideFirestore } from '@angular/fire/firestore';
+import { debugErrorMap, indexedDBLocalPersistence, initializeAuth, prodErrorMap, provideAuth } from '@angular/fire/auth';
 import { AppSettings } from '../settings/app.settings';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { FirebaseServerInfoService } from './services/firebase/server-info/firebase-server-info.service';
+import { BleDeviceSettingsService } from './services/ble/device-settings/ble-device-settings.service';
+import { PickerService } from './services/picker/picker.service';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-        provideFirebaseApp( () => {
+        provideFirebaseApp(() => {
             const app = initializeApp(environment.firebaseConfig, AppSettings.codeName);
             app.automaticDataCollectionEnabled = AppSettings.enableFirebaseDataCollection;
             return app;
-        }, ),
-        provideFirestore( () => {
+        }),
+        provideFirestore(() => {
             const firestore = initializeFirestore(getApp(AppSettings.codeName),
                 {
-                    // TODO: optimize cache size
                     cacheSizeBytes: CACHE_SIZE_UNLIMITED,
                     ignoreUndefinedProperties: true,
                 });
-            enableIndexedDbPersistence(firestore).catch((e: unknown) =>
+            enableIndexedDbPersistence(firestore, { forceOwnership: true }).catch((e: unknown) =>
                 LogHelper.log(
                     {
                         mainId: AppModule.name,
@@ -58,7 +59,7 @@ import { FirebaseServerInfoService } from './services/firebase/server-info/fireb
             );
             return firestore;
         }),
-        provideAuth( () => {
+        provideAuth(() => {
             const auth = initializeAuth(getApp(AppSettings.codeName), {
                 persistence: indexedDBLocalPersistence,
                 errorMap: environment.production ? prodErrorMap : debugErrorMap
@@ -66,7 +67,7 @@ import { FirebaseServerInfoService } from './services/firebase/server-info/fireb
             auth.useDeviceLanguage();
             return auth;
         }),
-        provideDatabase( () => getDatabase(getApp(AppSettings.codeName), environment.firebaseConfig.databaseURL) ),
+        provideDatabase(() => getDatabase(getApp(AppSettings.codeName), environment.firebaseConfig.databaseURL)),
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
@@ -82,13 +83,14 @@ import { FirebaseServerInfoService } from './services/firebase/server-info/fireb
         IonicStorageModule.forRoot()
     ],
     providers: [
-        // TODO: move providers to components if needed
         BluetoothLE,
         BleConnectionService,
         AndroidPermissions,
         PermissionService,
         MessageService,
+        PickerService,
         BleDataService,
+        BleDeviceSettingsService,
         LanguageService,
         StorageService,
         FirebaseAuthService,
@@ -99,7 +101,6 @@ import { FirebaseServerInfoService } from './services/firebase/server-info/fireb
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ],
     bootstrap: [AppComponent],
-    exports: []
 })
 
 export class AppModule {
