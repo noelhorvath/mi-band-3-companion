@@ -15,4 +15,5 @@ import { ReactiveFormsModule } from '@angular/forms';
     ],
     exports: [PasswordInputComponent]
 })
-export class PasswordInputModule { }
+export class PasswordInputModule {
+}

@@ -10,16 +10,15 @@ export class PasswordInputComponent {
     public isPasswordHidden: boolean;
     public passwordInputIcon: 'eye-outline' | 'eye-off-outline';
     public passwordInputType: 'password' | 'text';
-    @Input() public labelPosition: 'fixed'| 'floating' | 'stacked' | undefined;
-    @Input() public inputLabel: string;
-    @Input() public inputFormControl: FormControl | undefined;
+    @Input() public labelText: string;
+    @Input() public control: FormControl | undefined | null;
     @Input() public clearInput: boolean;
 
     public constructor() {
         this.clearInput = true;
         this.isPasswordHidden = true;
         this.passwordInputType = 'password';
-        this.inputLabel = this.passwordInputType.toUpperCase();
+        this.labelText = this.passwordInputType.toUpperCase();
         this.passwordInputIcon = 'eye-off-outline';
     }
 
