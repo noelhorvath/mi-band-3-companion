@@ -1,45 +1,56 @@
 import { IHeartRate } from '../interfaces/IHeartRate';
-import { Device } from './Device';
-import { IDevice } from '../interfaces/IDevice';
-import { MeasurementDate } from './MeasurementDate';
-import { IMeasurementDate } from '../interfaces/IMeasurementDate';
-import { copyProperty } from '../../functions/parser.functions';
+import { MeasurementInfo } from './MeasurementInfo';
+import { IMeasurementInfo } from '../interfaces/IMeasurementInfo';
+import { copyProperty, instantiate } from '../../functions/parser.functions';
+import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from '@angular/fire/firestore';
+import { MeasurementValue } from './MeasurementValue';
 
 export class HeartRate implements IHeartRate {
     public id: string;
-    public bpm: number;
-    public device: Device | undefined;
-    public measurementDate: MeasurementDate | undefined;
+    public bpm!: MeasurementValue;
+    public measurementInfo!: MeasurementInfo;
+
+    public static getFirestoreConverter(): FirestoreDataConverter<HeartRate> {
+        return {
+            toFirestore: (instance: WithFieldValue<HeartRate> | Partial<HeartRate>): DocumentData => ({
+                id: instance.id,
+                bpm: instance.bpm !== undefined
+                    ? MeasurementValue.getFirestoreConverter().toFirestore(instance.bpm as MeasurementValue)
+                    : instance.bpm,
+                measurementInfo: instance.measurementInfo !== undefined
+                    ? MeasurementInfo.getFirestoreConverter().toFirestore(instance.measurementInfo as MeasurementInfo)
+                    : instance.measurementInfo
+            }),
+            fromFirestore: (snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): HeartRate =>
+                instantiate(snapshot.data(options) as IHeartRate, HeartRate)
+        };
+    }
 
     public constructor(
         id: string = 'undefined',
-        bpm: number = 0,
-        device?: IDevice,
-        measurementDate?: IMeasurementDate)
-    {
+        bpm: MeasurementValue = new MeasurementValue(),
+        measurementInfo: IMeasurementInfo = new MeasurementInfo()
+    ) {
         this.id = id;
-        this.bpm = bpm;
-        copyProperty(this, { device } as Partial<IHeartRate>, 'device', Device);
-        copyProperty(this, { measurementDate } as Partial<IHeartRate>, 'measurementDate', MeasurementDate);
+        copyProperty(this, { bpm }, 'bpm', MeasurementValue);
+        copyProperty(this, { measurementInfo }, 'measurementInfo', MeasurementInfo);
     }
 
     public copy(other: IHeartRate): void {
         if (!this.isEqual(other)) {
             this.id = other.id ?? 'undefined';
-            this.bpm = other.bpm;
-            copyProperty(this, other, 'device', Device);
-            copyProperty(this, other, 'measurementDate', MeasurementDate);
+            copyProperty(this, other, 'bpm', MeasurementValue);
+            copyProperty(this, other, 'measurementInfo', MeasurementInfo);
         }
     }
 
     public toString(): string {
-        return 'id: ' + this.id + ', bpm: ' + this.bpm + ', device: ' + (this.device ? '{' + this.device.toString() + '}' : this.device)
-            + 'measurementDate: ' + (this.measurementDate ? '{' + this.measurementDate.toString() + '}' : this.measurementDate);
+        return 'id: ' + this.id + ', bpm: ' + '{' + this.measurementInfo.toString() + '}'
+            + ', measurementInfo: ' + '{' + this.measurementInfo.toString() + '}';
     }
 
     public isEqual(other: IHeartRate | undefined): boolean {
-        return this !== other ? this.id === other?.id && this.bpm === other.bpm
-            && (this.device !== other.device ? this.device?.isEqual(other.device) ?? false : true)
-            && (this.measurementDate !== other.measurementDate ? this.measurementDate?.isEqual(other.measurementDate) ?? false : true) : true;
+        return this !== other ? this.id === other?.id && this.bpm?.isEqual(other.bpm)
+            && this.measurementInfo?.isEqual(other.measurementInfo) : true;
     }
 }

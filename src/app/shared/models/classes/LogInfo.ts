@@ -12,8 +12,8 @@ export class LogInfo implements ILogInfo {
         mainId: string = 'undefined',
         secondaryId: string = 'undefined',
         message: unknown | string = 'undefined',
-        options?: LogOptions)
-    {
+        options?: LogOptions
+    ) {
         this.mainId = mainId;
         this.secondaryId = secondaryId;
         this.message = message;

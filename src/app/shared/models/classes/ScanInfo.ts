@@ -13,11 +13,11 @@ export class ScanInfo implements IScanInfo {
     public constructor(
         status: ScanStatus = BLEScanStatus.NOT_SCANNING,
         isDisabled: boolean = false,
-        results?: IScanResult[])
-    {
+        results?: IScanResult[]
+    ) {
         this.status = status;
         this.isDisabled = isDisabled;
-        copyProperty(this, { results } as Partial<IScanInfo>, 'results', ScanResult);
+        copyProperty(this, { results }, 'results', ScanResult);
     }
 
     public isScanning(): boolean {
@@ -38,7 +38,7 @@ export class ScanInfo implements IScanInfo {
 
     public toString(): string {
         return 'status: ' + this.status + ', isDisabled: ' + this.isDisabled + ', results: '
-            + (this.results !== undefined ? '[' + this.results.map( (r: ScanResult) => r.toString()).toString() + ']' : this.results );
+            + (this.results !== undefined ? '[' + this.results.map((r: ScanResult) => r.toString()).toString() + ']' : this.results);
     }
 
     public isEqual(other: IScanInfo | undefined): boolean {

@@ -26,7 +26,7 @@ export class FireTimestamp extends Timestamp implements IFireTimestamp {
     }
 
     public override toString(): string {
-        return this.toDate().toISOString();
+        return this.toDate().toString();
     }
 
     public override toDate(): Date {

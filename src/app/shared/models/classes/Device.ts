@@ -1,9 +1,9 @@
 import { IDevice } from '../interfaces/IDevice';
 import { Service } from './Service';
 import { IService } from '../interfaces/IService';
-import { copyProperty, isArrayPropertyEqual } from '../../functions/parser.functions';
+import { copyProperty, instantiate, isArrayPropertyEqual } from '../../functions/parser.functions';
 import { compareNumericStrings, compareTimestamps, equals } from '../../functions/comparison.functions';
-import { OrderByDirection } from '@angular/fire/firestore';
+import { DocumentData, FirestoreDataConverter, OrderByDirection, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from '@angular/fire/firestore';
 import { FireTimestamp } from './FireTimestamp';
 import { IFireTimestamp } from '../interfaces/IFireTimestamp';
 
@@ -48,16 +48,28 @@ export class Device implements IDevice {
         throw new Error('Property is either invalid or no compare function is defined for it');
     }
 
+    public static getFirestoreConverter(): FirestoreDataConverter<Device> {
+        return {
+            toFirestore: (instance: WithFieldValue<Device> | Partial<Device>): DocumentData => ({
+                name: instance.name,
+                macAddress: instance.macAddress,
+                lastUsedDate: (instance.lastUsedDate as FireTimestamp | undefined)?.toDate()
+            }),
+            fromFirestore: (snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Device =>
+                instantiate(snapshot.data(options) as IDevice, Device)
+        };
+    }
+
     public constructor(
         name: string = 'undefined',
         macAddress: string = 'undefined',
         lastUsedDate: IFireTimestamp = FireTimestamp.now(),
-        services?: IService[])
-    {
+        services?: IService[]
+    ) {
         this.name = name;
         this.macAddress = macAddress;
-        copyProperty<IDevice, Device, 'lastUsedDate', IFireTimestamp, FireTimestamp>(this, { lastUsedDate } as Partial<Device>, 'lastUsedDate', FireTimestamp);
-        copyProperty(this, { services } as Partial<IDevice>, 'services', Service);
+        copyProperty<IDevice, Device, 'lastUsedDate', IFireTimestamp, FireTimestamp>(this, { lastUsedDate }, 'lastUsedDate', FireTimestamp);
+        copyProperty(this, { services }, 'services', Service);
     }
 
     public copy(other: IDevice): void {

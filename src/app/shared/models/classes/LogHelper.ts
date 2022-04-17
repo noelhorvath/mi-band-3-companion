@@ -2,9 +2,10 @@ import { LogInfo } from './LogInfo';
 import { LogOptions, LogType } from '../../types/custom.types';
 import { ILogInfo } from '../interfaces/ILogInfo';
 import { instantiate } from '../../functions/parser.functions';
+import { environment } from '../../../../environments/environment';
 
 export class LogHelper {
-    private _logInfo: LogInfo;
+    private readonly _logInfo: LogInfo;
 
     public constructor(mainId: string) {
         this._logInfo = new LogInfo();
@@ -16,10 +17,6 @@ export class LogHelper {
 
     private get logInfo(): LogInfo {
         return this._logInfo;
-    }
-
-    private set logInfo(logInfo: ILogInfo) {
-        this._logInfo = logInfo instanceof LogInfo ? logInfo : instantiate(logInfo, LogInfo);
     }
 
     private setOptions(options: LogOptions | undefined): void {
@@ -56,7 +53,19 @@ export class LogHelper {
 
     public static log(logInfo: ILogInfo, type: LogType = 'log'): void {
         const logMsg = logInfo instanceof LogInfo ? logInfo.toString() : instantiate(logInfo, LogInfo).toString();
-        return type === 'log' ? console.log(logMsg) : console.error(logMsg);
+        switch (type) {
+            case 'error':
+                console.error(logMsg);
+                break;
+            case 'log':
+                if (!environment.production) {
+                    console.log(logMsg);
+                }
+                break;
+            default:
+                break;
+        }
+        return;
     }
 
     public static getUnknownMsg(message: unknown): string {
@@ -73,7 +82,9 @@ export class LogHelper {
         } else if (message === null) {
             return 'null';
         } else if (typeof message === 'object') {
-            return typeof message.toString === 'function' && message.toString() !== '[object Object]' ? message.toString() : JSON.stringify(message);
+            return (typeof message.toString === 'function'
+                && message.toString().startsWith('[object ')
+                && message.toString().endsWith(']')) ? JSON.stringify(message) : message.toString();
         } else {
             return JSON.stringify(message);
         }

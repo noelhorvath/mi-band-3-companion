@@ -8,7 +8,7 @@ import { OrderByDirection } from '@angular/fire/firestore';
 
 export class Service extends UUIDExtension implements IService {
     public characteristics!: Characteristic[];
-    public name?: string;
+    public name: string | undefined;
 
     private static sortByUUIDAsc(a: IService, b: IService): number {
         return (a instanceof Service ? a.uuid : a.uuid.toLowerCase()) === (b instanceof Service ? b.uuid : b.uuid.toLowerCase())
@@ -40,15 +40,19 @@ export class Service extends UUIDExtension implements IService {
     public constructor(
         uuid: string = 'undefined',
         characteristics: ICharacteristic[] = [],
-        name?: string)
-    {
+        name?: string
+    ) {
         super(uuid);
-        copyProperty(this, { characteristics } as Partial<IService>, 'characteristics', Characteristic);
+        copyProperty(this, { characteristics }, 'characteristics', Characteristic);
         this.name = name ?? 'undefined';
     }
 
-    public getCharacteristic(name: string): Characteristic | undefined {
+    public getCharacteristicByName(name: string): Characteristic | undefined {
         return this.characteristics.find((c: Characteristic) => c.name.toLowerCase().includes(name.toLowerCase().trim()));
+    }
+
+    public getCharacteristicByUUID(uuid: string): Characteristic | undefined {
+        return this.characteristics.find((c: Characteristic) => c.uuid === uuid.toLowerCase() || c.getShortenedUUID() === uuid.toLowerCase());
     }
 
     public copy(other: IService): void {

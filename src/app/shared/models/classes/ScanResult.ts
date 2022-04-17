@@ -45,8 +45,8 @@ export class ScanResult implements IScanResult {
     public constructor(
         address: string = 'undefined',
         name: string = 'undefined',
-        rssi: number = 0)
-    {
+        rssi: number = 0
+    ) {
         this.address = address;
         this.name = name;
         this.rssi = rssi;

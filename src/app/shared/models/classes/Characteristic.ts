@@ -7,6 +7,7 @@ import { IDescriptor } from '../interfaces/IDescriptor';
 import { copyProperty, isArrayPropertyEqual } from '../../functions/parser.functions';
 import { compareNumericStrings, compareStrings } from '../../functions/comparison.functions';
 import { OrderByDirection } from '@angular/fire/firestore';
+import { PropertyName } from '../../types/custom.types';
 
 export class Characteristic extends UUIDExtension implements ICharacteristic {
     public name: string;
@@ -46,12 +47,12 @@ export class Characteristic extends UUIDExtension implements ICharacteristic {
         uuid: string = 'undefined',
         name: string = 'undefined',
         properties: IProperty[] = [],
-        descriptor?: IDescriptor)
-    {
+        descriptor?: IDescriptor
+    ) {
         super(uuid);
         this.name = name;
         copyProperty(this, { properties }, 'properties', Property);
-        copyProperty(this, { descriptor } as Partial<ICharacteristic>, 'descriptor', Descriptor);
+        copyProperty(this, { descriptor }, 'descriptor', Descriptor);
     }
 
     public copy(other: ICharacteristic): void {
@@ -79,5 +80,9 @@ export class Characteristic extends UUIDExtension implements ICharacteristic {
                 && (this.descriptor !== other.descriptor ? this.descriptor?.isEqual(other.descriptor) ?? false : true);
             return !res ? res : isArrayPropertyEqual(this, other, Characteristic, 'properties', Property.getCompareFunction, 'uuid', 'asc');
         }
+    }
+
+    public hasProperty(name: PropertyName): boolean {
+        return this.properties.find((prop: Property) => prop.name.toLowerCase() === name.toLowerCase()) !== undefined;
     }
 }

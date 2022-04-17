@@ -13,11 +13,10 @@ export class ConnectionInfo implements IConnectionInfo {
     public constructor(
         status: ConnectionStatus = BLEConnectionStatus.DISCONNECTED,
         isAuthenticated: boolean = false,
-        device?: IDevice)
-    {
+        device?: IDevice) {
         this.status = status;
         this.isAuthenticated = isAuthenticated;
-        copyProperty(this, { device } as Partial<IConnectionInfo>, 'device', Device);
+        copyProperty(this, { device }, 'device', Device);
     }
 
     public set status(status: ConnectionStatus) {

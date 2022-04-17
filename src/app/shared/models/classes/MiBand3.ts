@@ -22,7 +22,11 @@ export class MiBand3 extends Device {
         return this.instance;
     }
 
-    public getService(name: string): Service | undefined {
+    public getServiceByName(name: string): Service | undefined {
         return this.services.find((s: Service) => s.name !== undefined && s.name.toLowerCase().includes(name.toLowerCase()));
+    }
+
+    public getServiceByUUID(uuid: string): Service | undefined {
+        return this.services.find((s: Service) => s.uuid === uuid.toLowerCase() || s.getShortenedUUID() === uuid.toLowerCase());
     }
 }
