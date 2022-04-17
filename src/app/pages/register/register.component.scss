@@ -1,0 +1,19 @@
+:host {
+    ion-item {
+        ion-select {
+            max-width: 100% !important;
+            width: 100% !important;
+            text-align: center;
+        }
+        ion-select::part(icon) {
+            display: none !important;
+        }
+    }
+    .title {
+        font-size: x-large;
+        font-weight: bold;
+    }
+    .placeholder {
+        color: grey;
+    }
+}
