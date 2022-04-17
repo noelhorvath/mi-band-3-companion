@@ -3,9 +3,7 @@
 </info description="Exported and edited data from nRF Connect containing
              information about all services of Mi Band 3"
 editor="Noel Horváth"
-creator="nRF Connect"
-credits="Thanks Freeyourgadget for missing service names,
-         nRF Connect for exported data"/>
+app="nRF Connect"
 
 ############################################################################# -->
 
