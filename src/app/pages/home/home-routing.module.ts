@@ -20,10 +20,6 @@ const routes: Routes = [
                 loadChildren: () => import('../home/tabs/heart-rate/heart-rate.module').then(m => m.HeartRateModule),
             },
             {
-                path: 'statistics',
-                loadChildren: () => import('../home/tabs/statistics/statistics.module').then(m => m.StatisticsModule),
-            },
-            {
                 path: '',
                 redirectTo: '/home/device',
                 pathMatch: 'full'
