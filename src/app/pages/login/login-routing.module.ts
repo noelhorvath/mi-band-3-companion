@@ -5,15 +5,8 @@ import { LoginComponent } from './login.component';
 const routes: Routes = [
     {
         path: '',
-        component: LoginComponent,
-        children: [
-            {
-                path: 'reset-password',
-                loadChildren: () => import('../reset-password/reset-password.module').then(m => m.ResetPasswordModule)
-            }
-        ]
+        component: LoginComponent
     },
-    {}
 ];
 
 @NgModule({
