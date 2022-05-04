@@ -14,9 +14,7 @@ export interface IUser extends IEntityModel<IUser> {
     bandUserId: number;
     id?: string;
     devices?: IDevice[] | undefined;
-
-    getFullName?(): string;
-
+    getFullName?(langCode?: string): string;
     getCurrentlyUsedDevice?(): IDevice | undefined;
 }
 
