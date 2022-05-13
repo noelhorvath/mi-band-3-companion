@@ -84,3 +84,10 @@ capacitor-cordova-android-plugins
 
 # Copied web assets
 app/src/main/assets/public
+
+# Private key files
+private_key.pepk
+secret_keystore_LULE.jks
+
+# Release
+app/release
