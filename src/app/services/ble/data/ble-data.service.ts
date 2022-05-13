@@ -160,9 +160,10 @@ export class BleDataService extends BleBaseService {
                fetch batch contains 4 (at max) activity data/package  per minute
 
                     0. queue number
-                    1-4 activity data
-                    5-8. next activity data
-                    9-12. next activity data
+                    1-4. activity data
+                    5-8. activity data
+                    9-12. activity data
+                    13-16. activity data
 
                     Activity data:
 
