@@ -1,0 +1,1327 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ToolbarMenuDeviceSettingsModalComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-toolbar-menu-device-settings-modal</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./toolbar-menu-device-settings-modal.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./toolbar-menu-device-settings-modal.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currentDevice" >currentDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#DATA_TYPES" >DATA_TYPES</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#deviceSettingsModal" >deviceSettingsModal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#exportDataType" >exportDataType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#exportDevice" >exportDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logHelper" >logHelper</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#changeDevice" >changeDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#exportActivityData" >exportActivityData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#exportData" >exportData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#exportHeartRateData" >exportHeartRateData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#goToSetup" >goToSetup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#connectionInfo" >connectionInfo</a>
+                            </li>
+                            <li>
+                                <a href="#triggerId" >triggerId</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(activityService: <a href="../injectables/FirestoreActivityService.html" target="_self">FirestoreActivityService</a>, heartRateService: <a href="../injectables/FirestoreHeartRateService.html" target="_self">FirestoreHeartRateService</a>, messageService: <a href="../injectables/MessageService.html" target="_self">MessageService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, bleConnectionService: <a href="../injectables/BleConnectionService.html" target="_self">BleConnectionService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>activityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreActivityService.html" target="_self" >FirestoreActivityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>heartRateService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreHeartRateService.html" target="_self" >FirestoreHeartRateService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>messageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MessageService.html" target="_self" >MessageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>bleConnectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BleConnectionService.html" target="_self" >BleConnectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="connectionInfo"></a>
+                        <b>connectionInfo</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ConnectionInfo.html" target="_self" >ConnectionInfo | undefined</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:30</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="triggerId"></a>
+                        <b>triggerId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="user"></a>
+                        <b>user</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User | undefined</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:29</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeDevice"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>changeDevice</b></span>
+                        <a href="#changeDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>changeDevice(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="199"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:199</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportActivityData"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>exportActivityData</b></span>
+                        <a href="#exportActivityData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportActivityData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:52</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportData"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>exportData</b></span>
+                        <a href="#exportData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="179"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:179</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportHeartRateData"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>exportHeartRateData</b></span>
+                        <a href="#exportHeartRateData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportHeartRateData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:118</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToSetup"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>goToSetup</b></span>
+                        <a href="#goToSetup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>goToSetup()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="187"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:187</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentDevice"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currentDevice</b></span>
+                        <a href="#currentDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DATA_TYPES"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>DATA_TYPES</b></span>
+                        <a href="#DATA_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deviceSettingsModal"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>deviceSettingsModal</b></span>
+                        <a href="#deviceSettingsModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>HTMLIonModalElement</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;modal&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportDataType"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>exportDataType</b></span>
+                        <a href="#exportDataType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportDevice"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>exportDevice</b></span>
+                        <a href="#exportDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logHelper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logHelper</b></span>
+                        <a href="#logHelper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/LogHelper.html" target="_self" >LogHelper</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/components/toolbar/menu/device-settings-modal/toolbar-menu-device-settings-modal.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnChanges, SimpleChanges, ViewChild } from &#x27;@angular/core&#x27;;
+import { User } from &#x27;../../../../models/classes/User&#x27;;
+import { FirestoreActivityService } from &#x27;../../../../../services/firestore/activity/firestore-activity.service&#x27;;
+import { FirestoreHeartRateService } from &#x27;../../../../../services/firestore/heart-rate/firestore-heart-rate.service&#x27;;
+import { MessageService } from &#x27;../../../../../services/message/message.service&#x27;;
+import { LogInfo } from &#x27;../../../../models/classes/LogInfo&#x27;;
+import { Directory, Encoding, Filesystem } from &#x27;@capacitor/filesystem&#x27;;
+import { Activity } from &#x27;../../../../models/classes/Activity&#x27;;
+import { HeartRate } from &#x27;../../../../models/classes/HeartRate&#x27;;
+import { QueryOperator } from &#x27;../../../../enums/firestore.enum&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { LogHelper } from &#x27;../../../../models/classes/LogHelper&#x27;;
+import { BleConnectionService } from &#x27;../../../../../services/ble/connection/ble-connection.service&#x27;;
+import { ConnectionInfo } from &#x27;../../../../models/classes/ConnectionInfo&#x27;;
+import { Device } from &#x27;../../../../models/classes/Device&#x27;;
+
+@Component({
+    selector: &#x27;app-toolbar-menu-device-settings-modal&#x27;,
+    templateUrl: &#x27;./toolbar-menu-device-settings-modal.component.html&#x27;,
+    styleUrls: [&#x27;./toolbar-menu-device-settings-modal.component.scss&#x27;],
+})
+export class ToolbarMenuDeviceSettingsModalComponent implements OnChanges {
+    private readonly logHelper: LogHelper;
+    public readonly DATA_TYPES: string[];
+    public exportDataType: string;
+    public exportDevice: string | undefined;
+    public currentDevice: string | undefined;
+    @Input() public triggerId: any;
+    @Input() public user: User | undefined;
+    @Input() public connectionInfo: ConnectionInfo | undefined;
+    @ViewChild(&#x27;modal&#x27;) public deviceSettingsModal!: HTMLIonModalElement;
+
+    public constructor(
+        private activityService: FirestoreActivityService,
+        private heartRateService: FirestoreHeartRateService,
+        private messageService: MessageService,
+        private router: Router,
+        private bleConnectionService: BleConnectionService
+    ) {
+        this.logHelper &#x3D; new LogHelper(ToolbarMenuDeviceSettingsModalComponent.name);
+        this.DATA_TYPES &#x3D; [&#x27;activity&#x27;, &#x27;pulse&#x27;];
+        this.exportDataType &#x3D; this.DATA_TYPES[0];
+        this.triggerId &#x3D; &#x27;device-settings-modal&#x27;;
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes[&#x27;connectionInfo&#x27;] &amp;&amp; this.connectionInfo?.device?.macAddress !&#x3D;&#x3D; undefined) {
+            this.currentDevice &#x3D; this.connectionInfo.device.macAddress;
+        }
+    }
+
+    public async exportActivityData(): Promise&lt;void&gt; {
+        try {
+            await this.messageService.createLoading(&#x27;EXPORTING_ACTIVITY_DATA_WITH_DOTS&#x27;);
+            const status &#x3D; await Filesystem.requestPermissions();
+            if (status.publicStorage !&#x3D;&#x3D; &#x27;denied&#x27;) {
+                let data &#x3D; &#x27;[\n&#x27;;
+                const activities &#x3D; await this.activityService.list([
+                    { fieldPath: &#x27;measurementInfo.deviceRef&#x27;, opStr: QueryOperator.EQUAL, value: this.exportDevice},
+                ]);
+                activities?.map((activity: Activity, i: number) &#x3D;&gt; {
+                    data +&#x3D; &#x27;&#x27; +
+                        &#x27;   {\n&#x27; +
+                        &#x27;       &quot;steps&quot;:&#x27; + &#x27;&quot;&#x27; + activity.steps + &#x27;&quot;,\n&#x27; +
+                        &#x27;       &quot;distance&quot;:&#x27; + &#x27;&quot;&#x27; + (activity.distance !&#x3D;&#x3D; -1 ? activity.distance : 0) + &#x27;&quot;,\n&#x27; +
+                        &#x27;       &quot;calories&quot;:&#x27; + &#x27;&quot;&#x27; + (activity.calories !&#x3D;&#x3D; -1 ? activity.calories : 0) + &#x27;&quot;,\n&#x27; +
+                        &#x27;       &quot;intensity&quot;: {\n&#x27; +
+                        &#x27;           &quot;avg&quot;:&#x27; + &#x27;&quot;&#x27; + (activity.intensity.avg !&#x3D;&#x3D; -1 ? activity.intensity.avg : 0) + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;max&quot;:&#x27; + &#x27;&quot;&#x27; + (activity.intensity.max !&#x3D;&#x3D; Number.MIN_SAFE_INTEGER ? activity.intensity.max : 0) + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;min&quot;:&#x27; + &#x27;&quot;&#x27; + (activity.intensity.min !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER ? activity.intensity.min : 0) + &#x27;&quot;\n&#x27; +
+                        &#x27;       },\n&#x27; +
+                        &#x27;       &quot;measurementInfo&quot;: {\n&#x27; +
+                        &#x27;           &quot;date&quot;:&#x27; + &#x27;&quot;&#x27; + activity.measurementInfo.date.toDate().toISOString() + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;type&quot;:&#x27; + &#x27;&quot;&#x27; + activity.measurementInfo.type + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;deviceRef&quot;:&#x27; + &#x27;&quot;&#x27; + activity.measurementInfo.deviceRef + &#x27;&quot;\n&#x27; +
+                        &#x27;       }\n&#x27; +
+                        &#x27;   }&#x27; + (i !&#x3D;&#x3D; activities?.length - 1 &amp;&amp; activities?.length !&#x3D;&#x3D; 0 ? &#x27;,\n&#x27; : &#x27;\n&#x27;);
+                });
+                data +&#x3D; &#x27;]&#x27;;
+                const date &#x3D; new Date();
+                const path &#x3D; &#x27;MiBand3Companion/Activity&#x27;;
+                try {
+                    await Filesystem.mkdir({
+                        path: &#x27;MiBand3Companion/Activity&#x27;,
+                        directory: Directory.Documents,
+                        recursive: true
+                    });
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.exportActivityData.name, &#x27;mkdir&#x27;, { value: e });
+                }
+                await Filesystem.writeFile({
+                    path: &#x60;${path}/export_${date.getFullYear()}_${date.getMonth()}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getMilliseconds()}.json&#x60;,
+                    data,
+                    directory: Directory.Documents,
+                    encoding: Encoding.ASCII
+                });
+                await this.messageService.createToast(&#x27;EXPORT_ACTIVITY_DATA&#x27;, &#x27;ACTIVITY_DATA_EXPORTED_TO_DOCUMENTS&#x27;, &#x27;top&#x27;, &#x27;success&#x27;, 5000);
+            } else {
+                await this.messageService.createToast(&#x27;EXPORT_ACTIVITY_DATA&#x27;, &#x27;MISSING_FILE_ACCESS_PERMISSIONS&#x27;, &#x27;top&#x27;, &#x27;danger&#x27;);
+            }
+        } catch (e: unknown) {
+            await this.messageService.displayErrorMessage(
+                new LogInfo(
+                    ToolbarMenuDeviceSettingsModalComponent.name,
+                    this.exportActivityData.name,
+                    &#x27;EXPORT_ACTIVITY_DATA_ERROR&#x27;,
+                    { value: e }
+                ),
+                &#x27;toast&#x27;,
+                true,
+                5000
+            );
+        } finally {
+            await this.messageService.dismissLoading();
+        }
+    }
+
+    public async exportHeartRateData(): Promise&lt;void&gt; {
+        try {
+            await this.messageService.createLoading(&#x27;EXPORTING_PULSE_DATA_WITH_DOTS&#x27;);
+            const status &#x3D; await Filesystem.requestPermissions();
+            if (status.publicStorage !&#x3D;&#x3D; &#x27;denied&#x27;) {
+                let data &#x3D; &#x27;[\n&#x27;;
+                const heartRates &#x3D; await this.heartRateService.list({ fieldPath: &#x27;measurementInfo.date&#x27;, directionStr: &#x27;asc&#x27;});
+                heartRates?.map((heartRate: HeartRate, i: number) &#x3D;&gt; {
+                    data +&#x3D; &#x27;&#x27; +
+                        &#x27;   {\n&#x27; +
+                        &#x27;       &quot;bpm&quot;: {\n&#x27; +
+                        &#x27;           &quot;avg&quot;:&#x27; + &#x27;&quot;&#x27; + (heartRate.bpm.avg !&#x3D;&#x3D; -1 ? heartRate.bpm.avg : 0) + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;max&quot;:&#x27; + &#x27;&quot;&#x27; + (heartRate.bpm.max !&#x3D;&#x3D; Number.MIN_SAFE_INTEGER ? heartRate.bpm.max : 0) + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;min&quot;:&#x27; + &#x27;&quot;&#x27; + (heartRate.bpm.min !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER ? heartRate.bpm.min : 0) + &#x27;&quot;\n&#x27; +
+                        &#x27;       },\n&#x27; +
+                        &#x27;       &quot;measurementInfo&quot;: {\n&#x27; +
+                        &#x27;           &quot;date&quot;:&#x27; + &#x27;&quot;&#x27; + heartRate.measurementInfo.date.toDate().toISOString() + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;type&quot;:&#x27; + &#x27;&quot;&#x27; + heartRate.measurementInfo.type + &#x27;&quot;,\n&#x27; +
+                        &#x27;           &quot;deviceRef&quot;:&#x27; + &#x27;&quot;&#x27; + heartRate.measurementInfo.deviceRef + &#x27;&quot;\n&#x27; +
+                        &#x27;       }\n&#x27; +
+                        &#x27;   }&#x27; + (i !&#x3D;&#x3D; heartRates?.length - 1 &amp;&amp; heartRates?.length !&#x3D;&#x3D; 0 ? &#x27;,\n&#x27; : &#x27;\n&#x27;);
+                });
+                data +&#x3D; &#x27;]&#x27;;
+                const date &#x3D; new Date();
+                const path &#x3D; &#x27;MiBand3Companion/Pulse&#x27;;
+                try {
+                    await Filesystem.mkdir({
+                        path: &#x27;MiBand3Companion/Pulse&#x27;,
+                        directory: Directory.Documents,
+                        recursive: true
+                    });
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.exportActivityData.name, &#x27;mkdir&#x27;, { value: e });
+                }
+                await Filesystem.writeFile({
+                    path: &#x60;${path}/export_${date.getFullYear()}_${date.getMonth()}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getMilliseconds()}.json&#x60;,
+                    data,
+                    directory: Directory.Documents,
+                    encoding: Encoding.ASCII
+                });
+                await this.messageService.createToast(&#x27;EXPORT_PULSE_DATA&#x27;, &#x27;PULSE_DATA_EXPORTED_TO_DOCUMENTS&#x27;, &#x27;top&#x27;, &#x27;success&#x27;, 5000);
+            } else {
+                await this.messageService.createToast(&#x27;EXPORT_PULSE_DATA&#x27;, &#x27;MISSING_FILE_ACCESS_PERMISSIONS&#x27;, &#x27;top&#x27;, &#x27;danger&#x27;);
+            }
+        } catch (e: unknown) {
+            await this.messageService.displayErrorMessage(
+                new LogInfo(
+                    ToolbarMenuDeviceSettingsModalComponent.name,
+                    this.exportActivityData.name,
+                    &#x27;EXPORT_PULSE_DATA_ERROR&#x27;,
+                    { value: e }
+                ),
+                &#x27;toast&#x27;,
+                true,
+                5000
+            );
+        } finally {
+            await this.messageService.dismissLoading();
+        }
+    }
+
+    public async exportData(): Promise&lt;void&gt; {
+        if (this.exportDataType &#x3D;&#x3D;&#x3D; &#x27;activity&#x27;) {
+            return this.exportActivityData();
+        } else {
+            return this.exportHeartRateData();
+        }
+    }
+
+    public async goToSetup(): Promise&lt;void&gt; {
+        try {
+            if (this.connectionInfo?.device !&#x3D;&#x3D; undefined &amp;&amp; this.connectionInfo.isConnected()) {
+                await this.bleConnectionService.disconnectAndClose(this.connectionInfo.device);
+            }
+            await this.router.navigateByUrl(&#x27;device-setup&#x27;, { replaceUrl: true });
+            await this.deviceSettingsModal.dismiss();
+        } catch (e: unknown) {
+            this.logHelper.logError(this.goToSetup.name, e);
+        }
+    }
+
+    public async changeDevice(value: string): Promise&lt;void&gt; {
+        if (value !&#x3D;&#x3D; undefined &amp;&amp; this.user !&#x3D;&#x3D; undefined &amp;&amp; this.user.devices !&#x3D;&#x3D; undefined &amp;&amp; this.user.devices.length &gt; 0) {
+            if (this.connectionInfo?.device !&#x3D;&#x3D; undefined &amp;&amp; this.connectionInfo.isConnected() &amp;&amp; this.connectionInfo.device.macAddress !&#x3D;&#x3D; value) {
+                try {
+                    await this.bleConnectionService.disconnectAndClose(this.connectionInfo.device);
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.changeDevice.name, e);
+                }
+            }
+            this.bleConnectionService.deviceSettingsSubject.next(this.user.devices.find( d &#x3D;&gt; d.macAddress &#x3D;&#x3D;&#x3D; value) ?? new Device());
+        }
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-modal #modal [trigger]&#x3D;&quot;triggerId&quot; [breakpoints]&#x3D;&quot;[0.1, 1]&quot; [initialBreakpoint]&#x3D;&quot;1&quot;&gt;
+    &lt;ng-template&gt;
+        &lt;ion-content&gt;
+            &lt;div class&#x3D;&quot;page-title ion-margin-bottom ion-margin-top&quot;&gt;
+                &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;DEVICE_SETTINGS&#x27; | translate }}&lt;/ion-label&gt;
+            &lt;/div&gt;
+            &lt;ion-grid class&#x3D;&quot;ion-margin-bottom&quot;&gt;
+                &lt;ion-row class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;DEVICE_DATA&#x27; | translate }}&lt;/ion-label&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;user !&#x3D;&#x3D; undefined&quot;&gt;
+                    &lt;ion-row&gt;
+                        &lt;ion-col&gt;
+                            &lt;ion-item&gt;
+                                &lt;ion-label [hidden]&#x3D;&quot;true&quot;&gt;{{ &#x27;DEVICE&#x27; | translate }}&lt;/ion-label&gt;
+                                &lt;ion-select [(ngModel)]&#x3D;&quot;exportDevice&quot; placeholder&#x3D;&quot;{{ &#x27;SELECT_DEVICE&#x27; | translate }}&quot;&gt;
+                                    &lt;ion-select-option  *ngFor&#x3D;&quot;let device of this.user.devices&quot; [value]&#x3D;&quot;device.macAddress&quot;&gt;{{ device.macAddress }}&lt;/ion-select-option&gt;
+                                &lt;/ion-select&gt;
+                            &lt;/ion-item&gt;
+                        &lt;/ion-col&gt;
+                    &lt;/ion-row&gt;
+                    &lt;ion-row&gt;
+                        &lt;ion-col&gt;
+                            &lt;ion-item&gt;
+                                &lt;ion-label [hidden]&#x3D;&quot;true&quot;&gt;{{ &#x27;DEVICE&#x27; | translate }}&lt;/ion-label&gt;
+                                &lt;ion-select [(ngModel)]&#x3D;&quot;exportDataType&quot;&gt;
+                                    &lt;ion-select-option *ngFor&#x3D;&quot;let dataType of DATA_TYPES&quot; [value]&#x3D;&quot;dataType&quot;&gt;
+                                        {{ dataType.toUpperCase() | translate }}
+                                    &lt;/ion-select-option&gt;
+                                &lt;/ion-select&gt;
+                            &lt;/ion-item&gt;
+                        &lt;/ion-col&gt;
+                    &lt;/ion-row&gt;
+                    &lt;ion-row&gt;
+                        &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                            &lt;ion-button expand&#x3D;&quot;block&quot; color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;exportData()&quot; [disabled]&#x3D;&quot;!exportDevice &amp;&amp; !exportDataType&quot;&gt;
+                                {{ &#x27;EXPORT&#x27; | translate }}
+                            &lt;/ion-button&gt;
+                        &lt;/ion-col&gt;
+                    &lt;/ion-row&gt;
+                &lt;/ng-container&gt;
+            &lt;/ion-grid&gt;
+            &lt;ion-grid class&#x3D;&quot;ion-margin-bottom&quot;&gt;
+                &lt;ion-row class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+                &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                    &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;CHANGE_DEVICE&#x27; | translate }}&lt;/ion-label&gt;
+                &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;user !&#x3D;&#x3D; undefined&quot;&gt;
+                    &lt;ion-row&gt;
+                        &lt;ion-col&gt;
+                            &lt;ion-item&gt;
+                                &lt;ion-label [hidden]&#x3D;&quot;true&quot;&gt;{{ &#x27;DEVICE&#x27; | translate }}&lt;/ion-label&gt;
+                                &lt;ion-select [(ngModel)]&#x3D;&quot;this.currentDevice&quot; #deviceSelect (ionChange)&#x3D;&quot;changeDevice(deviceSelect.value)&quot; placeholder&#x3D;&quot;{{ &#x27;SELECT_DEVICE&#x27; | translate }}&quot;&gt;
+                                    &lt;ion-select-option *ngFor&#x3D;&quot;let device of this.user.devices&quot; [value]&#x3D;&quot;device.macAddress&quot;&gt;
+                                        {{ device.macAddress }}
+                                    &lt;/ion-select-option&gt;
+                                &lt;/ion-select&gt;
+                            &lt;/ion-item&gt;
+                        &lt;/ion-col&gt;
+                    &lt;/ion-row&gt;
+                &lt;/ng-container&gt;
+            &lt;/ion-grid&gt;
+            &lt;ion-grid&gt;
+                &lt;ion-row class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;ADD_DEVICE&#x27; | translate }}&lt;/ion-label&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-button expand&#x3D;&quot;block&quot; color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;goToSetup()&quot;&gt;
+                            {{ &#x27;SETUP_NEW_DEVICE&#x27; | translate }}
+                        &lt;/ion-button&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+            &lt;/ion-grid&gt;
+        &lt;/ion-content&gt;
+    &lt;/ng-template&gt;
+&lt;/ion-modal&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./toolbar-menu-device-settings-modal.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">ion-modal {
+    .title {
+        font-size: large;
+
+    }
+    .page-title {
+        font-size: x-large;
+    }
+
+    .title, .page-title {
+        font-weight: bold;
+        text-align: center;
+    }
+    ion-select {
+        max-width: 100% !important;
+        width: 100% !important;
+        text-align: center;
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-modal #modal [trigger]="triggerId" [breakpoints]="[0.1, 1]" [initialBreakpoint]="1">    <ng-template>        <ion-content>            <div class="page-title ion-margin-bottom ion-margin-top">                <ion-label color="primary">{{ \'DEVICE_SETTINGS\' | translate }}</ion-label>            </div>            <ion-grid class="ion-margin-bottom">                <ion-row class="title ion-margin-top ion-margin-bottom">                    <ion-col size="12">                        <ion-label color="primary">{{ \'DEVICE_DATA\' | translate }}</ion-label>                    </ion-col>                </ion-row>                <ng-container *ngIf="user !== undefined">                    <ion-row>                        <ion-col>                            <ion-item>                                <ion-label [hidden]="true">{{ \'DEVICE\' | translate }}</ion-label>                                <ion-select [(ngModel)]="exportDevice" placeholder="{{ \'SELECT_DEVICE\' | translate }}">                                    <ion-select-option  *ngFor="let device of this.user.devices" [value]="device.macAddress">{{ device.macAddress }}</ion-select-option>                                </ion-select>                            </ion-item>                        </ion-col>                    </ion-row>                    <ion-row>                        <ion-col>                            <ion-item>                                <ion-label [hidden]="true">{{ \'DEVICE\' | translate }}</ion-label>                                <ion-select [(ngModel)]="exportDataType">                                    <ion-select-option *ngFor="let dataType of DATA_TYPES" [value]="dataType">                                        {{ dataType.toUpperCase() | translate }}                                    </ion-select-option>                                </ion-select>                            </ion-item>                        </ion-col>                    </ion-row>                    <ion-row>                        <ion-col size="12">                            <ion-button expand="block" color="primary" (click)="exportData()" [disabled]="!exportDevice && !exportDataType">                                {{ \'EXPORT\' | translate }}                            </ion-button>                        </ion-col>                    </ion-row>                </ng-container>            </ion-grid>            <ion-grid class="ion-margin-bottom">                <ion-row class="title ion-margin-top ion-margin-bottom">                <ion-col size="12">                    <ion-label color="primary">{{ \'CHANGE_DEVICE\' | translate }}</ion-label>                </ion-col>                </ion-row>                <ng-container *ngIf="user !== undefined">                    <ion-row>                        <ion-col>                            <ion-item>                                <ion-label [hidden]="true">{{ \'DEVICE\' | translate }}</ion-label>                                <ion-select [(ngModel)]="this.currentDevice" #deviceSelect (ionChange)="changeDevice(deviceSelect.value)" placeholder="{{ \'SELECT_DEVICE\' | translate }}">                                    <ion-select-option *ngFor="let device of this.user.devices" [value]="device.macAddress">                                        {{ device.macAddress }}                                    </ion-select-option>                                </ion-select>                            </ion-item>                        </ion-col>                    </ion-row>                </ng-container>            </ion-grid>            <ion-grid>                <ion-row class="title ion-margin-top ion-margin-bottom">                    <ion-col size="12">                        <ion-label color="primary">{{ \'ADD_DEVICE\' | translate }}</ion-label>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col size="12">                        <ion-button expand="block" color="primary" (click)="goToSetup()">                            {{ \'SETUP_NEW_DEVICE\' | translate }}                        </ion-button>                    </ion-col>                </ion-row>            </ion-grid>        </ion-content>    </ng-template></ion-modal></div>'
+    var COMPONENTS = [{'name': 'ActivityComponent', 'selector': 'app-activity'},{'name': 'ActivityItemComponent', 'selector': 'app-activity-item'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomChartComponent', 'selector': 'app-custom-chart'},{'name': 'DataChartComponent', 'selector': 'app-data-chart'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DeviceComponent', 'selector': 'app-device'},{'name': 'DeviceSetupComponent', 'selector': 'app-setup'},{'name': 'HeartRateComponent', 'selector': 'app-heart-rate'},{'name': 'HeartRateItemComponent', 'selector': 'app-heart-rate-item'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeTabBarComponent', 'selector': 'app-home-tab-bar'},{'name': 'ItemsFilterComponent', 'selector': 'app-items-filter'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'RangeItemComponent', 'selector': 'app-range-item'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-login-reset-password'},{'name': 'ScannedDeviceItemComponent', 'selector': 'app-scanned-device-item'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'ToolbarLanguageSelectComponent', 'selector': 'app-toolbar-language-select'},{'name': 'ToolbarMenuComponent', 'selector': 'app-toolbar-menu'},{'name': 'ToolbarMenuDeviceSettingsModalComponent', 'selector': 'app-toolbar-menu-device-settings-modal'},{'name': 'ToolbarMenuUserSettingsModalComponent', 'selector': 'app-toolbar-menu-user-settings-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ToolbarMenuDeviceSettingsModalComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToolbarMenuDeviceSettingsModalComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

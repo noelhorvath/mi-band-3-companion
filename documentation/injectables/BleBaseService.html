@@ -1,0 +1,1262 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >BleBaseService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/ble/base/ble-base.service.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#miBand3" >miBand3</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#bytesFromInt" >bytesFromInt</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#bytesToInt" >bytesToInt</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dateTimeFromBytes" >dateTimeFromBytes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dateTimeToBytes" >dateTimeToBytes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#read" >read</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#subscribe" >subscribe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#unsubscribe" >unsubscribe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#write" >write</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Protected</span>
+                        <code>constructor(ble: BluetoothLE)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:18</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>ble</td>
+                                                  
+                                                        <td>
+                                                                    <code>BluetoothLE</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bytesFromInt"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>bytesFromInt</b></span>
+                        <a href="#bytesFromInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>bytesFromInt(num: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, size?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>num</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>size</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Uint8Array</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bytesToInt"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>bytesToInt</b></span>
+                        <a href="#bytesToInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>bytesToInt(bytes: Uint8Array)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:100</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>bytes</td>
+                                    <td>
+                                            <code>Uint8Array</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dateTimeFromBytes"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dateTimeFromBytes</b></span>
+                        <a href="#dateTimeFromBytes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dateTimeFromBytes(bytes: Uint8Array, startIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>bytes</td>
+                                    <td>
+                                            <code>Uint8Array</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>startIndex</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>0</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/FireTimestamp.html" target="_self" >FireTimestamp | undefined</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dateTimeToBytes"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dateTimeToBytes</b></span>
+                        <a href="#dateTimeToBytes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dateTimeToBytes(dateTime: <a href="../interfaces/IFireTimestamp.html" target="_self">Date | IFireTimestamp</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="153"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:153</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dateTime</td>
+                                    <td>
+                                                <code><a href="../interfaces/IFireTimestamp.html" target="_self" >Date | IFireTimestamp</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>new Date()</code>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Uint8Array</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="read"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>read</b></span>
+                        <a href="#read"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>read(deviceData: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:48</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>deviceData</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;OperationResult&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribe"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span ><b>subscribe</b></span>
+                        <a href="#subscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribe(deviceData: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>, observer: Partial<Observer<OperationResult>>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:64</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>deviceData</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>observer</td>
+                                    <td>
+                                            <code>Partial&lt;Observer&lt;OperationResult&gt;&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unsubscribe"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>unsubscribe</b></span>
+                        <a href="#unsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>unsubscribe(device: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:84</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>device</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;UnsubscribeResult&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="write"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>write</b></span>
+                        <a href="#write"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>write(deviceData: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>, value: Buffer | Uint8Array, type?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:24</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>deviceData</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                            <code>Buffer | Uint8Array</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;OperationResult&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="miBand3"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>miBand3</b></span>
+                        <a href="#miBand3"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/MiBand3.html" target="_self" >MiBand3</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/services/ble/base/ble-base.service.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BluetoothLE, OperationResult, UnsubscribeResult } from &#x27;@ionic-native/bluetooth-le/ngx&#x27;;
+import { IDevice } from &#x27;../../../shared/models/interfaces/IDevice&#x27;;
+import { Service } from &#x27;../../../shared/models/classes/Service&#x27;;
+import { Characteristic } from &#x27;../../../shared/models/classes/Characteristic&#x27;;
+import { Buffer } from &#x27;buffer&#x27;;
+import { BLEProperty } from &#x27;../../../shared/enums/ble.enum&#x27;;
+import { MiBand3 } from &#x27;../../../shared/models/classes/MiBand3&#x27;;
+import { IFireTimestamp } from &#x27;../../../shared/models/interfaces/IFireTimestamp&#x27;;
+import { FireTimestamp } from &#x27;../../../shared/models/classes/FireTimestamp&#x27;;
+import { instantiate } from &#x27;../../../shared/functions/parser.functions&#x27;;
+import { Observer } from &#x27;rxjs&#x27;;
+
+@Injectable({
+    providedIn: &#x27;root&#x27;
+})
+export abstract class BleBaseService {
+    protected readonly miBand3: MiBand3;
+
+    protected constructor(protected readonly ble: BluetoothLE) {
+        this.miBand3 &#x3D; MiBand3.getInstance();
+    }
+
+    protected async write(
+        deviceData: string | IDevice,
+        service: string | Service,
+        characteristic: string | Characteristic,
+        value: Buffer | Uint8Array,
+        type?: string
+    ): Promise&lt;OperationResult&gt; {
+        const serviceInstance &#x3D; typeof service &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? this.miBand3.getServiceByUUID(service) : service;
+        const characteristicInstance &#x3D; typeof characteristic &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? serviceInstance?.getCharacteristicByUUID(characteristic) : characteristic;
+        if (serviceInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get service&#x27;);
+        } else if (characteristicInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get characteristic&#x27;);
+        }
+
+        return this.ble.write({
+            address: typeof deviceData &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? deviceData : deviceData.macAddress,
+            service: serviceInstance.uuid,
+            characteristic: characteristicInstance.uuid,
+            value: this.ble.bytesToEncodedString(value),
+            type: type !&#x3D;&#x3D; undefined ? type : characteristicInstance.hasProperty(BLEProperty.WRITE_WITHOUT_RESPONSE) ? &#x27;noResponse&#x27; : &#x27;&#x27;
+        });
+    }
+
+    protected async read(deviceData: string | IDevice, service: string | Service, characteristic: string | Characteristic): Promise&lt;OperationResult&gt; {
+        const serviceInstance &#x3D; typeof service &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? this.miBand3.getServiceByUUID(service) : service;
+        const characteristicInstance &#x3D; typeof characteristic &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? serviceInstance?.getCharacteristicByUUID(characteristic) : characteristic;
+        if (serviceInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get service&#x27;);
+        } else if (characteristicInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get characteristic&#x27;);
+        }
+
+        return this.ble.read({
+            address: typeof deviceData &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? deviceData : deviceData.macAddress,
+            service: serviceInstance.uuid,
+            characteristic: characteristicInstance.uuid
+        });
+    }
+
+    protected subscribe(
+        deviceData: string | IDevice,
+        service: string | Service,
+        characteristic: string | Characteristic,
+        observer: Partial&lt;Observer&lt;OperationResult&gt;&gt;): void {
+        const serviceInstance &#x3D; typeof service &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? this.miBand3.getServiceByUUID(service) : service;
+        const characteristicInstance &#x3D; typeof characteristic &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? serviceInstance?.getCharacteristicByUUID(characteristic) : characteristic;
+        if (serviceInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get service&#x27;);
+        } else if (characteristicInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get characteristic&#x27;);
+        }
+
+        this.ble.subscribe({
+            address: typeof deviceData &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? deviceData : deviceData.macAddress,
+            service: serviceInstance.uuid,
+            characteristic: characteristicInstance.uuid
+        }).subscribe(observer);
+    }
+
+    protected async unsubscribe(device: string | IDevice, service: string | Service, characteristic: string | Characteristic): Promise&lt;UnsubscribeResult&gt; {
+        const serviceInstance &#x3D; typeof service &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? this.miBand3.getServiceByUUID(service) : service;
+        const characteristicInstance &#x3D; typeof characteristic &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? serviceInstance?.getCharacteristicByUUID(characteristic) : characteristic;
+        if (serviceInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get service&#x27;);
+        } else if (characteristicInstance &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get characteristic&#x27;);
+        }
+
+        return this.ble.unsubscribe({
+            address: typeof device &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? device : device.macAddress,
+            service: serviceInstance.uuid,
+            characteristic: characteristicInstance.uuid
+        });
+    }
+
+    public bytesToInt(bytes: Uint8Array): number {
+        if (bytes.length &#x3D;&#x3D;&#x3D; 0) {
+            throw new Error(&#x27;Failed to convert bytes to int: bytes array is empty!&#x27;);
+        }
+        let res &#x3D; 0;
+        for (let i &#x3D; bytes.length - 1; 0 &lt;&#x3D; i; i--) {
+            res &#x3D; res * 256 + bytes[i];
+        }
+        return res;
+    }
+
+    public bytesFromInt(num: number, size?: number): Uint8Array {
+        const bytes &#x3D; new Array&lt;number&gt;();
+        let div &#x3D; num;
+        for (let i &#x3D; 0; i &lt;&#x3D; Math.floor(Math.log2(num) / 8 /* &#x3D;&#x3D;&#x3D; Math.log2(256) */); i++) {
+            if (div &lt; 256) {
+                bytes[i] &#x3D; div;
+            } else {
+                const tmp &#x3D; div;
+                div &#x3D; Math.floor(div / 256);
+                bytes[i] &#x3D; tmp - div * 256;
+            }
+        }
+        // add zero(s)
+        if (size !&#x3D;&#x3D; undefined &amp;&amp; size &gt; bytes.length) {
+            const times &#x3D; size - bytes.length;
+            for (let i &#x3D; 0; i &lt; times; i++) {
+                bytes.push(0);
+            }
+        }
+        return Uint8Array.from(bytes);
+    }
+
+
+    public dateTimeFromBytes(bytes: Uint8Array, startIndex: number &#x3D; 0): FireTimestamp | undefined {
+        const date &#x3D; new Date();
+        if (bytes.length &lt; 7) {
+            return undefined;
+        }
+        date.setFullYear(
+            this.bytesToInt(bytes.subarray(startIndex, startIndex + 2)),
+            (bytes.at(startIndex + 2) as number) - 1,
+            bytes.at(startIndex + 3)
+        );
+        date.setHours(
+            bytes.at(startIndex + 4) as number,
+            bytes.at(startIndex + 5),
+            bytes.at(startIndex + 6),
+            0
+        );
+        return FireTimestamp.fromDate(date);
+    }
+
+    public dateTimeToBytes(
+        dateTime: Date | IFireTimestamp &#x3D; new Date(),
+        options?: {
+            dayOfWeek?: boolean;
+            fractions256?: boolean;
+            DTSOffset?: boolean;
+            timezone?: boolean;
+            all?: boolean;
+        }
+    ): Uint8Array {
+        const tmpDateTime &#x3D; dateTime instanceof Date ? dateTime : (typeof (dateTime as FireTimestamp).toDate &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+            ? (dateTime as FireTimestamp).toDate() : instantiate(dateTime, FireTimestamp).toDate());
+        const tmp &#x3D; [
+            ...this.bytesFromInt(tmpDateTime.getFullYear(), 2),
+            tmpDateTime.getMonth() + 1,
+            tmpDateTime.getDate(),
+            tmpDateTime.getHours(),
+            tmpDateTime.getMinutes(),
+            tmpDateTime.getSeconds()
+        ];
+        if (options !&#x3D;&#x3D; undefined) {
+            if (options.all?.valueOf()) {
+                tmp.push(tmpDateTime.getDay() &#x3D;&#x3D;&#x3D; 0 ? 7 : tmpDateTime.getDay()); // day of week
+                tmp.push(0); // fractions256 off
+                tmp.push(0); // DTS offset
+                tmp.push(tmpDateTime.getTimezoneOffset() / -15); // timezone
+            } else {
+                if (options.dayOfWeek?.valueOf()) {
+                    tmp.push(tmpDateTime.getDay() &#x3D;&#x3D;&#x3D; 0 ? 7 : tmpDateTime.getDay());
+                }
+                if (options.fractions256?.valueOf()) {
+                    tmp.push(0);
+                }
+                if (options.DTSOffset?.valueOf()) {
+                    tmp.push(0);
+                }
+                if (options.timezone?.valueOf()) {
+                    tmp.push(tmpDateTime.getTimezoneOffset() / -15);
+                }
+            }
+        }
+        return Uint8Array.from(tmp);
+    }
+
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'BleBaseService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

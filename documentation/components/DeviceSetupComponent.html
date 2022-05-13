@@ -1,0 +1,1296 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  DeviceSetupComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/device-setup/device-setup.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-setup</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./device-setup.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./device-setup.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#connectionInfo" >connectionInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#connectionInfoSubscription" >connectionInfoSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#counter" >counter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logHelper" >logHelper</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#SCAN_WAIT_TIME" >SCAN_WAIT_TIME</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#scanInfo" >scanInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#scanInfoSubscription" >scanInfoSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#scanIntervalId" >scanIntervalId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#scanResults" >scanResults</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#connectToSelectedDevice" >connectToSelectedDevice</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#displayErrorToast" >displayErrorToast</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#runScanCountdown" >runScanCountdown</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#signOutUser" >signOutUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#startScanningForDevices" >startScanningForDevices</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(bleConnectionService: <a href="../injectables/BleConnectionService.html" target="_self">BleConnectionService</a>, permissionService: <a href="../injectables/PermissionService.html" target="_self">PermissionService</a>, userService: <a href="../injectables/FirestoreUserService.html" target="_self">FirestoreUserService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, authService: <a href="../injectables/FirebaseAuthService.html" target="_self">FirebaseAuthService</a>, messageService: <a href="../injectables/MessageService.html" target="_self">MessageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bleConnectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BleConnectionService.html" target="_self" >BleConnectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>permissionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PermissionService.html" target="_self" >PermissionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreUserService.html" target="_self" >FirestoreUserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirebaseAuthService.html" target="_self" >FirebaseAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>messageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MessageService.html" target="_self" >MessageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="connectToSelectedDevice"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>connectToSelectedDevice</b></span>
+                        <a href="#connectToSelectedDevice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>connectToSelectedDevice(scannedDevice: <a href="../classes/ScanResult.html" target="_self">ScanResult</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>scannedDevice</td>
+                                    <td>
+                                                <code><a href="../classes/ScanResult.html" target="_self" >ScanResult</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayErrorToast"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>displayErrorToast</b></span>
+                        <a href="#displayErrorToast"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>displayErrorToast(error, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="159"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:159</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>error</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="165"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:165</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="runScanCountdown"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>runScanCountdown</b></span>
+                        <a href="#runScanCountdown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>runScanCountdown()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signOutUser"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>signOutUser</b></span>
+                        <a href="#signOutUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>signOutUser()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="170"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:170</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startScanningForDevices"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>startScanningForDevices</b></span>
+                        <a href="#startScanningForDevices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>startScanningForDevices()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:72</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="connectionInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>connectionInfo</b></span>
+                        <a href="#connectionInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ConnectionInfo.html" target="_self" >ConnectionInfo</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="connectionInfoSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>connectionInfoSubscription</b></span>
+                        <a href="#connectionInfoSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="counter"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>counter</b></span>
+                        <a href="#counter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logHelper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logHelper</b></span>
+                        <a href="#logHelper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/LogHelper.html" target="_self" >LogHelper</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SCAN_WAIT_TIME"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>SCAN_WAIT_TIME</b></span>
+                        <a href="#SCAN_WAIT_TIME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scanInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>scanInfo</b></span>
+                        <a href="#scanInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ScanInfo.html" target="_self" >ScanInfo</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scanInfoSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>scanInfoSubscription</b></span>
+                        <a href="#scanInfoSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scanIntervalId"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>scanIntervalId</b></span>
+                        <a href="#scanIntervalId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>NodeJS.Timer | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scanResults"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>scanResults</b></span>
+                        <a href="#scanResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ScanResult.html" target="_self" >ScanResult[] | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/device-setup/device-setup.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { BleConnectionService } from &#x27;../../services/ble/connection/ble-connection.service&#x27;;
+import { PermissionService } from &#x27;../../services/permission/permission.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { FirebaseAuthService } from &#x27;../../services/firebase/auth/firebase-auth.service&#x27;;
+import { MessageService } from &#x27;../../services/message/message.service&#x27;;
+import { FirestoreUserService } from &#x27;../../services/firestore/user/firestore-user.service&#x27;;
+import { Device } from &#x27;../../shared/models/classes/Device&#x27;;
+import { ScanInfo } from &#x27;../../shared/models/classes/ScanInfo&#x27;;
+import { ConnectionInfo } from &#x27;../../shared/models/classes/ConnectionInfo&#x27;;
+import { ScanResult } from &#x27;../../shared/models/classes/ScanResult&#x27;;
+import { LogInfo } from &#x27;../../shared/models/classes/LogInfo&#x27;;
+import { LogHelper } from &#x27;../../shared/models/classes/LogHelper&#x27;;
+import { BLEConnectionStatus } from &#x27;../../shared/enums/ble.enum&#x27;;
+
+@Component({
+    selector: &#x27;app-setup&#x27;,
+    templateUrl: &#x27;./device-setup.component.html&#x27;,
+    styleUrls: [&#x27;./device-setup.component.scss&#x27;],
+})
+export class DeviceSetupComponent implements OnDestroy, OnInit {
+    private readonly logHelper: LogHelper;
+    private connectionInfoSubscription: Subscription | undefined;
+    private scanInfoSubscription: Subscription | undefined;
+    private scanIntervalId: NodeJS.Timer | undefined;
+    public readonly SCAN_WAIT_TIME: number &#x3D; 10;
+    public connectionInfo: ConnectionInfo;
+    public counter: number | undefined;
+    public scanInfo: ScanInfo;
+    public scanResults: ScanResult[] | undefined;
+
+    public constructor(
+        private bleConnectionService: BleConnectionService,
+        private permissionService: PermissionService,
+        private userService: FirestoreUserService,
+        private router: Router,
+        private authService: FirebaseAuthService,
+        private messageService: MessageService
+    ) {
+        this.logHelper &#x3D; new LogHelper(DeviceSetupComponent.name);
+        this.scanInfo &#x3D; new ScanInfo();
+        this.connectionInfo &#x3D; new ConnectionInfo();
+    }
+
+    public ngOnInit(): void {
+        this.scanInfoSubscription &#x3D; this.bleConnectionService.scanInfoSubject.subscribe({
+            next: async (scanInfo: ScanInfo) &#x3D;&gt; {
+                this.scanInfo &#x3D; scanInfo;
+                this.logHelper.logDefault(&#x27;ngOnInit&#x27;, &#x27;scan info&#x27;, { value: scanInfo });
+                if (scanInfo.results !&#x3D;&#x3D; undefined) {
+                    const authUser &#x3D; this.authService.getAuthUser();
+                    if (authUser !&#x3D;&#x3D; undefined) {
+                        const user &#x3D; await this.userService.get(authUser.uid);
+                        this.scanResults &#x3D; scanInfo.results.filter( (scanResult: ScanResult) &#x3D;&gt;
+                            user?.devices !&#x3D;&#x3D; undefined &amp;&amp; user.devices.length &gt; 0
+                                ? user.devices.findIndex( device &#x3D;&gt; device.macAddress &#x3D;&#x3D;&#x3D; scanResult.address) &#x3D;&#x3D;&#x3D; -1 : true);
+                        await this.messageService.dismissLoading();
+                        if (scanInfo.isDisabled.valueOf() &amp;&amp; this.scanIntervalId &#x3D;&#x3D;&#x3D; undefined) {
+                            // 10s timeout before next scan
+                            this.runScanCountdown();
+                        }
+                    }
+                }
+            },
+            error: async (e: unknown) &#x3D;&gt; {
+                await this.displayErrorToast(e, &#x27;scanInfoSubject&#x27;);
+            }
+        });
+    }
+
+    public async startScanningForDevices(): Promise&lt;void&gt; {
+        try {
+            await this.messageService.createLoading(&#x27;PREPARING_SCANNING_WITH_DOTS&#x27;);
+            this.messageService.changeLoadingMessage(&#x27;CHECKING_PERMISSIONS_WITH_DOTS&#x27;);
+            await this.permissionService.checkForBluetoothScanPermissions();
+            this.messageService.changeLoadingMessage(&#x27;ENABLING_BL_WITH_DOTS&#x27;);
+            const isEnabled &#x3D; await this.bleConnectionService.enableBL();
+            if (!isEnabled) {
+                return await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, this.startScanningForDevices.name, &#x27;BL_NOT_ENABLED&#x27;), &#x27;alert&#x27;, true);
+            }
+            this.messageService.changeLoadingMessage(&#x27;SCANNING_FOR_DEVICES_WITH_DOTS&#x27;);
+            return this.bleConnectionService.scanForDevices(3000);
+        } catch (e) {
+            return await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, this.startScanningForDevices.name, e), &#x27;alert&#x27;, true);
+        }
+    }
+
+    private runScanCountdown(): void {
+        this.scanIntervalId &#x3D; setInterval(() &#x3D;&gt; {
+            if (this.counter &#x3D;&#x3D;&#x3D; undefined) {
+                // start countdown
+                this.counter &#x3D; this.SCAN_WAIT_TIME;
+            } else {
+                if (1 &lt; this.counter) {
+                    this.counter--;
+                } else {
+                    // end countdown
+                    this.counter &#x3D; undefined;
+                    this.scanInfo.isDisabled &#x3D; false;
+                    this.bleConnectionService.scanInfoSubject.next(this.scanInfo);
+                    if (this.scanIntervalId !&#x3D;&#x3D; undefined) {
+                        clearInterval(this.scanIntervalId);
+                        this.scanIntervalId &#x3D; undefined;
+                    }
+                }
+            }
+        }, 1000);
+    }
+
+    public connectToSelectedDevice(scannedDevice: ScanResult): Promise&lt;void&gt; {
+        this.connectionInfoSubscription &#x3D; this.bleConnectionService.connectionInfoSubject.subscribe({
+            next: async (connectionInfo: ConnectionInfo) &#x3D;&gt; {
+                this.connectionInfo &#x3D; connectionInfo;
+                this.logHelper.logDefault(&#x27;connectionInfoSubject&#x27;, &#x27;connectionInfo&#x27;, { value: connectionInfo });
+                if (connectionInfo.isConnectingOrAuthenticating()) {
+                    await this.messageService.createLoading(&#x27;CONNECTING_TO_DEVICE_WITH_DOTS&#x27;);
+                } else if (connectionInfo.isReady()) {
+                    try {
+                        this.messageService.changeLoadingMessage(&#x27;SAVING_NEW_DEVICE_WITH_DOTS&#x27;);
+                        const authUser &#x3D; this.authService.getAuthUser();
+                        if (authUser !&#x3D;&#x3D; undefined) {
+                            const user &#x3D; await this.userService.get(authUser.uid);
+                            if (user !&#x3D;&#x3D; undefined &amp;&amp; connectionInfo.device !&#x3D;&#x3D; undefined) {
+                                if (user.devices &#x3D;&#x3D;&#x3D; undefined) {
+                                    user.devices &#x3D; [];
+                                }
+                                user.devices.push(connectionInfo.device);
+                                this.userService.update({ id: user.id }, { devices: user.devices })
+                                    .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;update User&#x27;, &#x27;devices field has been updated&#x27;))
+                                    .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;update User error&#x27;, e));
+                                this.messageService.changeLoadingMessage(&#x27;INITIALIZING_DEVICE_WITH_DOTS&#x27;);
+                                this.logHelper.logDefault(&#x27;connectionInfoSubject&#x27;, &#x27;Adding new device&#x27;, { value: connectionInfo.device });
+                                await this.router.navigateByUrl(&#x27;/home&#x27;, { replaceUrl: true });
+                            } else {
+                                await this.messageService.dismissLoading();
+                                await this.router.navigateByUrl(&#x27;/login&#x27;, { replaceUrl: true });
+                            }
+                        } else {
+                            this.logHelper.logError(&#x27;connectionInfoSubject&#x27;, &#x27;User is not logged in!&#x27;);
+                            await this.messageService.dismissLoading();
+                            await this.router.navigateByUrl(&#x27;/login&#x27;, { replaceUrl: true });
+                        }
+                    } catch (error: unknown) {
+                        await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, &#x27;connectionInfoSubject&#x27;, error), &#x27;toast&#x27;, true, 5000);
+                    }
+                } else if (connectionInfo.isDisconnected()) {
+                    await this.messageService.dismissLoading();
+                }
+            },
+            error: async (e: unknown) &#x3D;&gt; {
+                this.connectionInfo.status &#x3D; BLEConnectionStatus.CONNECTION_ERROR;
+                await this.displayErrorToast(e, &#x27;connectionInfoSubject&#x27;);
+            }
+        });
+        return this.bleConnectionService.connect(new Device(scannedDevice.name, scannedDevice.address), false);
+    }
+
+    private async displayErrorToast(error: unknown, id: string): Promise&lt;void&gt; {
+        if ((this.messageService.toast &amp;&amp; this.messageService.toast.header !&#x3D;&#x3D; &#x27;ERROR&#x27;) || this.messageService.toast) {
+            await this.messageService.displayErrorMessage(new LogInfo(DeviceSetupComponent.name, id, error), &#x27;toast&#x27;, true, 5000, &#x27;bottom&#x27;);
+        }
+    }
+
+    public ngOnDestroy(): void {
+        this.scanInfoSubscription?.unsubscribe();
+        this.connectionInfoSubscription?.unsubscribe();
+    }
+
+    public async signOutUser(): Promise&lt;void&gt; {
+        try {
+            await this.authService.signOut();
+            await this.router.navigateByUrl(&#x27;/login&#x27;, { replaceUrl: true });
+        } catch (e: unknown) {
+            this.logHelper.logError(this.signOutUser.name, e);
+        }
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header&gt;
+    &lt;app-toolbar [connectionInfo]&#x3D;&quot;connectionInfo&quot; [showBackButton]&#x3D;&quot;false&quot;
+                 [isConnectionManagementEnabled]&#x3D;&quot;false&quot; [showSignOut]&#x3D;&quot;true&quot;
+                 (logoutEvent)&#x3D;&quot;signOutUser()&quot;&gt;&lt;/app-toolbar&gt;
+&lt;/ion-header&gt;
+&lt;ion-content&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;!connectionInfo.isConnected()&quot;&gt;
+        &lt;ion-button class&#x3D;&quot;ion-margin-top ion-margin-bottom&quot; expand&#x3D;&quot;block&quot; color&#x3D;&quot;primary&quot; [disabled]&#x3D;&quot;scanInfo.isDisabled&quot; (click)&#x3D;&quot;startScanningForDevices()&quot;&gt;
+            &lt;ng-container *ngIf&#x3D;&quot;counter !&#x3D;&#x3D; undefined else enabledScan&quot;&gt;
+                &lt;ion-grid&gt;
+                    &lt;ion-row&gt;
+                        &lt;ion-col size&#x3D;&quot;11&quot;&gt;{{ (&#x27;SCAN_FOR_DEVICES&#x27; | translate) }}&lt;/ion-col&gt;
+                        &lt;ion-col size&#x3D;&quot;1&quot;&gt;{{ counter }}&lt;/ion-col&gt;
+                    &lt;/ion-row&gt;
+                &lt;/ion-grid&gt;
+            &lt;/ng-container&gt;
+            &lt;ng-template #enabledScan&gt;{{ &#x27;SCAN_FOR_DEVICES&#x27; | translate }}&lt;/ng-template&gt;
+        &lt;/ion-button&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;scanResults !&#x3D;&#x3D; undefined &amp;&amp; scanResults.length &gt; 0 else noDevices&quot;&gt;
+            &lt;ion-item-group&gt;
+                &lt;app-scanned-device-item *ngFor&#x3D;&quot;let scanResult of scanResults&quot; [scanResult]&#x3D;&quot;scanResult&quot;
+                                         (connectToDevice)&#x3D;&quot;connectToSelectedDevice($event)&quot;&gt;&lt;/app-scanned-device-item&gt;
+            &lt;/ion-item-group&gt;
+        &lt;/ng-container&gt;
+        &lt;ng-template #noDevices&gt;
+            &lt;ng-container *ngIf&#x3D;&quot;scanResults !&#x3D;&#x3D; undefined&quot;&gt;
+                &lt;ion-card&gt;
+                    &lt;ion-card-content class&#x3D;&quot;ion-text-center&quot;&gt;
+                        &lt;ion-label&gt;{{ &#x27;NO_DEVICES_FOUND&#x27; | translate }}&lt;/ion-label&gt;
+                    &lt;/ion-card-content&gt;
+                &lt;/ion-card&gt;
+            &lt;/ng-container&gt;
+        &lt;/ng-template&gt;
+    &lt;/ng-container&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./device-setup.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header>    <app-toolbar [connectionInfo]="connectionInfo" [showBackButton]="false"                 [isConnectionManagementEnabled]="false" [showSignOut]="true"                 (logoutEvent)="signOutUser()"></app-toolbar></ion-header><ion-content>    <ng-container *ngIf="!connectionInfo.isConnected()">        <ion-button class="ion-margin-top ion-margin-bottom" expand="block" color="primary" [disabled]="scanInfo.isDisabled" (click)="startScanningForDevices()">            <ng-container *ngIf="counter !== undefined else enabledScan">                <ion-grid>                    <ion-row>                        <ion-col size="11">{{ (\'SCAN_FOR_DEVICES\' | translate) }}</ion-col>                        <ion-col size="1">{{ counter }}</ion-col>                    </ion-row>                </ion-grid>            </ng-container>            <ng-template #enabledScan>{{ \'SCAN_FOR_DEVICES\' | translate }}</ng-template>        </ion-button>        <ng-container *ngIf="scanResults !== undefined && scanResults.length > 0 else noDevices">            <ion-item-group>                <app-scanned-device-item *ngFor="let scanResult of scanResults" [scanResult]="scanResult"                                         (connectToDevice)="connectToSelectedDevice($event)"></app-scanned-device-item>            </ion-item-group>        </ng-container>        <ng-template #noDevices>            <ng-container *ngIf="scanResults !== undefined">                <ion-card>                    <ion-card-content class="ion-text-center">                        <ion-label>{{ \'NO_DEVICES_FOUND\' | translate }}</ion-label>                    </ion-card-content>                </ion-card>            </ng-container>        </ng-template>    </ng-container></ion-content></div>'
+    var COMPONENTS = [{'name': 'ActivityComponent', 'selector': 'app-activity'},{'name': 'ActivityItemComponent', 'selector': 'app-activity-item'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomChartComponent', 'selector': 'app-custom-chart'},{'name': 'DataChartComponent', 'selector': 'app-data-chart'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DeviceComponent', 'selector': 'app-device'},{'name': 'DeviceSetupComponent', 'selector': 'app-setup'},{'name': 'HeartRateComponent', 'selector': 'app-heart-rate'},{'name': 'HeartRateItemComponent', 'selector': 'app-heart-rate-item'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeTabBarComponent', 'selector': 'app-home-tab-bar'},{'name': 'ItemsFilterComponent', 'selector': 'app-items-filter'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'RangeItemComponent', 'selector': 'app-range-item'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-login-reset-password'},{'name': 'ScannedDeviceItemComponent', 'selector': 'app-scanned-device-item'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'ToolbarLanguageSelectComponent', 'selector': 'app-toolbar-language-select'},{'name': 'ToolbarMenuComponent', 'selector': 'app-toolbar-menu'},{'name': 'ToolbarMenuDeviceSettingsModalComponent', 'selector': 'app-toolbar-menu-device-settings-modal'},{'name': 'ToolbarMenuUserSettingsModalComponent', 'selector': 'app-toolbar-menu-user-settings-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DeviceSetupComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DeviceSetupComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

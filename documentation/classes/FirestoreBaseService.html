@@ -1,0 +1,1858 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li >FirestoreBaseService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/firestore/base/firestore-base.service.ts</code>
+        </p>
+
+
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                            <code><a href="../interfaces/IFirestoreBase.html" target="_self" >IFirestoreBase</a></code>
+            </p>
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_collectionPath" >_collectionPath</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_collectionReference" >_collectionReference</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#factory" >factory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#firestoreConverter" >firestoreConverter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#INVALID_ID_ERROR" >INVALID_ID_ERROR</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#add" >add</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createQuery" >createQuery</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#get" >get</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getDocRef" >getDocRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getWithValueChanges" >getWithValueChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#isQueryValid" >isQueryValid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#list" >list</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#listWithValueChanges" >listWithValueChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#paginate" >paginate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#update" >update</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#collectionReference" >collectionReference</a>
+                                </li>
+                                <li>
+                                    <a href="#collectionPath" >collectionPath</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Protected</span>
+                        <code>constructor(firestore: Firestore, factory, firestoreConverter: FirestoreDataConverter<T>, collectionPath?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:191</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>firestore</td>
+                                                  
+                                                        <td>
+                                                                    <code>Firestore</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>factory</td>
+                                                  
+                                                        <td>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>firestoreConverter</td>
+                                                  
+                                                        <td>
+                                                                    <code>FirestoreDataConverter&lt;T&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>collectionPath</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_collectionPath"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_collectionPath</b></span>
+                        <a href="#_collectionPath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_collectionReference"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_collectionReference</b></span>
+                        <a href="#_collectionReference"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CollectionReference&lt;T&gt; | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="factory"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>factory</b></span>
+                        <a href="#factory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firestoreConverter"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>firestoreConverter</b></span>
+                        <a href="#firestoreConverter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FirestoreDataConverter&lt;T&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INVALID_ID_ERROR"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>INVALID_ID_ERROR</b></span>
+                        <a href="#INVALID_ID_ERROR"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;ID is invalid&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="add"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>add</b></span>
+                        <a href="#add"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>add(item: T)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="271"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:271</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+                                    <td>
+                                            <code>T</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createQuery"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>createQuery</b></span>
+                        <a href="#createQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createQuery(queryOptions: <a href="../undefineds/QueryOption.html" target="_self">QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[] | undefined</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="234"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:234</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>queryOptions</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#QueryOption" target="_self" >QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[] | undefined</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Query&lt;T&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>delete(queryOptions: <a href="../undefineds/QueryOption.html" target="_self">literal type | QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="283"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:283</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>queryOptions</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#QueryOption" target="_self" >literal type | QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="get"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>get</b></span>
+                        <a href="#get"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>get(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="305"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:305</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;T | undefined&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDocRef"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span ><b>getDocRef</b></span>
+                        <a href="#getDocRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDocRef(id?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="225"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:225</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>DocumentReference&lt;T&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getWithValueChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>getWithValueChanges</b></span>
+                        <a href="#getWithValueChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getWithValueChanges(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="314"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:314</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;T | undefined&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isQueryValid"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>isQueryValid</b></span>
+                        <a href="#isQueryValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isQueryValid(constraints: <a href="../undefineds/QueryOption.html" target="_self">QueryOption&lt;T&gt;[] | QueryOption&lt;T&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:45</a></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>constraints</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#QueryOption" target="_self" >QueryOption&lt;T&gt;[] | QueryOption&lt;T&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>literal type</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="list"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>list</b></span>
+                        <a href="#list"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>list(queryOptions?: <a href="../undefineds/QueryOption.html" target="_self">QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="322"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:322</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>queryOptions</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#QueryOption" target="_self" >QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;[] | undefined&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="listWithValueChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>listWithValueChanges</b></span>
+                        <a href="#listWithValueChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>listWithValueChanges(queryOptions?: <a href="../undefineds/QueryOption.html" target="_self">QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="364"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:364</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>queryOptions</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#QueryOption" target="_self" >QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;[] | undefined&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>paginate</b></span>
+                        <a href="#paginate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>paginate(options: <a href="../undefineds/PaginateOptions.html" target="_self">PaginateOptions&lt;T&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="334"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:334</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#PaginateOptions" target="_self" >PaginateOptions&lt;T&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#PaginateResult" target="_self" >Promise&lt;PaginateResult | undefined&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>update(queryOptions: <a href="../undefineds/QueryOption.html" target="_self">literal type | QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a>, data: Partial<T>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="372"
+                            class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:372</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>queryOptions</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#QueryOption" target="_self" >literal type | QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>Partial&lt;T&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+            <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="collectionReference"></a>
+                        <span class="name"><b>collectionReference</b><a href="#collectionReference"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>collectionReference()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="211" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:211</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>collectionReference(collectionReference: CollectionReference<T> | undefined)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="207" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:207</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>collectionReference</td>
+                                                    
+                                                            <td>
+                                                                        <code>CollectionReference&lt;T&gt; | undefined</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="collectionPath"></a>
+                        <span class="name"><b>collectionPath</b><a href="#collectionPath"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>collectionPath()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:221</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>collectionPath(path: string | undefined)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/app/services/firestore/base/firestore-base.service.ts:215</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>path</td>
+                                                    
+                                                            <td>
+                                                                        <code>string | undefined</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IFirestoreBase } from &#x27;./IFirestoreBase&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { IEntityModel } from &#x27;../../../shared/models/interfaces/IEntityModel&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import {
+    collection,
+    collectionData,
+    CollectionReference,
+    deleteDoc,
+    doc,
+    docData,
+    DocumentReference,
+    DocumentSnapshot,
+    endAt,
+    endBefore,
+    FieldPath,
+    Firestore, FirestoreDataConverter,
+    getDoc,
+    getDocs,
+    limit,
+    orderBy,
+    query,
+    Query,
+    QueryConstraint,
+    QueryDocumentSnapshot,
+    setDoc,
+    startAfter,
+    startAt,
+    where,
+    WhereFilterOp
+} from &#x27;@angular/fire/firestore&#x27;;
+import { instantiate } from &#x27;../../../shared/functions/parser.functions&#x27;;
+import { CursorQuery, LimitQuery, OrderByQuery, PaginateOptions, PaginateResult, QueryOption, WhereQuery } from &#x27;../../../shared/types/firestore.types&#x27;;
+import { QueryOperator } from &#x27;../../../shared/enums/firestore.enum&#x27;;
+import { LogHelper } from &#x27;../../../shared/models/classes/LogHelper&#x27;;
+import { LogInfo } from &#x27;../../../shared/models/classes/LogInfo&#x27;;
+
+export abstract class FirestoreBaseService&lt;T extends IEntityModel&lt;T&gt;&gt; implements IFirestoreBase&lt;T&gt; {
+    public static readonly INVALID_ID_ERROR &#x3D; &#x27;ID is invalid&#x27;;
+    private readonly factory: new (id?: string) &#x3D;&gt; T;
+    private readonly firestoreConverter: FirestoreDataConverter&lt;T&gt;;
+    private _collectionReference: CollectionReference&lt;T&gt; | undefined;
+    private _collectionPath: string | undefined;
+
+    public static isQueryValid&lt;T&gt;(constraints: QueryOption&lt;T&gt;[] | QueryOption&lt;T&gt;): { isValid: boolean; errorMsg?: string } {
+        const whereOpStats: { [filterOperator in WhereFilterOp]: { count: number; field?: string | FieldPath | undefined } } &#x3D; {
+            &#x27;&lt;&#x27;: { count: 0 },
+            &#x27;&lt;&#x3D;&#x27;: { count: 0 },
+            &#x27;&#x3D;&#x3D;&#x27;: { count: 0 },
+            &#x27;&gt;&#x27;: { count: 0 },
+            &#x27;&gt;&#x3D;&#x27;: { count: 0 },
+            &#x27;!&#x3D;&#x27;: { count: 0 },
+            in: { count: 0 },
+            &#x27;not-in&#x27;: { count: 0 },
+            &#x27;array-contains&#x27;: { count: 0 },
+            &#x27;array-contains-any&#x27;: { count: 0 },
+        };
+        const orderByFields: (string | FieldPath)[] &#x3D; [];
+        for (const constraint of constraints instanceof Array ? constraints : Array.of(constraints)) {
+
+            // If you include a filter with a range comparison (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;), your first ordering must be on the same field
+            if ((whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined &amp;&amp; orderByFields.length &gt; 0 &amp;&amp; orderByFields[0] !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS].field)
+                || (whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; orderByFields.length &gt; 0 &amp;&amp; orderByFields[0] !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS_OR_EQUAL].field)
+                || (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined &amp;&amp; orderByFields.length &gt; 0 &amp;&amp; orderByFields[0] !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER].field)
+                || (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; orderByFields.length &gt; 0 &amp;&amp; orderByFields[0] !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field)
+            ) {
+                return { isValid: false, errorMsg: &#x27;First ordering must be on the same field as the range comparison(s)&#x27; };
+            }
+
+            if (&#x27;limit&#x27; in constraint) {
+                if ((constraint as LimitQuery).limit &lt;&#x3D; 0) {
+                    return { isValid: false, errorMsg: &#x27;Limit must be higher than 0&#x27; };
+                }
+            } else if (&#x27;fieldPath&#x27; in constraint &amp;&amp; &#x27;value&#x27; in constraint &amp;&amp; &#x27;opStr&#x27; in constraint) {
+                const field: string | FieldPath &#x3D; (constraint as WhereQuery).fieldPath;
+                whereOpStats[(constraint as WhereQuery).opStr].count++;
+
+                if (whereOpStats[(constraint as WhereQuery).opStr].field &#x3D;&#x3D;&#x3D; undefined) {
+                    whereOpStats[(constraint as WhereQuery).opStr].field &#x3D; field;
+                }
+
+                // In a compound query, range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field.
+                // Range filter and orderBy cannot be on different fields
+                if (whereOpStats[QueryOperator.LESS].count &gt; 1 &amp;&amp; whereOpStats[QueryOperator.LESS_OR_EQUAL].count &gt; 1
+                    &amp;&amp; whereOpStats[QueryOperator.GREATER].count &gt; 1 &amp;&amp; whereOpStats[QueryOperator.GREATER_OR_EQUAL].count &gt; 1
+                    &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].count &gt; 1 &amp;&amp; whereOpStats[QueryOperator.NOT_IN].count &gt; 1) {
+                    return { isValid: false, errorMsg: &#x27;Only one of each range and not equals comparisons is allowed&#x27; };
+                }
+
+                if (whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined) {
+                    if ((whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER].field)
+                        || (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: &#x27;Range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field&#x27; };
+                    }
+                }
+
+                if (whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined) {
+                    if ((whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS].field)
+                        || (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER].field)
+                        || (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: &#x27;Range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field&#x27; };
+                    }
+                }
+
+                if (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined) {
+                    if ((whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS].field)
+                        || (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: &#x27;Range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field&#x27; };
+                    }
+                }
+
+                if (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined) {
+                    if ((whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER].field)
+                        || (whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS].field)
+                        || (whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: &#x27;Range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field&#x27; };
+                    }
+                }
+
+                if (whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined) {
+                    if ((whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER].field)
+                        || (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS].field)
+                        || (whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_IN].field)) {
+                        return { isValid: false, errorMsg: &#x27;Range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field&#x27; };
+                    }
+                }
+
+                if (whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined) {
+                    if ((whereOpStats[QueryOperator.LESS_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.GREATER].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER].field)
+                        || (whereOpStats[QueryOperator.GREATER_OR_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; whereOpStats[QueryOperator.GREATER_OR_EQUAL].field)
+                        || (whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; whereOpStats[QueryOperator.NOT_EQUAL].field)
+                        || (whereOpStats[QueryOperator.LESS].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; whereOpStats[QueryOperator.LESS].field)) {
+                        return { isValid: false, errorMsg: &#x27;Range (&lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;) and not equals (!&#x3D;, not-in) comparisons must all filter on the same field&#x27; };
+                    }
+                }
+
+                // You cannot order your query by any field included in an equality (&#x3D;) or in clause
+                if ((whereOpStats[QueryOperator.EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; orderByFields.includes(whereOpStats[QueryOperator.EQUAL].field as string | FieldPath))
+                    || (whereOpStats[QueryOperator.IN].field !&#x3D;&#x3D; undefined &amp;&amp; orderByFields.includes(whereOpStats[QueryOperator.IN].field as string | FieldPath))) {
+                    return { isValid: false, errorMsg: &#x27;Query cannot be ordered by any field included in an equality or in clause&#x27; };
+                }
+
+                // in, not-in, and array-contains-any support up to 10 comparison values
+                if ((constraint as WhereQuery).opStr &#x3D;&#x3D;&#x3D; QueryOperator.IN || (constraint as WhereQuery).opStr &#x3D;&#x3D;&#x3D; QueryOperator.NOT_IN
+                    || (constraint as WhereQuery).opStr &#x3D;&#x3D;&#x3D; QueryOperator.ARRAY_CONTAINS_ANY) {
+                    if ((constraint as WhereQuery).value instanceof Array) {
+                        if ((((constraint as WhereQuery).value) as Array&lt;any&gt;).length &gt; 10) {
+                            return { isValid: false, errorMsg: &#x27;More than 10 comparison values are not supported with the use of in, not-in and array-contains-any&#x27; };
+                        }
+                    } else {
+                        return { isValid: false, errorMsg: &#x27;Value used for not-in, in, array-contains-any comparisons must be an array&#x27; };
+                    }
+                }
+
+                // You can use at most one array-contains clause per query. You can&#x27;t combine array-contains with array-contains-any
+                if ((whereOpStats[QueryOperator.ARRAY_CONTAINS].count + whereOpStats[QueryOperator.ARRAY_CONTAINS_ANY].count) &gt; 1) {
+                    return { isValid: false, errorMsg: &#x27;Only one array-contains clause is allows in a query&#x27; };
+                }
+
+                // You can use at most one in, not-in, or array-contains-any clause per query. You can&#x27;t combine these operators in the same query.
+                if ((whereOpStats[QueryOperator.IN].count + whereOpStats[QueryOperator.NOT_IN].count + whereOpStats[QueryOperator.ARRAY_CONTAINS_ANY].count) &gt; 1) {
+                    return { isValid: false, errorMsg: &#x27;Only one in, not-in, or array-contains-any clause per query is allowed&#x27; };
+                }
+
+            } else if (&#x27;fieldPath&#x27; in constraint) {
+                const field: string | FieldPath &#x3D; (constraint as OrderByQuery).fieldPath;
+                orderByFields.push(field);
+                // You cannot order your query by any field included in an equality (&#x3D;) or in clause
+                if (whereOpStats[QueryOperator.IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.IN].field &#x3D;&#x3D;&#x3D; field
+                    //|| whereOpStats[QueryOperator.NOT_IN].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_IN].field &#x3D;&#x3D;&#x3D; field
+                    || whereOpStats[QueryOperator.EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.EQUAL].field &#x3D;&#x3D;&#x3D; field) {
+                    //|| whereOpStats[QueryOperator.NOT_EQUAL].field !&#x3D;&#x3D; undefined &amp;&amp; whereOpStats[QueryOperator.NOT_EQUAL].field &#x3D;&#x3D;&#x3D; field
+                    return { isValid: false, errorMsg: &#x27;Query cannot be ordered by any field included in an equality or in clause&#x27; };
+                }
+            }
+        }
+        return { isValid: true };
+    }
+
+    protected constructor(
+        protected readonly firestore: Firestore,
+        factory: new () &#x3D;&gt; T,
+        firestoreConverter: FirestoreDataConverter&lt;T&gt;,
+        collectionPath?: string
+    ) {
+        this.factory &#x3D; factory;
+        this.firestoreConverter &#x3D; firestoreConverter;
+        this._collectionPath &#x3D; collectionPath;
+        this._collectionReference &#x3D; collectionPath !&#x3D;&#x3D; undefined
+            ? collection(this.firestore, collectionPath).withConverter&lt;T&gt;(firestoreConverter)
+            : collectionPath;
+    }
+
+    private set collectionReference(collectionReference: CollectionReference&lt;T&gt; | undefined) {
+        this._collectionReference &#x3D; collectionReference;
+    }
+
+    protected get collectionReference(): CollectionReference&lt;T&gt; | undefined {
+        return this._collectionReference;
+    }
+
+    protected set collectionPath(path: string | undefined) {
+        this._collectionPath &#x3D; path;
+        this.collectionReference &#x3D; path !&#x3D;&#x3D; undefined ? collection(this.firestore, path)
+            .withConverter(this.firestoreConverter) : path;
+    }
+
+    public get collectionPath(): string | undefined {
+        return this._collectionPath;
+    }
+
+    protected getDocRef(id?: string): DocumentReference&lt;T&gt; {
+        if (this.collectionPath &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Collection path is undefined&#x27;);
+        }
+        return id !&#x3D;&#x3D; undefined
+            ? doc(this.firestore, this.collectionPath, id).withConverter(this.firestoreConverter)
+            : doc(this.firestore, this.collectionPath).withConverter(this.firestoreConverter);
+    }
+
+    private createQuery(queryOptions: QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[] | undefined): Query&lt;T&gt; {
+        if (this.collectionReference &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;CollectionReference is undefined&#x27;);
+        }
+
+        if (queryOptions &#x3D;&#x3D;&#x3D; undefined) {
+            return query&lt;T&gt;(this.collectionReference, ...[]);
+        } else {
+            const queryCheckResult &#x3D; FirestoreBaseService.isQueryValid(queryOptions);
+            if (!queryCheckResult.isValid) {
+                throw new Error(queryCheckResult.errorMsg);
+            } else {
+                const queryResult: QueryConstraint[] &#x3D; [];
+                for (const queryOption of queryOptions instanceof Array ? queryOptions : Array.of(queryOptions)) {
+                    if (&#x27;limit&#x27; in queryOption) {
+                        queryResult.push(limit((queryOption as LimitQuery).limit));
+                    } else if (&#x27;fieldPath&#x27; in queryOption &amp;&amp; &#x27;value&#x27; in queryOption &amp;&amp; &#x27;opStr&#x27; in queryOption) {
+                        queryResult.push(where((queryOption as WhereQuery).fieldPath, (queryOption as WhereQuery).opStr, (queryOption as WhereQuery).value));
+                    } else if (&#x27;fieldPath&#x27; in queryOption) {
+                        queryResult.push(orderBy((queryOption as OrderByQuery).fieldPath, (queryOption as OrderByQuery).directionStr));
+                    } else if (&#x27;snapshot&#x27; in queryOption) {
+                        if ((queryOption as CursorQuery&lt;T&gt;).type &#x3D;&#x3D;&#x3D; &#x27;startAt&#x27;) {
+                            queryResult.push(startAt((queryOption as CursorQuery&lt;T&gt;).snapshot));
+                        } else if ((queryOption as CursorQuery&lt;T&gt;).type &#x3D;&#x3D;&#x3D; &#x27;startAfter&#x27;) {
+                            queryResult.push(startAfter((queryOption as CursorQuery&lt;T&gt;).snapshot));
+                        } else if ((queryOption as CursorQuery&lt;T&gt;).type &#x3D;&#x3D;&#x3D; &#x27;endAt&#x27;) {
+                            queryResult.push(endAt((queryOption as CursorQuery&lt;T&gt;).snapshot));
+                        } else if ((queryOption as CursorQuery&lt;T&gt;).type &#x3D;&#x3D;&#x3D; &#x27;endBefore&#x27;) {
+                            queryResult.push(endBefore((queryOption as CursorQuery&lt;T&gt;).snapshot));
+                        }
+                    }
+                }
+                return query&lt;T&gt;(this.collectionReference, ...queryResult);
+            }
+        }
+    }
+
+    public async add(item: T): Promise&lt;void&gt; {
+        try {
+            if (item.id &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; || item.id &#x3D;&#x3D;&#x3D; undefined) {
+                // generate id from a non-existing document
+                item.id &#x3D; doc(collection(this.firestore, &#x27;tmp&#x27;)).id;
+            }
+            return setDoc&lt;T&gt;(this.getDocRef(item.id), item);
+        } catch (e: unknown) {
+            return Promise.reject(e);
+        }
+    }
+
+    public async delete(queryOptions: { id: string } | QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]): Promise&lt;void&gt; {
+        if (&#x27;id&#x27; in queryOptions) {
+            if (queryOptions.id &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27;) {
+                return Promise.reject(FirestoreBaseService.INVALID_ID_ERROR);
+            } else if (this.collectionPath &#x3D;&#x3D;&#x3D; undefined) {
+                return Promise.reject(&#x27;Collection path is undefined&#x27;);
+            }
+            return deleteDoc(doc(this.firestore, this.collectionPath, queryOptions.id));
+        } else {
+            try {
+                const querySnapshots &#x3D; await getDocs(this.createQuery(queryOptions));
+                querySnapshots.docs.map((result: QueryDocumentSnapshot&lt;T&gt;) &#x3D;&gt; {
+                    if (result.exists()) {
+                        deleteDoc(result.ref).catch((e: unknown) &#x3D;&gt; LogHelper.log(new LogInfo(FirestoreBaseService.name, &#x27;delete&#x27;, &#x27;delete document error&#x27;, { value: e })));
+                    }
+                });
+            } catch (e: unknown) {
+                return Promise.reject(e);
+            }
+        }
+    }
+
+    public async get(id: string): Promise&lt;T | undefined&gt; {
+        try {
+            const docSnap &#x3D; await getDoc&lt;T&gt;(this.getDocRef(id));
+            return docSnap.exists() ? Promise.resolve(instantiate(docSnap.data(), this.factory)) : Promise.resolve(docSnap.data());
+        } catch (e: unknown) {
+            return Promise.reject(e);
+        }
+    }
+
+    public getWithValueChanges(id: string): Observable&lt;T | undefined&gt; {
+        try {
+            return docData&lt;T&gt;(this.getDocRef(id)).pipe(map((item: T | undefined) &#x3D;&gt; item !&#x3D;&#x3D; undefined ? instantiate(item, this.factory) : item));
+        } catch (e: unknown) {
+            throw e;
+        }
+    }
+
+    public async list(queryOptions?: QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]): Promise&lt;T[] | undefined&gt; {
+        try {
+            const docSnaps &#x3D; await getDocs&lt;T&gt;(this.createQuery(queryOptions));
+            if (docSnaps.empty) {
+                return Promise.resolve(undefined);
+            }
+            return Promise.resolve(docSnaps.docs.map((docSnap: DocumentSnapshot&lt;T&gt;) &#x3D;&gt; instantiate(docSnap.data() as T, this.factory)));
+        } catch (e: unknown) {
+            return Promise.reject(e);
+        }
+    }
+
+    public async paginate(options: PaginateOptions&lt;T&gt;): Promise&lt;PaginateResult&lt;T&gt; | undefined&gt;  {
+        let queryArray: QueryOption&lt;T&gt;[] &#x3D; [];
+        if (options.queryOptions instanceof Array) {
+            queryArray &#x3D; options.queryOptions;
+        } else {
+            queryArray.push(options.queryOptions);
+        }
+
+        if (options.lastDocSnap !&#x3D;&#x3D; undefined) {
+            queryArray.push({ type: &#x27;startAfter&#x27;, snapshot: options.lastDocSnap });
+        }
+        queryArray.push({ limit: options.size });
+
+        try {
+            const docSnaps &#x3D; await getDocs&lt;T&gt;(this.createQuery(queryArray));
+            if (docSnaps.empty) {
+                return Promise.resolve(undefined);
+            }
+            return Promise.resolve(
+                {
+                    items: docSnaps.docs.map((docSnap: DocumentSnapshot&lt;T&gt;) &#x3D;&gt; instantiate(docSnap.data() as T, this.factory)),
+                    lastDocSnap: docSnaps.docs[docSnaps.docs.length - 1]
+                }
+            );
+        } catch (e: unknown) {
+            return Promise.reject(e);
+        }
+
+    }
+
+    public listWithValueChanges(queryOptions?: QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[]): Observable&lt;T[] | undefined&gt; {
+        try {
+            return collectionData(this.createQuery(queryOptions)).pipe(map((items: T[] | undefined) &#x3D;&gt; items?.map((item: T) &#x3D;&gt; instantiate(item, this.factory))));
+        } catch (e: unknown) {
+            throw e;
+        }
+    }
+
+    public async update(queryOptions: { id: string } | QueryOption&lt;T&gt; | QueryOption&lt;T&gt;[], data: Partial&lt;T&gt;): Promise&lt;void&gt; {
+        try {
+            if (&#x27;id&#x27; in queryOptions &amp;&amp; queryOptions.id &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27;) {
+                return Promise.reject(FirestoreBaseService.INVALID_ID_ERROR);
+            }
+
+            if (&#x27;id&#x27; in queryOptions) {
+                return setDoc&lt;T&gt;(this.getDocRef(queryOptions.id), data, { merge: true });
+            } else {
+                const itemList &#x3D; await this.list(queryOptions);
+                itemList?.map((item: T) &#x3D;&gt; item.id &#x3D;&#x3D;&#x3D; undefined ? Promise.resolve()
+                    : setDoc&lt;T&gt;(this.getDocRef(item.id), data, { merge: true }));
+            }
+        } catch (e: unknown) {
+            return Promise.reject(e);
+        }
+    }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'FirestoreBaseService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

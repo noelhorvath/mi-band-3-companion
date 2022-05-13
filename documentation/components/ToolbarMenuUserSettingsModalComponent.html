@@ -1,0 +1,1646 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ToolbarMenuUserSettingsModalComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-toolbar-menu-user-settings-modal</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./toolbar-menu-user-settings-modal.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./toolbar-menu-user-settings-modal.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#authUserSubscription" >authUserSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#datePickerMaxValue" >datePickerMaxValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#datePickerMinValue" >datePickerMinValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#emailUpdateFormGroup" >emailUpdateFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#genderText" >genderText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logHelper" >logHelper</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#profileUpdateForm" >profileUpdateForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#selectedGenderIndex" >selectedGenderIndex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userSubscription" >userSubscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isEmailUpdateValid" >isEmailUpdateValid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isProfileUpdateValid" >isProfileUpdateValid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resetEmailUpdateForm" >resetEmailUpdateForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resetProfileUpdateForm" >resetProfileUpdateForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendPasswordChangeLink" >sendPasswordChangeLink</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#showPicker" >showPicker</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateEmail" >updateEmail</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateProfile" >updateProfile</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#connectionInfo" >connectionInfo</a>
+                            </li>
+                            <li>
+                                <a href="#triggerId" >triggerId</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(pickerService: <a href="../injectables/PickerService.html" target="_self">PickerService</a>, formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, userService: <a href="../injectables/FirestoreUserService.html" target="_self">FirestoreUserService</a>, authService: <a href="../injectables/FirebaseAuthService.html" target="_self">FirebaseAuthService</a>, messageService: <a href="../injectables/MessageService.html" target="_self">MessageService</a>, bleDeviceSettings: <a href="../injectables/BleDeviceSettingsService.html" target="_self">BleDeviceSettingsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>pickerService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PickerService.html" target="_self" >PickerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formBuilder</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreUserService.html" target="_self" >FirestoreUserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirebaseAuthService.html" target="_self" >FirebaseAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>messageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MessageService.html" target="_self" >MessageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>bleDeviceSettings</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BleDeviceSettingsService.html" target="_self" >BleDeviceSettingsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="connectionInfo"></a>
+                        <b>connectionInfo</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ConnectionInfo.html" target="_self" >ConnectionInfo | undefined</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:31</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="triggerId"></a>
+                        <b>triggerId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="user"></a>
+                        <b>user</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User | undefined</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEmailUpdateValid"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>isEmailUpdateValid</b></span>
+                        <a href="#isEmailUpdateValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isEmailUpdateValid()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="228"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:228</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isProfileUpdateValid"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>isProfileUpdateValid</b></span>
+                        <a href="#isProfileUpdateValid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isProfileUpdateValid()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:140</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:61</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="223"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:223</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetEmailUpdateForm"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>resetEmailUpdateForm</b></span>
+                        <a href="#resetEmailUpdateForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetEmailUpdateForm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetProfileUpdateForm"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>resetProfileUpdateForm</b></span>
+                        <a href="#resetProfileUpdateForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetProfileUpdateForm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="104"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:104</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendPasswordChangeLink"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>sendPasswordChangeLink</b></span>
+                        <a href="#sendPasswordChangeLink"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendPasswordChangeLink()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="211"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:211</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPicker"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>showPicker</b></span>
+                        <a href="#showPicker"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showPicker(type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:149</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>type</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateEmail"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>updateEmail</b></span>
+                        <a href="#updateEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateEmail()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:93</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProfile"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>updateProfile</b></span>
+                        <a href="#updateProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateProfile()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:115</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authUserSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>authUserSubscription</b></span>
+                        <a href="#authUserSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datePickerMaxValue"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>datePickerMaxValue</b></span>
+                        <a href="#datePickerMaxValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datePickerMinValue"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>datePickerMinValue</b></span>
+                        <a href="#datePickerMinValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emailUpdateFormGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>emailUpdateFormGroup</b></span>
+                        <a href="#emailUpdateFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="genderText"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>genderText</b></span>
+                        <a href="#genderText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logHelper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logHelper</b></span>
+                        <a href="#logHelper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/LogHelper.html" target="_self" >LogHelper</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="profileUpdateForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>profileUpdateForm</b></span>
+                        <a href="#profileUpdateForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedGenderIndex"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>selectedGenderIndex</b></span>
+                        <a href="#selectedGenderIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userSubscription</b></span>
+                        <a href="#userSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/components/toolbar/menu/user-settings-modal/toolbar-menu-user-settings-modal.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { PickerButton, PickerColumn } from &#x27;@ionic/angular&#x27;;
+import { LogHelper } from &#x27;../../../../models/classes/LogHelper&#x27;;
+import { PickerService } from &#x27;../../../../../services/picker/picker.service&#x27;;
+import { FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { FirestoreUserService } from &#x27;../../../../../services/firestore/user/firestore-user.service&#x27;;
+import { FirebaseAuthService } from &#x27;../../../../../services/firebase/auth/firebase-auth.service&#x27;;
+import { User } from &#x27;../../../../models/classes/User&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { LogInfo } from &#x27;../../../../models/classes/LogInfo&#x27;;
+import { MessageService } from &#x27;../../../../../services/message/message.service&#x27;;
+import { FireTimestamp } from &#x27;../../../../models/classes/FireTimestamp&#x27;;
+import { ConnectionInfo } from &#x27;../../../../models/classes/ConnectionInfo&#x27;;
+import { BleDeviceSettingsService } from &#x27;../../../../../services/ble/device-settings/ble-device-settings.service&#x27;;
+
+@Component({
+    selector: &#x27;app-toolbar-menu-user-settings-modal&#x27;,
+    templateUrl: &#x27;./toolbar-menu-user-settings-modal.component.html&#x27;,
+    styleUrls: [&#x27;./toolbar-menu-user-settings-modal.component.scss&#x27;],
+})
+export class ToolbarMenuUserSettingsModalComponent implements OnDestroy, OnChanges {
+    private readonly logHelper: LogHelper;
+    private selectedGenderIndex: number;
+    private authUserSubscription: Subscription | undefined;
+    private userSubscription: Subscription | undefined;
+    public emailUpdateFormGroup: FormGroup;
+    public profileUpdateForm: FormGroup;
+    public genderText: string | undefined;
+    public datePickerMinValue: string;
+    public datePickerMaxValue: string;
+    @Input() public connectionInfo: ConnectionInfo | undefined;
+    @Input() public user: User | undefined;
+    @Input() public triggerId: string;
+
+    public constructor(
+        private pickerService: PickerService,
+        private formBuilder: FormBuilder,
+        private userService: FirestoreUserService,
+        private authService: FirebaseAuthService,
+        private messageService: MessageService,
+        private bleDeviceSettings: BleDeviceSettingsService
+    ) {
+        this.triggerId &#x3D; &#x27;user-settings-modal&#x27;;
+        this.logHelper &#x3D; new LogHelper(ToolbarMenuUserSettingsModalComponent.name);
+        this.emailUpdateFormGroup &#x3D; this.formBuilder.group({
+            email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+        });
+        this.profileUpdateForm &#x3D; this.formBuilder.group({
+            firstName: [&#x27;&#x27;, [Validators.required]],
+            lastName: [&#x27;&#x27;, [Validators.required]],
+            gender: [null, [Validators.required]],
+            birthDate: [null, [Validators.required]],
+            weight: [60, [Validators.required]],
+            height: [165, [Validators.required]],
+        });
+        this.selectedGenderIndex &#x3D; 0;
+        this.datePickerMinValue &#x3D; &#x60;${new Date().getFullYear() - 125}&#x60;;
+        this.datePickerMaxValue &#x3D; new Date().toISOString();
+    }
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes[&#x27;user&#x27;] !&#x3D;&#x3D; undefined &amp;&amp; this.user !&#x3D;&#x3D; undefined) {
+            const tmpDate &#x3D; this.user.birthDate.toDate();
+            const birthDate &#x3D; new Date(Date.UTC(tmpDate.getFullYear(), tmpDate.getMonth(), tmpDate.getDate(), 0, 0, 0, 0)).toISOString();
+            this.profileUpdateForm.patchValue({
+                firstName: this.user.firstName,
+                lastName: this.user.lastName,
+                gender: this.user.gender,
+                birthDate,
+                weight: this.user.weight,
+                height: this.user.height,
+            });
+            this.emailUpdateFormGroup.patchValue({ email: this.user.email });
+            this.genderText &#x3D; this.user.gender.toUpperCase();
+            switch (this.user.gender) {
+                case &#x27;female&#x27;:
+                    this.selectedGenderIndex &#x3D; 0;
+                    break;
+                case &#x27;male&#x27;:
+                    this.selectedGenderIndex &#x3D; 1;
+                    break;
+                default:
+                    this.selectedGenderIndex &#x3D; 2;
+            }
+        }
+    }
+
+
+    public resetEmailUpdateForm(): void {
+        this.emailUpdateFormGroup.reset({ email: this.user?.email });
+    }
+
+    public async updateEmail(): Promise&lt;void&gt; {
+        try {
+            await this.messageService.createLoading(&#x27;UPDATING_EMAIL_WITH_DOTS&#x27;);
+            await this.authService.updateUserEmail(this.emailUpdateFormGroup.value.email);
+            await this.messageService.dismissLoading();
+            return await this.messageService.createToast(&#x27;ACCOUNT_SETTINGS&#x27;, &#x27;EMAIL_SUCCESSFULLY_UPDATED&#x27;, &#x27;top&#x27;, &#x27;success&#x27;);
+        } catch (e: unknown) {
+            return await this.messageService.displayErrorMessage(new LogInfo(ToolbarMenuUserSettingsModalComponent.name, this.updateEmail.name, e), &#x27;toast&#x27;, true, 5000, &#x27;top&#x27;);
+        }
+    }
+
+    public resetProfileUpdateForm(): void {
+        this.profileUpdateForm.reset({
+            firstName: this.user?.firstName ?? &#x27;&#x27;,
+            lastName: this.user?.lastName ?? &#x27;&#x27;,
+            gender: this.user?.gender ?? this.genderText?.toUpperCase(),
+            birthDate: this.user?.birthDate.toDate().toISOString() ?? &#x27;&#x27;,
+            weight: this.user?.weight ?? 60,
+            height: this.user?.height ?? 165,
+        });
+    }
+
+    public async updateProfile(): Promise&lt;void&gt; {
+        try {
+            await this.messageService.createLoading(&#x27;UPDATING_PROFILE_WITH_DOTS&#x27;);
+            const tmpDate &#x3D; new Date(this.profileUpdateForm.value.birthDate);
+            const birthDate &#x3D; new Date(Date.UTC(tmpDate.getFullYear(), tmpDate.getMonth(), tmpDate.getDate(), 0, 0, 0, 0));
+            await this.userService.update({ id: this.user?.id ?? &#x27;unknown&#x27;},{
+                firstName: this.profileUpdateForm.value.firstName,
+                lastName: this.profileUpdateForm.value.lastName,
+                gender: this.profileUpdateForm.value.gender,
+                birthDate: FireTimestamp.fromDate(birthDate),
+                weight: this.profileUpdateForm.value.weight,
+                height: this.profileUpdateForm.value.height,
+            });
+            if (this.connectionInfo?.device !&#x3D;&#x3D; undefined &amp;&amp; this.user !&#x3D;&#x3D; undefined) {
+                await this.bleDeviceSettings.setUserInfo(this.connectionInfo.device, this.user);
+            } else {
+                this.logHelper.logDefault(this.updateProfile.name, &#x27;failed to update band user settings&#x27;, { value: this.connectionInfo });
+            }
+            await this.messageService.dismissLoading();
+            return await this.messageService.createToast(&#x27;ACCOUNT_SETTINGS&#x27;, &#x27;PROFILE_SUCCESSFULLY_UPDATED&#x27;, &#x27;top&#x27;, &#x27;success&#x27;);
+        } catch (e: unknown) {
+            return await this.messageService.displayErrorMessage(new LogInfo(ToolbarMenuUserSettingsModalComponent.name, this.updateProfile.name, e), &#x27;toast&#x27;, true, 5000, &#x27;top&#x27;);
+        }
+    }
+
+    public isProfileUpdateValid(): boolean {
+        return this.profileUpdateForm.valid &amp;&amp; (this.user?.gender !&#x3D;&#x3D; this.profileUpdateForm.value.gender
+            || this.user?.height !&#x3D;&#x3D; this.profileUpdateForm.value.height
+            || this.user?.weight !&#x3D;&#x3D; this.profileUpdateForm.value.weight
+            || this.user?.birthDate.toDate().toISOString() !&#x3D;&#x3D; this.profileUpdateForm.value.birthDate
+            || this.user?.firstName !&#x3D;&#x3D; this.profileUpdateForm.value.firstName
+            || this.user?.lastName !&#x3D;&#x3D; this.profileUpdateForm.value.lastName);
+    }
+
+    public async showPicker(type: &#x27;gender&#x27;): Promise&lt;void&gt; {
+        try {
+            const buttons: PickerButton[] &#x3D; [
+                {
+                    text: &#x27;CANCEL&#x27;,
+                    role: &#x27;cancel&#x27;
+                }
+            ];
+            const columns: PickerColumn[] &#x3D; [];
+            switch(type) {
+                case &#x27;gender&#x27;:
+                    columns.push(
+                        {
+                            name: type,
+                            options: [
+                                {
+                                    text: &#x27;FEMALE&#x27;,
+                                    value: &#x27;female&#x27;
+                                },
+                                {
+                                    text: &#x27;MALE&#x27;,
+                                    value: &#x27;male&#x27;
+                                },
+                                {
+                                    text: &#x27;OTHER&#x27;,
+                                    value: &#x27;other&#x27;,
+                                }
+                            ],
+                            selectedIndex: this.selectedGenderIndex ?? 0
+                        }
+                    );
+                    buttons.push(
+                        {
+                            text: &#x27;CONFIRM&#x27;,
+                            handler: (selected: any): void &#x3D;&gt;
+                            {
+                                this.logHelper.logDefault(this.showPicker.name, &#x27;picker selected option&#x27;, { value: selected });
+                                this.logHelper.logDefault(this.showPicker.name, &#x27;picker selected value&#x27;, { value: selected[type]?.value });
+                                this.profileUpdateForm.value.gender &#x3D; selected[type]?.value;
+                                this.profileUpdateForm.patchValue({ gender: selected[type]?.value ?? &#x27;&#x27; });
+                                if (typeof this.profileUpdateForm.value.gender &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+                                    this.genderText &#x3D; this.profileUpdateForm.value.gender.toUpperCase();
+                                }
+                                this.pickerService.getColumn(type).then( (column: PickerColumn | undefined ) &#x3D;&gt; {
+                                    if (column !&#x3D;&#x3D; undefined &amp;&amp; column.selectedIndex) {
+                                        this.selectedGenderIndex &#x3D; column.selectedIndex;
+                                    }
+                                    this.logHelper.logDefault(this.showPicker.name, &#x27;picker selected index&#x27;, { value: column?.selectedIndex });
+                                });
+                            }
+                        }
+                    );
+                    await this.pickerService.createPicker(columns, buttons);
+                    break;
+                default:
+                    break;
+            }
+        } catch (e: unknown) {
+            this.logHelper.logError(this.showPicker.name, e);
+        }
+    }
+
+    public async sendPasswordChangeLink(): Promise&lt;void&gt; {
+        try {
+            await this.messageService.createLoading(&#x27;SENDING_PASSWORD_CHANGE_LINK_WITH_DOTS&#x27;);
+            await this.authService.sendPasswordResetEmail(this.user?.email ?? &#x27;unknown&#x27;);
+            this.logHelper.logDefault(this.sendPasswordChangeLink.name, &#x27;Password change link has been sent&#x27;);
+            await this.messageService.dismissLoading();
+            return await this.messageService.createToast(&#x27;ACCOUNT_SETTINGS&#x27;, &#x27;PASSWORD_CHANGE_EMAIL_SENT&#x27;, &#x27;top&#x27;, &#x27;success&#x27;);
+        } catch (error: unknown) {
+            return await this.messageService.displayErrorMessage(new LogInfo(ToolbarMenuUserSettingsModalComponent.name, this.sendPasswordChangeLink.name, error), &#x27;toast&#x27;, true, 5000, &#x27;top&#x27;);
+        }
+    }
+
+    public ngOnDestroy(): void {
+        this.authUserSubscription?.unsubscribe();
+        this.userSubscription?.unsubscribe();
+    }
+
+    public isEmailUpdateValid(): boolean {
+        return this.emailUpdateFormGroup.valid &amp;&amp; this.user?.email !&#x3D;&#x3D; this.emailUpdateFormGroup.value.email;
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-modal [trigger]&#x3D;&quot;triggerId&quot; [breakpoints]&#x3D;&quot;[0.1, 1]&quot; [initialBreakpoint]&#x3D;&quot;1&quot;&gt;
+    &lt;ng-template&gt;
+        &lt;ion-content&gt;
+            &lt;div class&#x3D;&quot;page-title ion-margin-bottom ion-margin-top&quot;&gt;
+                &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;ACCOUNT_SETTINGS&#x27; | translate }}&lt;/ion-label&gt;
+            &lt;/div&gt;
+            &lt;ion-grid class&#x3D;&quot;ion-margin-bottom&quot;&gt;
+                &lt;ion-row class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;PASSWORD&#x27; | translate }}&lt;/ion-label&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-button expand&#x3D;&quot;block&quot; color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;sendPasswordChangeLink()&quot;&gt;
+                            {{ &#x27;REQUEST_PASSWORD_CHANGE_LINK&#x27; | translate }}
+                        &lt;/ion-button&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+            &lt;/ion-grid&gt;
+            &lt;ion-grid [formGroup]&#x3D;&quot;emailUpdateFormGroup&quot;&gt;
+                &lt;ion-row class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;EMAIL&#x27; | translate }}&lt;/ion-label&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;ion-item&gt;
+                            &lt;ion-label position&#x3D;&quot;floating&quot;&gt;{{ &#x27;EMAIL&#x27; | translate }}&lt;/ion-label&gt;
+                            &lt;ion-input type&#x3D;&quot;email&quot; autocomplete&#x3D;&quot;email&quot; formControlName&#x3D;&quot;email&quot;
+                                       clearInput&#x3D;&quot;true&quot;&gt;&lt;/ion-input&gt;
+                        &lt;/ion-item&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col size&#x3D;&quot;6&quot;&gt;
+                        &lt;ion-button expand&#x3D;&quot;block&quot; color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;resetEmailUpdateForm()&quot;&gt;
+                            {{ &#x27;CLEAR&#x27; | translate }}
+                        &lt;/ion-button&gt;
+                    &lt;/ion-col&gt;
+                    &lt;ion-col size&#x3D;&quot;6&quot;&gt;
+                        &lt;ion-button expand&#x3D;&quot;block&quot; [disabled]&#x3D;&quot;!isEmailUpdateValid()&quot; color&#x3D;&quot;primary&quot;
+                                    (click)&#x3D;&quot;updateEmail()&quot;&gt;
+                            {{ &#x27;CHANGE&#x27; | translate }}
+                        &lt;/ion-button&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+            &lt;/ion-grid&gt;
+            &lt;ion-grid class&#x3D;&quot;ion-margin-bottom&quot; [formGroup]&#x3D;&quot;profileUpdateForm&quot;&gt;
+                &lt;ion-row class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+                    &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+                        &lt;ion-label color&#x3D;&quot;primary&quot;&gt;{{ &#x27;PROFILE&#x27; | translate }}&lt;/ion-label&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;ion-item&gt;
+                            &lt;ion-label position&#x3D;&quot;floating&quot;&gt;{{ &#x27;FIRST_NAME&#x27; | translate }}&lt;/ion-label&gt;
+                            &lt;ion-input type&#x3D;&quot;text&quot; autocomplete&#x3D;&quot;given-name&quot; formControlName&#x3D;&quot;firstName&quot;
+                                       clearInput&#x3D;&quot;true&quot;&gt;&lt;/ion-input&gt;
+                        &lt;/ion-item&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;ion-item&gt;
+                            &lt;ion-label position&#x3D;&quot;floating&quot;&gt;{{ &#x27;LAST_NAME&#x27; | translate }}&lt;/ion-label&gt;
+                            &lt;ion-input type&#x3D;&quot;text&quot; autocomplete&#x3D;&quot;family-name&quot; formControlName&#x3D;&quot;lastName&quot;
+                                       clearInput&#x3D;&quot;true&quot;&gt;&lt;/ion-input&gt;
+                        &lt;/ion-item&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;ion-item (click)&#x3D;&quot;showPicker(&#x27;gender&#x27;)&quot;&gt;
+                            &lt;ng-container *ngIf&#x3D;&quot;profileUpdateForm.get(&#x27;gender&#x27;)?.value else genderPlaceholder&quot;&gt;
+                                &lt;ion-label class&#x3D;&quot;ion-text-center&quot;&gt;{{ genderText ?? &#x27;UNKNOWN&#x27; | translate }}&lt;/ion-label&gt;
+                            &lt;/ng-container&gt;
+                            &lt;ng-template #genderPlaceholder&gt;
+                                &lt;ion-label class&#x3D;&quot;ion-text-center placeholder&quot;&gt;{{ &#x27;GENDER&#x27; | translate }}&lt;/ion-label&gt;
+                            &lt;/ng-template&gt;
+                            &lt;ion-icon color&#x3D;&quot;primary&quot; name&#x3D;&quot;chevron-forward-outline&quot;&gt;&lt;/ion-icon&gt;
+                        &lt;/ion-item&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;app-date-picker [control]&#x3D;&quot;$any(profileUpdateForm.controls[&#x27;birthDate&#x27;])&quot;
+                                         placeholderText&#x3D;&quot;BIRTH_DATE&quot; [min]&#x3D;&quot;this.datePickerMinValue&quot;
+                                         [max]&#x3D;&quot;this.datePickerMaxValue&quot;&gt;&lt;/app-date-picker&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;app-range-item [control]&#x3D;&quot;$any(profileUpdateForm.controls[&#x27;height&#x27;])&quot;
+                                                 labelText&#x3D;&quot;HEIGHT&quot; unit&#x3D;&quot;cm&quot; [minRangeValue]&#x3D;&quot;20&quot; [maxRangeValue]&#x3D;&quot;300&quot;&gt;
+                        &lt;/app-range-item&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col&gt;
+                        &lt;app-range-item [control]&#x3D;&quot;$any(profileUpdateForm.controls[&#x27;weight&#x27;])&quot;
+                                                 labelText&#x3D;&quot;WEIGHT&quot; unit&#x3D;&quot;kg&quot; [minRangeValue]&#x3D;&quot;3&quot; [maxRangeValue]&#x3D;&quot;650&quot;&gt;
+                        &lt;/app-range-item&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+                &lt;ion-row&gt;
+                    &lt;ion-col size&#x3D;&quot;6&quot;&gt;
+                        &lt;ion-button expand&#x3D;&quot;block&quot; color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;resetProfileUpdateForm()&quot;&gt;
+                            {{ &#x27;CLEAR&#x27; | translate }}
+                        &lt;/ion-button&gt;
+                    &lt;/ion-col&gt;
+                    &lt;ion-col size&#x3D;&quot;6&quot;&gt;
+                        &lt;ion-button expand&#x3D;&quot;block&quot; [disabled]&#x3D;&quot;!isProfileUpdateValid()&quot; color&#x3D;&quot;primary&quot;
+                                    (click)&#x3D;&quot;updateProfile()&quot;&gt;
+                            {{ &#x27;UPDATE&#x27; | translate }}
+                        &lt;/ion-button&gt;
+                    &lt;/ion-col&gt;
+                &lt;/ion-row&gt;
+            &lt;/ion-grid&gt;
+        &lt;/ion-content&gt;
+    &lt;/ng-template&gt;
+&lt;/ion-modal&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./toolbar-menu-user-settings-modal.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">ion-modal {
+    .title {
+        font-size: large;
+
+    }
+    .page-title {
+        font-size: x-large;
+    }
+
+    .title, .page-title {
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-modal [trigger]="triggerId" [breakpoints]="[0.1, 1]" [initialBreakpoint]="1">    <ng-template>        <ion-content>            <div class="page-title ion-margin-bottom ion-margin-top">                <ion-label color="primary">{{ \'ACCOUNT_SETTINGS\' | translate }}</ion-label>            </div>            <ion-grid class="ion-margin-bottom">                <ion-row class="title ion-margin-top ion-margin-bottom">                    <ion-col size="12">                        <ion-label color="primary">{{ \'PASSWORD\' | translate }}</ion-label>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col size="12">                        <ion-button expand="block" color="primary" (click)="sendPasswordChangeLink()">                            {{ \'REQUEST_PASSWORD_CHANGE_LINK\' | translate }}                        </ion-button>                    </ion-col>                </ion-row>            </ion-grid>            <ion-grid [formGroup]="emailUpdateFormGroup">                <ion-row class="title ion-margin-top ion-margin-bottom">                    <ion-col size="12">                        <ion-label color="primary">{{ \'EMAIL\' | translate }}</ion-label>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <ion-item>                            <ion-label position="floating">{{ \'EMAIL\' | translate }}</ion-label>                            <ion-input type="email" autocomplete="email" formControlName="email"                                       clearInput="true"></ion-input>                        </ion-item>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col size="6">                        <ion-button expand="block" color="primary" (click)="resetEmailUpdateForm()">                            {{ \'CLEAR\' | translate }}                        </ion-button>                    </ion-col>                    <ion-col size="6">                        <ion-button expand="block" [disabled]="!isEmailUpdateValid()" color="primary"                                    (click)="updateEmail()">                            {{ \'CHANGE\' | translate }}                        </ion-button>                    </ion-col>                </ion-row>            </ion-grid>            <ion-grid class="ion-margin-bottom" [formGroup]="profileUpdateForm">                <ion-row class="title ion-margin-top ion-margin-bottom">                    <ion-col size="12">                        <ion-label color="primary">{{ \'PROFILE\' | translate }}</ion-label>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <ion-item>                            <ion-label position="floating">{{ \'FIRST_NAME\' | translate }}</ion-label>                            <ion-input type="text" autocomplete="given-name" formControlName="firstName"                                       clearInput="true"></ion-input>                        </ion-item>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <ion-item>                            <ion-label position="floating">{{ \'LAST_NAME\' | translate }}</ion-label>                            <ion-input type="text" autocomplete="family-name" formControlName="lastName"                                       clearInput="true"></ion-input>                        </ion-item>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <ion-item (click)="showPicker(\'gender\')">                            <ng-container *ngIf="profileUpdateForm.get(\'gender\')?.value else genderPlaceholder">                                <ion-label class="ion-text-center">{{ genderText ?? \'UNKNOWN\' | translate }}</ion-label>                            </ng-container>                            <ng-template #genderPlaceholder>                                <ion-label class="ion-text-center placeholder">{{ \'GENDER\' | translate }}</ion-label>                            </ng-template>                            <ion-icon color="primary" name="chevron-forward-outline"></ion-icon>                        </ion-item>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <app-date-picker [control]="$any(profileUpdateForm.controls[\'birthDate\'])"                                         placeholderText="BIRTH_DATE" [min]="this.datePickerMinValue"                                         [max]="this.datePickerMaxValue"></app-date-picker>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <app-range-item [control]="$any(profileUpdateForm.controls[\'height\'])"                                                 labelText="HEIGHT" unit="cm" [minRangeValue]="20" [maxRangeValue]="300">                        </app-range-item>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col>                        <app-range-item [control]="$any(profileUpdateForm.controls[\'weight\'])"                                                 labelText="WEIGHT" unit="kg" [minRangeValue]="3" [maxRangeValue]="650">                        </app-range-item>                    </ion-col>                </ion-row>                <ion-row>                    <ion-col size="6">                        <ion-button expand="block" color="primary" (click)="resetProfileUpdateForm()">                            {{ \'CLEAR\' | translate }}                        </ion-button>                    </ion-col>                    <ion-col size="6">                        <ion-button expand="block" [disabled]="!isProfileUpdateValid()" color="primary"                                    (click)="updateProfile()">                            {{ \'UPDATE\' | translate }}                        </ion-button>                    </ion-col>                </ion-row>            </ion-grid>        </ion-content>    </ng-template></ion-modal></div>'
+    var COMPONENTS = [{'name': 'ActivityComponent', 'selector': 'app-activity'},{'name': 'ActivityItemComponent', 'selector': 'app-activity-item'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomChartComponent', 'selector': 'app-custom-chart'},{'name': 'DataChartComponent', 'selector': 'app-data-chart'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DeviceComponent', 'selector': 'app-device'},{'name': 'DeviceSetupComponent', 'selector': 'app-setup'},{'name': 'HeartRateComponent', 'selector': 'app-heart-rate'},{'name': 'HeartRateItemComponent', 'selector': 'app-heart-rate-item'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeTabBarComponent', 'selector': 'app-home-tab-bar'},{'name': 'ItemsFilterComponent', 'selector': 'app-items-filter'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'RangeItemComponent', 'selector': 'app-range-item'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-login-reset-password'},{'name': 'ScannedDeviceItemComponent', 'selector': 'app-scanned-device-item'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'ToolbarLanguageSelectComponent', 'selector': 'app-toolbar-language-select'},{'name': 'ToolbarMenuComponent', 'selector': 'app-toolbar-menu'},{'name': 'ToolbarMenuDeviceSettingsModalComponent', 'selector': 'app-toolbar-menu-device-settings-modal'},{'name': 'ToolbarMenuUserSettingsModalComponent', 'selector': 'app-toolbar-menu-user-settings-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ToolbarMenuUserSettingsModalComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToolbarMenuUserSettingsModalComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

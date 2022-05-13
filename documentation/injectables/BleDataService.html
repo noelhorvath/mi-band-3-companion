@@ -1,0 +1,3644 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >BleDataService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/ble/data/ble-data.service.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+            </p>
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityInfo" >activityInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityInfoSubscription" >activityInfoSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activitySubject" >activitySubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activitySyncedDate" >activitySyncedDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activitySyncInterval" >activitySyncInterval</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activitySyncStatusSubject" >activitySyncStatusSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#batteryInfoSubject" >batteryInfoSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#connectionInfo" >connectionInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#heartRateSubject" >heartRateSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isSubscribedSubject" >isSubscribedSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isSyncInitialized" >isSyncInitialized</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logHelper" >logHelper</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#pastActivityBuffer" >pastActivityBuffer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#pastHeartRateBuffer" >pastHeartRateBuffer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processedPackageCount" >processedPackageCount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processingCount" >processingCount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processingIndex" >processingIndex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processingPastActivityDay" >processingPastActivityDay</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processingPastActivityHour" >processingPastActivityHour</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#totalPackageCount" >totalPackageCount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#miBand3" >miBand3</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchActivityData" >fetchActivityData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getHardwareVersion" >getHardwareVersion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getSerialNumber" >getSerialNumber</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getSoftwareVersion" >getSoftwareVersion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#initDeviceData" >initDeviceData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processBatteryInfo" >processBatteryInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processDataObserver" >processDataObserver</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processFetchData" >processFetchData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processHeartRate" >processHeartRate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processPastActivityData" >processPastActivityData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processRealTimeActivity" >processRealTimeActivity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#readBatteryInfo" >readBatteryInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#readRealTimeActivity" >readRealTimeActivity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resetService" >resetService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToActivityData" >subscribeToActivityData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToBatteryInfo" >subscribeToBatteryInfo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToHeartRate" >subscribeToHeartRate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscribeToRealTimeActivity" >subscribeToRealTimeActivity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#bytesFromInt" >bytesFromInt</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#bytesToInt" >bytesToInt</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dateTimeFromBytes" >dateTimeFromBytes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dateTimeToBytes" >dateTimeToBytes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#read" >read</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#subscribe" >subscribe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#unsubscribe" >unsubscribe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#write" >write</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(ble: BluetoothLE, bleConnectionService: <a href="../injectables/BleConnectionService.html" target="_self">BleConnectionService</a>, authService: <a href="../injectables/FirebaseAuthService.html" target="_self">FirebaseAuthService</a>, activityInfoService: <a href="../injectables/FirestoreActivityInfoService.html" target="_self">FirestoreActivityInfoService</a>, activityService: <a href="../injectables/FirestoreActivityService.html" target="_self">FirestoreActivityService</a>, heartRateService: <a href="../injectables/FirestoreHeartRateService.html" target="_self">FirestoreHeartRateService</a>, batteryInfoService: <a href="../injectables/FirestoreBatteryInfoService.html" target="_self">FirestoreBatteryInfoService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:48</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>ble</td>
+                                                  
+                                                        <td>
+                                                                    <code>BluetoothLE</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>bleConnectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BleConnectionService.html" target="_self" >BleConnectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirebaseAuthService.html" target="_self" >FirebaseAuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activityInfoService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreActivityInfoService.html" target="_self" >FirestoreActivityInfoService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreActivityService.html" target="_self" >FirestoreActivityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>heartRateService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreHeartRateService.html" target="_self" >FirestoreHeartRateService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>batteryInfoService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreBatteryInfoService.html" target="_self" >FirestoreBatteryInfoService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchActivityData"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>fetchActivityData</b></span>
+                        <a href="#fetchActivityData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchActivityData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="805"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:805</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHardwareVersion"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>getHardwareVersion</b></span>
+                        <a href="#getHardwareVersion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getHardwareVersion()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="785"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:785</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSerialNumber"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>getSerialNumber</b></span>
+                        <a href="#getSerialNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSerialNumber()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="765"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:765</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSoftwareVersion"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>getSoftwareVersion</b></span>
+                        <a href="#getSoftwareVersion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSoftwareVersion()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="745"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:745</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initDeviceData"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>initDeviceData</b></span>
+                        <a href="#initDeviceData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initDeviceData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="732"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:732</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processBatteryInfo"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>processBatteryInfo</b></span>
+                        <a href="#processBatteryInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processBatteryInfo(data: OperationResult)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="589"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:589</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>OperationResult</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processDataObserver"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>processDataObserver</b></span>
+                        <a href="#processDataObserver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processDataObserver(processFunction: (value: OperationResult) => void)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="635"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:635</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>processFunction</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Partial&lt;Observer&lt;OperationResult&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processFetchData"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>processFetchData</b></span>
+                        <a href="#processFetchData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processFetchData(data: OperationResult)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="357"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:357</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>OperationResult</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processHeartRate"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>processHeartRate</b></span>
+                        <a href="#processHeartRate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processHeartRate(data: OperationResult)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="624"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:624</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>OperationResult</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processPastActivityData"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>processPastActivityData</b></span>
+                        <a href="#processPastActivityData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processPastActivityData(data: OperationResult)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="157"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:157</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>OperationResult</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processRealTimeActivity"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>processRealTimeActivity</b></span>
+                        <a href="#processRealTimeActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processRealTimeActivity(data: OperationResult)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="551"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:551</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>OperationResult</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readBatteryInfo"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>readBatteryInfo</b></span>
+                        <a href="#readBatteryInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>readBatteryInfo()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="715"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:715</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readRealTimeActivity"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>readRealTimeActivity</b></span>
+                        <a href="#readRealTimeActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>readRealTimeActivity()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="698"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:698</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetService"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>resetService</b></span>
+                        <a href="#resetService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetService()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="142"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:142</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToActivityData"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>subscribeToActivityData</b></span>
+                        <a href="#subscribeToActivityData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToActivityData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="659"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:659</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToBatteryInfo"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>subscribeToBatteryInfo</b></span>
+                        <a href="#subscribeToBatteryInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToBatteryInfo()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="672"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:672</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToHeartRate"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>subscribeToHeartRate</b></span>
+                        <a href="#subscribeToHeartRate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToHeartRate()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="685"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:685</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribeToRealTimeActivity"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>subscribeToRealTimeActivity</b></span>
+                        <a href="#subscribeToRealTimeActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribeToRealTimeActivity()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="646"
+                            class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:646</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bytesFromInt"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>bytesFromInt</b></span>
+                        <a href="#bytesFromInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>bytesFromInt(num: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, size?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:111</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>num</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>size</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Uint8Array</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bytesToInt"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>bytesToInt</b></span>
+                        <a href="#bytesToInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>bytesToInt(bytes: Uint8Array)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:100</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>bytes</td>
+                                    <td>
+                                            <code>Uint8Array</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dateTimeFromBytes"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dateTimeFromBytes</b></span>
+                        <a href="#dateTimeFromBytes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dateTimeFromBytes(bytes: Uint8Array, startIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:134</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>bytes</td>
+                                    <td>
+                                            <code>Uint8Array</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>startIndex</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>0</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/FireTimestamp.html" target="_self" >FireTimestamp | undefined</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dateTimeToBytes"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dateTimeToBytes</b></span>
+                        <a href="#dateTimeToBytes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dateTimeToBytes(dateTime: <a href="../interfaces/IFireTimestamp.html" target="_self">Date | IFireTimestamp</a>, options?: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:153</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dateTime</td>
+                                    <td>
+                                                <code><a href="../interfaces/IFireTimestamp.html" target="_self" >Date | IFireTimestamp</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>new Date()</code>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Uint8Array</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="read"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>read</b></span>
+                        <a href="#read"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>read(deviceData: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:48</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>deviceData</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;OperationResult&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscribe"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span ><b>subscribe</b></span>
+                        <a href="#subscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>subscribe(deviceData: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>, observer: Partial<Observer<OperationResult>>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:64</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>deviceData</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>observer</td>
+                                    <td>
+                                            <code>Partial&lt;Observer&lt;OperationResult&gt;&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unsubscribe"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>unsubscribe</b></span>
+                        <a href="#unsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>unsubscribe(device: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:84</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>device</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;UnsubscribeResult&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="write"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>write</b></span>
+                        <a href="#write"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>write(deviceData: <a href="../interfaces/IDevice.html" target="_self">string | IDevice</a>, service: <a href="../classes/Service.html" target="_self">string | Service</a>, characteristic: <a href="../classes/Characteristic.html" target="_self">string | Characteristic</a>, value: Buffer | Uint8Array, type?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:24</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>deviceData</td>
+                                    <td>
+                                                <code><a href="../interfaces/IDevice.html" target="_self" >string | IDevice</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>service</td>
+                                    <td>
+                                                <code><a href="../classes/Service.html" target="_self" >string | Service</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>characteristic</td>
+                                    <td>
+                                                <code><a href="../classes/Characteristic.html" target="_self" >string | Characteristic</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                            <code>Buffer | Uint8Array</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;OperationResult&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityInfo</b></span>
+                        <a href="#activityInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ActivityInfo | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityInfoSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityInfoSubscription</b></span>
+                        <a href="#activityInfoSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activitySubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activitySubject</b></span>
+                        <a href="#activitySubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >BehaviorSubject&lt;Activity | undefined&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activitySyncedDate"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activitySyncedDate</b></span>
+                        <a href="#activitySyncedDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Date | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activitySyncInterval"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activitySyncInterval</b></span>
+                        <a href="#activitySyncInterval"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>NodeJS.Timer | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activitySyncStatusSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activitySyncStatusSubject</b></span>
+                        <a href="#activitySyncStatusSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/TaskProgressInfo.html" target="_self" >BehaviorSubject&lt;TaskProgressInfo&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="batteryInfoSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>batteryInfoSubject</b></span>
+                        <a href="#batteryInfoSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/BatteryInfo.html" target="_self" >BehaviorSubject&lt;BatteryInfo | undefined&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="connectionInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>connectionInfo</b></span>
+                        <a href="#connectionInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/ConnectionInfo.html" target="_self" >ConnectionInfo</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="heartRateSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>heartRateSubject</b></span>
+                        <a href="#heartRateSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BehaviorSubject&lt;number | undefined&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubscribedSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isSubscribedSubject</b></span>
+                        <a href="#isSubscribedSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BehaviorSubject&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSyncInitialized"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isSyncInitialized</b></span>
+                        <a href="#isSyncInitialized"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logHelper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logHelper</b></span>
+                        <a href="#logHelper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/LogHelper.html" target="_self" >LogHelper</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pastActivityBuffer"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>pastActivityBuffer</b></span>
+                        <a href="#pastActivityBuffer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >Activity[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pastHeartRateBuffer"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>pastHeartRateBuffer</b></span>
+                        <a href="#pastHeartRateBuffer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/HeartRate.html" target="_self" >HeartRate[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processedPackageCount"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processedPackageCount</b></span>
+                        <a href="#processedPackageCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processingCount"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processingCount</b></span>
+                        <a href="#processingCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processingIndex"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processingIndex</b></span>
+                        <a href="#processingIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processingPastActivityDay"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processingPastActivityDay</b></span>
+                        <a href="#processingPastActivityDay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processingPastActivityHour"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processingPastActivityHour</b></span>
+                        <a href="#processingPastActivityHour"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPackageCount"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>totalPackageCount</b></span>
+                        <a href="#totalPackageCount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/services/ble/data/ble-data.service.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="miBand3"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>miBand3</b></span>
+                        <a href="#miBand3"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/MiBand3.html" target="_self" >MiBand3</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../injectables/BleBaseService.html" target="_self" >BleBaseService</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../injectables/BleBaseService.html#source" target="_self" >BleBaseService:18</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BluetoothLE, OperationResult } from &#x27;@ionic-native/bluetooth-le/ngx&#x27;;
+import { BleConnectionService } from &#x27;../connection/ble-connection.service&#x27;;
+import { BehaviorSubject, Observer, Subscription } from &#x27;rxjs&#x27;;
+import { BatteryInfo } from &#x27;../../../shared/models/classes/BatteryInfo&#x27;;
+import { FirebaseAuthService } from &#x27;../../firebase/auth/firebase-auth.service&#x27;;
+import { Activity } from &#x27;../../../shared/models/classes/Activity&#x27;;
+import { HeartRate } from &#x27;../../../shared/models/classes/HeartRate&#x27;;
+import { ConnectionInfo } from &#x27;../../../shared/models/classes/ConnectionInfo&#x27;;
+import { LogHelper } from &#x27;../../../shared/models/classes/LogHelper&#x27;;
+import { MeasurementInfo } from &#x27;../../../shared/models/classes/MeasurementInfo&#x27;;
+import { BleBaseService } from &#x27;../base/ble-base.service&#x27;;
+import { FireTimestamp } from &#x27;../../../shared/models/classes/FireTimestamp&#x27;;
+import { ActivityInfo } from &#x27;../../../shared/models/classes/ActivityInfo&#x27;;
+import { Buffer } from &#x27;buffer&#x27;;
+import { DateTypeEnum } from &#x27;../../../shared/enums/date.enum&#x27;;
+import { FirestoreHeartRateService } from &#x27;../../firestore/heart-rate/firestore-heart-rate.service&#x27;;
+import { ProgressStatusEnum } from &#x27;../../../shared/enums/progress-status.enum&#x27;;
+import { TaskProgressInfo } from &#x27;../../../shared/models/classes/TaskProgressInfo&#x27;;
+import { FirestoreBatteryInfoService } from &#x27;../../firestore/battery-info/firestore-battery-info.service&#x27;;
+import { FirestoreActivityService } from &#x27;../../firestore/activity/firestore-activity.service&#x27;;
+import { MeasurementValue } from &#x27;../../../shared/models/classes/MeasurementValue&#x27;;
+import { FirestoreActivityInfoService } from &#x27;../../firestore/activity/info/activity-info.service&#x27;;
+
+@Injectable({
+    providedIn: &#x27;root&#x27;
+})
+export class BleDataService extends BleBaseService {
+    private readonly logHelper: LogHelper;
+    private activityInfo: ActivityInfo | undefined;
+    private connectionInfo: ConnectionInfo;
+    private activitySyncedDate: Date | undefined;
+    private totalPackageCount: number;
+    private processedPackageCount: number;
+    private pastActivityBuffer: Activity[];
+    private pastHeartRateBuffer: HeartRate[];
+    private processingPastActivityHour: number;
+    private processingPastActivityDay: number;
+    private processingIndex: { hourly: number; daily: number; total: number };
+    private processingCount: { hourlyActivity: number; hourlyHeartRate: number; dailyActivity: number; dailyHeartRate: number };
+    private activitySyncInterval: NodeJS.Timer | undefined;
+    private activityInfoSubscription: Subscription | undefined;
+    private isSyncInitialized: boolean;
+    public activitySyncStatusSubject: BehaviorSubject&lt;TaskProgressInfo&gt;;
+    public activitySubject: BehaviorSubject&lt;Activity | undefined&gt;;
+    public batteryInfoSubject: BehaviorSubject&lt;BatteryInfo | undefined&gt;;
+    public heartRateSubject: BehaviorSubject&lt;number | undefined&gt;;
+    public isSubscribedSubject: BehaviorSubject&lt;boolean&gt;;
+
+    public constructor(
+        ble: BluetoothLE,
+        private bleConnectionService: BleConnectionService,
+        private authService: FirebaseAuthService,
+        private activityInfoService: FirestoreActivityInfoService,
+        private activityService: FirestoreActivityService,
+        private heartRateService: FirestoreHeartRateService,
+        private batteryInfoService: FirestoreBatteryInfoService
+    ) {
+        super(ble);
+        this.logHelper &#x3D; new LogHelper(BleDataService.name);
+        this.connectionInfo &#x3D; new ConnectionInfo();
+        this.totalPackageCount &#x3D; 0;
+        this.processedPackageCount &#x3D; 0;
+        this.processingPastActivityHour &#x3D; 0;
+        this.processingPastActivityDay &#x3D; 0;
+        this.processingIndex &#x3D; { daily: 0, hourly: 0, total: 0 };
+        this.processingCount &#x3D; { hourlyActivity: 0, hourlyHeartRate: 0, dailyActivity: 0, dailyHeartRate: 0 };
+        this.pastActivityBuffer &#x3D; [];
+        this.pastHeartRateBuffer &#x3D; [];
+        this.isSyncInitialized &#x3D; false;
+        this.activitySyncStatusSubject &#x3D; new BehaviorSubject&lt;TaskProgressInfo&gt;(new TaskProgressInfo());
+        this.batteryInfoSubject &#x3D; new BehaviorSubject&lt;BatteryInfo | undefined&gt;(undefined);
+        this.activitySubject &#x3D; new BehaviorSubject&lt;Activity | undefined&gt;(undefined);
+        this.heartRateSubject &#x3D; new BehaviorSubject&lt;number | undefined&gt;(undefined);
+        this.isSubscribedSubject &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+        this.bleConnectionService.connectionInfoSubject.subscribe({
+            next: async (info: ConnectionInfo) &#x3D;&gt; {
+                this.connectionInfo &#x3D; info;
+                if (info.isDisconnected()) {
+                    this.resetService();
+                } else if (info.isReady()) {
+                    this.activityInfoSubscription &#x3D; this.activityInfoService.getWithValueChanges(info.device?.macAddress ?? &#x27;undefined&#x27;)
+                        .subscribe(async (activityInfo: ActivityInfo | undefined) &#x3D;&gt; {
+                            this.activityInfo &#x3D; activityInfo;
+                            if (activityInfo &#x3D;&#x3D;&#x3D; undefined) {
+                                const initialSyncDate &#x3D; new Date(new Date().setUTCDate(new Date().getUTCDate() - 31));
+                                initialSyncDate.setUTCDate(initialSyncDate.getUTCDate() - 31);
+                                const initialActivityInfo &#x3D; new ActivityInfo(
+                                    info.device?.macAddress ?? &#x27;undefined&#x27;,
+                                    FireTimestamp.fromDate(new Date(new Date().setUTCDate(new Date().getUTCDate() - 31)))
+                                );
+                                try {
+                                    await this.activityInfoService.add(initialActivityInfo);
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(&#x27;activityInfo sub error&#x27;, e);
+                                }
+                            } else {
+                                if (!this.isSyncInitialized) {
+                                    this.isSyncInitialized &#x3D; !this.isSyncInitialized;
+                                    try {
+                                        await this.fetchActivityData();
+                                        this.logHelper.logDefault(&#x27;Started initial sync&#x27;, { value: FireTimestamp.now() });
+                                    } catch (e: unknown) {
+                                        this.logHelper.logError(this.fetchActivityData.name, e);
+                                    }
+
+                                    // set 30 min interval for activity sync
+                                    this.activitySyncInterval &#x3D; setInterval(async () &#x3D;&gt; {
+                                        try {
+                                            await this.fetchActivityData();
+                                        } catch (e: unknown) {
+                                            this.logHelper.logError(this.fetchActivityData.name, e);
+                                        }
+                                        this.logHelper.logDefault(&#x27;Syncing past activity data&#x27;, { value: FireTimestamp.now() });
+                                    }, 1800000); // &#x3D;&#x3D;&#x3D; 1000 (to ms) * 60 (to sec) * 30 (to min)
+                                    // set 5 min interval for battery info updating
+                                    this.activitySyncInterval &#x3D; setInterval(async () &#x3D;&gt; {
+                                        try {
+                                            if (this.connectionInfo.isReady()) {
+                                                await this.readBatteryInfo();
+                                            }
+                                        } catch (e: unknown) {
+                                            this.logHelper.logError(this.readBatteryInfo.name, e);
+                                        }
+                                        this.logHelper.logDefault(&#x27;Updating battery info&#x27;, { value: FireTimestamp.now() });
+                                    }, 300000); // &#x3D;&#x3D;&#x3D; 1000 (to ms) * 60 (to sec) * 5 (to min)
+                                }
+                            }
+                        });
+                }
+            },
+            error: (e: unknown) &#x3D;&gt; {
+                this.logHelper.logError(&#x27;connectionInfoSubject&#x27;, e);
+            }
+        });
+        this.authService.authUserSubject.subscribe( () &#x3D;&gt; {
+            // reset data
+            this.resetService();
+        });
+    }
+
+    private resetService(): void {
+        this.isSubscribedSubject.next(false);
+        this.batteryInfoSubject.next(undefined);
+        this.activitySubject.next(undefined);
+        this.heartRateSubject.next(undefined);
+        if (this.activitySyncInterval !&#x3D;&#x3D; undefined) {
+            clearInterval(this.activitySyncInterval);
+            this.activitySyncInterval &#x3D; undefined;
+        }
+        this.activityInfoSubscription?.unsubscribe();
+        this.pastActivityBuffer &#x3D; [];
+        this.pastHeartRateBuffer &#x3D; [];
+        this.isSyncInitialized &#x3D; false;
+    }
+
+    private processPastActivityData(data: OperationResult): void {
+        if (data.value) {
+            /* Fetched past activity data max 13 bytes
+               fetch batch contains 4 (at max) activity data/package  per minute
+
+                    0. queue number
+                    1-4 activity data
+                    5-8. next activity data
+                    9-12. next activity data
+
+                    Activity data:
+
+                        0. raw category
+                        1. intensity
+                        2. steps
+                        3. heart rate
+            */
+            const bytes &#x3D; this.ble.encodedStringToBytes(data.value);
+            if (this.activitySyncedDate !&#x3D;&#x3D; undefined) {
+                for (let i &#x3D; 0; i &lt; (bytes.length - 1) / 4; i++) {
+                    if (this.processedPackageCount &gt; 0) {
+                        this.activitySyncedDate.setMinutes(this.activitySyncedDate.getMinutes() + 1);
+                    }
+
+                    if (this.processedPackageCount &#x3D;&#x3D;&#x3D; 0) {
+                        this.processingIndex.total &#x3D; 0;
+                        this.processingCount.hourlyActivity &#x3D; 0;
+                        this.processingCount.hourlyHeartRate &#x3D; 0;
+                        this.processingCount.dailyActivity &#x3D; 0;
+                        this.processingCount.dailyHeartRate &#x3D; 0;
+                    }
+
+                    // for every average +1 is needed because avg starts at -1
+                    if (this.processingPastActivityDay !&#x3D;&#x3D; this.activitySyncedDate.getDate()) {
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.dailyHeartRate !&#x3D;&#x3D; 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg &#x3D;
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg
+                                    / this.processingCount.dailyHeartRate);
+                        }
+
+                        if (this.processingCount.dailyActivity !&#x3D;&#x3D; 0) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.avg &#x3D;
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.daily].intensity.avg
+                                    / this.processingCount.dailyActivity);
+                        }
+
+                        this.processingCount.dailyHeartRate &#x3D; 0;
+                        this.processingCount.dailyActivity &#x3D; 0;
+                        this.processingIndex.total++;
+                    }
+
+                    if (this.processingPastActivityDay !&#x3D;&#x3D; this.activitySyncedDate.getDate() || this.processedPackageCount &#x3D;&#x3D;&#x3D; 0) {
+                        this.processingPastActivityDay &#x3D; this.activitySyncedDate.getDate();
+                        const date &#x3D; new Date(Date.UTC(this.activitySyncedDate.getFullYear(),
+                            this.activitySyncedDate.getMonth(), this.activitySyncedDate.getDate(), 0, 0, 0, 0));
+                        this.pastActivityBuffer.push(
+                            new Activity(
+                                &#x27;undefined&#x27;,
+                                0, // steps,
+                                -1,
+                                -1,
+                                new MeasurementValue(-1), // intensity
+                                new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.DAILY),
+                            )
+                        );
+                        this.pastHeartRateBuffer.push(new HeartRate(
+                            &#x27;undefined&#x27;,
+                            new MeasurementValue(-1), // bpm
+                            new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.DAILY),
+                        ));
+                        this.processingIndex.daily &#x3D; this.processingIndex.total &#x3D;&#x3D;&#x3D; 0 ? this.processingIndex.total++ : this.processingIndex.total;
+                    }
+
+                    if (this.processingPastActivityHour !&#x3D;&#x3D; this.activitySyncedDate.getHours()) {
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.hourlyHeartRate !&#x3D;&#x3D; 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg &#x3D;
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg
+                                    / this.processingCount.hourlyHeartRate);
+                        }
+
+                        if (this.processingCount.hourlyActivity !&#x3D;&#x3D; 0) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg &#x3D;
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg
+                                    / this.processingCount.hourlyActivity);
+                        }
+
+                        this.processingCount.hourlyHeartRate &#x3D; 0;
+                        this.processingCount.hourlyActivity &#x3D; 0;
+                        this.processingIndex.total++;
+                    }
+
+                    if (this.processingPastActivityHour !&#x3D;&#x3D; this.activitySyncedDate.getHours() || this.processedPackageCount &#x3D;&#x3D;&#x3D; 0) {
+                        this.processingPastActivityHour &#x3D; this.activitySyncedDate.getHours();
+                        const date &#x3D; new Date(this.activitySyncedDate); // clone date
+                        date.setMinutes(0, 0, 0);
+                        this.pastActivityBuffer.push(
+                            new Activity(
+                                &#x27;undefined&#x27;,
+                                0, // steps,
+                                -1,
+                                -1,
+                                new MeasurementValue(-1), // intensity
+                                new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.HOURLY),
+                            )
+                        );
+                        this.pastHeartRateBuffer.push(new HeartRate(
+                            &#x27;undefined&#x27;,
+                            new MeasurementValue(-1), // bpm
+                            new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.HOURLY),
+                        ));
+                        this.processingIndex.hourly &#x3D; this.processingIndex.total;
+                    }
+
+
+                    // bytes[i * 4 + 1] &#x3D;&#x3D; category ?
+                    const intensity &#x3D; bytes[i * 4 + 2];
+                    this.pastActivityBuffer[this.processingIndex.daily].steps +&#x3D; bytes[i * 4 + 3];
+                    this.pastActivityBuffer[this.processingIndex.hourly].steps +&#x3D; bytes[i * 4 + 3];
+                    const bpm &#x3D; bytes[i * 4 + 4];
+                    // 255 bpm &#x3D;&#x3D;&#x3D; not measured
+                    if (bpm !&#x3D;&#x3D; 255) {
+                        if (this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.min &gt; bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.min &#x3D; bpm;
+                        }
+
+                        if (this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.max &lt; bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.max &#x3D; bpm;
+                        }
+
+                        this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg +&#x3D; bpm;
+                        this.processingCount.hourlyHeartRate++;
+
+                        if (this.pastHeartRateBuffer[this.processingIndex.daily].bpm.min &gt; bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.min &#x3D; bpm;
+                        }
+
+                        if (this.pastHeartRateBuffer[this.processingIndex.daily].bpm.max &lt; bpm) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.max &#x3D; bpm;
+                        }
+
+                        this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg +&#x3D; bpm;
+                        this.processingCount.dailyHeartRate++;
+                    }
+
+                    if (intensity !&#x3D;&#x3D; 0) {
+                        if (this.pastActivityBuffer[this.processingIndex.hourly].intensity.min &gt; intensity) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.min &#x3D; intensity;
+                        }
+
+                        if (this.pastActivityBuffer[this.processingIndex.hourly].intensity.max &lt; intensity) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.max &#x3D; intensity;
+                        }
+
+                        this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg +&#x3D; intensity;
+                        this.processingCount.hourlyActivity++;
+
+                        if (this.pastActivityBuffer[this.processingIndex.daily].intensity.min &gt; intensity) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.min &#x3D; intensity;
+                        }
+
+                        if (this.pastActivityBuffer[this.processingIndex.daily].intensity.max &lt; intensity) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.max &#x3D; intensity;
+                        }
+
+                        this.pastActivityBuffer[this.processingIndex.daily].intensity.avg +&#x3D; intensity;
+                        this.processingCount.dailyActivity++;
+                    }
+
+                    if (this.totalPackageCount &#x3D;&#x3D;&#x3D; ++this.processedPackageCount) {
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.hourlyHeartRate !&#x3D;&#x3D; 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg &#x3D;
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.hourly].bpm.avg / this.processingCount.hourlyHeartRate);
+                        }
+
+                        if (this.processingCount.hourlyActivity !&#x3D;&#x3D; 0) {
+                            this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg &#x3D;
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.hourly].intensity.avg / this.processingCount.hourlyActivity);
+                        }
+
+                        // +1 is needed because avg starts at -1
+                        if (this.processingCount.dailyHeartRate !&#x3D;&#x3D; 0) {
+                            this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg &#x3D;
+                                Math.floor(++this.pastHeartRateBuffer[this.processingIndex.daily].bpm.avg / this.processingCount.dailyHeartRate);
+                        }
+
+                        if (this.processingCount.dailyActivity !&#x3D;&#x3D; 0) {
+                            this.pastActivityBuffer[this.processingIndex.daily].intensity.avg &#x3D;
+                                Math.floor(++this.pastActivityBuffer[this.processingIndex.daily].intensity.avg / this.processingCount.dailyActivity);
+                        }
+                    }
+                }
+            } else {
+                this.logHelper.logDefault(this.processPastActivityData.name, &#x27;sync error&#x27;, { value: &#x27;activitySyncStartDateTime is undefined&#x27; });
+            }
+        }
+    }
+
+    private async processFetchData(data: OperationResult): Promise&lt;void&gt; {
+        if (data.value) {
+            /* Fetch data 15 bytes or 3 bytes
+                0-2. response
+                3-6. number of packages
+                7.-14 datetime (that was sent initially)
+            */
+            const bytes &#x3D; this.ble.encodedStringToBytes(data.value);
+            this.logHelper.logDefault(this.processFetchData.name, &#x27;fetch&#x27;, { value: Buffer.from(bytes).toString(&#x27;hex&#x27;) });
+            this.logHelper.logDefault(this.processFetchData.name, &#x27;fetch&#x27;, { value: bytes });
+            if (3 &lt;&#x3D; bytes.length) {
+                const response &#x3D; Buffer.from(bytes).subarray(0, 3).toString(&#x27;hex&#x27;);
+                switch (response) {
+                    case &#x27;100101&#x27;:
+                        this.totalPackageCount &#x3D; bytes.length &#x3D;&#x3D;&#x3D; 15 ? this.bytesToInt(bytes.subarray(3, 7)) : 0;
+                        const tmpStartDate &#x3D; bytes.length &#x3D;&#x3D;&#x3D; 15 ? this.dateTimeFromBytes(bytes, 7)?.toDate() : undefined;
+                        if (tmpStartDate !&#x3D;&#x3D; undefined) {
+                            this.activitySyncedDate &#x3D; new Date(tmpStartDate);
+                            this.activitySyncedDate.setSeconds(0, 0);
+                            this.processingPastActivityHour &#x3D; this.activitySyncedDate.getHours();
+                            this.processingPastActivityDay &#x3D; this.activitySyncedDate.getDate();
+                            this.logHelper.logDefault(this.processFetchData.name, &#x27;fetch package count&#x27;, { value: this.totalPackageCount });
+                            this.logHelper.logDefault(this.processFetchData.name, &#x27;fetch start datetime&#x27;, { value: this.activitySyncedDate });
+                            if (0 &lt; this.totalPackageCount) {
+                                this.processedPackageCount &#x3D; 0;
+                                try {
+                                    await this.write(data.address, data.service, data.characteristic, Uint8Array.of(0x02));
+                                    this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.STARTED, Math.ceil(this.totalPackageCount / 60) * 2));
+                                    this.logHelper.logDefault(this.processFetchData.name, &#x27;Activity fetching start code sent&#x27;);
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, &#x27;write fetch start error&#x27;, { value: e });
+                                }
+                            } else {
+                                try {
+                                    await this.write(data.address, data.service, data.characteristic, Uint8Array.of(0x03));
+                                    this.logHelper.logDefault(this.processFetchData.name, &#x27;Activity fetching end code sent, because there is no past activity data&#x27;);
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, &#x27;write fetch end error&#x27;, { value: e });
+                                }
+                            }
+                        } else {
+                            this.logHelper.logError(this.processFetchData.name, &#x27;fetch start error&#x27;, { value: &#x27;missing start date&#x27; });
+                        }
+                        break;
+                    case &#x27;100102&#x27;:
+                        this.logHelper.logDefault(this.processFetchData.name, &#x27;Activity fetching started&#x27;);
+                        break;
+                    case &#x27;100201&#x27;:
+                        if (this.pastActivityBuffer !&#x3D;&#x3D; []) {
+                            let processedCount &#x3D; 0;
+                            let isFirstHourlyProcessed &#x3D; false;
+                            await Promise.all(this.pastHeartRateBuffer.map( async (heartRate: HeartRate) &#x3D;&gt; {
+                                try {
+                                    if (!isFirstHourlyProcessed || heartRate.measurementInfo.type &#x3D;&#x3D;&#x3D; DateTypeEnum.DAILY) {
+                                        if (heartRate.measurementInfo.type &#x3D;&#x3D;&#x3D; DateTypeEnum.HOURLY) {
+                                            isFirstHourlyProcessed &#x3D; !isFirstHourlyProcessed;
+                                        }
+                                        const sameHeartRate &#x3D; await this.heartRateService.list([
+                                            { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: heartRate.measurementInfo.date },
+                                            { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: heartRate.measurementInfo.type },
+                                            { limit: 1 }
+                                        ]);
+                                        if (sameHeartRate !&#x3D;&#x3D; undefined) {
+                                            heartRate.bpm.max &#x3D; heartRate.bpm.max &lt; sameHeartRate[0].bpm.max ? sameHeartRate[0].bpm.max : heartRate.bpm.max;
+                                            heartRate.bpm.min &#x3D; heartRate.bpm.min &gt; sameHeartRate[0].bpm.min ? sameHeartRate[0].bpm.min : heartRate.bpm.min;
+
+                                            if (heartRate.bpm.avg &#x3D;&#x3D;&#x3D; -1) {
+                                                heartRate.bpm.avg &#x3D; sameHeartRate[0].bpm.avg;
+                                            }
+
+                                            if (heartRate.bpm.avg !&#x3D;&#x3D; -1 &amp;&amp; sameHeartRate[0].bpm.avg !&#x3D;&#x3D; -1) {
+                                                if ((heartRate.bpm.avg &#x3D;&#x3D;&#x3D; 0 &amp;&amp; sameHeartRate[0].bpm.avg &#x3D;&#x3D;&#x3D; 0)
+                                                    || (heartRate.bpm.avg &#x3D;&#x3D;&#x3D; 0 || sameHeartRate[0].bpm.avg &#x3D;&#x3D;&#x3D; 0)
+                                                ) {
+                                                    heartRate.bpm.avg +&#x3D; sameHeartRate[0].bpm.avg;
+                                                } else {
+                                                    heartRate.bpm.avg &#x3D; Math.floor((heartRate.bpm.avg + sameHeartRate[0].bpm.avg) / 2);
+                                                }
+                                            }
+
+                                            await this.heartRateService.update({ id: sameHeartRate[0].id }, { bpm: heartRate.bpm });
+                                        } else {
+                                            await this.heartRateService.add(heartRate);
+                                        }
+                                    } else {
+                                        await this.heartRateService.add(heartRate);
+                                    }
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, &#x27;add past HeartRate error&#x27;, { value: e });
+                                }
+                                this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.PROCESSING, this.pastActivityBuffer.length * 2, ++processedCount));
+                            }));
+                            this.pastHeartRateBuffer &#x3D; [];
+                            isFirstHourlyProcessed &#x3D; false;
+                            await Promise.all(this.pastActivityBuffer.map( async (activity: Activity) &#x3D;&gt; {
+                                try {
+                                    if (!isFirstHourlyProcessed || activity.measurementInfo.type &#x3D;&#x3D;&#x3D; DateTypeEnum.DAILY) {
+                                        if (activity.measurementInfo.type &#x3D;&#x3D;&#x3D; DateTypeEnum.HOURLY) {
+                                            isFirstHourlyProcessed &#x3D; !isFirstHourlyProcessed;
+                                        }
+                                        const sameActivity &#x3D; await this.activityService.list([
+                                            { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: activity.measurementInfo.date },
+                                            { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: activity.measurementInfo.type },
+                                            { limit: 1 }
+                                        ]);
+                                        if (sameActivity !&#x3D;&#x3D; undefined) {
+                                            if (activity.measurementInfo.type &#x3D;&#x3D;&#x3D; DateTypeEnum.HOURLY) {
+                                                activity.steps +&#x3D; sameActivity[0].steps;
+                                            } else {
+                                                activity.steps &#x3D; activity.steps &gt; sameActivity[0].steps ? activity.steps : sameActivity[0].steps;
+                                            }
+
+                                            activity.intensity.max &#x3D; activity.intensity.max &lt; sameActivity[0].intensity.max
+                                                ? sameActivity[0].intensity.max : activity.intensity.max;
+                                            activity.intensity.min &#x3D; activity.intensity.min &gt; sameActivity[0].intensity.min
+                                                ? sameActivity[0].intensity.min : activity.intensity.min;
+
+                                            if (activity.intensity.avg &#x3D;&#x3D;&#x3D; -1) {
+                                                activity.intensity.avg &#x3D; sameActivity[0].intensity.avg;
+                                            }
+
+                                            if (activity.intensity.avg !&#x3D;&#x3D; -1 &amp;&amp; sameActivity[0].intensity.avg !&#x3D;&#x3D; -1) {
+                                                if ((activity.intensity.avg &#x3D;&#x3D;&#x3D; 0 &amp;&amp; sameActivity[0].intensity.avg &#x3D;&#x3D;&#x3D; 0)
+                                                    || (activity.intensity.avg &#x3D;&#x3D;&#x3D; 0 || sameActivity[0].intensity.avg &#x3D;&#x3D;&#x3D; 0)
+                                                ) {
+                                                    activity.intensity.avg +&#x3D; sameActivity[0].intensity.avg;
+                                                } else {
+                                                    activity.intensity.avg &#x3D; Math.floor((activity.intensity.avg + sameActivity[0].intensity.avg) / 2);
+                                                }
+                                            }
+
+                                            await this.activityService.update(
+                                                { id: sameActivity[0].id },
+                                                {
+                                                    steps: activity.steps,
+                                                    intensity: activity.intensity
+                                                }
+                                            );
+                                        } else {
+                                            await this.activityService.add(activity);
+                                        }
+                                    } else {
+                                        await this.activityService.add(activity);
+                                    }
+                                } catch (e: unknown) {
+                                    this.logHelper.logError(this.processFetchData.name, &#x27;add past Activity error&#x27;, { value: e });
+                                }
+                                this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.PROCESSING, this.pastActivityBuffer.length * 2, ++processedCount));
+                            }));
+
+                            this.pastActivityBuffer &#x3D; [];
+                            try {
+                                if (this.activitySyncedDate !&#x3D;&#x3D; undefined &amp;&amp; this.activityInfo !&#x3D;&#x3D; undefined) {
+                                    this.activitySyncedDate.setMinutes(this.activitySyncedDate.getMinutes() + 1);
+                                    await this.activityInfoService.update({ id: this.activityInfo.id }, { lastSynced: FireTimestamp.fromDate(this.activitySyncedDate) });
+                                }
+                            } catch (e: unknown) {
+                                this.logHelper.logError(this.processPastActivityData.name, &#x27;update last sync date error&#x27;);
+                            }
+                        }
+
+                        if (this.activitySyncedDate !&#x3D;&#x3D; undefined &amp;&amp; new Date().getTime() - this.activitySyncedDate.getTime() &lt;&#x3D; 60 * 1000) {
+                            try {
+                                await this.write(data.address, data.service, data.characteristic, Uint8Array.of(0x03));
+                                this.logHelper.logDefault(this.processFetchData.name, &#x27;Activity fetching end code sent&#x27;);
+                            } catch (e: unknown) {
+                                this.logHelper.logError(this.processFetchData.name, &#x27;write fetch end error&#x27;, { value: e });
+                            }
+                        } else {
+                            try {
+                                await this.fetchActivityData();
+                            } catch (e: unknown) {
+                                this.logHelper.logError(this.fetchActivityData.name, e);
+                            }
+                        }
+                        break;
+                    case &#x27;100301&#x27;:
+                        this.logHelper.logDefault(this.processFetchData.name, &#x27;Fetching successfully finished&#x27;);
+                        this.unsubscribe(data.address, data.service, data.characteristic).catch((e: unknown) &#x3D;&gt; {
+                            this.logHelper.logError(this.processFetchData.name, e);
+                        });
+                        this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.FINISHED));
+                        break;
+                    default:
+                        this.activitySyncStatusSubject.next(new TaskProgressInfo(ProgressStatusEnum.FAILED));
+                        this.unsubscribe(data.address, data.service, data.characteristic).catch((e: unknown) &#x3D;&gt; {
+                            this.logHelper.logError(this.processFetchData.name, e);
+                        });
+                        this.logHelper.logError(this.processFetchData.name, &#x27;unexpected fetch response code&#x27;, { value: response });
+                }
+            }
+        }
+    }
+
+    private async processRealTimeActivity(data: OperationResult): Promise&lt;void&gt; {
+        if (data.value) {
+            const bytes &#x3D; this.ble.encodedStringToBytes(data.value);
+            /* Realtime steps 5 bytes or 13 bytes if not used with Mi Fit it only shows steps count &#x3D;&gt; 5 bytes
+                0. header?
+                1-4. steps
+                5-8. calories (kcal)
+                9-12. distance (meters)
+            */
+            const activity &#x3D; new Activity();
+            const current &#x3D; new Date();
+            const date &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate(), 0, 0, 0, 0));
+            activity.measurementInfo &#x3D; new MeasurementInfo(data.address, FireTimestamp.fromDate(date), DateTypeEnum.DAILY);
+            activity.steps &#x3D; this.bytesToInt(bytes.subarray(1, 5));
+            activity.distance &#x3D; this.bytesToInt(bytes.subarray(5, 9));
+            activity.calories &#x3D; this.bytesToInt(bytes.subarray(9));
+            const sameActivity &#x3D; await this.activityService.list([
+                { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: activity.measurementInfo.date },
+                { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: activity.measurementInfo.type },
+                { limit: 1 }
+            ]);
+            if (sameActivity !&#x3D;&#x3D; undefined) {
+                await this.activityService.update(
+                    { id: sameActivity[0].id },
+                    {
+                        steps: activity.steps,
+                        distance: activity.distance,
+                        calories: activity.calories
+                    }
+                );
+            } else {
+                await this.activityService.add(activity);
+            }
+            this.activitySubject.next(activity);
+            this.logHelper.logDefault(this.processRealTimeActivity.name, &#x27;realtime activity&#x27;, { value: activity });
+        }
+    }
+
+    public async processBatteryInfo(data: OperationResult): Promise&lt;void&gt; {
+        if (data.value) {
+            const bytes &#x3D; this.ble.encodedStringToBytes(data.value);
+            if (bytes.length &lt; 3) {
+                // get full battery info
+                try {
+                    await this.readBatteryInfo();
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.processBatteryInfo.name, this.readBatteryInfo.name, { value: e });
+                }
+            } else {
+                // process full info after reading from device
+                const batteryInfo &#x3D; new BatteryInfo();
+                const unknown_value &#x3D; bytes.at(0); // first byte ???
+                batteryInfo.id &#x3D; data.address;
+                batteryInfo.deviceRef &#x3D; this.connectionInfo.device?.macAddress ?? &#x27;unknown&#x27;;
+                batteryInfo.batteryLevel &#x3D; bytes.at(1) as number;
+                batteryInfo.isCharging &#x3D; bytes.at(2) &#x3D;&#x3D;&#x3D; 1; // status &#x3D;&gt; 1 &#x3D;&#x3D;&#x3D; charging
+                batteryInfo.prevChargeDate &#x3D; this.dateTimeFromBytes(bytes, 3); // 7 bytes
+                batteryInfo.prevNumOfCharges &#x3D; bytes.at(10);
+                batteryInfo.lastChargeDate &#x3D; this.dateTimeFromBytes(bytes, 11); // 7 bytes
+                batteryInfo.lastNumOfCharges &#x3D; bytes.at(18);
+                batteryInfo.lastChargeLevel &#x3D; bytes.at(19);
+                this.logHelper.logDefault(this.processBatteryInfo.name, &#x27;batteryInfo&#x27;, { value: batteryInfo });
+                this.logHelper.logDefault(this.processBatteryInfo.name, &#x27;batteryInfo unknown value&#x27;, { value: unknown_value });
+                this.batteryInfoSubject.next(batteryInfo);
+                try {
+                    await this.batteryInfoService.update({ id: batteryInfo.id }, batteryInfo);
+                } catch (e: unknown) {
+                    this.logHelper.logError(this.processBatteryInfo.name, &#x27;update BatteryInfo error&#x27;, { value: e });
+                }
+            }
+        }
+    }
+
+    private async processHeartRate(data: OperationResult): Promise&lt;void&gt; {
+        if (data.value !&#x3D;&#x3D; undefined) {
+            // pushes data per second 1 heart rate measurement &#x3D;&#x3D;&#x3D; 5 bpm data
+            // 0. header?
+            // 1. bpm
+            const bpm &#x3D; this.ble.encodedStringToBytes(data.value)[1];
+            this.logHelper.logDefault(this.processHeartRate.name, &#x27;bpm&#x27;, { value: bpm });
+            this.heartRateSubject.next(bpm);
+        }
+    }
+
+    private processDataObserver(processFunction: (value: OperationResult) &#x3D;&gt; void): Partial&lt;Observer&lt;OperationResult&gt;&gt; {
+        return {
+            next: processFunction,
+            error: (e: unknown): void &#x3D;&gt; {
+                if (e instanceof Error &amp;&amp; e.message !&#x3D;&#x3D; &#x27;Device is disconnected&#x27;) {
+                    this.logHelper.logDefault(this.processDataObserver.name, e);
+                }
+            }
+        };
+    }
+
+    private subscribeToRealTimeActivity(): void {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;mi band&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;realtime activity&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Mi Band service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Realtime Activity characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) &#x3D;&gt; this.processRealTimeActivity(value)));
+    }
+
+    private subscribeToActivityData(): void {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;mi band&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;activity data&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Mi Band service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Activity Data characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) &#x3D;&gt; this.processPastActivityData(value)));
+    }
+
+    private subscribeToBatteryInfo(): void {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;mi band&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;battery info&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Mi Band service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Battery Info characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) &#x3D;&gt; this.processBatteryInfo(value)));
+    }
+
+    private subscribeToHeartRate(): void {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;heart rate&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;heart rate measurement&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Heart Rate service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Heart Rate Measurement characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        return this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) &#x3D;&gt; this.processHeartRate(value)));
+    }
+
+    private async readRealTimeActivity(): Promise&lt;void&gt; {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;mi band&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;realtime activity&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Mi Band service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Realtime Activity characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        try {
+            await this.processRealTimeActivity(await this.read(this.connectionInfo.device, service, characteristic));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.readRealTimeActivity.name, &#x27;read real time activity error&#x27;, { value: e });
+        }
+    }
+
+    private async readBatteryInfo(): Promise&lt;void&gt; {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;mi band&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;battery info&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Mi Band service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Battery Info characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        try {
+            await this.processBatteryInfo(await this.read(this.connectionInfo.device, service, characteristic));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.readRealTimeActivity.name, &#x27;read real time activity error&#x27;, { value: e });
+        }
+    }
+
+    public async initDeviceData(): Promise&lt;void&gt; {
+        try {
+            this.subscribeToRealTimeActivity();
+            this.subscribeToBatteryInfo();
+            this.subscribeToHeartRate();
+            await this.readRealTimeActivity();
+            await this.readBatteryInfo();
+            this.isSubscribedSubject.next(true);
+        } catch (e: unknown) {
+            throw e;
+        }
+    }
+
+    public async getSoftwareVersion(): Promise&lt;string&gt; {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;device information&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;software&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Device Information service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Software Revision characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        let version &#x3D; &#x27;unknown&#x27;;
+        try {
+            const data &#x3D; await this.read(this.connectionInfo.device, service, characteristic);
+            version &#x3D; String.fromCharCode(...this.ble.encodedStringToBytes(data.value));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.getSoftwareVersion.name, e);
+        }
+        return version;
+    }
+
+    public async getSerialNumber(): Promise&lt;string&gt; {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;device information&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;serial number&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Device Information service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Serial Number characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        let version &#x3D; &#x27;unknown&#x27;;
+        try {
+            const data &#x3D; await this.read(this.connectionInfo.device, service, characteristic);
+            version &#x3D; String.fromCharCode(...this.ble.encodedStringToBytes(data.value));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.getSerialNumber.name, e);
+        }
+        return version;
+    }
+
+    public async getHardwareVersion(): Promise&lt;string&gt; {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;device information&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;hardware revision&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Device Information service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Hardware Revision characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        let version &#x3D; &#x27;unknown&#x27;;
+        try {
+            const data &#x3D; await this.read(this.connectionInfo.device, service, characteristic);
+            version &#x3D; String.fromCharCode(...this.ble.encodedStringToBytes(data.value));
+        } catch (e: unknown) {
+            this.logHelper.logError(this.getSerialNumber.name, e);
+        }
+        return version;
+    }
+
+    public async fetchActivityData(): Promise&lt;void&gt; {
+        const service &#x3D; this.miBand3.getServiceByName(&#x27;mi band&#x27;);
+        const characteristic &#x3D; service?.getCharacteristicByName(&#x27;fetch&#x27;);
+        if (service &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Mi Band service&#x27;);
+        } else if (characteristic &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Failed to get Fetch characteristic&#x27;);
+        } else if (this.connectionInfo.device &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;No connected device&#x27;);
+        }
+        this.subscribe(this.connectionInfo.device, service, characteristic, this.processDataObserver((value: OperationResult) &#x3D;&gt; this.processFetchData(value)));
+        this.subscribeToActivityData();
+        try {
+            if (this.activityInfo !&#x3D;&#x3D; undefined) {
+                this.logHelper.logDefault(this.fetchActivityData.name, &#x27;Fetching activity date from device...&#x27;);
+                if (this.activityInfo.lastSynced &#x3D;&#x3D;&#x3D; undefined) {
+                }
+                const timeBytes &#x3D; this.dateTimeToBytes(this.activityInfo.lastSynced, { timezone: true });
+                const initBytes &#x3D; Uint8Array.of(0x01, 0x01);
+                const writeData &#x3D; new Uint8Array(timeBytes.length + initBytes.length);
+                writeData.set(initBytes);
+                writeData.set(timeBytes, initBytes.length);
+                this.logHelper.logDefault(this.fetchActivityData.name, &#x27;activity fetch write data&#x27;, { value: writeData });
+                await this.write(this.connectionInfo.device, service, characteristic, writeData);
+                this.logHelper.logDefault(this.fetchActivityData.name, &#x27;Past activity fetching start data sent&#x27;);
+            }
+        } catch (e: unknown) {
+            this.logHelper.logError(this.fetchActivityData.name, e);
+        }
+    }
+
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'BleDataService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

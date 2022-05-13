@@ -1,0 +1,988 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#AppSettings" title="src/settings/app.settings.ts" ><b>AppSettings</b>&nbsp;&nbsp;&nbsp;(src/.../app.settings.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#compareDates" title="src/app/shared/functions/comparison.functions.ts" ><b>compareDates</b>&nbsp;&nbsp;&nbsp;(src/.../comparison.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#compareNumbers" title="src/app/shared/functions/comparison.functions.ts" ><b>compareNumbers</b>&nbsp;&nbsp;&nbsp;(src/.../comparison.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#compareNumericStrings" title="src/app/shared/functions/comparison.functions.ts" ><b>compareNumericStrings</b>&nbsp;&nbsp;&nbsp;(src/.../comparison.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#compareStrings" title="src/app/shared/functions/comparison.functions.ts" ><b>compareStrings</b>&nbsp;&nbsp;&nbsp;(src/.../comparison.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#compareTimestamps" title="src/app/shared/functions/comparison.functions.ts" ><b>compareTimestamps</b>&nbsp;&nbsp;&nbsp;(src/.../comparison.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#config" title="capacitor.config.ts" ><b>config</b>&nbsp;&nbsp;&nbsp;(capacitor.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#context" title="src/test.ts" ><b>context</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#copyProperty" title="src/app/shared/functions/parser.functions.ts" ><b>copyProperty</b>&nbsp;&nbsp;&nbsp;(src/.../parser.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createTranslateLoader" title="src/app/shared/functions/translate.function.ts" ><b>createTranslateLoader</b>&nbsp;&nbsp;&nbsp;(src/.../translate.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DAYS" title="src/app/shared/constants/date.constants.ts" ><b>DAYS</b>&nbsp;&nbsp;&nbsp;(src/.../date.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.prod.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#equals" title="src/app/shared/functions/comparison.functions.ts" ><b>equals</b>&nbsp;&nbsp;&nbsp;(src/.../comparison.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#generateArrayOfNumbers" title="src/app/shared/functions/generator.funtions.ts" ><b>generateArrayOfNumbers</b>&nbsp;&nbsp;&nbsp;(src/.../generator.funtions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#generateStringArrayOfNumbers" title="src/app/shared/functions/generator.funtions.ts" ><b>generateStringArrayOfNumbers</b>&nbsp;&nbsp;&nbsp;(src/.../generator.funtions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getDaysInMonth" title="src/app/shared/functions/date.functions.ts" ><b>getDaysInMonth</b>&nbsp;&nbsp;&nbsp;(src/.../date.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getInterval" title="src/app/shared/functions/date.functions.ts" ><b>getInterval</b>&nbsp;&nbsp;&nbsp;(src/.../date.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#instantiate" title="src/app/shared/functions/parser.functions.ts" ><b>instantiate</b>&nbsp;&nbsp;&nbsp;(src/.../parser.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isArrayPropertyEqual" title="src/app/shared/functions/parser.functions.ts" ><b>isArrayPropertyEqual</b>&nbsp;&nbsp;&nbsp;(src/.../parser.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isLeapYear" title="src/app/shared/functions/date.functions.ts" ><b>isLeapYear</b>&nbsp;&nbsp;&nbsp;(src/.../date.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MONTHS" title="src/app/shared/constants/date.constants.ts" ><b>MONTHS</b>&nbsp;&nbsp;&nbsp;(src/.../date.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#parseJSON" title="src/app/shared/functions/parser.functions.ts" ><b>parseJSON</b>&nbsp;&nbsp;&nbsp;(src/.../parser.functions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#require" title="src/test.ts" ><b>require</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#timeDifferenceInSeconds" title="src/app/shared/functions/date.functions.ts" ><b>timeDifferenceInSeconds</b>&nbsp;&nbsp;&nbsp;(src/.../date.functions.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/settings/app.settings.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AppSettings"></a>
+                    <span class="name">
+                        <span ><b>AppSettings</b></span>
+                        <a href="#AppSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &#x27;Mi Band 3 Companion&#x27;,
+    packageName: &#x27;hu.noelhorvath.MiBand3Companion&#x27;,
+    codeName: &#x27;MiBand3Companion&#x27;,
+    version: &#x27;0.9.9&#x27;,
+    enableFirebaseDataCollection: false,
+    //appDynamicLinksUrl: &#x27;https://www.mibandcompanion.page.link&#x27;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/functions/comparison.functions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareDates"></a>
+                    <span class="name">
+                        <span ><b>compareDates</b></span>
+                        <a href="#compareDates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(a: Date | number | string, b: Date | number | string): number &#x3D;&gt; (a instanceof Date &amp;&amp; b instanceof Date)
+    ? compareNumbers(a.getTime(), b.getTime()) : compareNumbers(new Date(a).getTime(), new Date(b).getTime())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareNumbers"></a>
+                    <span class="name">
+                        <span ><b>compareNumbers</b></span>
+                        <a href="#compareNumbers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(a: number, b: number): number &#x3D;&gt; a - b</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareNumericStrings"></a>
+                    <span class="name">
+                        <span ><b>compareNumericStrings</b></span>
+                        <a href="#compareNumericStrings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(a: string, b: string): number &#x3D;&gt; a.localeCompare(b, undefined, { numeric: true })</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareStrings"></a>
+                    <span class="name">
+                        <span ><b>compareStrings</b></span>
+                        <a href="#compareStrings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(a: string, b: string): number &#x3D;&gt; a.localeCompare(b)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareTimestamps"></a>
+                    <span class="name">
+                        <span ><b>compareTimestamps</b></span>
+                        <a href="#compareTimestamps"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(a: IFireTimestamp, b: IFireTimestamp): number &#x3D;&gt; {
+    const res &#x3D; compareNumbers(a.seconds, b.seconds);
+    return res &#x3D;&#x3D;&#x3D; 0 ? compareNumbers(a.nanoseconds, b.nanoseconds) : res;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="equals"></a>
+                    <span class="name">
+                        <span ><b>equals</b></span>
+                        <a href="#equals"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;T&gt;(a: T, b: T): boolean &#x3D;&gt; {
+    if (a &#x3D;&#x3D;&#x3D; b) {
+        return a &#x3D;&#x3D;&#x3D; b;
+    } else if (a &#x3D;&#x3D;&#x3D; undefined || b &#x3D;&#x3D;&#x3D; undefined) {
+        return a &#x3D;&#x3D;&#x3D; b;
+    } else if (a instanceof Date &amp;&amp; b instanceof Date) {
+        return compareDates(a, b) &#x3D;&#x3D;&#x3D; 0;
+    } else if (&#x27;seconds&#x27; in a &amp;&amp; &#x27;nanoseconds&#x27; in a &amp;&amp; &#x27;seconds&#x27; in b &amp;&amp; &#x27;nanoseconds&#x27; in b) {
+        return compareTimestamps(a as unknown as IFireTimestamp, b as unknown as IFireTimestamp) &#x3D;&#x3D;&#x3D; 0;
+    } else {
+        return a &#x3D;&#x3D;&#x3D; b;
+    }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>capacitor.config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="config"></a>
+                    <span class="name">
+                        <span ><b>config</b></span>
+                        <a href="#config"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CapacitorConfig</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    appId: &#x27;hu.noelhorvath.miband3companion&#x27;,
+    appName: &#x27;Mi Band 3 Companion&#x27;,
+    webDir: &#x27;www&#x27;,
+    bundledWebRuntime: false,
+    loggingBehavior: environment.production ? &#x27;production&#x27; : &#x27;debug&#x27;,
+    /*
+    server: {
+        hostname: &#x27;miband3companion.web.app&#x27;,
+        androidScheme: &#x27;https&#x27;
+    },
+    plugins: {
+        SplashScreen: {
+            launchShowDuration: 3000,
+            launchAutoHide: true,
+            backgroundColor: &#x27;#ff9500&#x27;,
+            //androidSplashResourceName: &#x27;splash&#x27;,
+            androidScaleType: &#x27;FIT_CENTER&#x27;,
+            showSpinner: true,
+            androidSpinnerStyle: &#x27;small&#x27;,
+            iosSpinnerStyle: &#x27;small&#x27;,
+            spinnerColor: &#x27;#ffffff&#x27;,
+            splashFullScreen: true,
+            splashImmersive: true,
+            layoutName: &#x27;launch_screen&#x27;,
+            useDialog: false,
+        },
+    },
+     */
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/test.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="context"></a>
+                    <span class="name">
+                        <span ><b>context</b></span>
+                        <a href="#context"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>require.context(&#x27;./&#x27;, true, /\.spec\.ts$/)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="require"></a>
+                    <span class="name">
+                        <span ><b>require</b></span>
+                        <a href="#require"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/functions/parser.functions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyProperty"></a>
+                    <span class="name">
+                        <span ><b>copyProperty</b></span>
+                        <a href="#copyProperty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;IMainType extends NamedProperty&lt;PropertyName, (IPropertyType | Array&lt;IPropertyType&gt;)&gt; &amp; Copyable&lt;IMainType&gt;,
+        MainType extends IMainType,
+        PropertyName extends string,
+        IPropertyType extends Copyable&lt;IPropertyType&gt;,
+        PropertyType extends IPropertyType&gt;
+    (_this: MainType, other: Partial&lt;IMainType&gt; | IMainType | MainType, propName: PropertyName, propFactory: Constructor&lt;PropertyType&gt;): void &#x3D;&gt; {
+        if (other[propName] instanceof Array) {
+            (_this[propName] as IPropertyType[] | undefined) &#x3D; (other[propName] as Array&lt;IPropertyType&gt;)?.map((item: IPropertyType) &#x3D;&gt; instantiate&lt;IPropertyType, PropertyType&gt;(item, propFactory));
+        } else if (_this[propName] &amp;&amp; other[propName] &amp;&amp; typeof _this.copy &#x3D;&#x3D;&#x3D; &#x27;function&#x27; &amp;&amp; typeof (_this[propName] as IPropertyType).copy &#x3D;&#x3D;&#x3D; &#x27;function&#x27;) {
+            (_this[propName] as (IPropertyType &amp; { copy: (other: IPropertyType) &#x3D;&gt; void })).copy(other[propName] as IPropertyType);
+        } else {
+            if (other !&#x3D;&#x3D; undefined &amp;&amp; typeof other[propName] &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+                (_this[propName] as IPropertyType) &#x3D; instantiate(other[propName] as IPropertyType, propFactory);
+            } else {
+                (_this[propName] as unknown) &#x3D; other[propName];
+            }
+        }
+    }</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="instantiate"></a>
+                    <span class="name">
+                        <span ><b>instantiate</b></span>
+                        <a href="#instantiate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;T extends Copyable&lt;T&gt;, K extends T&gt;(obj: T, factory: Constructor&lt;K&gt;): K &#x3D;&gt; {
+    const instance &#x3D; new factory();
+    if (typeof instance.copy &#x3D;&#x3D;&#x3D; &#x27;function&#x27;) { // copy object if the class has copy method
+        instance.copy(obj);
+        return instance;
+    } else {
+        return new factory(obj); // call copy constructor
+    }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isArrayPropertyEqual"></a>
+                    <span class="name">
+                        <span ><b>isArrayPropertyEqual</b></span>
+                        <a href="#isArrayPropertyEqual"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;IMainType extends NamedProperty&lt;PropertyName, Array&lt;IPropertyType&gt;&gt; &amp; Copyable&lt;IMainType&gt;,
+        MainType extends IMainType,
+        PropertyName extends string,
+        IPropertyType,
+        PropertyType extends IPropertyType &amp; EqualityChecker&lt;IPropertyType&gt;&gt;(
+        _this: MainType,
+        other: IMainType,
+        mainFactory: Constructor&lt;MainType&gt;,
+        propName: PropertyName,
+        sortFunction: (propName: string, order: OrderByDirection) &#x3D;&gt; SortFunction&lt;IPropertyType&gt;,
+        sortByPropName: string,
+        sortByOrder: OrderByDirection): boolean &#x3D;&gt; {
+        let isEqual &#x3D; false;
+        if (_this[propName] &#x3D;&#x3D;&#x3D; other[propName]) {
+            isEqual &#x3D; true;
+        } else if ((_this[propName] as Array&lt;IPropertyType&gt; | undefined)?.length !&#x3D;&#x3D; (other[propName] as Array&lt;IPropertyType&gt; | undefined)?.length) {
+            isEqual &#x3D; false;
+        } else {
+            const thisInstance &#x3D; &#x27;isEqual&#x27; in _this ? _this : instantiate(_this, mainFactory);
+            const thisPropArray &#x3D; (thisInstance[propName] as PropertyType[] | undefined)?.sort(sortFunction(sortByPropName, sortByOrder));
+            const otherInstance &#x3D; &#x27;isEqual&#x27; in other ? other : instantiate(other, mainFactory);
+            const otherPropArray &#x3D; (otherInstance[propName] as PropertyType[] | undefined)?.sort(sortFunction(sortByPropName, sortByOrder));
+            if (thisPropArray !&#x3D;&#x3D; undefined &amp;&amp; otherPropArray !&#x3D;&#x3D; undefined) {
+                for (let i &#x3D; 0; i &lt; thisPropArray.length; i++) {
+                    if (!(thisPropArray[i] as PropertyType).isEqual(otherPropArray[i] as PropertyType)) {
+                        break;
+                    }
+
+                    if (i &#x3D;&#x3D;&#x3D; thisPropArray.length - 1) {
+                        isEqual &#x3D; true;
+                    }
+                }
+            }
+        }
+        return isEqual;
+    }</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="parseJSON"></a>
+                    <span class="name">
+                        <span ><b>parseJSON</b></span>
+                        <a href="#parseJSON"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;T extends Copyable&lt;T&gt;, K extends T&gt;(data: Array&lt;T&gt; | T, factory: Constructor&lt;K&gt;): K[] | K &#x3D;&gt;
+    data instanceof Array ? data.map((s: T) &#x3D;&gt; instantiate(s, factory) ?? new factory()) : instantiate(data, factory) ?? new factory()</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/functions/translate.function.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createTranslateLoader"></a>
+                    <span class="name">
+                        <span ><b>createTranslateLoader</b></span>
+                        <a href="#createTranslateLoader"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(http: HttpClient): TranslateHttpLoader &#x3D;&gt; new TranslateHttpLoader(http, &#x27;./assets/i18n/&#x27;, &#x27;.json&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/constants/date.constants.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DAYS"></a>
+                    <span class="name">
+                        <span ><b>DAYS</b></span>
+                        <a href="#DAYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    Day.MONDAY,
+    Day.TUESDAY,
+    Day.WEDNESDAY,
+    Day.THURSDAY,
+    Day.FRIDAY,
+    Day.SATURDAY,
+    Day.SUNDAY,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MONTHS"></a>
+                    <span class="name">
+                        <span ><b>MONTHS</b></span>
+                        <a href="#MONTHS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    Month.JANUARY,
+    Month.FEBRUARY,
+    Month.MARCH,
+    Month.APRIL,
+    Month.MAY,
+    Month.JUNE,
+    Month.JULY,
+    Month.AUGUST,
+    Month.SEPTEMBER,
+    Month.OCTOBER,
+    Month.NOVEMBER,
+    Month.DECEMBER
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.prod.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    production: true,
+    firebaseAppName: &#x27;MiBand3Companion&#x27;,
+    firebaseConfig: {
+        apiKey: &#x27;AIzaSyCMNBJl6Aog0y4hJMq5xe6WQZs00ndfegw&#x27;,
+        authDomain: &#x27;miband3companion.firebaseapp.com&#x27;,
+        databaseURL: &#x27;https://miband3companion-default-rtdb.europe-west1.firebasedatabase.app&#x27;,
+        projectId: &#x27;miband3companion&#x27;,
+        storageBucket: &#x27;miband3companion.appspot.com&#x27;,
+        messagingSenderId: &#x27;1007890732398&#x27;,
+        appId: &#x27;1:1007890732398:web:62ae2dcfb661eeefd05d7f&#x27;,
+        measurementId: &#x27;G-7B4QDE680H&#x27;
+    }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    production: false,
+    firebaseAppName: &#x27;MiBand3Companion_debug&#x27;,
+    firebaseConfig: {
+        apiKey: &#x27;AIzaSyCMNBJl6Aog0y4hJMq5xe6WQZs00ndfegw&#x27;,
+        authDomain: &#x27;miband3companion.firebaseapp.com&#x27;,
+        databaseURL: &#x27;https://miband3companion-default-rtdb.europe-west1.firebasedatabase.app&#x27;,
+        projectId: &#x27;miband3companion&#x27;,
+        storageBucket: &#x27;miband3companion.appspot.com&#x27;,
+        messagingSenderId: &#x27;1007890732398&#x27;,
+        appId: &#x27;1:1007890732398:web:62ae2dcfb661eeefd05d7f&#x27;,
+        measurementId: &#x27;G-7B4QDE680H&#x27;
+    }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/functions/generator.funtions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateArrayOfNumbers"></a>
+                    <span class="name">
+                        <span ><b>generateArrayOfNumbers</b></span>
+                        <a href="#generateArrayOfNumbers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(start: number, end: number): number[] &#x3D;&gt; {
+    const array: number[] &#x3D; [];
+    for (let i &#x3D; start; i &lt; end; i++) {
+        array.push(i);
+    }
+    return array;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateStringArrayOfNumbers"></a>
+                    <span class="name">
+                        <span ><b>generateStringArrayOfNumbers</b></span>
+                        <a href="#generateStringArrayOfNumbers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(start: number, end: number): string[] &#x3D;&gt; {
+    const array: string[] &#x3D; [];
+    for (let i &#x3D; start; i &lt; end; i++) {
+        array.push(i.toString(10));
+    }
+    return array;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/functions/date.functions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDaysInMonth"></a>
+                    <span class="name">
+                        <span ><b>getDaysInMonth</b></span>
+                        <a href="#getDaysInMonth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(date: Date | IFireTimestamp): number &#x3D;&gt; {
+    let dateObj: Date;
+    if (date instanceof Date) {
+        dateObj &#x3D; date;
+    } else {
+        dateObj &#x3D; date instanceof FireTimestamp ? date.toDate() : instantiate(date, FireTimestamp).toDate();
+    }
+    return new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0).getDate();
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getInterval"></a>
+                    <span class="name">
+                        <span ><b>getInterval</b></span>
+                        <a href="#getInterval"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(intervalType: IntervalType): Interval &#x3D;&gt; {
+    const current &#x3D; new Date();
+    let startDate: Date &#x3D; new Date();
+    let endDate: Date &#x3D; new Date();
+    switch (intervalType) {
+        case &#x27;today&#x27;:
+            const tzOffset &#x3D; new Date().getTimezoneOffset() / 60;
+            startDate &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate(), tzOffset, 0, 0, 0));
+            endDate &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate(), 23 + tzOffset, 0, 0, 0));
+            return new Interval(FireTimestamp.fromDate(startDate), FireTimestamp.fromDate(endDate));
+        case &#x27;this_week&#x27;:
+            const currentDay &#x3D; current.getDay() &#x3D;&#x3D;&#x3D; 0 ? 6 : current.getDay() - 1;
+            startDate &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate() - currentDay, 0, 0, 0, 0));
+            endDate &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate() + (6 - currentDay), 23, 0, 0, 0));
+            return new Interval(FireTimestamp.fromDate(startDate), FireTimestamp.fromDate(endDate));
+        case &#x27;this_month&#x27;:
+            const daysInMonth &#x3D; getDaysInMonth(startDate);
+            startDate &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), 1, 0, 0, 0, 0));
+            endDate &#x3D; new Date(Date.UTC(current.getFullYear(), current.getMonth(), daysInMonth, 23, 0, 0, 0));
+            return new Interval(FireTimestamp.fromDate(startDate), FireTimestamp.fromDate(endDate));
+        case &#x27;this_year&#x27;:
+            startDate &#x3D; new Date(Date.UTC(current.getFullYear(), 0, 1, 0, 0, 0, 0));
+            endDate &#x3D; new Date(Date.UTC(current.getFullYear(), 11, 31, 23, 0, 0, 0));
+            return new Interval(FireTimestamp.fromDate(startDate), FireTimestamp.fromDate(endDate));
+        default:
+            return new Interval(FireTimestamp.fromDate(startDate), FireTimestamp.fromDate(endDate));
+    }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLeapYear"></a>
+                    <span class="name">
+                        <span ><b>isLeapYear</b></span>
+                        <a href="#isLeapYear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(date: Date | IFireTimestamp): boolean &#x3D;&gt; {
+    const dateObj &#x3D; date instanceof FireTimestamp ? date.toDate() : (&#x27;seconds&#x27; in date ? instantiate(date, FireTimestamp).toDate() : date);
+    return new Date(dateObj.getFullYear(), 1, 29).getDate() &#x3D;&#x3D;&#x3D; 29;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timeDifferenceInSeconds"></a>
+                    <span class="name">
+                        <span ><b>timeDifferenceInSeconds</b></span>
+                        <a href="#timeDifferenceInSeconds"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(a: IFireTimestamp, b: IFireTimestamp): number &#x3D;&gt;
+    (a instanceof FireTimestamp ? a : instantiate(a, FireTimestamp)).seconds
+    - (b instanceof FireTimestamp ? b : instantiate(b, FireTimestamp)).seconds</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

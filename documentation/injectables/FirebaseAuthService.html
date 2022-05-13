@@ -1,0 +1,1336 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >FirebaseAuthService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/firebase/auth/firebase-auth.service.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#authSecurity" >authSecurity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authUserSubject" >authUserSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#firebaseConnection" >firebaseConnection</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logHelper" >logHelper</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#getAuthErrorMessage" >getAuthErrorMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthUser" >getAuthUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAuthUserObservable" >getAuthUserObservable</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#register" >register</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendEmailVerification" >sendEmailVerification</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendPasswordResetEmail" >sendPasswordResetEmail</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#signIn" >signIn</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#signOut" >signOut</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateUserEmail" >updateUserEmail</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(userService: <a href="../injectables/FirestoreUserService.html" target="_self">FirestoreUserService</a>, languageService: <a href="../injectables/LanguageService.html" target="_self">LanguageService</a>, auth: Auth, authSecurityService: <a href="../injectables/FirestoreAuthSecurityService.html" target="_self">FirestoreAuthSecurityService</a>, deviceService: <a href="../injectables/DeviceService.html" target="_self">DeviceService</a>, serverInfo: <a href="../injectables/FirebaseServerInfoService.html" target="_self">FirebaseServerInfoService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreUserService.html" target="_self" >FirestoreUserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>languageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LanguageService.html" target="_self" >LanguageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                    <code>Auth</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authSecurityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreAuthSecurityService.html" target="_self" >FirestoreAuthSecurityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>deviceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DeviceService.html" target="_self" >DeviceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>serverInfo</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirebaseServerInfoService.html" target="_self" >FirebaseServerInfoService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthErrorMessage"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Static</span>
+                        <span ><b>getAuthErrorMessage</b></span>
+                        <a href="#getAuthErrorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthErrorMessage(error: AuthError)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:101</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>error</td>
+                                    <td>
+                                            <code>AuthError</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>string | undefined</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthUser"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>getAuthUser</b></span>
+                        <a href="#getAuthUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthUser()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="128"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:128</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/User.html" target="_self" >AuthUser | undefined</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAuthUserObservable"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>getAuthUserObservable</b></span>
+                        <a href="#getAuthUserObservable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAuthUserObservable()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="261"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:261</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/User.html" target="_self" >Observable&lt;AuthUser | undefined&gt;</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="register"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>register</b></span>
+                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>register(user: <a href="../classes/User.html" target="_self">User</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="200"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:200</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../classes/User.html" target="_self" >User</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendEmailVerification"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>sendEmailVerification</b></span>
+                        <a href="#sendEmailVerification"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendEmailVerification(signOutUser?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, actionCodeSettings?: ActionCodeSettings)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="169"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:169</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>signOutUser</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>actionCodeSettings</td>
+                                    <td>
+                                            <code>ActionCodeSettings</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendPasswordResetEmail"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>sendPasswordResetEmail</b></span>
+                        <a href="#sendPasswordResetEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendPasswordResetEmail(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, actionCodeSettings?: ActionCodeSettings)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="235"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:235</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>actionCodeSettings</td>
+                                    <td>
+                                            <code>ActionCodeSettings</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signIn"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>signIn</b></span>
+                        <a href="#signIn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>signIn(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="152"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:152</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/User.html" target="_self" >Promise&lt;AuthUser | undefined&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signOut"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>signOut</b></span>
+                        <a href="#signOut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>signOut()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="148"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:148</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUserEmail"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>updateUserEmail</b></span>
+                        <a href="#updateUserEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateUserEmail(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="132"
+                            class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:132</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authSecurity"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>authSecurity</b></span>
+                        <a href="#authSecurity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/AuthSecurity.html" target="_self" >AuthSecurity</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authUserSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authUserSubject</b></span>
+                        <a href="#authUserSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >BehaviorSubject&lt;AuthUser | undefined&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firebaseConnection"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>firebaseConnection</b></span>
+                        <a href="#firebaseConnection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#NetworkStatus" target="_self" >NetworkStatus</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logHelper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logHelper</b></span>
+                        <a href="#logHelper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/LogHelper.html" target="_self" >LogHelper</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/services/firebase/auth/firebase-auth.service.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, first, Observable } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import { FirestoreUserService } from &#x27;../../firestore/user/firestore-user.service&#x27;;
+import { LogHelper } from &#x27;../../../shared/models/classes/LogHelper&#x27;;
+import { User } from &#x27;../../../shared/models/classes/User&#x27;;
+import {
+    ActionCodeSettings,
+    Auth,
+    AuthError,
+    authState,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    sendEmailVerification,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+    signOut,
+    updateEmail,
+    updateProfile,
+    User as AuthUser,
+    UserCredential
+} from &#x27;@angular/fire/auth&#x27;;
+import { FirebaseErrorMessage } from &#x27;../../../shared/enums/firebase.enum&#x27;;
+import { LogInfo } from &#x27;../../../shared/models/classes/LogInfo&#x27;;
+import { LanguageService } from &#x27;../../language/language.service&#x27;;
+import { AuthSecurity } from &#x27;../../../shared/models/classes/AuthSecurity&#x27;;
+import { FirestoreAuthSecurityService } from &#x27;../../firestore/auth-security/firestore-auth-security.service&#x27;;
+import { DeviceService } from &#x27;../../device/device.service&#x27;;
+import { FirebaseServerInfoService } from &#x27;../server-info/firebase-server-info.service&#x27;;
+import { NetworkStatus } from &#x27;../../../shared/types/custom.types&#x27;;
+
+@Injectable({
+    providedIn: &#x27;root&#x27;
+})
+export class FirebaseAuthService {
+    private readonly logHelper: LogHelper;
+    private authSecurity: AuthSecurity;
+    private firebaseConnection: NetworkStatus;
+    public authUserSubject: BehaviorSubject&lt;AuthUser | undefined&gt;;
+
+    public constructor(
+        private userService: FirestoreUserService,
+        private languageService: LanguageService,
+        private auth: Auth,
+        private authSecurityService: FirestoreAuthSecurityService,
+        private deviceService: DeviceService,
+        private serverInfo: FirebaseServerInfoService
+    ) {
+        this.logHelper &#x3D; new LogHelper(FirebaseAuthService.name);
+        this.authUserSubject &#x3D; new BehaviorSubject&lt;AuthUser | undefined&gt;(this.auth.currentUser !&#x3D;&#x3D; null ? this.auth.currentUser : undefined);
+        onAuthStateChanged(
+            this.auth,
+            async (authUser: AuthUser | null) &#x3D;&gt; {
+                this.authUserSubject.next(this.auth.currentUser !&#x3D;&#x3D; null ? this.auth.currentUser : undefined);
+                this.logHelper.logDefault(&#x27;onAuthStateChanged&#x27;, &#x27;User status&#x27;, { value: !!authUser ? &#x27;logged in&#x27; : &#x27;not logged in&#x27; });
+                if (authUser !&#x3D;&#x3D; null &amp;&amp; authUser.email !&#x3D;&#x3D; null) {
+                    try {
+                        const user &#x3D; await this.userService.get(authUser.uid);
+                        if (user !&#x3D;&#x3D; undefined &amp;&amp; user.id !&#x3D;&#x3D; authUser.email) {
+                            await this.userService.update({ id: authUser.uid }, { email: authUser.email });
+                        }
+                    } catch (e: unknown) {
+                        this.logHelper.logError(&#x27;onAuthStateChanged&#x27;, e);
+                    }
+                }
+            },
+            (error: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;onAuthStateChanged&#x27;, error)
+        );
+        this.languageService.isServiceInitializedSubject.subscribe((isReady: boolean) &#x3D;&gt; {
+            if (isReady.valueOf()) {
+                this.languageService.currentLanguageSubject.subscribe((lang: string) &#x3D;&gt; {
+                    this.auth.languageCode &#x3D; lang;
+                });
+            }
+        });
+        // auth security setup
+        this.authSecurity &#x3D; new AuthSecurity();
+        this.deviceService.getUUID().then((uuid: string) &#x3D;&gt; {
+            this.authSecurityService.listWithValueChanges({ fieldPath: &#x27;uuid&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: uuid })
+                .subscribe({
+                    next: async (authSecurity: AuthSecurity[] | undefined) &#x3D;&gt; {
+                        this.logHelper.logDefault(this.authSecurityService.listWithValueChanges.name, &#x27;authSecurity data changed&#x27;, { value: authSecurity });
+                        if (authSecurity &#x3D;&#x3D;&#x3D; undefined || authSecurity.length &#x3D;&#x3D;&#x3D; 0) {
+                            this.authSecurity.uuid &#x3D; uuid;
+                            this.authSecurityService.add(this.authSecurity)
+                                .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;add AuthSecurity&#x27;, &#x27;new AuthSecurity has been added&#x27;))
+                                .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;add AuthSecurity error&#x27;, e));
+                        } else {
+                            this.authSecurity &#x3D; authSecurity[0];
+                        }
+                    },
+                    error: (error: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;get AuthSecurity error&#x27;, error)
+                });
+        }).catch((e: unknown) &#x3D;&gt; {
+            this.logHelper.logError(&#x27;AuthSecurity setup error&#x27;, e);
+        });
+        this.firebaseConnection &#x3D; &#x27;offline&#x27;;
+        this.serverInfo.connectionStatusSubject.subscribe((status: NetworkStatus) &#x3D;&gt; this.firebaseConnection &#x3D; status);
+    }
+
+    private static getAuthErrorMessage(error: AuthError): string | undefined {
+        if (&#x27;code&#x27; in error) {
+            switch (error.code) {
+                case &#x27;auth/wrong-password&#x27;:
+                    return FirebaseErrorMessage.WRONG_PASSWORD;
+                case &#x27;auth/user-disabled&#x27;:
+                    return FirebaseErrorMessage.USER_IS_DISABLED;
+                case &#x27;auth/user-not-found&#x27;:
+                    return FirebaseErrorMessage.USER_NOT_FOUND;
+                case &#x27;auth/email-already-in-use&#x27;:
+                    return FirebaseErrorMessage.EMAIL_ALREADY_IN_USE;
+                case &#x27;auth/network-request-failed&#x27;:
+                    return FirebaseErrorMessage.NETWORK_REQUEST_FAILED;
+                case &#x27;auth/internal-error&#x27;:
+                    return FirebaseErrorMessage.INTERNAL_ERROR;
+                case &#x27;auth/weak-password&#x27;:
+                    return FirebaseErrorMessage.WEAK_PASSWORD;
+                case &#x27;auth/invalid-email&#x27;:
+                    return FirebaseErrorMessage.INVALID_EMAIL;
+                default:
+                    LogHelper.log(new LogInfo(FirebaseAuthService.name, error.code, error.message), &#x27;error&#x27;);
+                    break;
+            }
+        }
+        return undefined;
+    }
+
+    public getAuthUser(): AuthUser | undefined {
+        return this.auth.currentUser !&#x3D;&#x3D; null ? this.auth.currentUser : undefined;
+    }
+
+    public async updateUserEmail(email: string): Promise&lt;void&gt; {
+        try {
+            if (this.auth.currentUser !&#x3D;&#x3D; null) {
+                await updateEmail(this.auth.currentUser, email);
+                this.userService.update({ id: this.auth.currentUser.uid }, { email })
+                    .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;update User&#x27;, &#x27;email has been updated&#x27;))
+                    .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;update User error&#x27;, e));
+                return Promise.resolve();
+            }
+            return Promise.reject(FirebaseErrorMessage.USER_IS_NOT_SIGNED_IN);
+        } catch (error: unknown) {
+            this.logHelper.logError(this.updateUserEmail.name, &#x27;updateUserEmail error&#x27;, { value: error });
+            return Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.UPDATING_EMAIL_FAILED);
+        }
+    }
+
+    public signOut(): Promise&lt;void&gt; {
+        return this.auth.currentUser !&#x3D;&#x3D; null ? signOut(this.auth) : Promise.reject(FirebaseErrorMessage.USER_IS_NOT_SIGNED_IN);
+    }
+
+    public async signIn(email: string, password: string): Promise&lt;AuthUser | undefined&gt; {
+        try {
+            const userCredentials &#x3D; await signInWithEmailAndPassword(this.auth, email, password);
+            // user must verify email before using the app
+            if (!userCredentials.user.emailVerified) {
+                return Promise.reject(FirebaseErrorMessage.UNVERIFIED_EMAIL);
+            } else {
+                return Promise.resolve(userCredentials.user);
+            }
+        } catch (error: unknown) {
+            this.logHelper.logError(this.signIn.name, &#x27;signIn error&#x27;, { value: error });
+            return error instanceof Error &amp;&amp; &#x27;code&#x27; in error
+                ? Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.SIGN_IN_FAILED)
+                : Promise.reject(error);
+        }
+    }
+
+    public async sendEmailVerification(signOutUser?: boolean, actionCodeSettings?: ActionCodeSettings): Promise&lt;void&gt; {
+        try {
+            if (this.auth.currentUser &#x3D;&#x3D;&#x3D; null) {
+                return Promise.reject(FirebaseErrorMessage.USER_IS_NOT_SIGNED_IN);
+            } else {
+                if (this.firebaseConnection &#x3D;&#x3D;&#x3D; &#x27;online&#x27;) {
+                    if (this.authSecurity.lastEmailVerificationRequestDate !&#x3D;&#x3D; undefined) {
+                        const timeDifference &#x3D; await this.serverInfo.timePassedSinceServerTimeInSeconds(this.authSecurity.lastEmailVerificationRequestDate);
+                        if (timeDifference &gt;&#x3D; 60 ** 2) {
+                            await sendEmailVerification(this.auth.currentUser, actionCodeSettings);
+                        } else {
+                            return Promise.reject(FirebaseErrorMessage.VERIFICATION_EMAIL_REQUESTING_IS_DISABLED);
+                        }
+                    } else {
+                        await sendEmailVerification(this.auth.currentUser, actionCodeSettings);
+                    }
+                    this.authSecurityService.update({ id: this.authSecurity.id }, { lastEmailVerificationRequestDate: await this.serverInfo.getServerTime() })
+                        .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;update AuthSecurity&#x27;, &#x27;lastEmailVerificationRequestDate has been updated&#x27;))
+                        .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;update AuthSecurity error&#x27;, e));
+                    return signOutUser ? this.signOut() : Promise.resolve();
+                } else {
+                    return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
+                }
+            }
+        } catch (e: unknown) {
+            return Promise.reject(e);
+        }
+    }
+
+    // register user and create user doc
+    // @ts-ignore
+    public async register(user: User, password: string): Promise&lt;void&gt; {
+        try {
+            if (this.firebaseConnection &#x3D;&#x3D;&#x3D; &#x27;online&#x27;) {
+                let userCredential: UserCredential;
+                if (this.authSecurity.lastEmailVerificationRequestDate !&#x3D;&#x3D; undefined) {
+                    const timeDifference &#x3D; await this.serverInfo.timePassedSinceServerTimeInSeconds(this.authSecurity.lastEmailVerificationRequestDate);
+                    if (timeDifference &gt;&#x3D; 60 ** 2) {
+                        userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, user.email, password);
+                    } else {
+                        return Promise.reject(FirebaseErrorMessage.ACCOUNT_CREATION_IS_DISABLED);
+                    }
+                } else {
+                    userCredential &#x3D; await createUserWithEmailAndPassword(this.auth, user.email, password);
+                }
+                this.authSecurityService.update({ id: this.authSecurity.id }, { lastAccountCreationDate: await this.serverInfo.getServerTime() })
+                    .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;update AuthSecurity&#x27;, &#x27;lastAccountCreationDate has been updated&#x27;))
+                    .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;update AuthSecurity error&#x27;, e));
+                await this.sendEmailVerification();
+                await updateProfile(userCredential.user, { displayName: user.getFullName(this.languageService.getCurrentLanguage()) });
+                user.id &#x3D; userCredential.user.uid;
+                this.userService.add(user)
+                    .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;add User&#x27;, &#x27;new user has been added&#x27;))
+                    .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;add User error&#x27;, e));
+                return await this.auth.signOut();
+            } else {
+                return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
+            }
+        } catch (error: unknown) {
+            this.logHelper.logError(this.register.name, &#x27;registration error&#x27;, { value: error });
+            return error instanceof Error &amp;&amp; &#x27;code&#x27; in error
+                ? Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.REGISTRATION_FAILED)
+                : Promise.reject(error);
+        }
+    }
+
+    public async sendPasswordResetEmail(email: string, actionCodeSettings?: ActionCodeSettings): Promise&lt;void&gt; {
+        try {
+            if (this.firebaseConnection &#x3D;&#x3D;&#x3D; &#x27;online&#x27;) {
+                if (this.authSecurity.lastPasswordChangeRequestDate !&#x3D;&#x3D; undefined) {
+                    const timeDifference &#x3D; await this.serverInfo.timePassedSinceServerTimeInSeconds(this.authSecurity.lastPasswordChangeRequestDate);
+                    if (timeDifference &gt;&#x3D; 60 ** 2) {
+                        await sendPasswordResetEmail(this.auth, email, actionCodeSettings);
+                    } else {
+                        return Promise.reject(FirebaseErrorMessage.PASSWORD_RESETTING_IS_DISABLED);
+                    }
+                } else {
+                    await sendPasswordResetEmail(this.auth, email, actionCodeSettings);
+                }
+                this.authSecurityService.update({ id: this.authSecurity.id }, { lastPasswordChangeRequestDate: await this.serverInfo.getServerTime() })
+                    .then(() &#x3D;&gt; this.logHelper.logDefault(&#x27;update AuthSecurity&#x27;, &#x27;lastPasswordChangeRequestDate has been updated&#x27;))
+                    .catch((e: unknown) &#x3D;&gt; this.logHelper.logError(&#x27;update AuthSecurity error&#x27;, e));
+                return Promise.resolve();
+            } else {
+                return Promise.reject(FirebaseErrorMessage.NETWORK_REQUEST_FAILED);
+            }
+        } catch (error: unknown) {
+            this.logHelper.logError(this.register.name, &#x27;sendPasswordResetEmail error&#x27;, { value: error });
+            return Promise.reject(FirebaseAuthService.getAuthErrorMessage(error as AuthError) ?? FirebaseErrorMessage.SENDING_PASSWORD_RESET_EMAIL_FAILED);
+        }
+    }
+
+    public getAuthUserObservable(): Observable&lt;AuthUser | undefined&gt; {
+        return authState(this.auth).pipe(first(), map((user: AuthUser | null) &#x3D;&gt; user &#x3D;&#x3D;&#x3D; null ? undefined : user));
+    }
+
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'FirebaseAuthService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

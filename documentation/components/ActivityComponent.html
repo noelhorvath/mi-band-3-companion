@@ -1,0 +1,2450 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-band-3-companion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">mi-band-3-companion documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ActivityComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/home/tabs/activity/activity.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-activity</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./activity.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./activity.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ACTIVITY_DATA_TYPES" >ACTIVITY_DATA_TYPES</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activityChartData" >activityChartData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activityChartDateType" >activityChartDateType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityDataInitializedStatus" >activityDataInitializedStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityDataInitializedStatusSubject" >activityDataInitializedStatusSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityDataInitializedStatusSubscription" >activityDataInitializedStatusSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activityDataType" >activityDataType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activityItems" >activityItems</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activityItemsSize" >activityItemsSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activityMeasurementValueDataType" >activityMeasurementValueDataType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#connectionInfoSubscription" >connectionInfoSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#dailyActivities" >dailyActivities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#dailyActivitiesSubscription" >dailyActivitiesSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#device" >device</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#FILTER_FIELDS" >FILTER_FIELDS</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isDailyButtonDisabled" >isDailyButtonDisabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isLoadingActivities" >isLoadingActivities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#lastPaginateActivityDoc" >lastPaginateActivityDoc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#lastPaginateQueryOptions" >lastPaginateQueryOptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logHelper" >logHelper</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#MEASUREMENT_TYPES" >MEASUREMENT_TYPES</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#MEASUREMENT_VALUE_DATA_TYPES" >MEASUREMENT_VALUE_DATA_TYPES</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#monthlyActivities" >monthlyActivities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#monthlyActivitiesSubscription" >monthlyActivitiesSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#weeklyActivities" >weeklyActivities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#weeklyActivitiesSubscription" >weeklyActivitiesSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#yearlyActivities" >yearlyActivities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#yearlyActivitiesSubscription" >yearlyActivitiesSubscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getActivityChartData" >getActivityChartData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#initChart" >initChart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadActivities" >loadActivities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onChartTypeChanged" >onChartTypeChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(storageService: <a href="../injectables/StorageService.html" target="_self">StorageService</a>, activityService: <a href="../injectables/FirestoreActivityService.html" target="_self">FirestoreActivityService</a>, bleConnectionService: <a href="../injectables/BleConnectionService.html" target="_self">BleConnectionService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>storageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StorageService.html" target="_self" >StorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FirestoreActivityService.html" target="_self" >FirestoreActivityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>bleConnectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BleConnectionService.html" target="_self" >BleConnectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActivityChartData"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>getActivityChartData</b></span>
+                        <a href="#getActivityChartData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getActivityChartData(fieldName: <a href="../classes/Activity.html" target="_self">ActivityDataType</a>, dateType: <a href="../undefineds/DateType.html" target="_self">DateType</a>, intensityDataType?: <a href="../classes/MeasurementValue.html" target="_self">MeasurementValueDataType</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="301"
+                            class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:301</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fieldName</td>
+                                    <td>
+                                                <code><a href="../classes/Activity.html" target="_self" >ActivityDataType</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>dateType</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#DateType" target="_self" >DateType</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>intensityDataType</td>
+                                    <td>
+                                                <code><a href="../classes/MeasurementValue.html" target="_self" >MeasurementValueDataType</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>ChartDataset[]</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initChart"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>initChart</b></span>
+                        <a href="#initChart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initChart()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:183</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadActivities"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>loadActivities</b></span>
+                        <a href="#loadActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadActivities(event?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, filterOptions?: <a href="../interfaces/IFilterOptions.html" target="_self">IFilterOptions</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="467"
+                            class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:467</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>filterOptions</td>
+                                    <td>
+                                                <code><a href="../interfaces/IFilterOptions.html" target="_self" >IFilterOptions</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="724"
+                            class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:724</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="203"
+                            class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:203</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onChartTypeChanged"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>onChartTypeChanged</b></span>
+                        <a href="#onChartTypeChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onChartTypeChanged(dateType?: <a href="../undefineds/DateType.html" target="_self">DateType</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="208"
+                            class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:208</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dateType</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#DateType" target="_self" >DateType</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ACTIVITY_DATA_TYPES"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ACTIVITY_DATA_TYPES</b></span>
+                        <a href="#ACTIVITY_DATA_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >ActivityDataType[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[ActivityDataTypeEnum.STEPS, ActivityDataTypeEnum.CALORIES, ActivityDataTypeEnum.DISTANCE, ActivityDataTypeEnum.INTENSITY]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityChartData"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activityChartData</b></span>
+                        <a href="#activityChartData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ChartDataset[] | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityChartDateType"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activityChartDateType</b></span>
+                        <a href="#activityChartDateType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#DateType" target="_self" >DateType | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityDataInitializedStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityDataInitializedStatus</b></span>
+                        <a href="#activityDataInitializedStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/IChartDataStatus.html" target="_self" >IChartDataStatus</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityDataInitializedStatusSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityDataInitializedStatusSubject</b></span>
+                        <a href="#activityDataInitializedStatusSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/IChartDataStatus.html" target="_self" >Subject&lt;IChartDataStatus&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityDataInitializedStatusSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityDataInitializedStatusSubscription</b></span>
+                        <a href="#activityDataInitializedStatusSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityDataType"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activityDataType</b></span>
+                        <a href="#activityDataType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >ActivityDataType | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityItems"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activityItems</b></span>
+                        <a href="#activityItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >Activity[] | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityItemsSize"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activityItemsSize</b></span>
+                        <a href="#activityItemsSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityMeasurementValueDataType"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activityMeasurementValueDataType</b></span>
+                        <a href="#activityMeasurementValueDataType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/MeasurementValue.html" target="_self" >MeasurementValueDataType | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="connectionInfoSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>connectionInfoSubscription</b></span>
+                        <a href="#connectionInfoSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dailyActivities"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>dailyActivities</b></span>
+                        <a href="#dailyActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >Activity[] | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dailyActivitiesSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>dailyActivitiesSubscription</b></span>
+                        <a href="#dailyActivitiesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="device"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>device</b></span>
+                        <a href="#device"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Device.html" target="_self" >Device | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FILTER_FIELDS"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>FILTER_FIELDS</b></span>
+                        <a href="#FILTER_FIELDS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isDailyButtonDisabled"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isDailyButtonDisabled</b></span>
+                        <a href="#isDailyButtonDisabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoadingActivities"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isLoadingActivities</b></span>
+                        <a href="#isLoadingActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lastPaginateActivityDoc"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>lastPaginateActivityDoc</b></span>
+                        <a href="#lastPaginateActivityDoc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >DocumentSnapshot&lt;Activity&gt; | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lastPaginateQueryOptions"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>lastPaginateQueryOptions</b></span>
+                        <a href="#lastPaginateQueryOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>(OrderByQuery | WhereQuery)[] | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logHelper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logHelper</b></span>
+                        <a href="#logHelper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/LogHelper.html" target="_self" >LogHelper</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MEASUREMENT_TYPES"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>MEASUREMENT_TYPES</b></span>
+                        <a href="#MEASUREMENT_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#DateType" target="_self" >(DateTypeEnum.DAILY | DateTypeEnum.HOURLY | DateTypeEnum.WEEKLY | DateTypeEnum.MONTHLY | &quot;all&quot;)[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MEASUREMENT_VALUE_DATA_TYPES"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>MEASUREMENT_VALUE_DATA_TYPES</b></span>
+                        <a href="#MEASUREMENT_VALUE_DATA_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/MeasurementValue.html" target="_self" >MeasurementValueDataType[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[MeasurementValueDataTypeEnum.AVERAGE, MeasurementValueDataTypeEnum.MINIMUM, MeasurementValueDataTypeEnum.MAXIMUM]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="monthlyActivities"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>monthlyActivities</b></span>
+                        <a href="#monthlyActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >Activity[] | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="monthlyActivitiesSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>monthlyActivitiesSubscription</b></span>
+                        <a href="#monthlyActivitiesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="weeklyActivities"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>weeklyActivities</b></span>
+                        <a href="#weeklyActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >Activity[] | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="weeklyActivitiesSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>weeklyActivitiesSubscription</b></span>
+                        <a href="#weeklyActivitiesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="yearlyActivities"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>yearlyActivities</b></span>
+                        <a href="#yearlyActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Activity.html" target="_self" >Activity[] | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="yearlyActivitiesSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>yearlyActivitiesSubscription</b></span>
+                        <a href="#yearlyActivitiesSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/home/tabs/activity/activity.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { ActivityDataType, DateType, MeasurementValueDataType } from &#x27;../../../../shared/types/custom.types&#x27;;
+import { DateTypeEnum, IntervalTypeEnum } from &#x27;../../../../shared/enums/date.enum&#x27;;
+import { ChartDataset } from &#x27;chart.js&#x27;;
+import { StorageService } from &#x27;../../../../services/storage/storage.service&#x27;;
+import { ActivityDataTypeEnum } from &#x27;../../../../shared/enums/activity.enum&#x27;;
+import { Activity } from &#x27;../../../../shared/models/classes/Activity&#x27;;
+import { LogHelper } from &#x27;../../../../shared/models/classes/LogHelper&#x27;;
+import { BehaviorSubject, Subject, Subscription } from &#x27;rxjs&#x27;;
+import { FirestoreActivityService } from &#x27;../../../../services/firestore/activity/firestore-activity.service&#x27;;
+import { getDaysInMonth, getInterval, isLeapYear } from &#x27;../../../../shared/functions/date.functions&#x27;;
+import { MeasurementValueDataTypeEnum } from &#x27;../../../../shared/enums/measurement-value-data-type.enum&#x27;;
+import { DocumentSnapshot } from &#x27;@angular/fire/firestore&#x27;;
+import { Device } from &#x27;../../../../shared/models/classes/Device&#x27;;
+import { IFilterOptions } from &#x27;../../../../shared/models/interfaces/IFilterOptions&#x27;;
+import { OrderByQuery, PaginateResult, WhereQuery } from &#x27;../../../../shared/types/firestore.types&#x27;;
+import { QueryOperator } from &#x27;../../../../shared/enums/firestore.enum&#x27;;
+import { FireTimestamp } from &#x27;../../../../shared/models/classes/FireTimestamp&#x27;;
+import { IChartDataStatus } from &#x27;../../../../shared/models/interfaces/IChartDataStatus&#x27;;
+import { BleConnectionService } from &#x27;../../../../services/ble/connection/ble-connection.service&#x27;;
+
+@Component({
+    selector: &#x27;app-activity&#x27;,
+    templateUrl: &#x27;./activity.component.html&#x27;,
+    styleUrls: [&#x27;./activity.component.scss&#x27;],
+})
+export class ActivityComponent implements OnInit, OnDestroy {
+    private readonly logHelper: LogHelper;
+    public readonly ACTIVITY_DATA_TYPES: ActivityDataType[] &#x3D; [ActivityDataTypeEnum.STEPS, ActivityDataTypeEnum.CALORIES, ActivityDataTypeEnum.DISTANCE, ActivityDataTypeEnum.INTENSITY];
+    public readonly MEASUREMENT_VALUE_DATA_TYPES: MeasurementValueDataType[] &#x3D; [MeasurementValueDataTypeEnum.AVERAGE, MeasurementValueDataTypeEnum.MINIMUM, MeasurementValueDataTypeEnum.MAXIMUM];
+    public readonly FILTER_FIELDS: { fieldName: string; text: string }[];
+    public readonly MEASUREMENT_TYPES: (DateTypeEnum.DAILY | DateTypeEnum.HOURLY | DateTypeEnum.WEEKLY | DateTypeEnum.MONTHLY | &#x27;all&#x27;)[];
+    private dailyActivitiesSubscription: Subscription | undefined;
+    private weeklyActivitiesSubscription: Subscription | undefined;
+    private monthlyActivitiesSubscription: Subscription | undefined;
+    private yearlyActivitiesSubscription: Subscription | undefined;
+    private connectionInfoSubscription: Subscription | undefined;
+    private activityDataInitializedStatusSubscription: Subscription | undefined;
+    private activityDataInitializedStatusSubject: Subject&lt;IChartDataStatus&gt;;
+    private activityDataInitializedStatus: IChartDataStatus;
+    private dailyActivities: Activity[] | undefined;
+    private weeklyActivities: Activity[] | undefined;
+    private monthlyActivities: Activity[] | undefined;
+    private yearlyActivities: Activity[] | undefined;
+    private lastPaginateActivityDoc: DocumentSnapshot&lt;Activity&gt; | undefined;
+    private lastPaginateQueryOptions: (OrderByQuery | WhereQuery)[] | undefined;
+    public isLoadingActivities: boolean;
+    public device: Device | undefined;
+    public activityItemsSize: number;
+    public activityItems: Activity[] | undefined;
+    public activityDataType: ActivityDataType | undefined;
+    public activityChartDateType: DateType | undefined;
+    public activityMeasurementValueDataType: MeasurementValueDataType | undefined;
+    public activityChartData: ChartDataset[] | undefined;
+    public isDailyButtonDisabled: boolean;
+
+    public constructor(
+        private storageService: StorageService,
+        private activityService: FirestoreActivityService,
+        private bleConnectionService: BleConnectionService
+    ) {
+        this.logHelper &#x3D; new LogHelper(ActivityComponent.name);
+        this.isDailyButtonDisabled &#x3D; false;
+        this.isLoadingActivities &#x3D; false;
+        this.activityItemsSize &#x3D; 10;
+        this.FILTER_FIELDS &#x3D; [
+            { fieldName: &#x27;measurementInfo.date&#x27;, text: &#x27;date&#x27; },
+            { fieldName: ActivityDataTypeEnum.STEPS, text: ActivityDataTypeEnum.STEPS },
+            { fieldName: ActivityDataTypeEnum.DISTANCE, text: ActivityDataTypeEnum.DISTANCE },
+            { fieldName: ActivityDataTypeEnum.CALORIES, text: ActivityDataTypeEnum.CALORIES },
+            { fieldName: &#x27;intensity.avg&#x27;, text: &#x27;avg_intensity&#x27; },
+            { fieldName: &#x27;intensity.max&#x27;, text: &#x27;max_intensity&#x27; },
+            { fieldName: &#x27;intensity.min&#x27;, text: &#x27;min_intensity&#x27; },
+        ];
+        this.activityDataInitializedStatus &#x3D; { isDaily: false, isWeekly: false, isMonthly: false, isYearly: false };
+        this.activityDataInitializedStatusSubject &#x3D; new BehaviorSubject&lt;{ isDaily: boolean; isWeekly: boolean; isMonthly: boolean; isYearly: boolean }&gt;(
+            { isDaily: false, isWeekly: false, isMonthly: false, isYearly: false }
+        );
+        this.MEASUREMENT_TYPES &#x3D; [&#x27;all&#x27;, DateTypeEnum.HOURLY, DateTypeEnum.DAILY];
+        this.connectionInfoSubscription &#x3D; this.bleConnectionService.deviceSettingsSubject.subscribe( (device: Device) &#x3D;&gt; {
+            this.device &#x3D; device;
+            this.activityDataInitializedStatus &#x3D; { isDaily: false, isWeekly: false, isMonthly: false, isYearly: false };
+            this.activityDataInitializedStatusSubject &#x3D; new BehaviorSubject&lt;{ isDaily: boolean; isWeekly: boolean; isMonthly: boolean; isYearly: boolean }&gt;(
+                { isDaily: false, isWeekly: false, isMonthly: false, isYearly: false }
+            );
+            this.activityDataInitializedStatusSubscription &#x3D; this.activityDataInitializedStatusSubject
+                .subscribe((initStatus: IChartDataStatus) &#x3D;&gt; {
+                        if (initStatus.isDaily !&#x3D;&#x3D; this.activityDataInitializedStatus.isDaily
+                            || initStatus.isWeekly !&#x3D;&#x3D; this.activityDataInitializedStatus.isWeekly
+                            || initStatus.isMonthly !&#x3D;&#x3D; this.activityDataInitializedStatus.isMonthly
+                            || initStatus.isYearly !&#x3D;&#x3D; this.activityDataInitializedStatus.isYearly
+                        ) {
+                            this.activityDataInitializedStatus &#x3D; initStatus;
+                        }
+                    }
+                );
+            let interval &#x3D; getInterval(IntervalTypeEnum.TODAY);
+            try {
+                this.dailyActivitiesSubscription &#x3D; this.activityService.listWithValueChanges([
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&gt;&#x3D;&#x27;, value: interval.start },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&lt;&#x3D;&#x27;, value: interval.end },
+                    { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: DateTypeEnum.HOURLY },
+                    { fieldPath: &#x27;measurementInfo.deviceRef&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: this.device?.macAddress },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, directionStr: &#x27;asc&#x27; },
+                    { limit: 24 }
+                ]).subscribe((activities: Activity[] | undefined) &#x3D;&gt; {
+                    this.dailyActivities &#x3D; activities ?? [];
+                    if (!this.activityDataInitializedStatus.isDaily &amp;&amp; this.dailyActivities instanceof Array) {
+                        this.activityDataInitializedStatus.isDaily &#x3D; true;
+                        this.activityDataInitializedStatusSubject.next(this.activityDataInitializedStatus);
+                    }
+                });
+            } catch (e: unknown) {
+                this.logHelper.logError(this.activityService.listWithValueChanges.name, &#x27;list activities error&#x27;, { value: e });
+                this.dailyActivities &#x3D; undefined;
+            }
+
+            interval &#x3D; getInterval(IntervalTypeEnum.THIS_WEEK);
+            try {
+                this.weeklyActivitiesSubscription &#x3D; this.activityService.listWithValueChanges([
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&gt;&#x3D;&#x27;, value: interval.start },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&lt;&#x3D;&#x27;, value: interval.end },
+                    { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: DateTypeEnum.DAILY },
+                    { fieldPath: &#x27;measurementInfo.deviceRef&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: this.device?.macAddress },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, directionStr: &#x27;asc&#x27; },
+                    { limit: 7 }
+                ]).subscribe((activities: Activity[] | undefined) &#x3D;&gt; {
+                    this.weeklyActivities &#x3D; activities ?? [];
+                    if (!this.activityDataInitializedStatus.isWeekly &amp;&amp; this.weeklyActivities instanceof Array) {
+                        this.activityDataInitializedStatus.isWeekly &#x3D; true;
+                        this.activityDataInitializedStatusSubject.next(this.activityDataInitializedStatus);
+                    }
+                });
+            } catch (e: unknown) {
+                this.logHelper.logError(this.activityService.listWithValueChanges.name, &#x27;list activities error&#x27;, { value: e });
+                this.weeklyActivities &#x3D; undefined;
+            }
+
+            interval &#x3D; getInterval(IntervalTypeEnum.THIS_MONTH);
+            try {
+                this.monthlyActivitiesSubscription &#x3D; this.activityService.listWithValueChanges([
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&gt;&#x3D;&#x27;, value: interval.start },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&lt;&#x3D;&#x27;, value: interval.end },
+                    { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: DateTypeEnum.DAILY },
+                    { fieldPath: &#x27;measurementInfo.deviceRef&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: this.device?.macAddress },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, directionStr: &#x27;asc&#x27; },
+                    { limit: getDaysInMonth(new Date()) }
+                ]).subscribe((activities: Activity[] | undefined) &#x3D;&gt; {
+                    this.monthlyActivities &#x3D; activities ?? [];
+                    if (!this.activityDataInitializedStatus.isMonthly &amp;&amp; this.monthlyActivities instanceof Array) {
+                        this.activityDataInitializedStatus.isMonthly &#x3D; true;
+                        this.activityDataInitializedStatusSubject.next(this.activityDataInitializedStatus);
+                    }
+                });
+            } catch (e: unknown) {
+                this.logHelper.logError(this.activityService.listWithValueChanges.name, &#x27;list activities error&#x27;, { value: e });
+                this.monthlyActivities &#x3D; undefined;
+            }
+
+            interval &#x3D; getInterval(IntervalTypeEnum.THIS_YEAR);
+            try {
+                this.yearlyActivitiesSubscription &#x3D; this.activityService.listWithValueChanges([
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&gt;&#x3D;&#x27;, value: interval.start },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, opStr: &#x27;&lt;&#x3D;&#x27;, value: interval.end },
+                    { fieldPath: &#x27;measurementInfo.type&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: DateTypeEnum.DAILY },
+                    { fieldPath: &#x27;measurementInfo.deviceRef&#x27;, opStr: &#x27;&#x3D;&#x3D;&#x27;, value: this.device?.macAddress },
+                    { fieldPath: &#x27;measurementInfo.date&#x27;, directionStr: &#x27;asc&#x27; },
+                    { limit: isLeapYear(new Date()) ? 366 : 365 }
+                ]).subscribe((activities: Activity[] | undefined) &#x3D;&gt; {
+                    this.yearlyActivities &#x3D; activities ?? [];
+                    if (!this.activityDataInitializedStatus.isYearly &amp;&amp; this.yearlyActivities instanceof Array) {
+                        this.activityDataInitializedStatus.isYearly &#x3D; true;
+                        this.activityDataInitializedStatusSubject.next(this.activityDataInitializedStatus);
+                    }
+                });
+            } catch (e: unknown) {
+                this.logHelper.logError(this.activityService.listWithValueChanges.name, &#x27;list activities error&#x27;, { value: e });
+                this.yearlyActivities &#x3D; undefined;
+            }
+        });
+    }
+
+    private async initChart(): Promise&lt;void&gt; {
+        try {
+            const savedActivityDataType &#x3D; await this.storageService.getActivityDataType();
+            this.logHelper.logDefault(this.ngOnInit.name, &#x27;saved ActivityDataType&#x27;, { value: savedActivityDataType });
+            this.activityDataType &#x3D; savedActivityDataType ?? ActivityDataTypeEnum.STEPS;
+            const savedActivityMeasurementValueDataType &#x3D; await this.storageService.getActivityMeasurementValueDataType();
+            this.logHelper.logDefault(this.ngOnInit.name, &#x27;saved ActivityMeasurementValueDataType&#x27;, { value: savedActivityMeasurementValueDataType });
+            this.activityMeasurementValueDataType &#x3D; savedActivityMeasurementValueDataType ?? MeasurementValueDataTypeEnum.AVERAGE;
+            const savedChartDateType &#x3D; await this.storageService.getActivityChartDateType();
+            this.logHelper.logDefault(this.ngOnInit.name, &#x27;saved chart DateType&#x27;, { value: savedChartDateType });
+            if (savedActivityDataType &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.CALORIES || savedActivityDataType &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.DISTANCE) {
+                this.activityChartDateType &#x3D; (savedChartDateType &#x3D;&#x3D;&#x3D; DateTypeEnum.DAILY ? DateTypeEnum.WEEKLY : savedChartDateType) ?? DateTypeEnum.WEEKLY;
+            } else {
+                this.activityChartDateType &#x3D; savedChartDateType ?? DateTypeEnum.DAILY;
+            }
+        } catch (e: unknown) {
+            this.logHelper.logError(this.ngOnInit.name, &#x27;error&#x27;, { value: e });
+        }
+    }
+
+    public ngOnInit(): void {
+        this.initChart()
+            .then(() &#x3D;&gt; this.logHelper.logDefault(this.initChart.name, &#x27;activity chart has been initialized&#x27;));
+    }
+
+    public async onChartTypeChanged(dateType?: DateType): Promise&lt;void&gt; {
+        try {
+            if (this.activityChartDateType !&#x3D;&#x3D; undefined &amp;&amp; this.activityDataType !&#x3D;&#x3D; undefined) {
+                const prevMeasurementValueDataType &#x3D; await this.storageService.getActivityMeasurementValueDataType();
+                const prevActivityDataType &#x3D; await this.storageService.getActivityDataType();
+                const prevDateType &#x3D; this.activityChartDateType;
+
+                if (this.activityChartDateType !&#x3D;&#x3D; dateType &amp;&amp; dateType !&#x3D;&#x3D; undefined) {
+                    this.activityChartDateType &#x3D; dateType;
+                    await this.storageService.setActivityChartDateType(this.activityChartDateType);
+                }
+
+                this.isDailyButtonDisabled &#x3D; this.activityDataType &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.CALORIES || this.activityDataType &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.DISTANCE;
+
+                if (this.isDailyButtonDisabled &amp;&amp; this.activityChartDateType &#x3D;&#x3D;&#x3D; DateTypeEnum.DAILY) {
+                    this.activityChartDateType &#x3D; DateTypeEnum.WEEKLY;
+                    return;
+                }
+
+                if (this.activityDataType !&#x3D;&#x3D; prevActivityDataType) {
+                    await this.storageService.setActivityDataType(this.activityDataType);
+                }
+
+                if (this.activityMeasurementValueDataType !&#x3D;&#x3D; prevMeasurementValueDataType &amp;&amp; this.activityMeasurementValueDataType !&#x3D;&#x3D; undefined) {
+                    await this.storageService.setActivityMeasurementValueDataType(this.activityMeasurementValueDataType);
+                }
+
+                if (this.activityDataType !&#x3D;&#x3D; prevActivityDataType || this.activityChartDateType !&#x3D;&#x3D; prevDateType
+                    || this.activityMeasurementValueDataType !&#x3D;&#x3D; prevMeasurementValueDataType || this.activityChartData &#x3D;&#x3D;&#x3D; undefined
+                ) {
+                    this.logHelper.logDefault(this.onChartTypeChanged.name, &#x27;data type changed&#x27;, { value: this.activityDataType });
+                    switch (dateType ?? this.activityChartDateType) {
+                        case DateTypeEnum.DAILY:
+                            if (this.dailyActivities &#x3D;&#x3D;&#x3D; undefined) {
+                                const sub &#x3D; this.activityDataInitializedStatusSubject.subscribe((status: IChartDataStatus) &#x3D;&gt; {
+                                    if (status.isDaily.valueOf()) {
+                                        this.logHelper.logDefault(this.onChartTypeChanged.name, &#x27;dailyActivities is initialized&#x27;);
+                                        this.onChartTypeChanged(DateTypeEnum.DAILY);
+                                        sub?.unsubscribe();
+                                    }
+                                });
+                                return;
+                            }
+                            break;
+                        case DateTypeEnum.WEEKLY:
+                            if (this.weeklyActivities &#x3D;&#x3D;&#x3D; undefined) {
+                                const sub &#x3D; this.activityDataInitializedStatusSubject.subscribe((status: IChartDataStatus) &#x3D;&gt; {
+                                    if (status.isWeekly.valueOf()) {
+                                        this.logHelper.logDefault(this.onChartTypeChanged.name, &#x27;weeklyActivities is initialized&#x27;);
+                                        this.onChartTypeChanged(DateTypeEnum.WEEKLY);
+                                        sub?.unsubscribe();
+                                    }
+                                });
+                                return;
+                            }
+                            break;
+                        case DateTypeEnum.MONTHLY:
+                            if (this.monthlyActivities &#x3D;&#x3D;&#x3D; undefined) {
+                                const sub &#x3D; this.activityDataInitializedStatusSubject.subscribe((status: IChartDataStatus) &#x3D;&gt; {
+                                    if (status.isMonthly.valueOf()) {
+                                        this.logHelper.logDefault(this.onChartTypeChanged.name, &#x27;monthlyActivities is initialized&#x27;);
+                                        this.onChartTypeChanged(DateTypeEnum.MONTHLY);
+                                        sub?.unsubscribe();
+                                    }
+                                });
+                                return;
+                            }
+                            break;
+                        case DateTypeEnum.YEARLY:
+                            if (this.yearlyActivities &#x3D;&#x3D;&#x3D; undefined) {
+                                const sub &#x3D; this.activityDataInitializedStatusSubject.subscribe((status: IChartDataStatus) &#x3D;&gt; {
+                                    if (status.isYearly.valueOf()) {
+                                        this.logHelper.logDefault(this.onChartTypeChanged.name, &#x27;yearlyActivities is initialized&#x27;);
+                                        this.onChartTypeChanged(DateTypeEnum.YEARLY);
+                                        sub?.unsubscribe();
+                                    }
+                                });
+                                return;
+                            }
+                            break;
+                        default:
+                            return Promise.reject(dateType + &#x27; is not used in chart visualization&#x27;);
+                    }
+                    this.activityChartData &#x3D; this.getActivityChartData(this.activityDataType, this.activityChartDateType, this.activityMeasurementValueDataType);
+                } else {
+                    this.logHelper.logDefault(this.onChartTypeChanged.name, &#x27;data type is same&#x27;, { value: this.activityDataType });
+                }
+            }
+        } catch (e: unknown) {
+            this.logHelper.logError(this.onChartTypeChanged.name, &#x27;error&#x27;, { value: e });
+        }
+    }
+
+    private getActivityChartData(fieldName: ActivityDataType, dateType: DateType, intensityDataType?: MeasurementValueDataType): ChartDataset[] {
+        let data: number[];
+        if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY &amp;&amp; intensityDataType &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;intensityDataType must be provided for intensity&#x27;);
+        }
+        switch (dateType) {
+            case DateTypeEnum.DAILY:
+                data &#x3D; new Array&lt;number&gt;(24).fill(0);
+                console.log(&#x27;dailyActivities: &#x27; + this.dailyActivities?.toString());
+                this.dailyActivities?.map((activity: Activity) &#x3D;&gt; {
+                    const hours &#x3D; activity.measurementInfo.date.toDate().getHours();
+                    if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY &amp;&amp; intensityDataType !&#x3D;&#x3D; undefined) {
+                        switch (intensityDataType) {
+                            case MeasurementValueDataTypeEnum.AVERAGE:
+                                data[hours] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; -1 ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            case MeasurementValueDataTypeEnum.MAXIMUM:
+                                data[hours] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; Number.MIN_SAFE_INTEGER ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            case MeasurementValueDataTypeEnum.MINIMUM:
+                                data[hours] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            default:
+                                throw new Error(&#x27;Unknown MeasurementValueDateType: &#x27; + intensityDataType);
+                        }
+                    } else if (fieldName !&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY) {
+                        data[hours] &#x3D; activity[fieldName] !&#x3D;&#x3D; -1 ? activity[fieldName] : 0;
+                    } else {
+                        throw new Error(&#x27;intensityDataType must be provided for intensity&#x27;);
+                    }
+                });
+                break;
+            case DateTypeEnum.WEEKLY:
+                data &#x3D; new Array(7).fill(0);
+                this.weeklyActivities?.map((activity: Activity) &#x3D;&gt; {
+                    const dayOfWeek &#x3D; activity.measurementInfo.date.toDate().getDay() - 1;
+                    if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY &amp;&amp; intensityDataType !&#x3D;&#x3D; undefined) {
+                        switch (intensityDataType) {
+                            case MeasurementValueDataTypeEnum.AVERAGE:
+                                data[dayOfWeek &#x3D;&#x3D;&#x3D; -1 ? 6 : dayOfWeek] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; -1 ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            case MeasurementValueDataTypeEnum.MAXIMUM:
+                                data[dayOfWeek &#x3D;&#x3D;&#x3D; -1 ? 6 : dayOfWeek] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; Number.MIN_SAFE_INTEGER
+                                    ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            case MeasurementValueDataTypeEnum.MINIMUM:
+                                data[dayOfWeek &#x3D;&#x3D;&#x3D; -1 ? 6 : dayOfWeek] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER
+                                    ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            default:
+                                throw new Error(&#x27;Unknown MeasurementValueDateType: &#x27; + intensityDataType);
+                        }
+                    } else if (fieldName !&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY) {
+                        data[dayOfWeek &#x3D;&#x3D;&#x3D; -1 ? 6 : dayOfWeek] &#x3D; activity[fieldName] !&#x3D;&#x3D; -1 ? activity[fieldName] : 0;
+                    }
+                });
+                break;
+            case DateTypeEnum.MONTHLY:
+                const daysInCurrentMonth &#x3D; getDaysInMonth(new Date());
+                data &#x3D; new Array(daysInCurrentMonth).fill(0);
+                this.monthlyActivities?.map((activity: Activity) &#x3D;&gt; {
+                    const day &#x3D; activity.measurementInfo.date.toDate().getDate();
+                    if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY &amp;&amp; intensityDataType !&#x3D;&#x3D; undefined) {
+                        switch (intensityDataType) {
+                            case MeasurementValueDataTypeEnum.AVERAGE:
+                                data[day] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; -1 ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            case MeasurementValueDataTypeEnum.MAXIMUM:
+                                data[day] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; Number.MIN_SAFE_INTEGER
+                                    ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            case MeasurementValueDataTypeEnum.MINIMUM:
+                                data[day] &#x3D; activity[fieldName][intensityDataType] !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER
+                                    ? activity[fieldName][intensityDataType] : 0;
+                                break;
+                            default:
+                                throw new Error(&#x27;Unknown MeasurementValueDateType: &#x27; + intensityDataType);
+                        }
+                    } else if (fieldName !&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY) {
+                        data[day] &#x3D; activity[fieldName] !&#x3D;&#x3D; -1 ? activity[fieldName] : 0;
+                    }
+                });
+                break;
+            case DateTypeEnum.YEARLY:
+                data &#x3D; new Array(12).fill(0);
+                let prevMonth;
+                let avgCount &#x3D; 0;
+                this.yearlyActivities?.map((activity: Activity, i: number) &#x3D;&gt; {
+                    const month &#x3D; activity.measurementInfo.date.toDate().getMonth();
+                    if (prevMonth &#x3D;&#x3D;&#x3D; undefined) {
+                        prevMonth &#x3D; month;
+                        if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY &amp;&amp; intensityDataType &#x3D;&#x3D;&#x3D; MeasurementValueDataTypeEnum.MINIMUM) {
+                            data[month] &#x3D; Number.MAX_SAFE_INTEGER;
+                        }
+                    }
+
+                    if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY) {
+                        if (intensityDataType !&#x3D;&#x3D; undefined) {
+                            switch (intensityDataType) {
+                                case MeasurementValueDataTypeEnum.MINIMUM:
+                                    if (month !&#x3D;&#x3D; prevMonth) {
+                                        data[prevMonth] &#x3D; data[prevMonth] !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER ? data[prevMonth] : 1;
+                                        data[month] &#x3D; Number.MAX_SAFE_INTEGER;
+                                    } else {
+                                        if (activity[fieldName][intensityDataType] &lt; data[month]) {
+                                            data[month] &#x3D; activity[fieldName][intensityDataType];
+                                        }
+                                    }
+                                    break;
+                                case MeasurementValueDataTypeEnum.MAXIMUM:
+                                    if (activity[fieldName][intensityDataType] &gt; data[month]) {
+                                        data[month] &#x3D; activity[fieldName][intensityDataType];
+                                    }
+                                    break;
+                                case MeasurementValueDataTypeEnum.AVERAGE:
+                                    if (month !&#x3D;&#x3D; prevMonth) {
+                                        if (avgCount !&#x3D;&#x3D; 0) {
+                                            data[prevMonth] &#x3D; Math.floor(data[prevMonth] / avgCount);
+                                            avgCount &#x3D; 0;
+                                        } else {
+                                            data[prevMonth] &#x3D; 0;
+                                        }
+                                    } else {
+                                        if (activity[fieldName][intensityDataType] !&#x3D;&#x3D; -1) {
+                                            data[month] +&#x3D; activity[fieldName][intensityDataType];
+                                            avgCount++;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    throw new Error(&#x27;Unknown MeasurementValueDateType: &#x27; + intensityDataType);
+                            }
+                        }
+                    } else {
+                        if (activity[fieldName] !&#x3D;&#x3D; -1) {
+                            data[month] +&#x3D; activity[fieldName];
+                        }
+                    }
+
+                    if (this.yearlyActivities &amp;&amp; i &#x3D;&#x3D;&#x3D; this.yearlyActivities.length - 1) {
+                        if (fieldName &#x3D;&#x3D;&#x3D; ActivityDataTypeEnum.INTENSITY) {
+                            if (intensityDataType &#x3D;&#x3D;&#x3D; MeasurementValueDataTypeEnum.AVERAGE) {
+                                data[month] &#x3D; avgCount !&#x3D;&#x3D; 0 ? Math.floor(data[month] / avgCount) : 0;
+                            }
+
+                            if (intensityDataType &#x3D;&#x3D;&#x3D; MeasurementValueDataTypeEnum.MINIMUM) {
+                                data[month] &#x3D; data[month] !&#x3D;&#x3D; Number.MAX_SAFE_INTEGER ? data[month] : 1;
+                            }
+                        }
+                    } else {
+                        prevMonth &#x3D; month;
+                    }
+                });
+                break;
+            default:
+                throw new Error(dateType + &#x27; is not used in chart visualization&#x27;);
+        }
+        return [
+            {
+                data,
+                backgroundColor: &#x27;#ff9500&#x27;,
+                borderColor: &#x27;#ff9500&#x27;
+            }
+        ];
+    }
+
+    public async loadActivities(event?: any, filterOptions?: IFilterOptions): Promise&lt;void&gt; {
+        try {
+            this.isLoadingActivities &#x3D; true;
+            let result: PaginateResult&lt;Activity&gt; | undefined;
+            if (filterOptions !&#x3D;&#x3D; undefined) {
+                event.disabled &#x3D; true;
+                this.lastPaginateActivityDoc &#x3D; undefined;
+                this.activityItems &#x3D; [];
+                const paginateOptions &#x3D; {
+                    queryOptions: new Array&lt;OrderByQuery | WhereQuery&gt;(),
+                    size: this.activityItemsSize,
+                    lastDocSnap: this.lastPaginateActivityDoc
+                };
+
+                if (filterOptions.measurementType !&#x3D;&#x3D; &#x27;all&#x27;) {
+                    paginateOptions.queryOptions.push({
+                        fieldPath: &#x27;measurementInfo.type&#x27;,
+                        opStr: &#x27;&#x3D;&#x3D;&#x27;,
+                        value: filterOptions.measurementType
+                    });
+                }
+
+                paginateOptions.queryOptions.push({
+                    fieldPath: &#x27;measurementInfo.deviceRef&#x27;,
+                    opStr: &#x27;&#x3D;&#x3D;&#x27;,
+                    value: this.device?.macAddress
+                });
+
+                switch (filterOptions.fieldName) {
+                    case &#x27;measurementInfo.date&#x27;:
+                        let date: FireTimestamp;
+                        if (filterOptions.startDate) {
+                            const current &#x3D; new Date(filterOptions.startDate);
+                            if (filterOptions.measurementType &#x3D;&#x3D;&#x3D; DateTypeEnum.DAILY) {
+                                date &#x3D; FireTimestamp.fromDate(
+                                    new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate(), 0, 0, 0, 0))
+                                );
+                            } else {
+                                date &#x3D; FireTimestamp.fromDate(
+                                    new Date(current.getFullYear(), current.getMonth(), current.getDate(), current.getHours(), 0, 0, 0)
+                                );
+                            }
+                            paginateOptions.queryOptions.push({
+                                fieldPath: &#x27;measurementInfo.date&#x27;,
+                                opStr: QueryOperator.GREATER_OR_EQUAL,
+                                value: date
+                            });
+                        }
+
+                        if (filterOptions.endDate) {
+                            const current &#x3D; new Date(filterOptions.endDate);
+                            if (filterOptions.measurementType &#x3D;&#x3D;&#x3D; DateTypeEnum.DAILY) {
+                                date &#x3D; FireTimestamp.fromDate(
+                                    new Date(Date.UTC(current.getFullYear(), current.getMonth(), current.getDate(), 0, 0, 0, 0))
+                                );
+                            } else {
+                                date &#x3D; FireTimestamp.fromDate(
+                                    new Date(current.getFullYear(), current.getMonth(), current.getDate(), current.getHours(), 0, 0, 0)
+                                );
+                            }
+                            paginateOptions.queryOptions.push({
+                                fieldPath: &#x27;measurementInfo.date&#x27;,
+                                opStr: QueryOperator.LESS_OR_EQUAL,
+                                value: date
+                            });
+                        }
+                        break;
+                    case ActivityDataTypeEnum.DISTANCE || ActivityDataTypeEnum.CALORIES || &#x27;intensity.avg&#x27;:
+                        if (filterOptions.fieldValue &#x3D;&#x3D;&#x3D; 0) {
+                            switch (filterOptions.matchOperator) {
+                                case &#x27;!&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: QueryOperator.NOT_IN,
+                                        value: [-1, 0]
+                                    });
+                                    break;
+                                case &#x27;&#x3D;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: QueryOperator.IN,
+                                        value: [-1, 0]
+                                    });
+                                    break;
+                                case &#x27;&lt;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: -1
+                                    });
+                                    break;
+                                case &#x27;&gt;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: -1
+                                    });
+                                    break;
+                                default:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: filterOptions.fieldValue
+                                    });
+                            }
+                        } else {
+                            paginateOptions.queryOptions.push({
+                                fieldPath: filterOptions.fieldName,
+                                opStr: filterOptions.matchOperator,
+                                value: filterOptions.fieldValue &#x3D;&#x3D;&#x3D; -1 ? -2 : filterOptions.fieldValue
+                            });
+                        }
+                        break;
+                    case &#x27;intensity.max&#x27;:
+                        if (filterOptions.fieldValue &#x3D;&#x3D;&#x3D; 0) {
+                            switch (filterOptions.matchOperator) {
+                                case &#x27;!&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: QueryOperator.NOT_IN,
+                                        value: [Number.MIN_SAFE_INTEGER, 0]
+                                    });
+                                    break;
+                                case &#x27;&#x3D;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: QueryOperator.IN,
+                                        value: [Number.MIN_SAFE_INTEGER, 0]
+                                    });
+                                    break;
+                                case &#x27;&lt;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: Number.MIN_SAFE_INTEGER
+                                    });
+                                    break;
+                                case &#x27;&gt;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: Number.MIN_SAFE_INTEGER
+                                    });
+                                    break;
+                                default:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: filterOptions.fieldValue
+                                    });
+                            }
+                        } else {
+                            paginateOptions.queryOptions.push({
+                                fieldPath: filterOptions.fieldName,
+                                opStr: filterOptions.matchOperator,
+                                value: filterOptions.fieldValue &#x3D;&#x3D;&#x3D; Number.MIN_SAFE_INTEGER ? -2 : filterOptions.fieldValue
+                            });
+                        }
+                        break;
+                    case &#x27;intensity.min&#x27;:
+                        if (filterOptions.fieldValue &#x3D;&#x3D;&#x3D; 0) {
+                            switch (filterOptions.matchOperator) {
+                                case &#x27;!&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: QueryOperator.NOT_IN,
+                                        value: [Number.MAX_SAFE_INTEGER, 0]
+                                    });
+                                    break;
+                                case &#x27;&#x3D;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: QueryOperator.IN,
+                                        value: [Number.MAX_SAFE_INTEGER, 0]
+                                    });
+                                    break;
+                                case &#x27;&lt;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: Number.MAX_SAFE_INTEGER
+                                    });
+                                    break;
+                                case &#x27;&gt;&#x3D;&#x27;:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: Number.MAX_SAFE_INTEGER
+                                    });
+                                    break;
+                                default:
+                                    paginateOptions.queryOptions.push({
+                                        fieldPath: filterOptions.fieldName,
+                                        opStr: filterOptions.matchOperator,
+                                        value: filterOptions.fieldValue
+                                    });
+                            }
+                        } else {
+                            paginateOptions.queryOptions.push({
+                                fieldPath: filterOptions.fieldName,
+                                opStr: filterOptions.matchOperator,
+                                value: filterOptions.fieldValue
+                            });
+                        }
+                        break;
+                    default:
+                        paginateOptions.queryOptions.push({
+                            fieldPath: filterOptions.fieldName,
+                            opStr: filterOptions.matchOperator,
+                            value: filterOptions.fieldValue &#x3D;&#x3D;&#x3D; Number.MAX_SAFE_INTEGER ? -2 : filterOptions.fieldValue
+                        });
+                }
+
+                if ((filterOptions.matchOperator !&#x3D;&#x3D; &#x27;&#x3D;&#x3D;&#x27; &amp;&amp; filterOptions.matchOperator !&#x3D;&#x3D; &#x27;!&#x3D;&#x27;)
+                    || filterOptions.fieldName &#x3D;&#x3D;&#x3D; &#x27;measurementInfo.date&#x27;
+                ) {
+                    paginateOptions.queryOptions.push({
+                        fieldPath: filterOptions.fieldName,
+                        directionStr: filterOptions.orderDirection
+                    });
+                }
+
+                result &#x3D; await this.activityService.paginate(paginateOptions);
+                this.lastPaginateQueryOptions &#x3D; paginateOptions.queryOptions;
+                this.activityItems &#x3D; result?.items ?? [];
+            } else {
+                if (this.lastPaginateActivityDoc !&#x3D;&#x3D; undefined) {
+                    result &#x3D; await this.activityService.paginate({
+                        queryOptions: this.lastPaginateQueryOptions ?? [],
+                        size: this.activityItemsSize,
+                        lastDocSnap: this.lastPaginateActivityDoc
+                    });
+
+                    if (this.activityItems &#x3D;&#x3D;&#x3D; undefined) {
+                        this.activityItems &#x3D; [];
+                    }
+
+                    if (result !&#x3D;&#x3D; undefined) {
+                        this.activityItems.push(...result.items);
+                    }
+                }
+            }
+            this.lastPaginateActivityDoc &#x3D; result?.lastDocSnap;
+        } catch (e: unknown) {
+            this.logHelper.logError(this.loadActivities.name, &#x27;paginate error&#x27;, { value: e });
+        } finally {
+            if (filterOptions !&#x3D;&#x3D; undefined &amp;&amp; event &amp;&amp; &#x27;disabled&#x27; in event) {
+                event.disabled &#x3D; false;
+            } else {
+                if (event &amp;&amp; &#x27;target&#x27; in event) {
+                    event.target.complete();
+                }
+            }
+            this.isLoadingActivities &#x3D; false;
+        }
+    }
+
+    public ngOnDestroy(): void {
+        this.dailyActivitiesSubscription?.unsubscribe();
+        this.weeklyActivitiesSubscription?.unsubscribe();
+        this.monthlyActivitiesSubscription?.unsubscribe();
+        this.yearlyActivitiesSubscription?.unsubscribe();
+        this.activityDataInitializedStatusSubscription?.unsubscribe();
+        this.connectionInfoSubscription?.unsubscribe();
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-content&gt;
+    &lt;app-data-chart [chartDateType]&#x3D;&quot;activityChartDateType&quot; [chartData]&#x3D;&quot;activityChartData&quot;
+                    (chartDateTypeChanged)&#x3D;&quot;onChartTypeChanged($event)&quot; [isDailyDisabled]&#x3D;&quot;isDailyButtonDisabled&quot;&gt;
+        &lt;ion-segment swipeGesture&#x3D;&quot;true&quot; [(ngModel)]&#x3D;&quot;activityDataType&quot; (ionChange)&#x3D;&quot;onChartTypeChanged()&quot;
+                     scrollable&#x3D;&quot;true&quot;&gt;
+            &lt;ion-segment-button *ngFor&#x3D;&quot;let type of ACTIVITY_DATA_TYPES&quot; [value]&#x3D;&quot;type&quot;&gt;{{ type.toUpperCase() | translate }}&lt;/ion-segment-button&gt;
+        &lt;/ion-segment&gt;
+        &lt;ion-segment swipeGesture&#x3D;&quot;true&quot; [(ngModel)]&#x3D;&quot;activityMeasurementValueDataType&quot; (ionChange)&#x3D;&quot;onChartTypeChanged()&quot;
+                     scrollable&#x3D;&quot;true&quot; [hidden]&#x3D;&quot;activityDataType !&#x3D;&#x3D; &#x27;intensity&#x27;&quot;&gt;
+            &lt;ion-segment-button *ngFor&#x3D;&quot;let type of MEASUREMENT_VALUE_DATA_TYPES&quot; [value]&#x3D;&quot;type&quot;&gt;
+                {{ type.toUpperCase() | translate }}
+            &lt;/ion-segment-button&gt;
+        &lt;/ion-segment&gt;
+    &lt;/app-data-chart&gt;
+    &lt;div class&#x3D;&quot;title ion-margin-top ion-margin-bottom&quot;&gt;
+        &lt;ion-label color&#x3D;&quot;primary&quot;&gt;
+            {{ &#x27;STORED_ACTIVITY_DATA&#x27; | translate }}
+        &lt;/ion-label&gt;
+    &lt;/div&gt;
+    &lt;app-items-filter [fields]&#x3D;&quot;FILTER_FIELDS&quot; [startDatePickerId]&#x3D;&quot;&#x27;activity-start-date-picker&#x27;&quot;
+                      [endDatePickerId]&#x3D;&quot;&#x27;activity-end-date-picker&#x27;&quot; [dateFieldName]&#x3D;&quot;FILTER_FIELDS[0].fieldName&quot;
+                      [measurementTypes]&#x3D;&quot;MEASUREMENT_TYPES&quot; (filterOptions)&#x3D;&quot;this.loadActivities(infiniteScroll, $event)&quot;&gt;
+    &lt;/app-items-filter&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;activityItems &amp;&amp; activityItems.length &gt; 0&quot;&gt;
+        &lt;app-activity-item *ngFor&#x3D;&quot;let activity of activityItems&quot; [activity]&#x3D;&quot;activity&quot;&gt;&lt;/app-activity-item&gt;
+    &lt;/ng-container&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;isLoadingActivities else noItemsOrInitial&quot;&gt;
+        &lt;div class&#x3D;&quot;ion-text-center ion-margin-top ion-margin-bottom&quot;&gt;
+            &lt;ion-spinner color&#x3D;&quot;primary&quot; name&#x3D;&quot;crescent&quot;&gt;&lt;/ion-spinner&gt;
+        &lt;/div&gt;
+    &lt;/ng-container&gt;
+    &lt;ng-template #noItemsOrInitial&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;activityItems &#x3D;&#x3D;&#x3D; undefined else noItems&quot;&gt;
+            &lt;ion-item class&#x3D;&quot;ion-text-center&quot;&gt;
+                &lt;ion-label&gt;{{ &#x27;USE_ACTIVITIES_FILTER&#x27; | translate }}&lt;/ion-label&gt;
+            &lt;/ion-item&gt;
+        &lt;/ng-container&gt;
+        &lt;ng-template #noItems&gt;
+            &lt;ng-container *ngIf&#x3D;&quot;activityItems?.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+                &lt;ion-item class&#x3D;&quot;ion-text-center&quot;&gt;
+                    &lt;ion-label&gt;{{ &#x27;NO_ACTIVITIES_FOUND&#x27; | translate }}&lt;/ion-label&gt;
+                &lt;/ion-item&gt;
+            &lt;/ng-container&gt;
+        &lt;/ng-template&gt;
+    &lt;/ng-template&gt;
+    &lt;ion-infinite-scroll #infiniteScroll threshold&#x3D;&quot;100px&quot; (ionInfinite)&#x3D;&quot;loadActivities($event)&quot;&gt;
+        &lt;ion-infinite-scroll-content loadingSpinner&#x3D;&quot;dots&quot;
+                                     loadingText&#x3D;&quot;{{ &#x27;LOADING_MORE_DATA&#x27; | translate }}&quot;&gt;
+        &lt;/ion-infinite-scroll-content&gt;
+    &lt;/ion-infinite-scroll&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./activity.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+    .title {
+        font-size: large;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-content>    <app-data-chart [chartDateType]="activityChartDateType" [chartData]="activityChartData"                    (chartDateTypeChanged)="onChartTypeChanged($event)" [isDailyDisabled]="isDailyButtonDisabled">        <ion-segment swipeGesture="true" [(ngModel)]="activityDataType" (ionChange)="onChartTypeChanged()"                     scrollable="true">            <ion-segment-button *ngFor="let type of ACTIVITY_DATA_TYPES" [value]="type">{{ type.toUpperCase() | translate }}</ion-segment-button>        </ion-segment>        <ion-segment swipeGesture="true" [(ngModel)]="activityMeasurementValueDataType" (ionChange)="onChartTypeChanged()"                     scrollable="true" [hidden]="activityDataType !== \'intensity\'">            <ion-segment-button *ngFor="let type of MEASUREMENT_VALUE_DATA_TYPES" [value]="type">                {{ type.toUpperCase() | translate }}            </ion-segment-button>        </ion-segment>    </app-data-chart>    <div class="title ion-margin-top ion-margin-bottom">        <ion-label color="primary">            {{ \'STORED_ACTIVITY_DATA\' | translate }}        </ion-label>    </div>    <app-items-filter [fields]="FILTER_FIELDS" [startDatePickerId]="\'activity-start-date-picker\'"                      [endDatePickerId]="\'activity-end-date-picker\'" [dateFieldName]="FILTER_FIELDS[0].fieldName"                      [measurementTypes]="MEASUREMENT_TYPES" (filterOptions)="this.loadActivities(infiniteScroll, $event)">    </app-items-filter>    <ng-container *ngIf="activityItems && activityItems.length > 0">        <app-activity-item *ngFor="let activity of activityItems" [activity]="activity"></app-activity-item>    </ng-container>    <ng-container *ngIf="isLoadingActivities else noItemsOrInitial">        <div class="ion-text-center ion-margin-top ion-margin-bottom">            <ion-spinner color="primary" name="crescent"></ion-spinner>        </div>    </ng-container>    <ng-template #noItemsOrInitial>        <ng-container *ngIf="activityItems === undefined else noItems">            <ion-item class="ion-text-center">                <ion-label>{{ \'USE_ACTIVITIES_FILTER\' | translate }}</ion-label>            </ion-item>        </ng-container>        <ng-template #noItems>            <ng-container *ngIf="activityItems?.length === 0">                <ion-item class="ion-text-center">                    <ion-label>{{ \'NO_ACTIVITIES_FOUND\' | translate }}</ion-label>                </ion-item>            </ng-container>        </ng-template>    </ng-template>    <ion-infinite-scroll #infiniteScroll threshold="100px" (ionInfinite)="loadActivities($event)">        <ion-infinite-scroll-content loadingSpinner="dots"                                     loadingText="{{ \'LOADING_MORE_DATA\' | translate }}">        </ion-infinite-scroll-content>    </ion-infinite-scroll></ion-content></div>'
+    var COMPONENTS = [{'name': 'ActivityComponent', 'selector': 'app-activity'},{'name': 'ActivityItemComponent', 'selector': 'app-activity-item'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CustomChartComponent', 'selector': 'app-custom-chart'},{'name': 'DataChartComponent', 'selector': 'app-data-chart'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DeviceComponent', 'selector': 'app-device'},{'name': 'DeviceSetupComponent', 'selector': 'app-setup'},{'name': 'HeartRateComponent', 'selector': 'app-heart-rate'},{'name': 'HeartRateItemComponent', 'selector': 'app-heart-rate-item'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeTabBarComponent', 'selector': 'app-home-tab-bar'},{'name': 'ItemsFilterComponent', 'selector': 'app-items-filter'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PasswordInputComponent', 'selector': 'app-password-input'},{'name': 'RangeItemComponent', 'selector': 'app-range-item'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-login-reset-password'},{'name': 'ScannedDeviceItemComponent', 'selector': 'app-scanned-device-item'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'ToolbarLanguageSelectComponent', 'selector': 'app-toolbar-language-select'},{'name': 'ToolbarMenuComponent', 'selector': 'app-toolbar-menu'},{'name': 'ToolbarMenuDeviceSettingsModalComponent', 'selector': 'app-toolbar-menu-device-settings-modal'},{'name': 'ToolbarMenuUserSettingsModalComponent', 'selector': 'app-toolbar-menu-user-settings-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ActivityComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActivityComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
