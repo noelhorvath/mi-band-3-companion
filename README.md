@@ -1,5 +1,5 @@
 # Mi Band 3 Companion
-My thesis work for acquaring BSc degree in Computer Science.
+My thesis work for acquiring BSc degree in Computer Science.
 
 ## Screenshots of the application
 
