@@ -1,6 +1,9 @@
 # Mi Band 3 Companion
 My thesis work for acquiring BSc degree in Computer Science.
 
+## Thesis
+[Thesis in Hungarian](/resources/Szakdolgozat.pdf)
+
 ## Screenshots of the application
 
 <table>
@@ -28,54 +31,3 @@ My thesis work for acquiring BSc degree in Computer Science.
 
 ## Video of the application
 https://drive.google.com/file/d/1cLqQFViPAEsQXAX7Ii1BBKuU6vv5ze-i
-
-## Thesis summary in Hungarian
-
-### Cím
-Mobilalkalmazás fejlesztése Mi Band 3 okoskarkötőhöz
-
-### Feladatkiírás
-A szakdolgozat során egy olyan mobilalkalmazást fejlesztettem a Mi Band 3 
-okoskarkötőhöz, ami képes az általa mért adatokat feldolgozni, megjeleníteni, 
-nyilvántartani és exportálni. Készítés során egy mindennapi használatra alkalmas hibrid
-mobil applikáció megvalósítása volt a cél, amiben felhasználom a modern webes technológiákat.
-
-### Téma megnevezése
-Mi Band 3 okoskarkötő mérési adatait feldolgozni, nyilvántartani, megjeleníteni és 
-exportálni képes webes technológiákkal megvalósított mobilalkalmazás készítése a 
-szakdolgozat témám.
-Megadott feladat megfogalmazása
-Feladatom egy olyan mobilapplikáció fejlesztése webes technológiákkal, ami képes a Mi 
-Band 3 okos karkötővel együtt működni.
-
-### Megoldási mód
-Olyan felületeket implementáltam hozzátartozó logikával és szolgáltatásokkal a 
-mobilalkalmazáshoz, amelyek elvégzik a mérési adatok megjelenítését, tárolását, 
-exportálását, feldolgozását és korábbi adatok szinkronizálását. Az szoftver felhasználója
-több Mi Band 3 eszközt is párosíthat, melyek között tetszőlegesen válthat az applikáción 
-belül.
-
-### Alkalmazott eszközök, módszerek
-Az applikáció létrehozásához Angular és Ionic keretrendszereket használtam fel, mint 
-webes technológiákat. A mobil natív funkcionalitásainak eléréséhez, mint a Bluetooth, 
-tárhely és fájlkezelés a Capacitor segít egy hibrid alkalmazást eredményezve, ami 
-Android operációs rendszeren működik. A Bluetooth kommunikáció és az során elérhető 
-adatok lekérésének megvalósítása a Cordova Bluetooth LE Plugin felhasználásával 
-történt meg. Adatok tárolása a Firebase Firestore által nyújtott valós idejű NoSQL 
-adatbázis használatával valósult meg. Mi Band 3 által mért adatok vizualizációjára pedig 
-a Chart.js-t használtam. Fejlesztői környezetnek a WebStorm-ot és az Android Studio-t 
-választottam.
-
-### Elért eredmények
-A szakdolgozatom végére egy olyan alkalmazást sikerült létrehoznom, amely a Mi Band 
-3 eszközzel párosítva képes a használója korábbi, jelenlegi aktivitását és pulzusát 
-feldolgozni, megjeleníteni, eltárolni és exportálni internet kapcsolat megléte nélkül is, így 
-akár alkalmas sportolási tevékenységek követésére és egészségügyi felhasználásra is. A 
-szoftvert elkészülte után a mindennapjaim és főleg edzéseim során használtam az 
-aktivitásom és pulzusom követésére.
-
-## Thesis summary in English
-### Title 
-Development of a mobile application for Mi Band 3 smart bracelet
-
-TODO: Complete summary
